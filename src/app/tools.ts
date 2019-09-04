@@ -1,6 +1,7 @@
 import {environment} from '../environments/environment';
+import {Router, Routes} from '@angular/router';
 
-export function api(service: string , param: string="", encode: boolean = true): string  {
+export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
   return(environment.root_api + '/' + service + '?' + param);
 }
@@ -12,7 +13,7 @@ export function direct_api(service: string , param: string, encode: boolean = tr
 
 export function hashCode(s) {
   // tslint:disable-next-line:no-bitwise
-  return s.split('').reduce((a, b)=> {a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
+  return s.split('').reduce((a, b) => {a = ((a << 5) - a) + b.charCodeAt(0); return a & a; }, 0);
 }
 
 export function tirage(max) {
@@ -28,6 +29,13 @@ export function $$(s: string, obj: any= null) {
   }
   console.log(lg + ' ' + obj);
   if (lg.indexOf('!!') > -1) {alert(lg); }
+}
+
+export function checkLogin(router: Router) {
+  const user = localStorage.getItem('user');
+  if (user == null) {
+    router.navigate(['login']);
+  }
 }
 
 export function openGeneral(item, domain)  {

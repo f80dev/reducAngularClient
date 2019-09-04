@@ -2,3 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.app-card {
+  margin:2px;
+  max-width: 700px;
+  vertical-align: text-top;
+  display: flex;
+  padding:0;
+}

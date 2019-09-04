@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule} from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NewshopComponent } from './newshop/newshop.component';
     LoginComponent,
     NewCouponComponent,
     ListCouponsComponent,
-    NewshopComponent
+    NewshopComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
