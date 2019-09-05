@@ -1,0 +1,14 @@
+mat-card img{
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+    height: 80%;
+  display: flex;
+}
+
+.header-image {
+  background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/facebook/200/label_1f3f7.png');
+  background-size: cover;
+}
+
+
+
+

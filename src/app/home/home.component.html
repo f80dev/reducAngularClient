@@ -1,0 +1,10 @@
+<app-userform [user]="user"></app-userform>
+<app-shops [shops]="user.shops"></app-shops>
+<br>
+<app-list-coupons [coupons]="user.coupons"></app-list-coupons>
+<br>
+
+&nbsp;
+<button mat-button mat-raised-button (click)="api.raz();refresh();">RAZ</button>
+&nbsp;
+<button mat-button mat-raised-button (click)="addshop()">Shop</button>

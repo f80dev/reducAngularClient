@@ -1,0 +1,28 @@
+<mat-card *ngFor="let coupon of coupons">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>{{coupon.label}}</mat-card-title>
+    <mat-card-subtitle>{{coupon.gain}}&nbsp;{{coupon.unity}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img
+         *ngIf="!coupon.showCode && coupon.picture?.length>0"
+         [src]="coupon.picture"
+         style="max-height: 200px;width:100%;">
+    <div *ngIf="coupon.showCode" style="width: 100%;text-align: center;">
+      <h4>{{coupon.url}}</h4>
+      <img
+        style="width:100%;"
+        [src]="coupon.qrcode">
+    </div>
+    <mat-card-actions>
+      <button *ngIf="coupon._id!=coupon.origin" mat-button (click)="showCode(coupon)">Partager</button>
+      <button *ngIf="coupon._id==coupon.origin" mat-button (click)="printCode(coupon)">Afficher</button>
+      <button mat-button ngxClipboard [cbContent]="coupon.url">Copy</button>
+      <button mat-button (click)="showAddress(coupon.shop_complete)">Adresse</button>
+      <button mat-button (click)="remove(coupon)">Supprimer</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>
+<br>
