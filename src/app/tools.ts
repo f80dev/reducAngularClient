@@ -8,7 +8,7 @@ export function api(service: string , param: string= '', encode: boolean = true)
 
 export function direct_api(service: string , param: string, encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
-  return(environment.domain + '/' + service + '?' + param);
+  return(environment.root_api+ '/' + service + '?' + param);
 }
 
 export function hashCode(s) {
@@ -31,40 +31,42 @@ export function $$(s: string, obj: any= null) {
   if (lg.indexOf('!!') > -1) {alert(lg); }
 }
 
-export function checkLogin(router: Router) {
-  const user = localStorage.getItem('user');
-  if (user == null) {
-    router.navigate(['login']);
+export function checkLogin(router: Router, params: any = null) {
+  if (!localStorage.getItem('user')) {
+    router.navigate(['login'], {queryParams: params});
+    return false;
+  } else {
+    return true;
   }
 }
-
-export function openGeneral(item, domain)  {
-  return new Promise((resolve, reject) => {
-      const url = environment.domain + '/api/connectTo?service=' + item + '&domain=' + domain;
-      const hwnd: any = window.open(url, 'Login', 'menubar=0,status=0,height=600,titlebar=0,width=400');
-      window.addEventListener('message', (event: any) => {
-        clearInterval(hTimer);
-        resolve(event.data);
-      }, false);
-
-      const hTimer = setInterval(() => {
-        if (hwnd != null) {
-          if (hwnd.location.href != null && hwnd.location.href.indexOf('email') > -1) {
-            const pos = hwnd.location.href.indexOf('email=');
-            const email = hwnd.location.href.substr(pos + 6, hwnd.location.href.indexOf('&', pos) - pos - 6);
-            const password = hwnd.location.href.substr(hwnd.location.href.indexOf('&', pos) + 10);
-            hwnd.close();
-            clearInterval(hTimer);
-            resolve({email, password});
-          }
-        }
-      }, 1000);
-
-      // hwnd.addEventListener("unload",(event)=>{
-      //   var obj={email:localStorage.getItem("email"),password:localStorage.getItem("password")};
-      // })
-  });
-}
+//
+// export function openGeneral(item, domain)  {
+//   return new Promise((resolve, reject) => {
+//       const url = environment.root_api + '/api/connectTo?service=' + item + '&domain=' + domain;
+//       const hwnd: any = window.open(url, 'Login', 'menubar=0,status=0,height=600,titlebar=0,width=400');
+//       window.addEventListener('message', (event: any) => {
+//         clearInterval(hTimer);
+//         resolve(event.data);
+//       }, false);
+//
+//       const hTimer = setInterval(() => {
+//         if (hwnd != null) {
+//           if (hwnd.location.href != null && hwnd.location.href.indexOf('email') > -1) {
+//             const pos = hwnd.location.href.indexOf('email=');
+//             const email = hwnd.location.href.substr(pos + 6, hwnd.location.href.indexOf('&', pos) - pos - 6);
+//             const password = hwnd.location.href.substr(hwnd.location.href.indexOf('&', pos) + 10);
+//             hwnd.close();
+//             clearInterval(hTimer);
+//             resolve({email, password});
+//           }
+//         }
+//       }, 1000);
+//
+//       // hwnd.addEventListener("unload",(event)=>{
+//       //   var obj={email:localStorage.getItem("email"),password:localStorage.getItem("password")};
+//       // })
+//   });
+// }
 
 
 export function getDelay(dtStart, lang= 'en', label_day= 'jours', serverNow= null) {
@@ -88,9 +90,6 @@ export function getDelay(dtStart, lang= 'en', label_day= 'jours', serverNow= nul
   return affichage;
 }
 
-export function reload() {
-  document.location.href = environment.domain;
-}
 
 export function clear(elt: any, xpath: string) {
   const doc = elt.contentDocument;

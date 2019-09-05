@@ -15,6 +15,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatSnackBarModule} from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
 import { HomeComponent } from './home/home.component';
+import { ShopsComponent } from './shops/shops.component';
+import { UserformComponent } from './userform/userform.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,12 @@ import { HomeComponent } from './home/home.component';
     NewCouponComponent,
     ListCouponsComponent,
     NewshopComponent,
-    HomeComponent
+    HomeComponent,
+    ShopsComponent,
+    UserformComponent
   ],
   imports: [
+    ClipboardModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

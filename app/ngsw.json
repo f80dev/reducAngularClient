@@ -1,0 +1,80 @@
+{
+  "configVersion": 1,
+  "timestamp": 1567696992499,
+  "index": "https://f80dev.github.io/reducClient/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://f80dev.github.io/reducClient/favicon.ico",
+        "https://f80dev.github.io/reducClient/index.html",
+        "https://f80dev.github.io/reducClient/main-es2015.777caea80d0c0bd5c1fe.js",
+        "https://f80dev.github.io/reducClient/main-es5.777caea80d0c0bd5c1fe.js",
+        "https://f80dev.github.io/reducClient/manifest.webmanifest",
+        "https://f80dev.github.io/reducClient/polyfills-es2015.fd917e7c3ed57f282ee5.js",
+        "https://f80dev.github.io/reducClient/polyfills-es5.3aa54d3e5134f5b5b842.js",
+        "https://f80dev.github.io/reducClient/runtime-es2015.24b02acc1f369d9b9f37.js",
+        "https://f80dev.github.io/reducClient/runtime-es5.24b02acc1f369d9b9f37.js",
+        "https://f80dev.github.io/reducClient/styles.d69bfa36d8ca0e390e63.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://f80dev.github.io/reducClient/assets/icons/icon-128x128.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-144x144.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-152x152.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-192x192.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-384x384.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-512x512.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-72x72.png",
+        "https://f80dev.github.io/reducClient/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://f80dev.github.io/reducClient/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://f80dev.github.io/reducClient/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://f80dev.github.io/reducClient/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "https://f80dev.github.io/reducClient/index.html": "bad91bc5ea1d5ab213cbbef1a53dbdddf83b9853",
+    "https://f80dev.github.io/reducClient/main-es2015.777caea80d0c0bd5c1fe.js": "ffa432159032eb4f763677a2b21ba0bedca264d2",
+    "https://f80dev.github.io/reducClient/main-es5.777caea80d0c0bd5c1fe.js": "ae57777d5c81d3b54b6e4c619d441f5a3cd12655",
+    "https://f80dev.github.io/reducClient/manifest.webmanifest": "76eb6db6ee9a4b178e494aff59b2ecccf6b6241e",
+    "https://f80dev.github.io/reducClient/polyfills-es2015.fd917e7c3ed57f282ee5.js": "e2f28c3743afd2899e140ad831df9675c233c02b",
+    "https://f80dev.github.io/reducClient/polyfills-es5.3aa54d3e5134f5b5b842.js": "db091f7ef692a1d3add240459a2ea20c81cd6f19",
+    "https://f80dev.github.io/reducClient/runtime-es2015.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://f80dev.github.io/reducClient/runtime-es5.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://f80dev.github.io/reducClient/styles.d69bfa36d8ca0e390e63.css": "b2dc6da1a43cdf7ab029683706b63b90bd554af8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
