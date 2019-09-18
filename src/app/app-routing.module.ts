@@ -8,6 +8,7 @@ import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
+  { path: 'login/:coupon', component: LoginComponent},
   { path: 'shop', component: NewshopComponent},
   { path: 'coupons', component: ListCouponsComponent},
   { path: 'home', component: HomeComponent},

@@ -35,14 +35,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     localStorage.setItem('user', this.email);
-    if (this.route.snapshot.queryParamMap.has('coupon')) {
-      this.api.flash(this.email, this.route.snapshot.queryParamMap.get('coupon')).subscribe(() => {
-        setTimeout(() => {
-          this.router.navigate(['home']);
-        }, 1000);
-      });
-    } else {
-      this.router.navigate(['home']);
-    }
+    this.route.params.subscribe((params)=>{
+      if(params["coupon"]!=null){
+        this.api.flash(this.email, params["coupon"]).subscribe(() => {
+          setTimeout(() => {
+            this.router.navigate(['home']);
+          }, 1000);
+        });
+      }else {
+        this.router.navigate(['home']);
+      }
+    });
   }
 }
