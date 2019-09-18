@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
       this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
         this.user = u;
         this.user.message=message;
-        setTimeout(()=>{this.user.message=""},3000);
+        //Effacer le message
+        setTimeout(()=>{this.user.message=""},5000);
 
         console.log("user="+this.user._id)
       });

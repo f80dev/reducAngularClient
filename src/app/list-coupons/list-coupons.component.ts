@@ -22,11 +22,13 @@ export class ListCouponsComponent implements OnInit {
 
   showCode(coupon: any) {
     coupon.qrcode = environment.root_api + '/getqrcode/' + coupon._id;
-    coupon.showCode = true;
+    if(coupon.showCode==null)coupon.showCode=false;
+    coupon.showCode = !coupon.showCode;
   }
 
   showInfos(coupon: any) {
-    coupon.showInfos = true;
+    if(coupon.showInfos==null)coupon.showInfos=false;
+    coupon.showInfos = !coupon.showInfos;
   }
 
   showAddress(shop: any) {

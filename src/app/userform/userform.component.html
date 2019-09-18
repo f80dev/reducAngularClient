@@ -4,7 +4,7 @@
     <mat-card-title *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</mat-card-title>
     <mat-card-subtitle *ngIf="user.message?.length>0">{{user.message}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-actions>
+  <mat-card-actions class="app-card-action">
     <button mat-button mat-raised-button class="app-button" (click)="addshop()">Shop</button>
   </mat-card-actions>
 </mat-card>

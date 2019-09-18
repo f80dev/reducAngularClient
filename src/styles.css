@@ -34,3 +34,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   app-root app-print-layout { display: block; }
 }
 
+.app-card-action {
+  text-align: right;
+}
