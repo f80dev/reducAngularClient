@@ -1,51 +1,49 @@
-<mat-card>
-  <mat-card-header>Nouvelle promotion</mat-card-header>
-  <mat-card-content>
-    <div *ngIf="!shopNameEdit"><h2>{{coupon.shop}}</h2></div>
-    <mat-form-field class="example-full-width" *ngIf="shopNameEdit">
+<div mat-dialog-title *ngIf="!shopNameEdit">Promotion: {{coupon.shop}}</div>
+<div mat-dialog-content>
+    <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
       <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
     </mat-form-field>
-    <br>
 
-    <mat-form-field class="example-full-width">
+
+    <mat-form-field class="form-field-style">
         <input type="text" matInput placeholder="teaser de votre promo" [(ngModel)]="coupon.label">
     </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <input type="text" matInput placeholder="teaser de votre promo" [(ngModel)]="coupon.unity">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="bonus a chaque partage" [(ngModel)]="coupon.share_bonus">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="bonus a chaque achat" [(ngModel)]="coupon.pay_bonus">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="bonus direct" [(ngModel)]="coupon.direct_bonus">
+
+    <mat-form-field class="form-field-style">
+      <input type="text" matInput placeholder="unité" [(ngModel)]="coupon.unity">
     </mat-form-field>
 
-    <br>
-    <mat-form-field class="example-full-width">
+
+    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
       <input matInput type="number" placeholder="max bonux" [(ngModel)]="coupon.max">
     </mat-form-field>
 
+    <mat-form-field class="form-field-style" style="width: 40%">
+      <input matInput type="number" placeholder="bonus a chaque partage" [(ngModel)]="coupon.share_bonus">
+    </mat-form-field>
+
     <br>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
+      <input matInput type="number" placeholder="bonus a chaque achat" [(ngModel)]="coupon.pay_bonus">
+    </mat-form-field>
+    <mat-form-field class="form-field-style" style="width: 40%">
+      <input matInput type="number" placeholder="bonus direct" [(ngModel)]="coupon.direct_bonus">
+    </mat-form-field>
+
+
+
+
+    <mat-form-field class="form-field-style">
       <input matInput type="number" placeholder="Durée de la promo" [(ngModel)]="coupon.duration">
     </mat-form-field>
 
-    <br>
-    <mat-form-field class="example-full-width">
+
+    <mat-form-field class="form-field-style">
       <input matInput type="url" placeholder="photo" [(ngModel)]="coupon.picture">
     </mat-form-field>
 
-    <mat-card-actions>
-      <button *ngIf="coupon.label?.length>0" mat-button (click)="addcoupon(coupon)">Valide</button>
-      <button mat-button (click)="router.navigate(['home'])">Cancel</button>
-    </mat-card-actions>
-
-  </mat-card-content>
-</mat-card>
+    <mat-dialog-actions>
+      <button mat-flat-button class="app-button" *ngIf="coupon.label?.length>0" mat-button (click)="addcoupon(coupon)">Valide</button>
+      <button mat-flat-button class="app-button" mat-button (click)="dialogRef.close()">Cancel</button>
+    </mat-dialog-actions>
+</div>

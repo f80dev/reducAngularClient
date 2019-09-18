@@ -1,6 +1,9 @@
-<mat-card>
+<mat-card class="app-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title>{{user.email}}</mat-card-title>
   </mat-card-header>
+  <mat-card-actions>
+    <button mat-button mat-raised-button class="app-button" (click)="addshop()">Shop</button>
+  </mat-card-actions>
 </mat-card>

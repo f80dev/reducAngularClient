@@ -1,27 +1,57 @@
-<mat-card *ngFor="let coupon of coupons">
+<mat-card *ngFor="let coupon of coupons" class="app-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title>{{coupon.label}}</mat-card-title>
-    <mat-card-subtitle>{{coupon.gain}}&nbsp;{{coupon.unity}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="coupon._id!=coupon.origin">{{coupon.gain}}&nbsp;{{coupon.unity}}</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content class="app-card-content">
     <img
          *ngIf="!coupon.showCode && coupon.picture?.length>0"
          [src]="coupon.picture"
          style="max-height: 200px;width:100%;">
+
+    <!--QRCode du coupon-->
     <div *ngIf="coupon.showCode" style="width: 100%;text-align: center;">
       <h4>{{coupon.url}}</h4>
       <img
         style="width:100%;"
         [src]="coupon.qrcode">
     </div>
-    <mat-card-actions>
-      <button *ngIf="coupon._id!=coupon.origin" mat-button (click)="showCode(coupon)">Partager</button>
-      <button *ngIf="coupon._id==coupon.origin" mat-button (click)="printCode(coupon)">Afficher</button>
-      <button mat-button ngxClipboard [cbContent]="coupon.url">Copy</button>
-      <button mat-button (click)="showAddress(coupon.shop_complete)">Adresse</button>
-      <button mat-button (click)="remove(coupon)">Supprimer</button>
+
+    <!--Info sur le coupon-->
+    <div *ngIf="coupon.showInfos" style="width: 100%;text-align: center;">
+      <table>
+        <tr><td>Share</td><td>{{coupon.share_bonus}}&nbsp;{{coupon.unity}}</td></tr>
+        <tr><td>Pay</td><td>{{coupon.pay_bonus}}&nbsp;{{coupon.unity}}</td></tr>
+        <tr><td>Direct</td><td>{{coupon.direct_bonus}}&nbsp;{{coupon.unity}}</td></tr>
+      </table>
+    </div>
+    <br>
+    <mat-card-actions style="text-align: center;">
+      <button mat-button mat-flat-button mat-icon-button (click)="showCode(coupon)">
+        <mat-icon>share</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button mat-icon-button (click)="showInfos(coupon)">
+        <mat-icon>attach_money</mat-icon>
+      </button>
+
+      <button *ngIf="coupon._id==coupon.origin" mat-button mat-flat-button mat-icon-button (click)="printCode(coupon)">
+        <mat-icon>printer</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button mat-icon-button ngxClipboard [cbContent]="coupon.url">
+        <mat-icon>link</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button mat-icon-button  (click)="showAddress(coupon.shop_complete)">
+        <mat-icon>map</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button mat-icon-button (click)="remove(coupon)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card-content>
 </mat-card>

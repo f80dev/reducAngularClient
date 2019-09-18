@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
-import {MatSnackBar} from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {DialogData} from "../shops/shops.component";
 
 @Component({
   selector: 'app-new-coupon',
@@ -23,24 +22,21 @@ export class NewCouponComponent implements OnInit {
   };
   shopNameEdit = true;
 
-  constructor(public snackBar: MatSnackBar,
+  constructor(
+              public dialogRef: MatDialogRef<NewCouponComponent>,
               public api: ApiService,
-              public router: Router,
-              public route: ActivatedRoute) { }
+              @Inject(MAT_DIALOG_DATA) public data:DialogData) { }
 
   ngOnInit() {
-    if (this.route.snapshot.queryParamMap.has('shop')) {
+    if (this.data!=null) {
       this.shopNameEdit = false;
-      this.coupon.shop = this.route.snapshot.queryParamMap.get('shop');
+      this.coupon.shop = this.data.shop;
     }
   }
 
   addcoupon(coupon: any) {
     this.api.addCoupon(coupon).subscribe((result: any) => {
-      this.snackBar.open(result.message, '', {
-        duration: 2000,
-      });
-      this.router.navigate(['home']);
+      this.dialogRef.close(result);
     });
   }
 }

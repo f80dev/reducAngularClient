@@ -34,4 +34,8 @@ export class ApiService {
   removeCoupon( idcoupon: string) {
     return this.http.get(api('removecoupon/'  + idcoupon, ''));
   }
+
+  removeShop(id: any) {
+    return this.http.get(api('removeshop/'  + id, ''));
+  }
 }

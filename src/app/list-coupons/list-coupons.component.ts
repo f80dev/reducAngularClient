@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-list-coupons',
@@ -12,6 +13,7 @@ export class ListCouponsComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('coupons') coupons: any[] = [];
+  @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
 
   constructor(public api: ApiService, public router: Router) { }
 
@@ -23,18 +25,24 @@ export class ListCouponsComponent implements OnInit {
     coupon.showCode = true;
   }
 
+  showInfos(coupon: any) {
+    coupon.showInfos = true;
+  }
+
   showAddress(shop: any) {
     window.open('https://www.google.fr/maps/place/' + shop.address);
   }
 
   remove(coupon: any) {
     this.api.removeCoupon( coupon._id).subscribe(() => {
-      const pos = this.coupons.indexOf(coupon);
-      this.coupons = this.coupons.splice(pos + 1, 1        );
+      //const pos = this.coupons.indexOf(coupon);
+      //this.coupons = this.coupons.splice(pos + 1, 1        );
+      this.ondelete.emit();
     });
   }
 
   printCode(coupon: any) {
-    window.open('./web/showcode.html?coupon=' + coupon._id, 'blank');
+    this.router.navigate(["print"]);
+    //window.open('./web/showcode.html?coupon=' + coupon._id, 'blank');
   }
 }

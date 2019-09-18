@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {checkLogin} from '../tools';
+import {Socket} from "ngx-socket-io";
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,16 @@ import {checkLogin} from '../tools';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute) { }
+  constructor(public socket:Socket,public api: ApiService, public router: Router, public route: ActivatedRoute) { }
 
   user: any = {};
 
   ngOnInit() {
     this.refresh();
+    this.socket.on("refresh",(data:any)=>{
+      if(data.user==this.user._id)
+        this.refresh();
+    });
   }
 
   refresh() {
@@ -26,7 +31,4 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  addshop() {
-    this.router.navigate(['shop']);
-  }
 }
