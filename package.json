@@ -24,6 +24,7 @@
     "@angular/pwa": "^0.803.2",
     "@angular/router": "~8.2.4",
     "@angular/service-worker": "~8.2.4",
+    "angular2-qrcode": "^2.0.3",
     "hammerjs": "^2.0.8",
     "ngx-clipboard": "^12.2.1",
     "ngx-socket-io": "^3.0.1",

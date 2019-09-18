@@ -21,7 +21,7 @@ export class ListCouponsComponent implements OnInit {
   }
 
   showCode(coupon: any) {
-    coupon.qrcode = environment.root_api + '/getqrcode/' + coupon._id;
+    coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
     if(coupon.showCode==null)coupon.showCode=false;
     coupon.showCode = !coupon.showCode;
   }

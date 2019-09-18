@@ -22,6 +22,8 @@ export class NewCouponComponent implements OnInit {
   };
   shopNameEdit = true;
 
+  preview: string="";
+
   constructor(
               public dialogRef: MatDialogRef<NewCouponComponent>,
               public api: ApiService,
@@ -38,5 +40,9 @@ export class NewCouponComponent implements OnInit {
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.dialogRef.close(result);
     });
+  }
+
+  refreshPicture() {
+    this.preview=this.coupon.picture;
   }
 }

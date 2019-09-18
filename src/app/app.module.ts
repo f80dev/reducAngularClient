@@ -30,6 +30,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { ShowcodeComponent } from './showcode/showcode.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+import {QRCodeModule} from "angular2-qrcode";
+import { TimerComponent } from './timer/timer.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -44,7 +46,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ShopsComponent,
     UserformComponent,
     PrintLayoutComponent,
-    ShowcodeComponent
+    ShowcodeComponent,
+    TimerComponent
   ],
   entryComponents: [
     NewCouponComponent
@@ -53,6 +56,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   imports: [
     SocketIoModule.forRoot(config),
     MatDialogModule,
+    QRCodeModule,
     ClipboardModule,
     BrowserModule,
     HttpClientModule,
