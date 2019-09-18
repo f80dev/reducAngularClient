@@ -23,6 +23,12 @@ export class LoginComponent implements OnInit {
   email = 'paul.dudule@gmail.com';
 
   ngOnInit() {
+    debugger
+    if(localStorage.getItem("user")==null){
+      localStorage.setItem("user","user"+new Date().getTime()+"@fictif.com");
+    }
+
+
     if (localStorage.getItem('user') != null) {
       this.email = localStorage.getItem('user');
       this.login();

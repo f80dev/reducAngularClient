@@ -7,7 +7,7 @@
 
   <mat-card-content class="app-card-content">
     <img
-         *ngIf="!coupon.showCode && coupon.picture?.length>0"
+         *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0"
          [src]="coupon.picture"
          style="max-height: 200px;width:100%;">
 
