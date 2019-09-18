@@ -31,7 +31,7 @@ import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { ShowcodeComponent } from './showcode/showcode.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 
-const config: SocketIoConfig = { url: "http://server.f80.fr:5500", options: {} };
+const config: SocketIoConfig = { url: "https://server.f80.fr:5500", options: {} };
 //const config: SocketIoConfig = { url: "http://localhost:5500", options: {} };
 
 @NgModule({
