@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   user: any = {message:""};
 
   ngOnInit() {
-    this.refresh();
+    this.refresh(this.route.snapshot.queryParamMap.get("message"));
+
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
         console.log("From server:" + data.message);
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   refresh(message:string="") {
+    if(message==null)message="";
     if (checkLogin(this.router, this.route.snapshot.queryParamMap)) {
       this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
         this.user = u;

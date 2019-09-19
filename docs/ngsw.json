@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568842991485,
+  "timestamp": 1568901337694,
   "index": "https://spr.f80.fr/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "https://spr.f80.fr/favicon.ico",
         "https://spr.f80.fr/index.html",
-        "https://spr.f80.fr/main-es2015.6d57752df8919964a292.js",
-        "https://spr.f80.fr/main-es5.6d57752df8919964a292.js",
+        "https://spr.f80.fr/main-es2015.faa09832de4f434493a8.js",
+        "https://spr.f80.fr/main-es5.faa09832de4f434493a8.js",
         "https://spr.f80.fr/manifest.webmanifest",
         "https://spr.f80.fr/polyfills-es2015.50abed8b022b0c775c73.js",
         "https://spr.f80.fr/polyfills-es5.c57b1b22db0382419e1d.js",
@@ -49,9 +49,9 @@
     "https://spr.f80.fr/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://spr.f80.fr/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://spr.f80.fr/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://spr.f80.fr/index.html": "c4dbe8300026a113bbb3b0ff854ea9b1d1a44946",
-    "https://spr.f80.fr/main-es2015.6d57752df8919964a292.js": "470ef43ce3db4ca6d7b4cdff7d8a6ba143c1bcfd",
-    "https://spr.f80.fr/main-es5.6d57752df8919964a292.js": "ec24380dfe584fd52ca8b34f8d937e53424d88be",
+    "https://spr.f80.fr/index.html": "a6daa956f080831b1c36d2f000d44f3610bff834",
+    "https://spr.f80.fr/main-es2015.faa09832de4f434493a8.js": "c8e7af5d5f8b73c16d37dde2f93aa6adc3bfb4bc",
+    "https://spr.f80.fr/main-es5.faa09832de4f434493a8.js": "3a52a3ccfb9e97be5028685e8a99ca7b28e4e8a4",
     "https://spr.f80.fr/manifest.webmanifest": "b98d0ff9748ed2a33df4905318c00ed0e00617c5",
     "https://spr.f80.fr/polyfills-es2015.50abed8b022b0c775c73.js": "5b86bf2fc3a305573ac97b371bca6cb7b99b4b49",
     "https://spr.f80.fr/polyfills-es5.c57b1b22db0382419e1d.js": "2104c0d25888eafce9d175549237362823b71853",

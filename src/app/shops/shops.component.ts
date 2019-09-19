@@ -36,8 +36,8 @@ export class ShopsComponent implements OnInit {
   }
 
   delShop(shop: any) {
-    this.api.removeShop(shop._id).subscribe(()=>{
-      this.ondelete.emit();
+    this.api.removeShop(shop._id).subscribe((result)=>{
+      this.ondelete.emit(result);
     })
   }
 }

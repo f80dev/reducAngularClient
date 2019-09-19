@@ -1,11 +1,14 @@
 <app-userform [user]="user"></app-userform>
-<app-shops [shops]="user.shops" (delete)="refresh()" (insert)="refresh()"></app-shops>
+<app-shops [shops]="user.shops"
+           (delete)="refresh()"
+           (insert)="refresh()">
+</app-shops>
 
 <app-list-coupons (delete)="refresh()"
                   [coupons]="user.coupons">
 </app-list-coupons>
 
 <br><br><br>
-<button mat-button mat-raised-button (click)="api.raz();refresh();">RAZ</button>
+<!--<button mat-button mat-raised-button (click)="api.raz();refresh();">RAZ</button>-->
 
 

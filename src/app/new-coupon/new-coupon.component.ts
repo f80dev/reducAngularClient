@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {DialogData} from "../shops/shops.component";
+import {cropToSquare, resizeBase64Img} from "../tools";
 
 @Component({
   selector: 'app-new-coupon',
@@ -11,7 +12,7 @@ import {DialogData} from "../shops/shops.component";
 export class NewCouponComponent implements OnInit {
   coupon: any = {
     shop: 'test',
-    teaser: '',
+    label: 'Promotion sur les vin blancs',
     unity: '% sur le prix',
     share_bonus: 1,
     direct_bonus: 0.3,
@@ -44,5 +45,22 @@ export class NewCouponComponent implements OnInit {
 
   refreshPicture() {
     this.preview=this.coupon.picture;
+  }
+
+  onSelectFile(event:any) {
+    if(event.target.files && event.target.files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = ()=>{
+        var dataURL = reader.result;
+        resizeBase64Img(dataURL,800,0.5,(result=>{
+          cropToSquare(result,0.5,(result_square)=>{
+            this.coupon.picture=result_square;
+            this.preview=result_square;
+          })
+        }))
+
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 }

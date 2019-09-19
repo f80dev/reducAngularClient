@@ -25,7 +25,7 @@ export class NewshopComponent implements OnInit {
   add() {
     const owner = localStorage.getItem('user');
     this.api.addshop(this.shopname, this.address, owner).subscribe((result: any) => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home'],{queryParams:{message:result.message}});
     });
   }
 

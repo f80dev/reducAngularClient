@@ -31,6 +31,70 @@ export function $$(s: string, obj: any= null) {
   if (lg.indexOf('!!') > -1) {alert(lg); }
 }
 
+
+export function resizeBase64Img(base64, maxsize,quality,func) {
+
+  if(base64==null || base64==""){
+    $$("Probleme d'image vide");
+    func();
+  }
+
+  var canvas:any = document.createElement("canvas");
+  var img=new Image();
+  img.onload=function(){
+    var ratio=1;
+    if(maxsize!=null)ratio=maxsize/Math.max(img.width,img.height);
+
+    if(ratio<=1){
+      canvas.width =img.width*ratio;
+      canvas.height =img.height*ratio;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, 0, 0,canvas.width,canvas.height);
+      var rc=canvas.toDataURL("image/jpeg", quality);
+    }
+    else
+      rc=base64;
+
+    func(rc);
+  };
+
+  img.src=base64;
+}
+
+export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error) {
+  try{
+    var canvas:any = document.createElement("canvas");
+    var img=new Image();
+    img.crossOrigin="anonymous";
+    img.onload=function(){
+      canvas.width=width;
+      canvas.height=height;
+      var context = canvas.getContext("2d");
+      context.drawImage(img, x, y,width,height,0,0,width,height);
+      var rc=canvas.toDataURL("image/jpeg", quality);
+      func(rc);
+    };
+
+    img.src=base64;
+  }catch (e){
+    if(func_error!=null)func_error(e);
+  }
+}
+
+
+export function cropToSquare(base64,quality=1,func) {
+  var img=new Image();
+  img.onload=function(){
+    var i:any=this;
+    var l=Math.min(i.width,i.height);
+    var x=(i.width-l)/2;
+    var y=(i.height-l)/2
+    cropBase64Img(base64,x,y,l,l,quality,func,null);
+  }
+  img.src=base64;
+}
+
+
 export function checkLogin(router: Router, params: any = null) {
   if (!localStorage.getItem('user')) {
     router.navigate(['login'], {queryParams: params});
