@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve --prod=false --sourceMap=true",
     "start prod": "ng serve --prod=true --sourceMap=true",
-    "build": "ng build --prod --base-href=https://spr.f80.fr --outputPath=./docs",
+    "build": "ng build --prod --base-href=https://spr.f80.fr/ --outputPath=./docs",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

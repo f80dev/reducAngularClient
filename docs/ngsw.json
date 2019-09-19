@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568901337694,
+  "timestamp": 1568902429471,
   "index": "https://spr.f80.fr/index.html",
   "assetGroups": [
     {
@@ -49,7 +49,7 @@
     "https://spr.f80.fr/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://spr.f80.fr/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://spr.f80.fr/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://spr.f80.fr/index.html": "a6daa956f080831b1c36d2f000d44f3610bff834",
+    "https://spr.f80.fr/index.html": "e71cf6107d499f47f04c53fc3f976e0590002d01",
     "https://spr.f80.fr/main-es2015.faa09832de4f434493a8.js": "c8e7af5d5f8b73c16d37dde2f93aa6adc3bfb4bc",
     "https://spr.f80.fr/main-es5.faa09832de4f434493a8.js": "3a52a3ccfb9e97be5028685e8a99ca7b28e4e8a4",
     "https://spr.f80.fr/manifest.webmanifest": "b98d0ff9748ed2a33df4905318c00ed0e00617c5",
