@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>ReducClient</title>
-  <base href="'https://f80dev.github.io/reducAngularClient/'">
+  <base href="https://f80dev.github.io/reducAngularClient/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet">
@@ -12,6 +12,23 @@
   <meta name="theme-color" content="#1976d2">
 <link rel="stylesheet" href="styles.fd678238396bcb4c7554.css"></head>
 <body>
+
+<!-- Github Pages hack to allow SPA refresh without receiving 404. -->
+<script>
+  (function () {
+    // Retrieve the URL the user was trying to access when receiving the 404.
+    var redirect = sessionStorage.redirect;
+    // Remove the URL from sessionStorage.
+    delete sessionStorage.redirect;
+    // Check if we actually need to redirect.
+    if (redirect && redirect != location.href) {
+      // We need to redirect to the URL the user was trying to access.
+      history.replaceState(null, null, redirect);
+    }
+  })();
+</script>
+<!-- /Github Pages hack. -->
+
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 <script src="polyfills-es5.c57b1b22db0382419e1d.js" nomodule defer></script><script src="polyfills-es2015.50abed8b022b0c775c73.js" type="module"></script><script src="runtime-es2015.24b02acc1f369d9b9f37.js" type="module"></script><script src="main-es2015.7d2c42f5a87ec5ba5a02.js" type="module"></script><script src="runtime-es5.24b02acc1f369d9b9f37.js" nomodule defer></script><script src="main-es5.7d2c42f5a87ec5ba5a02.js" nomodule defer></script></body>
