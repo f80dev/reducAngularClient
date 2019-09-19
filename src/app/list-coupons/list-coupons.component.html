@@ -1,7 +1,7 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>
+    <mat-card-title style="font-size: medium;">
         {{coupon.label}}&nbsp;chez "{{coupon.shop_complete.name}}"
     </mat-card-title>
 
@@ -10,35 +10,34 @@
   <mat-card-content class="app-card-content">
     <!--Visuel du coupon-->
     <table style="width:100%;vertical-align: top;"><tr>
-      <td>
+      <td style="width:30%;">
         <img
           *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0"
           [src]="coupon.picture"
-          style="height: 200px;width:200px;">
+          style="height: 175px;">
 
           <qr-code [value]="coupon.url"
                    style="max-width:200px;max-height: 200px;display:inline;"
                    *ngIf="coupon.showCode" style="width: 100%;text-align: center;"
-                   [size]="200">
+                   [size]="175">
           </qr-code>
 
       </td>
-      <td style="text-align: center;vertical-align: top;">
-        <h2 *ngIf="coupon._id!=coupon.origin">{{coupon.gain}}&nbsp;{{coupon.unity}} (/{{coupon.max}})</h2>
+      <td style="text-align: center;vertical-align: top;width:50%;">
+        <h3 *ngIf="coupon._id!=coupon.origin">{{coupon.gain}}&nbsp;{{coupon.unity}} (/{{coupon.max}})</h3>
 
         <!--Zone réserver au créateur-->
-        <div *ngIf="coupon._id==coupon.origin">
+        <div *ngIf="coupon._id==coupon.origin" style="font-size: small;">
           Nombre de partage : {{coupon.share}}
           <br><br>
         </div>
-
-          <table style="text-align: left;display: inline-block;" cellpadding="5">
-            <tr><td>Partage</td><td>: +{{coupon.share_bonus}}&nbsp;{{coupon.unity}}</td></tr>
-            <tr><td>Achat</td><td>: +{{coupon.pay_bonus}}&nbsp;{{coupon.unity}}</td></tr>
-            <tr><td>Direct</td><td>: +{{coupon.direct_bonus}}&nbsp;{{coupon.unity}}</td></tr>
+          <table style="text-align: left;display: inline-block;font-size: small;" cellpadding="4">
+            <tr><td>Partage</td><td>+{{coupon.share_bonus}}</td></tr>
+            <tr><td>Achat</td><td>+{{coupon.pay_bonus}}</td></tr>
+            <tr><td>Direct</td><td>+{{coupon.direct_bonus}}</td></tr>
           </table><br><br>
           <span style="font-size: small">
-            Validitée : <app-timer [end]="coupon.dtEnd"></app-timer>
+            Validitée : <strong><app-timer [end]="coupon.dtEnd"></app-timer></strong>
           </span>
       </td>
     </tr></table>
