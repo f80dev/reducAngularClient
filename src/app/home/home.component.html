@@ -4,7 +4,8 @@
            (insert)="refresh()">
 </app-shops>
 
-<app-list-coupons (delete)="refresh()"
+<app-list-coupons (delete)="refresh('coupon supprimé')"
+                  (insert)="refresh('coupon ajouté')"
                   [coupons]="user.coupons">
 </app-list-coupons>
 

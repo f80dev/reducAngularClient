@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DialogData} from "../shops/shops.component";
 import {cropToSquare, resizeBase64Img} from "../tools";
+import {ActivatedRoute} from "@angular/router";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-coupon',
@@ -19,27 +19,25 @@ export class NewCouponComponent implements OnInit {
     pay_bonus: 3,
     max: 10,
     duration: 15,
-    picture: 'https://static.ponroy.com/image/medias/PLANTES_ACTIFS/raisinblanc.jpg?p=product_showcase'
+    picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
-  shopNameEdit = true;
 
+  @Input("shopname") shopname="";
+  shopNameEdit = true;
+  @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
+  @Output('close') onclose: EventEmitter<any>=new EventEmitter();
   preview: string="";
 
-  constructor(
-              public dialogRef: MatDialogRef<NewCouponComponent>,
-              public api: ApiService,
-              @Inject(MAT_DIALOG_DATA) public data:DialogData) { }
+  constructor(public api: ApiService,public route: ActivatedRoute,public location: Location) { }
 
   ngOnInit() {
-    if (this.data!=null) {
-      this.shopNameEdit = false;
-      this.coupon.shop = this.data.shop;
-    }
+    this.shopNameEdit = false;
+    this.coupon.shop = this.shopname;
   }
 
   addcoupon(coupon: any) {
     this.api.addCoupon(coupon).subscribe((result: any) => {
-      this.dialogRef.close(result);
+      this.oninsert.emit({message:result.message});
     });
   }
 

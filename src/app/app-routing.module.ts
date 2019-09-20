@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {ListCouponsComponent} from './list-coupons/list-coupons.component';
 import {NewshopComponent} from './newshop/newshop.component';
 import {HomeComponent} from './home/home.component';
+import {NewCouponComponent} from "./new-coupon/new-coupon.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},

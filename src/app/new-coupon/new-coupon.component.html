@@ -1,14 +1,15 @@
-<div mat-dialog-title *ngIf="!shopNameEdit">
-  Nouvelle Promotion de "{{coupon.shop}}"
-</div>
-<div mat-dialog-content>
+<mat-card class="app-card">
+  <mat-card-title>
+    Nouvelle Promotion de "{{coupon.shop}}"
+  </mat-card-title>
+  <mat-card-content class="app-card-content" style="text-align: left;">
     <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
       <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
     </mat-form-field>
 
 
     <mat-form-field class="form-field-style">
-        <input type="text" matInput placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
+      <input type="text" matInput placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
     </mat-form-field>
 
     <mat-form-field class="form-field-style">
@@ -32,14 +33,9 @@
       <input matInput type="number" placeholder="Bonus immédiat" [(ngModel)]="coupon.direct_bonus">
     </mat-form-field>
 
-
-
-
     <mat-form-field class="form-field-style">
       <input matInput type="number" placeholder="Durée de validité (En Jours)" [(ngModel)]="coupon.duration">
     </mat-form-field>
-
-
 
   <div style="width: 100%;text-align: center;">
   <span class="btn-file">
@@ -49,22 +45,20 @@
            accept="image/gif,image/jpeg,image/png" />
   </span>
 
-    <br>
+    <br><br>
 
     <img style="max-height:200px"
          *ngIf="preview.length>0"
          [src]="preview">
 
-
   </div>
 
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button class="app-button" *ngIf="coupon.label?.length>0" mat-button (click)="addcoupon(coupon)">Valide</button>
+    <button mat-flat-button class="app-button" mat-button (click)="onclose.emit()">Cancel</button>
+
+  </mat-card-actions>
+</mat-card>
 
 
-
-
-
-    <mat-dialog-actions style="text-align: center;width:100%;">
-      <button mat-flat-button class="app-button" *ngIf="coupon.label?.length>0" mat-button (click)="addcoupon(coupon)">Valide</button>
-      <button mat-flat-button class="app-button" mat-button (click)="dialogRef.close()">Cancel</button>
-    </mat-dialog-actions>
-</div>

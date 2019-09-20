@@ -18,6 +18,7 @@ export class ShopsComponent implements OnInit {
   @Input('shops') shops = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
+  @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
   constructor(public snackBar: MatSnackBar,public router: Router,public api:ApiService,public dialog:MatDialog) { }
 
@@ -25,14 +26,7 @@ export class ShopsComponent implements OnInit {
   }
 
   addCoupon(shop: any) {
-    this.dialog.open(NewCouponComponent,{data:{shop:shop.name},width: '95%',height:'95%'}).afterClosed().subscribe((r)=>{
-      if(r!=null){
-        this.snackBar.open(r.message, '', {
-          duration: 2000,
-        });
-        this.oninsert.emit();
-      }
-    });
+    shop.showAddCoupon=true;
   }
 
   delShop(shop: any) {
