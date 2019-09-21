@@ -6,8 +6,11 @@
     <input matInput type="email" placeholder="Email" [(ngModel)]="email">
   </mat-form-field>
 
-    <br>
-    <button mat-button mat-raise-button (click)="login()">Login</button>
-
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-button mat-flat-button (click)="login()">Login</button>
+    <button mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook Login</button>
+    <button mat-button mat-flat-button (click)="socialSignIn('google')">Google Login</button>
+
+  </mat-card-actions>
 </mat-card>

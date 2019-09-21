@@ -87,11 +87,26 @@
     <!--Info sur le coupon-->
 
     <mat-card-actions style="text-align: center;">
-      <button mat-button mat-flat-button
-              *ngIf="coupon.share<coupon.max_coupon"
-              mat-icon-button (click)="showCode(coupon)" ngxClipboard [cbContent]="coupon.url">
-        <mat-icon>share</mat-icon>
-      </button>
+      <div *ngIf="coupon.share<coupon.max_coupon" style="display: inline-block;">
+        <button mat-button mat-flat-button
+                mat-icon-button (click)="showCode(coupon)" ngxClipboard [cbContent]="coupon.url">
+          <mat-icon>share</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button (click)="socialSharing(coupon)" >
+          <span style="font-size: x-large">f</span>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button (click)="socialSharing(coupon)" >
+          <span style="font-size: large">g+</span>
+        </button>
+
+      </div>
+      &nbsp;
+
+
 
       <!--<button mat-button mat-flat-button mat-icon-button (click)="showInfos(coupon)">-->
         <!--<mat-icon>attach_money</mat-icon>-->

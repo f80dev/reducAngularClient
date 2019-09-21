@@ -3,6 +3,10 @@ import {ErrorStateMatcher} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from "ngx-social-button";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -19,7 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute) { }
+  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
 
   ngOnInit() {
@@ -46,5 +50,21 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       }
     });
+  }
+
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "facebook"){
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
+    }else if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
+    }
+
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (socialUser) => {
+        console.log(socialPlatform+" sign in data : " , socialUser);
+        // Now sign-in with userData
+      ...
+      });
   }
 }

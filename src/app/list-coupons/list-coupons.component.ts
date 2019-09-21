@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
-import {Socket} from "ngx-socket-io";
+import {SocialService} from "ngx-social-button"
 
 @Component({
   selector: 'app-list-coupons',
@@ -15,7 +15,9 @@ export class ListCouponsComponent implements OnInit {
   @Input('coupons') coupons: any[] = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
 
-  constructor(public api: ApiService, public router: Router) { }
+
+
+  constructor(public api: ApiService, public router: Router,private socialAuthService: SocialService) { }
 
   ngOnInit() {
   }
@@ -50,5 +52,9 @@ export class ListCouponsComponent implements OnInit {
     WindowPrt.document.close();
     WindowPrt.focus();
     WindowPrt.print();
+  }
+
+  socialSharing(coupon: any) {
+    this.socialAuthService.facebookSharing({href:coupon.url,hashtag:coupon.label});
   }
 }

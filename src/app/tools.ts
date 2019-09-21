@@ -1,5 +1,10 @@
 import {environment} from '../environments/environment';
 import {Router, Routes} from '@angular/router';
+import {
+  NgxSocialButtonModule,
+  SocialServiceConfig
+} from "ngx-social-button";
+
 
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
@@ -59,6 +64,14 @@ export function resizeBase64Img(base64, maxsize,quality,func) {
   };
 
   img.src=base64;
+}
+
+export function getAuthServiceConfigs() {
+  let config = new SocialServiceConfig()
+    .addFacebook("908733539486004");
+    // .addGoogle("Your-Google-Client-Id")
+    // .addLinkedIn("Your-LinkedIn-Client-Id");
+  return config;
 }
 
 export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error) {

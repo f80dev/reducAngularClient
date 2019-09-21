@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {
+  NgxSocialButtonModule,
+  SocialServiceConfig
+} from "ngx-social-button";
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -32,6 +35,7 @@ import { ShowcodeComponent } from './showcode/showcode.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {QRCodeModule} from "angular2-qrcode";
 import { TimerComponent } from './timer/timer.component';
+import {getAuthServiceConfigs} from "./tools";
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -70,9 +74,13 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatInputModule,
     ReactiveFormsModule,
     MatSnackBarModule
+
+
+
   ],
   providers: [
     ApiService,
+    {provide: SocialServiceConfig,useFactory: getAuthServiceConfigs},
     {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
