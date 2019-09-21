@@ -4,10 +4,41 @@
     <mat-card-title style="font-size: medium;">
         {{coupon.label}}&nbsp;chez "{{coupon.shop_complete.name}}"
     </mat-card-title>
-
   </mat-card-header>
 
   <mat-card-content class="app-card-content" *ngIf="coupon.visible">
+
+
+    <div name="print-section" style="display: none;">
+      <div style="text-align: center;width:100%;">
+        <h2>
+          {{coupon.label}}&nbsp;chez "{{coupon.shop_complete.name}}"
+        </h2>
+        <br>
+        <br>
+        {{coupon.direct_bonus}}&nbsp;{{coupon.unity}}
+        <br>
+        <br>
+        <h3>Flasher ce code pour en bénéficier</h3>
+
+        <qr-code [value]="coupon.url"
+                 style="max-width:200px;max-height: 200px;display:inline;"
+                 [size]="400">
+        </qr-code>
+        <br><br>
+
+
+        <div style="font-size: large">
+          +{{coupon.share_bonus}}&nbsp;{{coupon.unity}} à chaque partage du coupon<br>
+          +{{coupon.pay_bonus}}&nbsp;{{coupon.unity}} à chaque fois qu'un client utilise le coupon que vous lui avez partagez
+        </div>
+
+
+
+      </div>
+
+    </div>
+
     <!--Visuel du coupon-->
     <table style="width:100%;vertical-align: top;"><tr>
       <td style="width:30%;">
@@ -15,12 +46,14 @@
           *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0"
           [src]="coupon.picture"
           style="height: 175px;">
+          <!--QRCode du coupon-->
 
-          <qr-code [value]="coupon.url"
-                   style="max-width:200px;max-height: 200px;display:inline;"
-                   *ngIf="coupon.showCode" style="width: 100%;text-align: center;"
-                   [size]="175">
-          </qr-code>
+            <qr-code [value]="coupon.url"
+                     style="max-width:200px;max-height: 200px;display:inline;"
+                     *ngIf="coupon.showCode"
+                     [size]="175">
+            </qr-code>
+
 
       </td>
       <td style="text-align: center;vertical-align: top;width:50%;">
@@ -42,7 +75,7 @@
       </td>
     </tr></table>
 
-    <!--QRCode du coupon-->
+
 
     <!--Info sur le coupon-->
 
@@ -55,9 +88,11 @@
         <!--<mat-icon>attach_money</mat-icon>-->
       <!--</button>-->
 
-      <!--<button *ngIf="coupon._id==coupon.origin" mat-button mat-flat-button mat-icon-button (click)="printCode(coupon)">-->
-        <!--<mat-icon>printer</mat-icon>-->
-      <!--</button>-->
+      <button *ngIf="coupon._id==coupon.origin" mat-button
+              (click)="openPrinter(coupon)"
+              mat-flat-button mat-icon-button>
+        <mat-icon>printer</mat-icon>
+      </button>
 
       <button mat-button mat-flat-button mat-icon-button  (click)="showAddress(coupon.shop_complete)">
         <mat-icon>map</mat-icon>

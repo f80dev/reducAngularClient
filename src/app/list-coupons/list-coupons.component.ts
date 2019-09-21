@@ -43,8 +43,12 @@ export class ListCouponsComponent implements OnInit {
     });
   }
 
-  printCode(coupon: any) {
-    this.router.navigate(["print"]);
-    //window.open('./web/showcode.html?coupon=' + coupon._id, 'blank');
+  openPrinter(coupon: any) {
+    const printContent:any = document.getElementsByName("print-section")[0];
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    WindowPrt.document.write(printContent.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
   }
 }
