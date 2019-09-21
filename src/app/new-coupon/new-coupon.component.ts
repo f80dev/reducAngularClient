@@ -12,14 +12,14 @@ import { Location } from '@angular/common';
 export class NewCouponComponent implements OnInit {
   coupon: any = {
     shop: 'test',
-    label: 'Promotion sur les vin blancs',
-    unity: '% sur le prix',
-    share_bonus: 1,
-    direct_bonus: 0.3,
-    pay_bonus: 3,
-    max: 10,
+    label: 'Gagner des minutes supplémentaire pour vos cours',
+    unity: 'minutes',
+    share_bonus: 3,
+    direct_bonus: 5,
+    pay_bonus: 10,
+    max: 60,
     max_coupon:1000,
-    duration: 15,
+    duration: 10,
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
 

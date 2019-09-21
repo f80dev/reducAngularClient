@@ -13,8 +13,8 @@ declare var ol: any;
 })
 
 export class NewshopComponent implements OnInit {
-  shopname = 'Chez Bouly';
-  address = 'passage du marché, paris 10';
+  shopname = 'La maison du serpent';
+  address = '12, rue martel, paris 10';
   owner = '';
   map: any;
   marker = new ol.Feature({

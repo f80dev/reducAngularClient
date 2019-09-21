@@ -1,4 +1,4 @@
-<mat-card class="app-card">
+<mat-card class="app-card" *ngIf="showLogin">
 <mat-card-title>Login</mat-card-title>
   <mat-card-content class="app-card-content">
 
@@ -9,8 +9,8 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button mat-flat-button (click)="login()">Login</button>
-    <button mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook Login</button>
-    <button mat-button mat-flat-button (click)="socialSignIn('google')">Google Login</button>
+    <!--<button mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook Login</button>-->
+    <!--<button mat-button mat-flat-button (click)="socialSignIn('google')">Google Login</button>-->
 
   </mat-card-actions>
 </mat-card>

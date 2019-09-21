@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
 import {
   FacebookLoginProvider,
-  GoogleLoginProvider
+  GoogleLoginProvider,
+  SocialService
 } from "ngx-social-button";
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
+  showLogin=false;
 
   ngOnInit() {
     if(localStorage.getItem("user")==null){
@@ -52,19 +54,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public socialSignIn(socialPlatform : string) {
-    let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
-      socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
-    }else if(socialPlatform == "google"){
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
-    }
 
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (socialUser) => {
-        console.log(socialPlatform+" sign in data : " , socialUser);
-        // Now sign-in with userData
-      ...
-      });
-  }
+  // public socialSignIn(socialPlatform : string) {
+  //   let socialPlatformProvider;
+  //   if(socialPlatform == "facebook"){
+  //     socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
+  //   }else if(socialPlatform == "google"){
+  //     socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
+  //   }
+  //
+  //   this.socialAuthService.signIn(socialPlatformProvider).then(
+  //     (socialUser) => {
+  //       console.log(socialPlatform+" sign in data : " , socialUser);
+  //     });
+  // }
 }

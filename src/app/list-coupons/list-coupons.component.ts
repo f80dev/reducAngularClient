@@ -15,8 +15,6 @@ export class ListCouponsComponent implements OnInit {
   @Input('coupons') coupons: any[] = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
 
-
-
   constructor(public api: ApiService, public router: Router,private socialAuthService: SocialService) { }
 
   ngOnInit() {

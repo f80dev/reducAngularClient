@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  refresh(message:string="") {
+  refresh(message="") {
     if(message==null)message="";
     if (checkLogin(this.router, this.route.snapshot.queryParamMap)) {
       this.api.getuser(localStorage.getItem('user')).subscribe((u) => {

@@ -36,6 +36,7 @@ import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import {QRCodeModule} from "angular2-qrcode";
 import { TimerComponent } from './timer/timer.component';
 import {getAuthServiceConfigs} from "./tools";
+import { TutoComponent } from './tuto/tuto.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -51,7 +52,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     UserformComponent,
     PrintLayoutComponent,
     ShowcodeComponent,
-    TimerComponent
+    TimerComponent,
+    TutoComponent
   ],
   entryComponents: [
     NewCouponComponent
