@@ -18,6 +18,7 @@ export class NewCouponComponent implements OnInit {
     direct_bonus: 0.3,
     pay_bonus: 3,
     max: 10,
+    max_coupon:1000,
     duration: 15,
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };

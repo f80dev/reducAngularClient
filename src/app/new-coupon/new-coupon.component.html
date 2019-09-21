@@ -1,6 +1,6 @@
 <mat-card class="app-card">
   <mat-card-title>
-    Nouvelle Promotion de "{{coupon.shop}}"
+    Nouvelle Promotion
   </mat-card-title>
   <mat-card-content class="app-card-content" style="text-align: left;">
     <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
@@ -27,14 +27,18 @@
 
     <br>
     <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Récompense pour achat" [(ngModel)]="coupon.pay_bonus">
+      <input matInput type="number" placeholder="Récompense par achat généré" [(ngModel)]="coupon.pay_bonus">
     </mat-form-field>
     <mat-form-field class="form-field-style" style="width: 40%">
       <input matInput type="number" placeholder="Bonus immédiat" [(ngModel)]="coupon.direct_bonus">
     </mat-form-field>
 
-    <mat-form-field class="form-field-style">
+    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
       <input matInput type="number" placeholder="Durée de validité (En Jours)" [(ngModel)]="coupon.duration">
+    </mat-form-field>
+
+    <mat-form-field class="form-field-style" style="width: 40%">
+      <input matInput type="number" placeholder="Nombre maximum de partage" [(ngModel)]="coupon.max_coupon">
     </mat-form-field>
 
   <div style="width: 100%;text-align: center;">

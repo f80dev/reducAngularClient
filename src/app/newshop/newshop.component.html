@@ -8,8 +8,10 @@
     <br>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="adresse" [(ngModel)]="address">
+      <input type="text" matInput placeholder="adresse" [(ngModel)]="address" (blur)="showOnMap()">
     </mat-form-field>
+    <br>
+    <div id="map" class="map"></div>
 
   </mat-card-content>
   <mat-card-actions>

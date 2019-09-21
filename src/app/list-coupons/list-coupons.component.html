@@ -4,6 +4,9 @@
     <mat-card-title style="font-size: medium;">
         {{coupon.label}}&nbsp;chez "{{coupon.shop_complete.name}}"
     </mat-card-title>
+    <mat-card-subtitle *ngIf="!coupon.visible">
+      <strong>{{coupon.gain}}</strong>&nbsp;{{coupon.unity}} (max:{{coupon.max}})
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content class="app-card-content" *ngIf="coupon.visible">
@@ -16,7 +19,9 @@
         </h2>
         <br>
         <br>
-        {{coupon.direct_bonus}}&nbsp;{{coupon.unity}}
+        <span style="font-size: 2em;">
+          Gagner immédiatement <strong>{{coupon.direct_bonus}}</strong>&nbsp;{{coupon.unity}}
+        </span>
         <br>
         <br>
         <h3>Flasher ce code pour en bénéficier</h3>
@@ -27,10 +32,12 @@
         </qr-code>
         <br><br>
 
+        <br><br><br>
+        <h1>Votre réduction peut facilement augmenter !</h1>
 
-        <div style="font-size: large">
-          +{{coupon.share_bonus}}&nbsp;{{coupon.unity}} à chaque partage du coupon<br>
-          +{{coupon.pay_bonus}}&nbsp;{{coupon.unity}} à chaque fois qu'un client utilise le coupon que vous lui avez partagez
+        <div style="font-size: xx-large">
+          de <strong>{{coupon.share_bonus}}</strong>&nbsp;{{coupon.unity}} à chaque fois que vous la partagez avec vos proches<br><br>
+          de <strong>{{coupon.pay_bonus}}</strong>&nbsp;{{coupon.unity}} à chaque fois qu'un client utilise le coupon que vous lui avez partagez
         </div>
 
 
@@ -61,7 +68,7 @@
 
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin" style="font-size: small;">
-          Nombre de partage : {{coupon.share}}
+          Nombre de coupon créés : {{coupon.share}} / {{coupon.max_coupon}}
           <br><br>
         </div>
           <table style="text-align: left;display: inline-block;font-size: small;" cellpadding="4">
@@ -80,7 +87,9 @@
     <!--Info sur le coupon-->
 
     <mat-card-actions style="text-align: center;">
-      <button mat-button mat-flat-button mat-icon-button (click)="showCode(coupon)" ngxClipboard [cbContent]="coupon.url">
+      <button mat-button mat-flat-button
+              *ngIf="coupon.share<coupon.max_coupon"
+              mat-icon-button (click)="showCode(coupon)" ngxClipboard [cbContent]="coupon.url">
         <mat-icon>share</mat-icon>
       </button>
 

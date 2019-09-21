@@ -8,6 +8,7 @@
   <mat-card-content class="app-card-content">
     <mat-card-actions class="app-card-action">
       <button mat-button mat-flat-button
+              *ngIf="!shop.showAddCoupon"
               (click)="addCoupon(shop)">
         Fabriquer un Coupon
       </button>
