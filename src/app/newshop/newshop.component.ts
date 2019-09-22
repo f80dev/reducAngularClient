@@ -13,7 +13,7 @@ declare var ol: any;
 })
 
 export class NewshopComponent implements OnInit {
-  shopname = 'La maison du serpent';
+  shopname = 'La maison du piano';
   address = '12, rue martel, paris 10';
   owner = '';
   map: any;

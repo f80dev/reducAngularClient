@@ -19,6 +19,7 @@
       </app-new-coupon>
 
       <button mat-button mat-flat-button mat-icon-button
+              *ngIf="!shop.showAddCoupon"
               (click)="delShop(shop)">
         <mat-icon>delete</mat-icon>
       </button>

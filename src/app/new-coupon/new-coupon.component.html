@@ -42,14 +42,24 @@
     </mat-form-field>
 
   <div style="width: 100%;text-align: center;">
-  <span class="btn-file">
-    <button mat-flat-button mat-button>Photos / Images</button>
-    <input type="file"
+
+    <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
+    &nbsp;&nbsp;
+
+    <div mat-flat-button mat-button style="display: inline;">
+      <label for="file">Photos / Images</label>
+      <input type="file" id="file" style="opacity: 0;"
            (change)="onSelectFile($event)"
            accept="image/gif,image/jpeg,image/png" />
-  </span>
+    </div>
 
     <br><br>
+
+    <div *ngIf="showIcons" style="width:100%;">
+      <img *ngFor="let icon of icons" [src]="icon.photo"
+           style="width:30px;display: inline-block;"
+           (click)="selIcon(icon)">
+    </div>
 
     <img style="max-height:200px"
          *ngIf="preview.length>0"
@@ -58,10 +68,14 @@
   </div>
 
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-flat-button class="app-button" *ngIf="coupon.label?.length>0" mat-button (click)="addcoupon(coupon)">Valide</button>
-    <button mat-flat-button class="app-button" mat-button (click)="onclose.emit()">Cancel</button>
 
+  <mat-card-actions>
+    <button mat-flat-button class="app-button"
+            *ngIf="coupon.label?.length>0" mat-button
+            (click)="addcoupon(coupon)">Valide</button>
+
+    <button mat-flat-button class="app-button"
+            mat-button (click)="onclose.emit()">Cancel</button>
   </mat-card-actions>
 </mat-card>
 

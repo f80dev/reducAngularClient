@@ -23,6 +23,9 @@ export class NewCouponComponent implements OnInit {
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
 
+  showIcons=false;
+  icons=[];
+
   @Input("shopname") shopname="";
   shopNameEdit = true;
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
@@ -34,6 +37,14 @@ export class NewCouponComponent implements OnInit {
   ngOnInit() {
     this.shopNameEdit = false;
     this.coupon.shop = this.shopname;
+  }
+
+  addIcons(){
+    var root="https://shifumix.com/avatars/";
+    if(this.icons.length==0){
+      for(var i=1;i<300;i++)
+        this.icons.push({photo:root+"file_emojis"+i+".png"});
+    }
   }
 
   addcoupon(coupon: any) {
@@ -61,5 +72,11 @@ export class NewCouponComponent implements OnInit {
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+  }
+
+  selIcon(icon: any) {
+    this.showIcons=false;
+    // var event={target:{files:[icon.picture]}};
+    // this.onSelectFile(event);
   }
 }

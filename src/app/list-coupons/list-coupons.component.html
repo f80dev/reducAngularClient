@@ -14,7 +14,6 @@
            Nombre de coupon créés : {{coupon.share}} / {{coupon.max_coupon}}
       </span>
 
-
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -74,7 +73,10 @@
 
       </td>
       <td style="text-align: center;vertical-align: top;width:50%;">
-        <h3 *ngIf="coupon._id!=coupon.origin">{{coupon.gain}}&nbsp;{{coupon.unity}} (/{{coupon.max}})</h3>
+        <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
+          Vous avez déjà gagné {{coupon.gain}}&nbsp;{{coupon.unity}} (/{{coupon.max}})
+        </div>
+        <br><br>
 
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin" style="font-size: small;">
