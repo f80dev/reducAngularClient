@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
 
         //Effacer le message
-        setTimeout(()=>{this.user.message=""},5000);
+        setTimeout(()=>{this.user.message=""},8000);
 
         if(this.user.coupons!=null){
           this.coupons=[];
@@ -51,8 +51,6 @@ export class HomeComponent implements OnInit {
             }
           });
         }
-
-        console.log("user="+this.user._id)
       });
     }
 

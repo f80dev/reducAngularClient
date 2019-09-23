@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
   constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
   showLogin=false;
-  showMessage: boolean = false;
-  message:string="";
 
   ngOnInit() {
     if(localStorage.getItem("user")==null){
@@ -41,18 +39,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  goHome(){
-    this.router.navigate(['home'],{queryParams:{message:this.message}});
-  }
-
   login() {
     localStorage.setItem('user', this.email);
     this.route.params.subscribe((params)=>{
       if(params["coupon"]!=null){
         this.api.flash(this.email, params["coupon"]).subscribe((result:any) => {
-          this.message=result.message;
-          if(result.message!="" && result.code==201)
-            this.showMessage=true;
+          this.router.navigate(['home'],{queryParams:{message:result.message}});
         });
       }else {
         this.router.navigate(['home']);
