@@ -43,10 +43,10 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('user', this.email);
     this.route.params.subscribe((params)=>{
       if(params["coupon"]!=null){
-        this.api.flash(this.email, params["coupon"]).subscribe(() => {
+        this.api.flash(this.email, params["coupon"]).subscribe((result:any) => {
           setTimeout(() => {
-            this.router.navigate(['home']);
-          }, 1000);
+            this.router.navigate(['home'],{queryParams:{message:result.message}});
+          }, 500);
         });
       }else {
         this.router.navigate(['home']);

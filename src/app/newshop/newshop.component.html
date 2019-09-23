@@ -11,10 +11,12 @@
       <input type="text" matInput placeholder="adresse" [(ngModel)]="address" (blur)="showOnMap()">
     </mat-form-field>
     <br>
-    <div id="map" class="map"></div>
+    <div id="map" class="map form-field-style"></div>
     <app-tuto label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions class="app-card-action">
+    <button mat-button mat-flat-button class="app-button" (click)="cancel()">Annuler</button>
+    &nbsp;
     <button mat-button mat-flat-button class="app-button" (click)="add()">Valide</button>
   </mat-card-actions>
 </mat-card>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {hashCode} from '../tools';
 import {ConfigService} from "../config.service";
 
@@ -7,16 +7,17 @@ import {ConfigService} from "../config.service";
   templateUrl: './tuto.component.html',
   styleUrls: ['./tuto.component.css']
 })
-export class TutoComponent implements OnInit {
+export class TutoComponent implements OnChanges {
 
   @Input("text") text: string="";
+  @Input("type") _type: string="";
   @Input("label") label: string="";
-  @Input("delay") delay=0.1;
+  @Input("delay") delay=0.2;
   @Input('if') _if: boolean=true;
 
   constructor(public config:ConfigService) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     setTimeout(()=>{
       if(this.text==null || this.text.length==0)this.text=this.label;
       if(this._if && !this.config.visibleTuto){

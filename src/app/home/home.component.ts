@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
-        console.log("From server:" + data.message);
         this.refresh(data.message);
       }
     });
@@ -35,11 +34,15 @@ export class HomeComponent implements OnInit {
         //Effacer le message
         setTimeout(()=>{this.user.message=""},5000);
 
-        this.coupons=[];
         if(this.user.coupons!=null){
+          this.coupons=[];
+          var i=0;
           this.user.coupons.forEach((coupon)=>{
-            if(coupon.origin!=coupon._id)
+            if(coupon.origin!=coupon._id){
+              if(i==0)coupon.visible=true;
               this.coupons.push(coupon);
+              i++;
+            }
           });
         }
 

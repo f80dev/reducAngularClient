@@ -62,6 +62,10 @@ export class NewshopComponent implements OnInit {
     });
   }
 
+  cancel(){
+    this.router.navigate(['home'],{queryParams:{message:"Enseigne non créée"}});
+  }
+
   showOnMap() {
     this.loc.getAddress(this.address,(res)=> {
       var view = this.map.getView();
@@ -71,4 +75,6 @@ export class NewshopComponent implements OnInit {
       this.address=res[0].display_name;
     });
   }
+
+
 }

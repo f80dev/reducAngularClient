@@ -6,20 +6,28 @@
     </mat-card-title>
     <mat-card-subtitle *ngIf="!coupon.visible">
 
-      <span *ngIf="coupon._id!=coupon.origin">
-        <strong>{{coupon.gain}}</strong>&nbsp;{{coupon.unity}} (max:{{coupon.max}})
+      <span *ngIf="coupon._id!=coupon.origin" style="font-size: large">
+        <strong>{{coupon.gain}}</strong>&nbsp;{{coupon.unity}}
+
+        <span *ngIf="(coupon.gain/coupon.max)>0.8">
+        (max:{{coupon.max}})
+          </span>
       </span>
 
     <span *ngIf="coupon._id==coupon.origin">
            Nombre de coupon créés : {{coupon.share}} / {{coupon.max_coupon}}
       </span>
 
+
+
+
+
     </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content class="app-card-content" *ngIf="coupon.visible">
 
-    <app-tuto label="Cliquer sur le titre pour réduire la taille d'affichage du coupon"></app-tuto>
+    <app-tuto [delay]="20" label="Cliquer sur le titre pour réduire la taille d'affichage du coupon"></app-tuto>
 
     <div name="print-section" style="display: none;">
       <div style="text-align: center;width:100%;">
@@ -74,7 +82,8 @@
       </td>
       <td style="text-align: center;vertical-align: top;width:50%;">
         <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
-          Vous avez déjà gagné {{coupon.gain}}&nbsp;{{coupon.unity}} (/{{coupon.max}})
+          Vous avez déjà gagné {{coupon.gain}}&nbsp;{{coupon.unity}}
+          <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
         <br><br>
 
@@ -94,9 +103,11 @@
       </td>
     </tr></table>
 
-    <app-tuto [if]="coupon.showCode"
-              label="Le lien du coupon a été placé dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
+
+    <app-tuto [if]="coupon.showCode && coupon.visible" [delay]="3"
+              label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
+
   </mat-card-content>
 
     <!--Info sur le coupon-->
@@ -104,6 +115,7 @@
     <mat-card-actions style="text-align: center;">
       <div *ngIf="coupon.share<coupon.max_coupon" style="display: inline-block;">
         <button mat-button mat-flat-button
+                title="Partager le coupon pour augmenter votre promotion / réduction"
                 mat-icon-button (click)="showCode(coupon)"
                 ngxClipboard [cbContent]="coupon.url">
           <mat-icon>share</mat-icon>
@@ -130,12 +142,14 @@
 
       <button *ngIf="coupon._id==coupon.origin && coupon.visible" mat-button
               (click)="openPrinter(coupon)"
+              title="Imprimer une affiche de votre bon plan"
               mat-flat-button mat-icon-button>
         <mat-icon>printer</mat-icon>
       </button>
 
       <button mat-button mat-flat-button
               *ngIf="coupon._id!=coupon.origin"
+              title="Localiser l'enseigne proposant la réduction"
               mat-icon-button  (click)="showAddress(coupon.shop_complete)">
         <mat-icon>map</mat-icon>
       </button>

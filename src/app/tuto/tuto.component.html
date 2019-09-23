@@ -1,8 +1,15 @@
 <div *ngIf="text?.length>0 && _if" style="display:inline-block;margin:3px;" (click)="hideTuto()">
-  <table>
-    <tr>
-      <td><img src="./assets/img/tips.png" style="width:30px;height:30px;padding:3px;"></td>
-      <td><span style="font-size: small;font-weight: normal;">{{text}}</span></td>
-    </tr>
-  </table>
+  <div *ngIf="_type!='title'">
+    <table>
+      <tr>
+        <td><img src="./assets/img/tips.png" style="width:30px;height:30px;padding:3px;"></td>
+        <td><span style="font-size: small;font-weight: normal;">{{text}}</span></td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="_type=='title'" class="app-card" style="background:none;width: 100%;text-align: center;font-size: 2em;">
+    <br>
+    {{text}}
+    <br>
+  </div>
 </div>
