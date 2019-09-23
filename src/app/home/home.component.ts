@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
           });
         }
 
-
         console.log("user="+this.user._id)
       });
     }
@@ -60,4 +59,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  closeFlashScreen() {
+    this.showMessage=false;
+  }
 }
