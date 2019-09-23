@@ -3,17 +3,19 @@
 <app-tuto [if]="user.shops?.length>0"
           label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
 </app-tuto>
-<app-shops [shops]="user.shops"
-           (delete)="refresh()"
-           (insert)="refresh()">
+<app-shops
+           [user]="user"
+           (update)="refresh($event?.message)"
+           (delete)="refresh($event?.message)"
+           (insert)="refresh($event?.message)">
 </app-shops>
 
 <app-tuto [if]="user.coupons?.length>0"
           label="Retrouvez ici tout les coupons de promotion dont vous disposez">
 </app-tuto>
-<app-list-coupons (delete)="refresh('coupon supprimé')"
-                  (insert)="refresh('coupon ajouté')"
-                  [coupons]="user.coupons">
+<app-list-coupons (delete)="refresh($event?.message)"
+                  (insert)="refresh($event?.message)"
+                  [coupons]="coupons">
 </app-list-coupons>
 
 <!--<br><br><br>-->

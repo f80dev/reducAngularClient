@@ -37,8 +37,6 @@ export class ListCouponsComponent implements OnInit {
 
   remove(coupon: any) {
     this.api.removeCoupon( coupon._id).subscribe(() => {
-      //const pos = this.coupons.indexOf(coupon);
-      //this.coupons = this.coupons.splice(pos + 1, 1        );
       this.ondelete.emit();
     });
   }

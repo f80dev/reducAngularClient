@@ -46,12 +46,12 @@
     <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
     &nbsp;&nbsp;
 
-    <div mat-flat-button mat-button style="display: inline;">
-      <label for="file">Photos / Images</label>
+    <button mat-flat-button mat-button style="width:140px;text-align: center;">
+      <label  for="file">Photos / Images</label>
       <input type="file" id="file" style="opacity: 0;"
            (change)="onSelectFile($event)"
            accept="image/gif,image/jpeg,image/png" />
-    </div>
+    </button>
 
     <br><br>
 

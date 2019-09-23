@@ -1,29 +1,33 @@
-<mat-card *ngFor="let shop of shops" class="app-card">
+<mat-card *ngFor="let shop of user.shops" class="app-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title>{{shop.name}}</mat-card-title>
     <mat-card-subtitle>{{shop.address}}</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content class="app-card-content">
-    <mat-card-actions class="app-card-action">
-      <button mat-button mat-flat-button
-              *ngIf="!shop.showAddCoupon"
-              (click)="addCoupon(shop)">
-        Fabriquer un Coupon
-      </button>
-      <app-new-coupon *ngIf="shop.showAddCoupon"
-                      [shopname]="shop.name"
-                      (insert)="shop.showAddCoupon=false;oninsert.emit('coupon ajouté')"
-                      (close)="shop.showAddCoupon=false">
-      </app-new-coupon>
+  <mat-card-actions class="app-card-action">
+    <button mat-button mat-flat-button
+            *ngIf="!shop.showAddCoupon"
+            (click)="addCoupon(shop)">
+      Fabriquer un Coupon
+    </button>
+    <app-new-coupon *ngIf="shop.showAddCoupon"
+                    [shopname]="shop.name"
+                    (insert)="onInsert(shop)"
+                    (close)="shop.showAddCoupon=false">
+    </app-new-coupon>
 
-      <button mat-button mat-flat-button mat-icon-button
-              *ngIf="!shop.showAddCoupon"
-              (click)="delShop(shop)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
+    <button mat-button mat-flat-button mat-icon-button
+            *ngIf="!shop.showAddCoupon"
+            (click)="delShop(shop)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+
+  <mat-card-content class="app-card-content">
+    <app-list-coupons [coupons]="coupons"
+                      (delete)="onupdate.emit($event)">
+    </app-list-coupons>
   </mat-card-content>
 </mat-card>
 

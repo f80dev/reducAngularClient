@@ -128,13 +128,15 @@
         <!--<mat-icon>attach_money</mat-icon>-->
       <!--</button>-->
 
-      <button *ngIf="coupon._id==coupon.origin" mat-button
+      <button *ngIf="coupon._id==coupon.origin && coupon.visible" mat-button
               (click)="openPrinter(coupon)"
               mat-flat-button mat-icon-button>
         <mat-icon>printer</mat-icon>
       </button>
 
-      <button mat-button mat-flat-button mat-icon-button  (click)="showAddress(coupon.shop_complete)">
+      <button mat-button mat-flat-button
+              *ngIf="coupon._id!=coupon.origin"
+              mat-icon-button  (click)="showAddress(coupon.shop_complete)">
         <mat-icon>map</mat-icon>
       </button>
 

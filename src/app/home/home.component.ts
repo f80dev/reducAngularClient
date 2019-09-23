@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(public socket:Socket,public api: ApiService, public router: Router, public route: ActivatedRoute) { }
 
   user: any = {message:""};
+  coupons=[];
 
   ngOnInit() {
     this.refresh(this.route.snapshot.queryParamMap.get("message"));
@@ -34,9 +35,20 @@ export class HomeComponent implements OnInit {
         //Effacer le message
         setTimeout(()=>{this.user.message=""},5000);
 
+        this.coupons=[];
+        if(this.user.coupons!=null){
+          this.user.coupons.forEach((coupon)=>{
+            if(coupon.origin!=coupon._id)
+              this.coupons.push(coupon);
+          });
+        }
+
+
         console.log("user="+this.user._id)
       });
     }
+
+
   }
 
 }

@@ -11,7 +11,7 @@ export class TutoComponent implements OnInit {
 
   @Input("text") text: string="";
   @Input("label") label: string="";
-  @Input("delay") delay=0.01;
+  @Input("delay") delay=0.1;
   @Input('if') _if: boolean=true;
 
   constructor(public config:ConfigService) {}
