@@ -37,6 +37,7 @@ import {QRCodeModule} from "angular2-qrcode";
 import { TimerComponent } from './timer/timer.component';
 import {getAuthServiceConfigs} from "./tools";
 import { TutoComponent } from './tuto/tuto.component';
+import { FlashscreenComponent } from './flashscreen/flashscreen.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -53,7 +54,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PrintLayoutComponent,
     ShowcodeComponent,
     TimerComponent,
-    TutoComponent
+    TutoComponent,
+    FlashscreenComponent
   ],
   entryComponents: [
     NewCouponComponent
