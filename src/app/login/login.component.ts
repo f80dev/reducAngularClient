@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       if(params["coupon"]!=null){
         this.api.flash(this.email, params["coupon"]).subscribe((result:any) => {
           this.message=result.message;
-          if(result.message!="")
+          if(result.message!="" && result.code==201)
             this.showMessage=true;
         });
       }else {

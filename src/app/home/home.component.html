@@ -1,3 +1,8 @@
+<app-flashscreen [message]="user.message"
+                 [visible]="showMessage"
+                 (close)="showMessage=false"
+                 >
+</app-flashscreen>
 <app-tuto label="Bienvenue dans ReducShare, la première application qui récompense le bouche à oreille" type="title"></app-tuto>
 <app-userform [user]="user"></app-userform>
 <app-tuto [if]="user.shops?.length>0"

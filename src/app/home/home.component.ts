@@ -10,8 +10,10 @@ import {Socket} from "ngx-socket-io";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   constructor(public socket:Socket,public api: ApiService, public router: Router, public route: ActivatedRoute) { }
 
+  showMessage: boolean=false;
   user: any = {message:""};
   coupons=[];
 
@@ -31,6 +33,10 @@ export class HomeComponent implements OnInit {
       this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
         this.user = u;
         this.user.message=message;
+        if(this.user.message.startsWith("#"))this.user.message=this.user.message.substr(1);
+        if(message.startsWith("#"))this.showMessage=true;
+
+
         //Effacer le message
         setTimeout(()=>{this.user.message=""},5000);
 
