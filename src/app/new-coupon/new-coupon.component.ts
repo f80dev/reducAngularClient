@@ -76,7 +76,7 @@ export class NewCouponComponent implements OnInit {
 
   selIcon(icon: any) {
     this.showIcons=false;
-    // var event={target:{files:[icon.picture]}};
-    // this.onSelectFile(event);
+    this.coupon.picture=icon.picture;
+    this.preview=icon.picture;
   }
 }
