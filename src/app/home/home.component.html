@@ -3,25 +3,28 @@
                  (close)="showMessage=false"
                  >
 </app-flashscreen>
-<app-tuto label="Bienvenue dans ReducShare, la première application qui récompense le bouche à oreille" type="title"></app-tuto>
-<app-userform [user]="user"></app-userform>
-<app-tuto [if]="user.shops?.length>0"
-          label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
-</app-tuto>
-<app-shops
-           [user]="user"
-           (update)="refresh($event?.message)"
-           (delete)="refresh($event?.message)"
-           (insert)="refresh($event?.message)">
-</app-shops>
 
-<app-tuto [if]="user.coupons?.length>0"
-          label="Retrouvez ici tout les coupons de promotion dont vous disposez">
-</app-tuto>
-<app-list-coupons (delete)="refresh($event?.message)"
-                  (insert)="refresh($event?.message)"
-                  [coupons]="coupons">
-</app-list-coupons>
+<div [hidden]="showMessage">
+  <app-tuto label="Bienvenue dans ReducShare, la première application qui récompense le bouche à oreille" type="title"></app-tuto>
+  <app-userform [user]="user"></app-userform>
+  <app-tuto [if]="user.shops?.length>0"
+            label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
+  </app-tuto>
+  <app-shops
+             [user]="user"
+             (update)="refresh($event?.message)"
+             (delete)="refresh($event?.message)"
+             (insert)="refresh($event?.message)">
+  </app-shops>
+
+  <app-tuto [if]="user.coupons?.length>0"
+            label="Retrouvez ici tout les coupons de promotion dont vous disposez">
+  </app-tuto>
+  <app-list-coupons (delete)="refresh($event?.message)"
+                    (insert)="refresh($event?.message)"
+                    [coupons]="coupons">
+  </app-list-coupons>
+</div>
 
 <!--<br><br><br>-->
 <!--<button mat-button mat-raised-button (click)="api.raz();refresh();">RAZ</button>-->
