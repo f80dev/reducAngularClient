@@ -14,8 +14,8 @@
           </span>
       </span>
 
-    <span *ngIf="coupon._id==coupon.origin">
-           Nombre de coupon créés : {{coupon.share}} / {{coupon.max_coupon}}
+    <span *ngIf="coupon._id==coupon.origin && coupon.share>0">
+           {{coupon.share}} coupons distribués (max:{{coupon.max_coupon}})
       </span>
 
 
@@ -85,8 +85,8 @@
         <br><br>
 
         <!--Zone réserver au créateur-->
-        <div *ngIf="coupon._id==coupon.origin" style="font-size: small;">
-          Nombre de coupon créés : {{coupon.share}} / {{coupon.max_coupon}}
+        <div *ngIf="coupon._id==coupon.origin && coupon.share>0" style="font-size: small;">
+          {{coupon.share}} coupons distribués (max:{{coupon.max_coupon}})
           <br><br>
         </div>
           <table style="text-align: left;display: inline-block;font-size: small;" cellpadding="4">

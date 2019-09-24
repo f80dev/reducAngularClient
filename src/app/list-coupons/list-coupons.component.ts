@@ -16,7 +16,9 @@ export class ListCouponsComponent implements OnInit {
   @Input('coupons') coupons: any[] = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
 
-  constructor(public meta: Meta,public api: ApiService, public router: Router,private socialAuthService: SocialService) { }
+  constructor(public meta: Meta,public api: ApiService, public router: Router,private socialAuthService: SocialService) {
+    meta.addTag({name:"application",content:"ReducShare"});
+  }
 
   ngOnInit() {
   }
@@ -25,11 +27,19 @@ export class ListCouponsComponent implements OnInit {
     coupon.visible=true;
     coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
 
-    this.meta.addTag({name:"og:url",content:coupon.url});
-    this.meta.addTag({name:"og:type",content:"shopping"});
-    this.meta.addTag({name:"og:title",content:coupon.label});
-    this.meta.addTag({name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"});
-    this.meta.addTag({name:"og:image",content:coupon.qrcode});
+    this.meta.removeTag('name = "og:url"');
+    this.meta.removeTag('name = "og:type"');
+    this.meta.removeTag('name = "og:title"');
+    this.meta.removeTag('name = "og:description"');
+    this.meta.removeTag('name = "og:image"');
+    this.meta.addTags([
+      {name:"og:url",content:coupon.url},
+      {name:"og:type",content:"shopping"},
+      {name:"og:title",content:coupon.label},
+      {name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"},
+      {name:"og:image",content:coupon.qrcode}
+      ],true);
+
 
     if(coupon.showCode==null)coupon.showCode=false;
     coupon.showCode = !coupon.showCode;
