@@ -3,6 +3,7 @@ import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {SocialService} from "ngx-social-button"
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-coupons',
@@ -15,7 +16,7 @@ export class ListCouponsComponent implements OnInit {
   @Input('coupons') coupons: any[] = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
 
-  constructor(public api: ApiService, public router: Router,private socialAuthService: SocialService) { }
+  constructor(public meta: Meta,public api: ApiService, public router: Router,private socialAuthService: SocialService) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,13 @@ export class ListCouponsComponent implements OnInit {
   showCode(coupon: any) {
     coupon.visible=true;
     coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
+
+    this.meta.addTag({name:"og:url",content:coupon.url});
+    this.meta.addTag({name:"og:type",content:"shopping"});
+    this.meta.addTag({name:"og:title",content:coupon.label});
+    this.meta.addTag({name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"});
+    this.meta.addTag({name:"og:image",content:coupon.qrcode});
+
     if(coupon.showCode==null)coupon.showCode=false;
     coupon.showCode = !coupon.showCode;
   }
