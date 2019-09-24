@@ -15,7 +15,7 @@
       </span>
 
     <span *ngIf="coupon._id==coupon.origin && coupon.share>0">
-           {{coupon.share}} coupons distribués (max:{{coupon.max_coupon}})
+           {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
       </span>
 
 
@@ -26,6 +26,7 @@
 
     <app-tuto [delay]="20" label="Cliquer sur le titre pour réduire la taille d'affichage du coupon"></app-tuto>
 
+    <!-- Section destinée à l'affichage -->
     <div name="print-section" style="display: none;">
       <div style="text-align: center;width:100%;">
         <h2>
@@ -41,7 +42,7 @@
         <h3>Flasher ce code pour en bénéficier</h3>
 
         <qr-code [value]="coupon.url"
-                 style="max-width:200px;max-height: 200px;display:inline;"
+                 style="max-width:400px;max-height: 400px;display:inline;"
                  [size]="400">
         </qr-code>
         <br><br>
@@ -55,24 +56,25 @@
         </div>
 
 
-
       </div>
 
     </div>
 
     <!--Visuel du coupon-->
     <table style="width:100%;vertical-align: top;"><tr>
-      <td style="width:30%;">
+      <td>
+        <!--Visuel du coupon-->
         <img
           *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0"
           [src]="coupon.picture"
-          style="height: 175px;">
-          <!--QRCode du coupon-->
+          style="width: 150px;height:150px;">
+
+        <!--QRCode du coupon-->
 
             <qr-code [value]="coupon.url"
                      style="max-width:200px;max-height: 200px;display:inline;"
                      *ngIf="coupon.showCode"
-                     [size]="175">
+                     [size]="150">
             </qr-code>
 
 
