@@ -19,9 +19,6 @@
       </span>
 
 
-
-
-
     </mat-card-subtitle>
   </mat-card-header>
 
@@ -108,11 +105,17 @@
               label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
 
+    <app-tuto [delay]="2" [duration]="15"
+              label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
+    </app-tuto>
+
   </mat-card-content>
 
     <!--Info sur le coupon-->
 
     <mat-card-actions style="text-align: center;">
+
+
       <div *ngIf="coupon.share<coupon.max_coupon" style="display: inline-block;">
         <button mat-button mat-flat-button
                 title="Partager le coupon pour augmenter votre promotion / réduction"
@@ -133,7 +136,6 @@
 
       </div>
       &nbsp;
-
 
 
       <!--<button mat-button mat-flat-button mat-icon-button (click)="showInfos(coupon)">-->

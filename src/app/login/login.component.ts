@@ -3,6 +3,7 @@ import {ErrorStateMatcher} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
+
 import {
   FacebookLoginProvider,
   GoogleLoginProvider,
@@ -24,7 +25,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,private socialAuthService: SocialService) { }
+  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,
+              private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
   showLogin=false;
 
