@@ -17,7 +17,10 @@ export class TimerComponent implements OnInit {
       var delay=(this.dtEnd-new Date().getTime())/1000;
       var delayInHour=Math.trunc(delay/3600);
       var delayInDay=Math.trunc(delay/(24*3600));
-      this.dateToShow=(delayInHour*60)+" minutes";
+      var delayInMinutes=Math.trunc(delay/60);
+      var sec=""+Math.trunc((delay-delayInMinutes*60) % 60);
+      if(sec.length==1)sec="0"+sec;
+      this.dateToShow=delayInMinutes+":"+sec;
       if(delayInHour>2)this.dateToShow=delayInHour+" heures"
       if(delayInHour>48)this.dateToShow=delayInDay+" jours";
 
