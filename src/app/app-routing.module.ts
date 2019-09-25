@@ -6,7 +6,7 @@ import {ListCouponsComponent} from './list-coupons/list-coupons.component';
 import {NewshopComponent} from './newshop/newshop.component';
 import {HomeComponent} from './home/home.component';
 import {NgxPrintModule} from "ngx-print";
-import {JwSocialButtonsModule} from "jw-angular-social-buttons";
+import {NgxSocialButtonModule} from "ngx-social-button";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     CommonModule,
     NgxPrintModule,
-    JwSocialButtonsModule
+    NgxSocialButtonModule
   ],
   exports: [RouterModule]
 })

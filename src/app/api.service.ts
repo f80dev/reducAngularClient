@@ -17,6 +17,10 @@ export class ApiService {
     return this.http.get(api('addshop/' + name + '/' + address + '/' + owner, ''));
   }
 
+  public stopdeal(couponid: string) {
+    return this.http.get(api('stopdeal/'+couponid, ''));
+  }
+
   public raz() {
     localStorage.removeItem('user');
     return this.http.get(api('raz', '')).subscribe(() => {});

@@ -1,8 +1,7 @@
 <app-flashscreen [message]="user.message"
-                 [visible]="showMessage"
-                 [duration]="15"
-                 (close)="closeFlashScreen()"
-                 >
+                 *ngIf="showMessage"
+                 [duration]="8"
+                 (close)="closeFlashScreen()">
 </app-flashscreen>
 
 <div [hidden]="showMessage">
@@ -18,8 +17,8 @@
              (insert)="refresh($event?.message)">
   </app-shops>
 
-  <app-tuto [if]="user.coupons?.length>0"
-            label="Retrouvez ici tout les coupons de promotion dont vous disposez">
+  <app-tuto [if]="coupons?.length>0"
+            label="Vous pouvez partager vos promotions pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
   </app-tuto>
   <app-list-coupons (delete)="refresh($event?.message)"
                     (insert)="refresh($event?.message)"

@@ -15,6 +15,7 @@ export class ListCouponsComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('coupons') coupons: any[] = [];
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
+  @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
   constructor(public meta: Meta,public api: ApiService, public router: Router,private socialAuthService: SocialService) {
     meta.addTag({name:"application",content:"ReducShare"});
@@ -71,5 +72,11 @@ export class ListCouponsComponent implements OnInit {
 
   socialSharing(coupon: any) {
     this.socialAuthService.facebookSharing({href:coupon.url,hashtag:coupon.label});
+  }
+
+  stopDeal(coupon: any) {
+    this.api.stopdeal(coupon["_id"]).subscribe((mes:any)=>{
+      this.onupdate.emit(mes);
+    });
   }
 }

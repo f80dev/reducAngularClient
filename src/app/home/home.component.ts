@@ -59,8 +59,6 @@ export class HomeComponent implements OnInit {
         }
       });
     }
-
-
   }
 
   closeFlashScreen() {

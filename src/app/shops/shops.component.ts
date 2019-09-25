@@ -34,7 +34,7 @@ export class ShopsComponent implements OnChanges {
 
 
   ngOnChanges(){
-    this.refresh();
+    this.refresh(0);
   }
 
   refresh(showItem=-1){
