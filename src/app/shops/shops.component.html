@@ -8,7 +8,7 @@
     <button mat-button mat-flat-button
             *ngIf="!shop.showAddCoupon"
             (click)="addCoupon(shop)">
-      Ajouter une promotion
+      Lancer une promotion
     </button>
     <app-new-coupon *ngIf="shop.showAddCoupon"
                     [shopname]="shop.name"

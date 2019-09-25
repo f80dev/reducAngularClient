@@ -2,7 +2,10 @@
   <div *ngIf="_type!='title'">
     <table>
       <tr>
-        <td><img src="./assets/img/tips.png" style="width:30px;height:30px;padding:3px;"></td>
+        <td>
+          <img *ngIf="image?.length>0" [src]="image" style="width:30px;height:30px;padding:3px;">
+          <span *ngIf="icon?.length>0"><mat-icon>{{icon}}</mat-icon></span>
+        </td>
         <td><span style="font-size: small;font-weight: normal;">{{text}}</span></td>
       </tr>
     </table>

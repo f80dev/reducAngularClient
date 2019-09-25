@@ -3,26 +3,27 @@
     Nouvelle Promotion
   </mat-card-title>
   <mat-card-content class="app-card-content" style="text-align: left;">
+
+    <br>
     <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
       <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
     </mat-form-field>
-
 
     <mat-form-field class="form-field-style">
       <input type="text" matInput placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
     </mat-form-field>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="unité" [(ngModel)]="coupon.unity">
+      <input type="text" matInput placeholder="Que gagne-t-on ? (unité de votre promo)" [(ngModel)]="coupon.unity">
     </mat-form-field>
 
-
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Valeur maximum" [(ngModel)]="coupon.max">
-    </mat-form-field>
+    <br><br><br>le client gagne {{coupon.direct_bonus}} {{coupon.unity}}(s) lorsqu'il flash le coupon, puis
+    {{coupon.share_bonus}} {{coupon.unity}}(s) supplémentaire à chaque fois qu'il le partage et encore {{coupon.pay_bonus}} {{coupon.unity}}(s)
+    si un client fait un achat avec.
+    <br><br>
 
     <mat-form-field class="form-field-style" style="width: 40%">
-      <input matInput type="number" placeholder="Bonus a chaque partage" [(ngModel)]="coupon.share_bonus">
+      <input matInput type="number" placeholder="Bonus à chaque partage" [(ngModel)]="coupon.share_bonus">
     </mat-form-field>
 
     <br>
@@ -33,15 +34,29 @@
       <input matInput type="number" placeholder="Bonus immédiat" [(ngModel)]="coupon.direct_bonus">
     </mat-form-field>
 
+    <br><br><br>La promotion dure {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures<br><br>
+
+    <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
+      <input matInput type="number" placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
+    </mat-form-field>
+
+    <mat-form-field class="form-field-style" style="width: 40%;">
+      <input matInput type="number" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
+    </mat-form-field>
+
+    <br><br><br>Un client ne peut gagner plus de {{coupon.max}} {{coupon.unity}}(s) à chaque achat et le nombre
+    maximum de clients bénéficiant de la promotion ne peut excéder {{coupon.max_coupon}}<br><br>
+
     <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Durée de validité (En Jours)" [(ngModel)]="coupon.duration">
+      <input matInput type="number" placeholder="Gain maximum pour le client" [(ngModel)]="coupon.max">
     </mat-form-field>
 
     <mat-form-field class="form-field-style" style="width: 40%">
-      <input matInput type="number" placeholder="Nombre maximum de partage" [(ngModel)]="coupon.max_coupon">
+      <input matInput type="number" placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
     </mat-form-field>
 
-  <div style="width: 100%;text-align: center;">
+
+    <div style="width: 100%;text-align: center;">
 
     <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
     &nbsp;&nbsp;

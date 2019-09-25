@@ -24,8 +24,8 @@ export class NewshopComponent implements OnInit {
   private lat: number;
 
   constructor(public api: ApiService, public router: Router,public loc:LocService) {
-
   }
+
 
   showMap(lat,lon){
 

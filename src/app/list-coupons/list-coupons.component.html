@@ -100,7 +100,8 @@
             <tr><td>Immédiat</td><td>+ {{coupon.direct_bonus}} {{coupon.unity}}</td></tr>
           </table><br><br>
           <span style="font-size: small">
-            Validitée : <strong><app-timer [end]="coupon.dtEnd"></app-timer></strong>
+            Validitée : <br>
+            <strong><app-timer [end]="coupon.dtEnd"></app-timer></strong>
           </span>
       </td>
     </tr></table>
@@ -110,7 +111,7 @@
               label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
 
-    <app-tuto [delay]="2" [duration]="15" [if]="coupon.canbedeal"
+    <app-tuto icon="share" [delay]="2" [duration]="15" [if]="coupon.canbedeal"
               label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
     </app-tuto>
 

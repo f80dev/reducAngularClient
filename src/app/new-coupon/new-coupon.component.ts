@@ -19,7 +19,8 @@ export class NewCouponComponent implements OnInit {
     pay_bonus: 10,
     max: 60,
     max_coupon:1000,
-    duration: 10,
+    duration_jours: 2,
+    duration_hours: 0,
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
 
@@ -48,6 +49,8 @@ export class NewCouponComponent implements OnInit {
   }
 
   addcoupon(coupon: any) {
+    debugger
+    coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)/24;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
     });

@@ -42,4 +42,8 @@ export class ApiService {
   removeShop(id: any) {
     return this.http.get(api('removeshop/'  + id, ''));
   }
+
+  getcouponinsquare(param: { x0: any; y0: any; x1: any; y1: any }) {
+    return this.http.get(api('getcouponinsquare/'  + param.x0+'/'+param.y0+'/'+param.x1+'/'+param.y1, ''));
+  }
 }

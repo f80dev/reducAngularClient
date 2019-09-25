@@ -16,6 +16,8 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("delay") delay=0.2;
   @Input("duration") duration=0;
   @Input('if') _if: boolean=true;
+  @Input('image') image: string="./assets/img/tips.png";
+  @Input('icon') icon:string="";
 
   constructor(public config:ConfigService) {}
 
@@ -51,5 +53,6 @@ export class TutoComponent implements OnChanges,OnInit {
 
   ngOnInit(): void {
     if(this.subtitle.length>0)this._type="title";
+    if(this.icon!=null && this.icon.length>0)this.image="";
   }
 }
