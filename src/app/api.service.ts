@@ -13,8 +13,8 @@ export class ApiService {
     return this.http.post(api('createcoupon'), coupon);
   }
 
-  public addshop(name: string, address: string, owner: string) {
-    return this.http.get(api('addshop/' + name + '/' + address + '/' + owner, ''));
+  public addshop(name: string, address: string, owner: string,lng:number,lat:number) {
+    return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat, ''));
   }
 
   public stopdeal(couponid: string) {

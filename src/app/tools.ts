@@ -36,6 +36,27 @@ export function $$(s: string, obj: any= null) {
   if (lg.indexOf('!!') > -1) {alert(lg); }
 }
 
+export function createMarker(ol,lon,lat,icon){
+  var iconStyle = new ol.style.Style({
+    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+      anchor: [0.5, 0.5],
+      scale:0.2,
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      src: icon
+    }))
+  });
+
+  var marker = new ol.Feature({
+    geometry: new ol.geom.Point(
+      ol.proj.fromLonLat([lon, lat])
+    ),
+  });
+  marker.setStyle(iconStyle);
+  return marker;
+}
+
+
 
 export function resizeBase64Img(base64, maxsize,quality,func) {
 

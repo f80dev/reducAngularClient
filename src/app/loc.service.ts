@@ -7,6 +7,19 @@ export class LocService {
 
   constructor() { }
 
+  getPosition(): Promise<any> {
+    return new Promise((resolve, reject) => {
+
+      navigator.geolocation.getCurrentPosition(resp => {
+
+          resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
+        },
+        err => {
+          reject(err);
+        });
+    });
+
+  }
 
   public getAddress(query:string,func_success:Function,func_failed:Function=null){
     var url="https://nominatim.openstreetmap.org/search?q="+encodeURI(query);
