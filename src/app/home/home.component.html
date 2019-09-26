@@ -22,7 +22,7 @@
   </app-tuto>
   <app-list-coupons (delete)="refresh($event?.message)"
                     (insert)="refresh($event?.message)"
-                    [coupons]="coupons">
+                    [coupons]="coupons" [user]="user">
   </app-list-coupons>
 </div>
 

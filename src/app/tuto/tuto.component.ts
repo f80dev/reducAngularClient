@@ -54,5 +54,13 @@ export class TutoComponent implements OnChanges,OnInit {
   ngOnInit(): void {
     if(this.subtitle.length>0)this._type="title";
     if(this.icon!=null && this.icon.length>0)this.image="";
+    if(this._type=="tips"){
+      this._if=false;
+    }
+  }
+
+  showText(b: boolean) {
+    this._if=b;
+    this.ngOnChanges();
   }
 }

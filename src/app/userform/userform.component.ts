@@ -16,6 +16,7 @@ export class UserformComponent implements OnInit {
   @Input("user") user:any;
   showScanner: boolean = false;
   showMap: boolean=false;
+  showOldPromos: boolean=false;
   private map: any;
   private vectorLayer: any;
 

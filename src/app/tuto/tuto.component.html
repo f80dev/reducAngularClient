@@ -1,4 +1,4 @@
-<div *ngIf="text?.length>0 && _if" style="display:inline-block;margin:3px;" (click)="hideTuto()">
+<div *ngIf="_type!='tips' && text?.length>0 && _if" style="display:inline-block;margin:3px;" (click)="hideTuto()">
   <div *ngIf="_type!='title'">
     <table>
       <tr>
@@ -17,4 +17,13 @@
     <div style="width:100%;text-align:center;font-size: medium;">{{subtitle}}</div>
     <br><br><br>
   </div>
+
+</div>
+
+<div *ngIf="_type=='tips'" style="display: inline-block;">
+  <img *ngIf="image?.length>0 && text?.length>0"
+       [src]="image" style="width:15px;height:15px;padding:3px;display: inline-block;"
+       (mousedown)="showText(true)" (mouseup)="showText(false)"
+  >
+  <div *ngIf="_if" style="font-size: x-small;display: inline;">{{text}}</div>
 </div>

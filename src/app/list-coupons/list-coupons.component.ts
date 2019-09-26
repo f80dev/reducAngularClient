@@ -14,6 +14,8 @@ export class ListCouponsComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('coupons') coupons: any[] = [];
+  @Input('user') user: any;
+
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
@@ -78,5 +80,9 @@ export class ListCouponsComponent implements OnInit {
     this.api.stopdeal(coupon["_id"]).subscribe((mes:any)=>{
       this.onupdate.emit(mes);
     });
+  }
+
+  addfollow(userid: string, shopid: string) {
+    this.api.follow(userid,"+",shopid).subscribe(()=>{});
   }
 }

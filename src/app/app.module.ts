@@ -19,10 +19,10 @@ import {
   MAT_DIALOG_DATA,
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatCheckboxModule,
   MatDialogModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatSnackBarModule
 } from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
@@ -38,6 +38,8 @@ import { TimerComponent } from './timer/timer.component';
 import {getAuthServiceConfigs} from "./tools";
 import { TutoComponent } from './tuto/tuto.component';
 import { FlashscreenComponent } from './flashscreen/flashscreen.component';
+import { OldCouponsComponent } from './old-coupons/old-coupons.component';
+import { PrintCouponComponent } from './print-coupon/print-coupon.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -55,7 +57,9 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ShowcodeComponent,
     TimerComponent,
     TutoComponent,
-    FlashscreenComponent
+    FlashscreenComponent,
+    OldCouponsComponent,
+    PrintCouponComponent
   ],
   entryComponents: [
     NewCouponComponent
@@ -68,6 +72,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ClipboardModule,
     BrowserModule,
     HttpClientModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     AppRoutingModule,
@@ -76,6 +81,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatListModule,
     ReactiveFormsModule,
     MatSnackBarModule
 

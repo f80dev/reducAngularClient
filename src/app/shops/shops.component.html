@@ -11,7 +11,7 @@
       Lancer une promotion
     </button>
     <app-new-coupon *ngIf="shop.showAddCoupon"
-                    [shopname]="shop.name"
+                    [shop]="shop"
                     (insert)="onInsert(shop)"
                     (close)="shop.showAddCoupon=false">
     </app-new-coupon>

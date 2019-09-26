@@ -8,6 +8,7 @@
 
       <span *ngIf="coupon._id!=coupon.origin" style="font-size: large">
         <strong>{{coupon.gain}}</strong>&nbsp;{{coupon.unity}}
+        <span *ngIf="coupon.pluriel && coupon.gain>1">s</span>
 
         <span *ngIf="(coupon.gain/coupon.max)>0.8">
         (max:{{coupon.max}})
@@ -28,46 +29,25 @@
 
     <!-- Section destinée à l'imprression -->
     <div name="print-section" style="display: none;">
-      <div style="text-align: center;width:100%;">
-        <h2>
-          {{coupon.label}}&nbsp;chez "{{coupon.shop_complete.name}}"
-        </h2>
-        <br>
-        <br>
-        <span style="font-size: 2em;">
-          Gagner immédiatement <strong>{{coupon.direct_bonus}}</strong>&nbsp;{{coupon.unity}}
-        </span>
-        <br>
-        <br>
-        <h3>Flasher ce code pour en bénéficier</h3>
-
-        <qr-code [value]="coupon.url"
-                 style="max-width:400px;max-height: 400px;display:inline;"
-                 [size]="400">
-        </qr-code>
-        <br><br>
-
-        <br><br><br>
-        <h1>Votre réduction peut facilement augmenter !</h1>
-
-        <div style="font-size: xx-large">
-          <strong>+ {{coupon.share_bonus}}</strong>&nbsp;{{coupon.unity}} pour vous à chaque fois que vous la partagez avec vos proches<br><br>
-          <strong>+ {{coupon.pay_bonus}}</strong>&nbsp;{{coupon.unity}} pour vous à chaque fois qu'un client utilise le coupon que vous lui avez partagez
-        </div>
-
-
-      </div>
-
+      <app-print-coupon [coupon]="coupon"></app-print-coupon>
     </div>
 
     <!--Visuel du coupon-->
     <table style="width:100%;vertical-align: top;text-align: center;"><tr>
-      <td style="text-align: center;">
+      <td style="text-align: center;width: fit-content;">
         <!--Visuel du coupon-->
-        <img
-          *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0"
-          [src]="coupon.picture"
-          style="width: 150px;height:150px;display: inline-block;">
+        <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0">
+          <img
+            *ngIf="coupon.origin==coupon._id"
+            [src]="coupon.picture"
+            style="width: 30%;display: inline-block;">
+
+          <img
+            *ngIf="coupon.origin!=coupon._id"
+            [src]="coupon.picture"
+            style="width: 150px;height:150px;display: inline-block;">
+
+        </div>
 
         <!--QRCode du coupon-->
 
@@ -79,29 +59,32 @@
 
 
       </td>
-      <td style="text-align: center;vertical-align: top;width:50%;">
+      <td style="text-align: center;vertical-align: top;width:auto;">
         <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
-          Vous avez gagné {{coupon.gain}}&nbsp;{{coupon.unity}}
+          Vous avez gagné {{coupon.gain}}&nbsp;{{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.gain>1">s</span>
           <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
         <br><br>
 
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin && coupon.share>0" style="font-size: small;">
-          {{coupon.share}} coupons distribués (max:{{coupon.max_coupon}})<br>
-          {{coupon.gain_total}} {{coupon.unity}} distribué(es) <br><br>
+          {{coupon.share | number:'1.0-0'}} coupons distribués (max:{{coupon.max_coupon}})<br>
+          {{coupon.gain_total | number:'1.0-0'}} {{coupon.unity}} distribué(es) <br><br>
         </div>
 
           <table style="text-align: left;display: inline-block;font-size:x-small;"
                  cellpadding="2"
                  *ngIf="coupon.canbedeal">
-            <tr><td>Partage</td><td>+ {{coupon.share_bonus}} {{coupon.unity}}</td></tr>
-            <tr><td>Achat</td><td>+ {{coupon.pay_bonus}} {{coupon.unity}}</td></tr>
-            <tr><td>Immédiat</td><td>+ {{coupon.direct_bonus}} {{coupon.unity}}</td></tr>
+            <tr><td>Partage</td><td>+ {{coupon.share_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.share_bonus>1">s</span></td></tr>
+            <tr><td>Achat</td><td>+ {{coupon.pay_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.pay_bonus>1">s</span></td></tr>
+            <tr><td>Immédiat</td><td>+ {{coupon.direct_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.direct_bonus>1">s</span></td></tr>
           </table><br><br>
           <span style="font-size: small">
-            Validitée : <br>
-            <strong><app-timer [end]="coupon.dtEnd"></app-timer></strong>
+            Validitée : <app-timer [end]="coupon.dtEnd"></app-timer>
+          </span>
+
+          <span *ngIf="coupon.origin==coupon._id">
+            <br>Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.stock>1">s</span>
           </span>
       </td>
     </tr></table>
@@ -115,15 +98,21 @@
               label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
     </app-tuto>
 
+    <div style="width: 100%;text-align: center;font-size: x-small;color:lightgrey;" *ngIf="coupon.origin!=coupon._id && coupon.showCode">
+      <strong>Conditions d'application:</strong><br>
+      {{coupon.conditions}}
+    </div>
+
+
   </mat-card-content>
 
     <!--Info sur le coupon-->
 
     <mat-card-actions style="text-align: center;">
 
-
-      <div *ngIf="coupon.share<coupon.max_coupon" style="display: inline-block;">
+      <div *ngIf="!coupon.closed" style="display: inline-block;">
         <button mat-button mat-flat-button
+                *ngIf="coupon.canbedeal || coupon.origin!=coupon._id"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
                 mat-icon-button (click)="showCode(coupon)"
                 ngxClipboard [cbContent]="coupon.url">
@@ -154,6 +143,13 @@
               title="Imprimer une affiche de votre bon plan"
               mat-flat-button mat-icon-button>
         <mat-icon>printer</mat-icon>
+      </button>
+
+    <button *ngIf="coupon.shop.owner!=user?._id" mat-button
+              (click)="addfollow(user._id,coupon.shop)"
+              title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'"
+              mat-flat-button mat-icon-button>
+        <mat-icon>link</mat-icon>
       </button>
 
       <button *ngIf="coupon._id==coupon.origin && coupon.visible && coupon.canbedeal" mat-button

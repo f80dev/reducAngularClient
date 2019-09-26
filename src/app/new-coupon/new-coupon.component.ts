@@ -12,12 +12,16 @@ import { Location } from '@angular/common';
 export class NewCouponComponent implements OnInit {
   coupon: any = {
     shop: 'test',
-    label: 'Gagner des minutes supplémentaire pour vos cours',
-    unity: 'minutes',
+    label: 'Super promo !',
+    breakable:false,
+    unity: 'minute',
+    pluriel:true,
+    conditions:"La promotion n'est valable que pour un achat d'un montant supérieur à ",
     share_bonus: 3,
     direct_bonus: 5,
     pay_bonus: 10,
     max: 60,
+    stock:60,
     max_coupon:1000,
     duration_jours: 2,
     duration_hours: 0,
@@ -25,9 +29,10 @@ export class NewCouponComponent implements OnInit {
   };
 
   showIcons=false;
+  showOldCoupon=false;
   icons=[];
 
-  @Input("shopname") shopname="";
+  @Input("shop") shop:any={};
   shopNameEdit = true;
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
@@ -37,7 +42,7 @@ export class NewCouponComponent implements OnInit {
 
   ngOnInit() {
     this.shopNameEdit = false;
-    this.coupon.shop = this.shopname;
+    this.coupon.shop = this.shop._id;
   }
 
   addIcons(){
@@ -49,7 +54,6 @@ export class NewCouponComponent implements OnInit {
   }
 
   addcoupon(coupon: any) {
-    debugger
     coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)/24;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
@@ -81,5 +85,13 @@ export class NewCouponComponent implements OnInit {
     this.showIcons=false;
     this.coupon.picture=icon.photo;
     this.preview=icon.photo;
+  }
+
+  selectOldAsModel(coupon: any) {
+    this.coupon=coupon;
+    this.coupon.dtStart=new Date().getTime();
+    this.coupon.duration_hours=Math.trunc(coupon.duration);
+    this.preview=coupon.picture;
+    this.showOldCoupon=false;
   }
 }

@@ -14,8 +14,13 @@
 
     <div id="map" *ngIf="showMap" class="map" style="width:95%;display: inline-block;"></div>
 
+    <app-old-coupons [user]="user"
+                     *ngIf="showOldPromos">
+    </app-old-coupons>
+
   </mat-card-content>
   <mat-card-actions class="app-card-action">
+    <button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>
     <!--<button mat-button mat-raised-button (click)="showScanner=!showScanner">Scanner</button>-->
     <!--<button mat-button mat-raised-button (click)="openLoc()">Promo autour de moi</button>-->
     <button mat-button mat-raised-button (click)="addshop()">
@@ -25,8 +30,6 @@
       <span *ngIf="user.shops?.length>0">
         Ajouter une enseigne
       </span>
-
-
     </button>
   </mat-card-actions>
 </mat-card>

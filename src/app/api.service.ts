@@ -26,17 +26,20 @@ export class ApiService {
     return this.http.get(api('raz', '')).subscribe(() => {});
   }
 
-
   getuser(user: string) {
     return this.http.get(api('getuser/' + user, ''));
+  }
+
+  getoldcoupons(shopid: string,ownerid:string) {
+    return this.http.get(api('getoldcoupons/' + shopid+"/"+ownerid, ''));
   }
 
   flash(user: string, couponid: string) {
     return this.http.get(api('flash/' + couponid + '/' + user, ''));
   }
 
-  removeCoupon( idcoupon: string) {
-    return this.http.get(api('removecoupon/'  + idcoupon, ''));
+  removeCoupon( idcoupon: string,bDelete=false) {
+    return this.http.get(api('removecoupon/'  + idcoupon+"/"+bDelete, ''));
   }
 
   removeShop(id: any) {
@@ -45,5 +48,9 @@ export class ApiService {
 
   getcouponinsquare(param: { x0: any; y0: any; x1: any; y1: any }) {
     return this.http.get(api('getcouponinsquare/'  + param.x0+'/'+param.y0+'/'+param.x1+'/'+param.y1, ''));
+  }
+
+  follow(userid: string, operation: string, shopid: string) {
+    return this.http.get(api('updatefollow/'  + userid+'/'+operation+'/'+shopid, ''));
   }
 }
