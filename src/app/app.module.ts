@@ -23,7 +23,7 @@ import {
   MatDialogModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatStepperModule
 } from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
 import { HomeComponent } from './home/home.component';
@@ -73,6 +73,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     BrowserModule,
     HttpClientModule,
     MatCheckboxModule,
+    MatStepperModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     AppRoutingModule,

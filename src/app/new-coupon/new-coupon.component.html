@@ -3,120 +3,149 @@
   <button mat-button mat-flat-button (click)="showOldCoupon=!showOldCoupon">Modèles</button>
 
   <mat-card-content class="app-card-content" style="text-align: left;">
+
     <app-old-coupons *ngIf="showOldCoupon" [shop]="shop" (select)="selectOldAsModel($event)"></app-old-coupons>
     <br>
-    <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
-      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
-    </mat-form-field>
 
-    <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
-    </mat-form-field>
+    <mat-vertical-stepper style="background: none;">
+      <mat-step>
+        <ng-template matStepLabel>Nature de la promotion</ng-template>
 
+        <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
+          <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
+        </mat-form-field>
 
+        <app-tuto label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
+                  [delay]="5">
+        </app-tuto>
 
-    <app-tuto label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
-              [delay]="5">
-    </app-tuto>
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput placeholder="Que gagne-t-on ? (unité de votre promo)" [(ngModel)]="coupon.unity">
+        </mat-form-field>
 
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input type="text" matInput placeholder="Que gagne-t-on ? (unité de votre promo)" [(ngModel)]="coupon.unity">
-    </mat-form-field>
+        <br><br>
 
-    <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>
-    <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>
+        <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>
+        <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Teasing</ng-template>
 
-    <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="Condition d'obtention de la promotion" [(ngModel)]="coupon.conditions">
-    </mat-form-field>
-
-
-
-    <br><br><br>le client gagne {{coupon.direct_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.direct_bonus>1">s</span>
-    lorsqu'il flash le coupon, puis
-    {{coupon.share_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.share_bonus>1">s</span>
-    supplémentaire à chaque fois qu'il le partage et encore {{coupon.pay_bonus}} {{coupon.unity}}
-    <span *ngIf="coupon.pluriel && coupon.pay_bonus>1">s</span>
-    si un client fait un achat avec.
-    <br><br>
-
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Bonus à chaque partage" [(ngModel)]="coupon.share_bonus">
-    </mat-form-field>
-    <app-tuto type="tips"
-              label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
-    </app-tuto>
-
-    <br>
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Récompense par achat généré" [(ngModel)]="coupon.pay_bonus">
-    </mat-form-field>
-    <mat-form-field class="form-field-style" style="width: 40%">
-      <input matInput type="number" placeholder="Bonus immédiat" [(ngModel)]="coupon.direct_bonus">
-    </mat-form-field>
-
-    <br><br><br>Un client ne peut gagner plus de {{coupon.max}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.max>1">s</span>
-    à chaque achat<br><br>
-
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
-      <input matInput type="number" placeholder="Gain maximum pour le client" [(ngModel)]="coupon.max">
-    </mat-form-field>
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
+        </mat-form-field>
 
 
-    <br><br><br>La promotion se termine au bout de {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures,
-    avant si les
-    {{coupon.stock}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.stock>1">s</span> ont été distribué(es) et
-    le nombre
-    maximum de clients bénéficiant de la promotion ne peut excéder {{coupon.max_coupon}}
-    <br><br>
+        <!--Gestion du visuel-->
+        <div style="width: 100%;text-align: center;">
 
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
-      <input matInput type="number" placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
-    </mat-form-field>
+          <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
+          &nbsp;&nbsp;
 
-    <mat-form-field class="form-field-style" style="width: 40%;">
-      <input matInput type="number" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
-    </mat-form-field>
-    <br>
+          <button mat-flat-button mat-button style="width:140px;text-align: center;">
+            <label  for="file">Photos / Images</label>
+            <input type="file" id="file" style="opacity: 0;"
+                   (change)="onSelectFile($event)"
+                   accept="image/gif,image/jpeg,image/png" />
+          </button>
 
-    <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
-      <input matInput type="number" placeholder="Stock en {{coupon.unity}}" [(ngModel)]="coupon.stock">
-    </mat-form-field>
+          <br><br>
 
-    <mat-form-field class="form-field-style" style="width: 40%">
-      <input matInput type="number" placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
-    </mat-form-field>
+          <div *ngIf="showIcons" style="width:100%;">
+            <img *ngFor="let icon of icons" [src]="icon.photo"
+                 style="width:30px;display: inline-block;"
+                 (click)="selIcon(icon)">
+          </div>
+
+          <img style="max-height:200px"
+               *ngIf="preview.length>0"
+               [src]="preview">
+        </div>
+
+      </mat-step>
 
 
+      <mat-step>
+        <ng-template matStepLabel>Les gains</ng-template>
+        <div style="font-size: small">
 
 
+        le client gagne {{coupon.direct_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.direct_bonus>1">s</span>
+        lorsqu'il flash le coupon, puis
+        {{coupon.share_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.share_bonus>1">s</span>
+        supplémentaire à chaque fois qu'il le partage et encore {{coupon.pay_bonus}} {{coupon.unity}}
+        <span *ngIf="coupon.pluriel && coupon.pay_bonus>1">s</span>
+        si un client fait un achat avec.
+        </div>
+        <br>
 
-    <div style="width: 100%;text-align: center;">
+        <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
+          <input matInput type="number" placeholder="Bonus à chaque partage" [(ngModel)]="coupon.share_bonus">
+        </mat-form-field>
+        <app-tuto type="tips"
+                  label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
+        </app-tuto>
 
-    <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
-    &nbsp;&nbsp;
+        <br>
+        <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
+          <input matInput type="number" placeholder="Récompense par achat généré" [(ngModel)]="coupon.pay_bonus">
+        </mat-form-field>
+        <mat-form-field class="form-field-style" style="width: 40%">
+          <input matInput type="number" placeholder="Bonus immédiat" [(ngModel)]="coupon.direct_bonus">
+        </mat-form-field>
 
-    <button mat-flat-button mat-button style="width:140px;text-align: center;">
-      <label  for="file">Photos / Images</label>
-      <input type="file" id="file" style="opacity: 0;"
-           (change)="onSelectFile($event)"
-           accept="image/gif,image/jpeg,image/png" />
-    </button>
 
-    <br><br>
+      </mat-step>
 
-    <div *ngIf="showIcons" style="width:100%;">
-      <img *ngFor="let icon of icons" [src]="icon.photo"
-           style="width:30px;display: inline-block;"
-           (click)="selIcon(icon)">
-    </div>
+      <mat-step>
+        <ng-template matStepLabel>Les conditions d'application</ng-template>
 
-    <img style="max-height:200px"
-         *ngIf="preview.length>0"
-         [src]="preview">
+        Un client ne peut gagner plus de {{coupon.max}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.max>1">s</span>
+        à chaque achat<br><br>
 
-  </div>
+        <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
+          <input matInput type="number" placeholder="Gain maximum pour le client" [(ngModel)]="coupon.max">
+        </mat-form-field>
 
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput placeholder="Condition d'obtention de la promotion" [(ngModel)]="coupon.conditions">
+        </mat-form-field>
+
+
+      </mat-step>
+
+
+      <mat-step>
+        <ng-template matStepLabel>Les limites</ng-template>
+
+        La promotion se termine au bout de {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures,
+        avant si les
+        {{coupon.stock}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.stock>1">s</span> ont été distribué(es) et
+        le nombre
+        maximum de clients bénéficiant de la promotion ne peut excéder {{coupon.max_coupon}}
+        <br><br>
+
+        <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
+          <input matInput type="number" placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
+        </mat-form-field>
+
+        <mat-form-field class="form-field-style" style="width: 40%;">
+          <input matInput type="number" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
+        </mat-form-field>
+        <br>
+
+        <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
+          <input matInput type="number" placeholder="Stock en {{coupon.unity}}" [(ngModel)]="coupon.stock">
+        </mat-form-field>
+
+        <mat-form-field class="form-field-style" style="width: 40%">
+          <input matInput type="number" placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
+        </mat-form-field>
+
+      </mat-step>
+
+
+    </mat-vertical-stepper>
   </mat-card-content>
 
   <mat-card-actions>
