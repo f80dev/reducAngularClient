@@ -37,10 +37,10 @@
       <td style="text-align: center;width: fit-content;">
         <!--Visuel du coupon-->
         <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0">
-          <img
-            *ngIf="coupon.origin==coupon._id"
-            [src]="coupon.picture"
-            style="width: 40%;display: inline-block;">
+          <!--<img-->
+            <!--*ngIf="coupon.origin==coupon._id"-->
+            <!--[src]="coupon.picture"-->
+            <!--style="width: 40%;display: inline-block;">-->
 
           <img
             *ngIf="coupon.origin!=coupon._id"
@@ -51,12 +51,11 @@
 
         <!--QRCode du coupon-->
 
-            <qr-code [value]="coupon.url"
-                     style="max-width:200px;max-height: 200px;display:inline;"
-                     *ngIf="coupon.showCode"
-                     [size]="150">
-            </qr-code>
-
+        <qr-code [value]="coupon.url"
+                 style="max-width:200px;max-height: 200px;display:inline;"
+                 *ngIf="coupon.showCode"
+                 [size]="150">
+        </qr-code>
 
       </td>
       <td style="text-align: center;vertical-align: top;width:auto;">
