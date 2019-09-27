@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class NewCouponComponent implements OnInit {
   coupon: any = {
     shop: 'test',
+    symbol:"min",
     label: 'Super promo !',
     breakable:false,
     unity: 'minute',
@@ -54,7 +55,11 @@ export class NewCouponComponent implements OnInit {
   }
 
   addcoupon(coupon: any) {
+    //Mise en conformité du coupon
     coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)/24;
+    if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
+    coupon.unity=coupon.unity.toLowerCase();
+
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
     });

@@ -16,6 +16,8 @@
       <mat-step>
         <ng-template matStepLabel>Nature de la promotion</ng-template>
 
+
+
         <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
           <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
         </mat-form-field>
@@ -25,7 +27,23 @@
         </app-tuto>
 
         <mat-form-field class="form-field-style">
-          <input type="text" matInput placeholder="Que gagne-t-on ? (unité de votre promo)" [(ngModel)]="coupon.unity">
+          <input type="text" matInput
+                 placeholder="Titre de la promotion (non visible du client)"
+                 [(ngModel)]="coupon.title">
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field-style" style="width: 60%;margin-right: 10%;">
+          <input type="text" matInput
+
+                 placeholder="Que gagne-t-on ?"
+                 [(ngModel)]="coupon.unity">
+        </mat-form-field>
+
+        <mat-form-field class="form-field-style" style="width: 20%;">
+          <input type="text" matInput max="3"
+                 placeholder="Symbole"
+                 [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
         <br><br>
@@ -33,6 +51,10 @@
         <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>
         <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>
       </mat-step>
+
+
+
+
       <mat-step>
         <ng-template matStepLabel>Teaser</ng-template>
 
@@ -73,12 +95,9 @@
       <mat-step>
         <ng-template matStepLabel>Gains pour les clients</ng-template>
         <div style="font-size: x-small">
-        le client gagne {{coupon.direct_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.direct_bonus>1">s</span>
-        lorsqu'il flash le coupon, puis<br>
-        - {{coupon.share_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.share_bonus>1">s</span>
-        supplémentaires à chaque fois qu'il le partage,<br>
-          - {{coupon.pay_bonus}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.pay_bonus>1">s</span>
-        si un client fait un achat avec.
+        le client gagne {{coupon.direct_bonus}} {{coupon.symbol}}
+        lorsqu'il flash le coupon, puis
+        {{coupon.share_bonus}} {{coupon.symbol}} supplémentaires pour chaque partage de la promo, et {{coupon.pay_bonus}} {{coupon.symbol}} si un client fait un achat avec.
         </div>
         <br>
 
@@ -113,12 +132,12 @@
         </div>
         <br>
 
-        <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
+        <mat-form-field class="form-field-style">
           <input matInput type="number" placeholder="Gain maximum pour le client" [(ngModel)]="coupon.max">
         </mat-form-field>
 
         <mat-form-field class="form-field-style">
-          <input type="text" matInput placeholder="Condition d'obtention de la promotion" [(ngModel)]="coupon.conditions">
+          <textarea matInput rows="3" placeholder="Condition d'obtention de la promotion" [(ngModel)]="coupon.conditions"></textarea>
         </mat-form-field>
 
 
@@ -130,8 +149,8 @@
 
         <div style="font-size: x-small">
         La promotion dure {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures,
-        et s'interrompt si
-        {{coupon.stock}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.stock>1">s</span> ont été distribué(es) ou si plus de {{coupon.max_coupon}} promotions ont été partagée
+        et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es)
+          ou si plus de {{coupon.max_coupon}} promotions ont été partagées.
         <br><br>
         </div>
 
@@ -145,7 +164,7 @@
         <br>
 
         <mat-form-field class="form-field-style">
-          <input matInput type="number" placeholder="Stock destiné à la promotion ({{coupon.unity}})" [(ngModel)]="coupon.stock">
+          <input matInput type="number" placeholder="Stock (en {{coupon.symbol}}) destiné à la promotion" [(ngModel)]="coupon.stock">
         </mat-form-field>
 
         <mat-form-field class="form-field-style">

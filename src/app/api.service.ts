@@ -27,11 +27,11 @@ export class ApiService {
   }
 
   getuser(user: string) {
-    return this.http.get(api('getuser/' + user, ''));
+    return this.http.get(api('getuser/' + user));
   }
 
   setuser(user: any) {
-    return this.http.post(api('setuser/' , user["_id"]), user);
+    return this.http.post(api('setuser/' + user["_id"]), user);
   }
 
   getoldcoupons(shopid: string,ownerid:string) {

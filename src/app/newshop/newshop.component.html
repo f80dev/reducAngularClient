@@ -1,9 +1,10 @@
 <mat-card class="app-card">
   <mat-card-title>Nouveau magasin / boutique</mat-card-title>
   <mat-card-content class="app-card-content">
+    <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname">
+      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" cdkFocusInitial>
     </mat-form-field>
     <br>
 
@@ -12,7 +13,7 @@
     </mat-form-field>
     <br>
     <div id="map" class="map form-field-style"></div>
-    <app-tuto label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
+    <app-tuto [delay]="5" label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
   </mat-card-content>
 
 

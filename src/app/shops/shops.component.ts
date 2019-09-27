@@ -45,6 +45,7 @@ export class ShopsComponent implements OnChanges {
         if(i==showItem)coupon.visible=true;
         if(coupon.origin==coupon._id)
           this.coupons.push(coupon);
+        i++;
       });
     }
 

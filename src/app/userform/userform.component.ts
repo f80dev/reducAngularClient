@@ -104,6 +104,8 @@ export class UserformComponent implements OnInit {
   }
 
   private saveUser() {
-    this.api.setuser(this.user).subscribe(()=>{});
+    this.api.setuser(this.user).subscribe((r:any)=>{
+      this.user.message=r.message;
+    });
   }
 }

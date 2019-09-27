@@ -8,7 +8,10 @@ import {
 
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
-  return(environment.root_api + '/' + service + '?' + param);
+  if(param.length==0)
+    return(environment.root_api + '/' + service);
+  else
+    return(environment.root_api + '/' + service + '?' + param);
 }
 
 export function direct_api(service: string , param: string, encode: boolean = true): string  {

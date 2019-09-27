@@ -4,7 +4,12 @@
     <mat-card-title>{{shop.name}}</mat-card-title>
     <mat-card-subtitle>{{shop.address}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-actions class="app-card-action">
+  <mat-card-content class="app-card-content">
+    <span *ngIf="shop.followers?.length>0">
+      Vous avez {{shop.followers?.length}} followers
+    </span>
+  </mat-card-content>
+  <mat-card-actions class="app-card-action" *ngIf="shop.visible">
     <button mat-button mat-flat-button
             *ngIf="!shop.showAddCoupon"
             (click)="addCoupon(shop)">
