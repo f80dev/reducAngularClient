@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   domain_appli:"http://localhost:4200",
   root_api: 'http://localhost:5500/api',
-  socket_server: "https://server.f80.fr",
+  socket_server: "http://localhost:5500",
   config_file:"./assets/config.json"
 };
 
 /*
-socket_server: "http://localhost:5500",
+
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

@@ -18,16 +18,17 @@
     <app-tuto label="Cette zone affiche les informations de votre profil"></app-tuto>
   </mat-card-header>
   <mat-card-content class="app-card-content">
-    <webcam *ngIf="showScanner"
-            [height]="400" width="400"
-            [trigger]="triggerObservable"
-            [allowCameraSwitch]="false"
-            [imageQuality]="0.85"
-            [captureImageData]="true"
-            imageType="image/jpeg"
-            (imageCapture)="handleImage($event)">
-    </webcam>
-
+    <div style="width:100%;text-align: center;" *ngIf="showScanner">
+      <webcam
+              [height]="400" [width]="400"
+              [trigger]="triggerObservable"
+              [allowCameraSwitch]="false"
+              [imageQuality]="0.85"
+              [captureImageData]="true"
+              imageType="image/jpeg"
+              (imageCapture)="handleImage($event)">
+      </webcam>
+    </div>
 
     <div id="map" *ngIf="showMap" class="map" style="width:95%;display: inline-block;"></div>
 

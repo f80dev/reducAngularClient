@@ -60,8 +60,15 @@ export class UserformComponent implements OnInit {
 
 
   handleImage(event: any) {
-    var decoded =jsQR(event.imageData(),400,400);
-    this.user.message=decoded;
+    var rc=event.imageData;
+    var decoded =jsQR(rc.data,rc.width,rc.height);
+    if(decoded!=null && decoded.data!=null && decoded.data.startsWith("http") && decoded.data.indexOf("/login")>-1){
+      var coupon=decoded.data.split("/login/")[1];
+      this.startScanner();
+      this.api.flash(this.user._id, coupon).subscribe((result:any) => {
+        this.user.message = result.message;
+      });
+    }
   }
 
   onSelectFile(event:any) {
@@ -118,7 +125,7 @@ export class UserformComponent implements OnInit {
         }
 
         this.user.coupons.forEach((c)=>{
-          debugger;
+
         })
       });
 
@@ -151,9 +158,10 @@ export class UserformComponent implements OnInit {
   startScanner() {
     this.showScanner=! this.showScanner;
     if(this.showScanner){
+      this.user.message="Ouverture du scanner";
       this.handle=setInterval(()=>{
         this.trigger.next();
-      },500);
+      },250);
     } else {
       clearInterval(this.handle);
     }
