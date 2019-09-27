@@ -5,9 +5,12 @@ import {createMarker, selectFile} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
-import {NONE_TYPE} from "../../../node_modules/@angular/compiler/src/output/output_ast";
+import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import {Observable,Subject} from "rxjs";
+import jsQR from "jsqr"
 
 declare var ol: any;
+
 
 @Component({
   selector: 'app-userform',
@@ -16,19 +19,50 @@ declare var ol: any;
 })
 export class UserformComponent implements OnInit {
 
+
   @Input("user") user:any;
   showScanner: boolean = false;
   showMap: boolean=false;
   showOldPromos: boolean=false;
   private map: any;
   private vectorLayer: any;
+  webcamsAvailable=0;
+  handle:any;
 
   constructor(public dialog: MatDialog,public router:Router,public loc:LocService,public api:ApiService) { }
+
+  private trigger: Subject<void> = new Subject<void>();
+  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
 
 
   ngOnInit() {
+    this.initAvailableCameras();
+  }
 
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public get nextWebcamObservable(): Observable<boolean|string> {
+    return this.nextWebcam.asObservable();
+  }
+
+  initAvailableCameras(){
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        if(mediaDevices==null)
+          this.webcamsAvailable =0;
+        else
+          this.webcamsAvailable = mediaDevices.length;
+      });
+  }
+
+
+  handleImage(event: any) {
+    debugger
+    var decoded =jsQR(event.imageData(),400,400);
+    console.log(decoded);
   }
 
   onSelectFile(event:any) {
@@ -107,5 +141,23 @@ export class UserformComponent implements OnInit {
     this.api.setuser(this.user).subscribe((r:any)=>{
       this.user.message=r.message;
     });
+  }
+
+  clearAccount(id:string) {
+    // this.api.raz(id).subscribe(()=>{
+    //
+    // })
+  }
+
+  startScanner() {
+    this.showScanner=! this.showScanner;
+    if(this.showScanner){
+      this.handle=setInterval(()=>{
+        this.trigger.next();
+      },500);
+    } else {
+      clearInterval(this.handle);
+    }
+
   }
 }

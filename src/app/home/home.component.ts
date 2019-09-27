@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {checkLogin} from '../tools';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(public socket:Socket,
               public api: ApiService,
               public router: Router,
+              public config:ConfigService,
               public _location:Location,
               public route: ActivatedRoute) { }
 
@@ -26,11 +28,13 @@ export class HomeComponent implements OnInit {
     this.refresh(this.route.snapshot.queryParamMap.get("message"));
     this._location.replaceState("/home");
 
-    this.socket.on("refresh",(data:any)=>{
-      if(data.user==this.user._id){
-        this.refresh(data.message);
-      }
-    });
+    if(this.config.values.socket){
+      this.socket.on("refresh",(data:any)=>{
+        if(data.user==this.user._id){
+          this.refresh(data.message);
+        }
+      });
+    }
   }
 
   refresh(message="") {

@@ -1,6 +1,9 @@
 {
   "title":"ReducShare",
-  "version":"0.1",
+  "version":"0.0.1",
+  "socket":true,
+
+
   "modeles":[
     {
       "title":"Réduction sur le prix de vente",

@@ -13,6 +13,7 @@ import {ApiService} from './api.service';
 import { LoginComponent } from './login/login.component';
 import { NewCouponComponent } from './new-coupon/new-coupon.component';
 import { ListCouponsComponent } from './list-coupons/list-coupons.component';
+import {WebcamModule} from 'ngx-webcam';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -75,6 +76,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ClipboardModule,
     BrowserModule,
     HttpClientModule,
+    WebcamModule,
     MatCheckboxModule,
     MatStepperModule,
     BrowserAnimationsModule,
@@ -88,9 +90,6 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatListModule,
     ReactiveFormsModule,
     MatSnackBarModule
-
-
-
   ],
   providers: [
     ApiService,

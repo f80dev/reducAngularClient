@@ -21,9 +21,9 @@ export class ApiService {
     return this.http.get(api('stopdeal/'+couponid, ''));
   }
 
-  public raz() {
+  public raz(userid) {
     localStorage.removeItem('user');
-    return this.http.get(api('raz', '')).subscribe(() => {});
+    return this.http.get(api('raz/'+userid)).subscribe(() => {});
   }
 
   getuser(user: string) {
