@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
 import {createMarker, selectFile} from "../tools";
@@ -21,6 +21,8 @@ export class UserformComponent implements OnInit {
 
 
   @Input("user") user:any;
+  @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
+
   showScanner: boolean = false;
   showMap: boolean=false;
   showOldPromos: boolean=false;
@@ -67,6 +69,7 @@ export class UserformComponent implements OnInit {
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
         this.user.message = result.message;
+        this.onflash.emit({message:result.message});
       });
     }
   }
