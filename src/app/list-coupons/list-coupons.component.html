@@ -1,13 +1,13 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card">
-  <mat-card-header (click)="coupon.visible=!coupon.visible">
+  <mat-card-header (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
       {{coupon.label}}&nbsp;
-      <span *ngIf="coupon.visible">
+      <span *ngIf="isVisible(coupon)">
         chez "{{coupon.shop_complete.name}}"
       </span>
     </mat-card-title>
-    <mat-card-subtitle *ngIf="!coupon.visible">
+    <mat-card-subtitle *ngIf="!isVisible(coupon)">
 
       <span *ngIf="coupon._id!=coupon.origin" style="font-size: large">
           Vous avez <strong>{{coupon.gain}}</strong>{{coupon.symbol}}
@@ -27,7 +27,7 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content class="app-card-content" *ngIf="coupon.visible">
+  <mat-card-content class="app-card-content" *ngIf="isVisible(coupon)">
 
     <app-tuto [delay]="20" label="Cliquer sur le titre pour réduire la taille d'affichage du coupon"></app-tuto>
 
@@ -91,7 +91,7 @@
     </tr></table>
 
 
-    <app-tuto [if]="coupon.showCode && coupon.visible" [delay]="1" [duration]="15"
+    <app-tuto [if]="coupon.showCode && isVisible(coupon)" [delay]="1" [duration]="15"
               label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
 
@@ -110,7 +110,7 @@
 
   <!--Info sur le coupon-->
 
-  <mat-card-actions style="text-align: center;">
+  <mat-card-actions style="text-align: center;" *ngIf="isVisible(coupon)">
 
     <div *ngIf="!coupon.closed" style="display: inline-block;">
       <button mat-button mat-flat-button
@@ -146,7 +146,7 @@
     <!--<mat-icon>attach_money</mat-icon>-->
     <!--</button>-->
 
-    <button *ngIf="coupon._id==coupon.origin && coupon.visible && coupon.canbedeal" mat-button
+    <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
             (click)="openPrinter(coupon)"
             title="Imprimer une affiche de votre bon plan"
             mat-flat-button mat-icon-button>
@@ -160,7 +160,7 @@
       <mat-icon>link</mat-icon>
     </button>
 
-    <button *ngIf="coupon._id==coupon.origin && coupon.visible && coupon.canbedeal" mat-button
+    <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
             (click)="stopDeal(coupon)"
             title="Fermer prématurément la promotion"
             mat-flat-button mat-icon-button>

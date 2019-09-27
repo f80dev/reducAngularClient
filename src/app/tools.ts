@@ -62,7 +62,8 @@ export function createMarker(ol,lon,lat,icon){
       scale:0.2,
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: icon
+      src: icon,
+      opacity:0.8
     }))
   });
 

@@ -29,33 +29,32 @@ export class NewshopComponent implements OnInit {
 
   showMap(lat,lon){
 
-    this.marker=createMarker(ol,lon,lat,"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png");
-
     this.map = new ol.Map({
       target: 'map',
       layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        }),
+        new ol.layer.Tile({source: new ol.source.OSM()}),
         new ol.layer.Vector({
-          source: new ol.source.Vector({
-            features: [
-              this.marker
-            ]
-          }),
+          source: new ol.source.Vector({features: []}),
         })
-      ],
+      ]
+      ,
       view: new ol.View({
         center: ol.proj.fromLonLat([lon, lat]),
-        zoom: 19
+        zoom: 10
       })
     });
+
+    this.marker=createMarker(ol,lon,lat,"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png");
+    var l=this.map.getLayers().item(1);
+    l.getSource().addFeature(this.marker);
+    l.setZIndex(1000);
+
   }
 
   ngOnInit() {
     checkLogin(this.router);
-    this.showMap(48,2);
     this.showOnMap();
+    this.showMap(this.lat,this.lng);
   }
 
   add() {

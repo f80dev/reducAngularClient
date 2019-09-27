@@ -93,4 +93,17 @@ export class ListCouponsComponent implements OnInit {
       this.user.message=r.message;
     });
   }
+
+  showCoupon(coupon: any) {
+    coupon.visible=!coupon.visible
+    if(coupon.visible)
+      localStorage.setItem("showCoupon",coupon._id);
+    else
+      localStorage.setItem("showCoupon",null);
+  }
+
+  isVisible(coupon:any){
+    if(localStorage.getItem("showCoupon")==coupon._id)return true;
+    return false;
+  }
 }

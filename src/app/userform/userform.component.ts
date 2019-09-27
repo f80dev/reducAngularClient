@@ -68,6 +68,7 @@ export class UserformComponent implements OnInit {
       var coupon=decoded.data.split("/login/")[1];
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
+        localStorage.setItem("showCoupon",coupon);
         this.user.message = result.message;
         this.onflash.emit({message:result.message});
       });

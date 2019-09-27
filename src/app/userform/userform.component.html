@@ -39,13 +39,15 @@
   </mat-card-content>
   <mat-card-actions class="app-card-action">
     <!--<button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>-->
-    <button *ngIf="webcamsAvailable>0" mat-button mat-raised-button (click)="startScanner()">Scanner</button>
-    <!--<button mat-button mat-raised-button (click)="openLoc()">Promo autour de moi</button>-->
     <button mat-icon-button mat-button mat-raised-button
             *ngIf="user.shops==null || user.shops.length==0"
             (click)="clearAccount(user._id)">
       <mat-icon>delete</mat-icon>
     </button>
+
+
+    <button *ngIf="webcamsAvailable>0" mat-button mat-raised-button (click)="startScanner()">Scanner</button>
+    <!--<button mat-button mat-raised-button (click)="openLoc()">Promo autour de moi</button>-->
 
     <button mat-button mat-raised-button (click)="addshop()">
       <span *ngIf="user.shops==null || user.shops.length==0">
