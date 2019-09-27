@@ -23,7 +23,8 @@
               "src/404.html",
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/CNAME"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
