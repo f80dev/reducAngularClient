@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ConfigService} from './config.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'reducClient';
+
+  constructor(public config:ConfigService){
+    config.init();
+  }
 }

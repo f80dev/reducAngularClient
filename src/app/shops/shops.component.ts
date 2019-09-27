@@ -29,8 +29,7 @@ export class ShopsComponent implements OnChanges {
 
   constructor(public snackBar: MatSnackBar,
               public router: Router,
-              public api:ApiService,
-              public dialog:MatDialog) {}
+              public api:ApiService) {}
 
 
   ngOnChanges(){

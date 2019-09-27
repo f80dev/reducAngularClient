@@ -30,6 +30,10 @@ export class ApiService {
     return this.http.get(api('getuser/' + user, ''));
   }
 
+  setuser(user: any) {
+    return this.http.post(api('setuser' , ''), user);
+  }
+
   getoldcoupons(shopid: string,ownerid:string) {
     return this.http.get(api('getoldcoupons/' + shopid+"/"+ownerid, ''));
   }

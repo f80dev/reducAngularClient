@@ -25,6 +25,22 @@ export function tirage(max) {
   return Math.trunc(Math.random() * max);
 }
 
+export function selectFile(event:any,maxsize:number,func:Function){
+  if(event.target.files && event.target.files.length > 0) {
+    var reader = new FileReader();
+    reader.onload = ()=>{
+      var dataURL = reader.result;
+      resizeBase64Img(dataURL,maxsize,0.5,(result=>{
+        cropToSquare(result,0.5,(result_square)=>{
+          func(result_square);
+        })
+      }))
+
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+}
+
 export function $$(s: string, obj: any= null) {
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
   if (obj != null) {

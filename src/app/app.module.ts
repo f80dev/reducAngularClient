@@ -40,6 +40,7 @@ import { TutoComponent } from './tuto/tuto.component';
 import { FlashscreenComponent } from './flashscreen/flashscreen.component';
 import { OldCouponsComponent } from './old-coupons/old-coupons.component';
 import { PrintCouponComponent } from './print-coupon/print-coupon.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -59,10 +60,12 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     TutoComponent,
     FlashscreenComponent,
     OldCouponsComponent,
-    PrintCouponComponent
+    PrintCouponComponent,
+    PromptComponent
   ],
   entryComponents: [
-    NewCouponComponent
+    NewCouponComponent,
+    PromptComponent
   ],
 
   imports: [

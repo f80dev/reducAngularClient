@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {cropToSquare, resizeBase64Img} from "../tools";
+import {cropToSquare, resizeBase64Img, selectFile} from "../tools";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 
@@ -65,20 +65,10 @@ export class NewCouponComponent implements OnInit {
   }
 
   onSelectFile(event:any) {
-    if(event.target.files && event.target.files.length > 0) {
-      var reader = new FileReader();
-      reader.onload = ()=>{
-        var dataURL = reader.result;
-        resizeBase64Img(dataURL,800,0.5,(result=>{
-          cropToSquare(result,0.5,(result_square)=>{
-            this.coupon.picture=result_square;
-            this.preview=result_square;
-          })
-        }))
-
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
+    selectFile(event,600,(res)=>{
+      this.coupon.picture=res;
+      this.preview=res;
+    })
   }
 
   selIcon(icon: any) {

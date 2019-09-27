@@ -1,7 +1,24 @@
 <mat-card class="app-card">
   <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</mat-card-title>
+    <mat-card-title>
+
+      <div style="display:inline-block;width:60px;">
+        <label for="file"><img mat-card-avatar [src]="user.photo"></label>
+        <input style="display:none;width:50px;" type="file" id="file"
+               (change)="onSelectFile($event)"
+               accept="image/gif,image/jpeg,image/png" />
+
+      </div>
+          <span *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</span>
+          <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">'{{user.pseudo}}'</span>
+          <button *ngIf="user.pseudo?.length==0" mat-button mat-flat-button (click)="promptForPseudo()">Pseudo ?</button>
+
+
+
+    </mat-card-title>
+
+
+
     <mat-card-subtitle *ngIf="user.message?.length>0">{{user.message}}</mat-card-subtitle>
     <app-tuto label="Cette zone affiche les informations de votre profil"></app-tuto>
   </mat-card-header>

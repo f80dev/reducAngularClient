@@ -1,8 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {createMarker} from "../tools";
+import {createMarker, selectFile} from "../tools";
 import {ApiService} from "../api.service";
+import {PromptComponent} from "../prompt/prompt.component";
+import {MatDialog} from '@angular/material/dialog';
+import {NONE_TYPE} from "../../../node_modules/@angular/compiler/src/output/output_ast";
 
 declare var ol: any;
 
@@ -20,12 +23,19 @@ export class UserformComponent implements OnInit {
   private map: any;
   private vectorLayer: any;
 
-  constructor(public router:Router,public loc:LocService,public api:ApiService) { }
+  constructor(public dialog: MatDialog,public router:Router,public loc:LocService,public api:ApiService) { }
 
 
 
   ngOnInit() {
 
+  }
+
+  onSelectFile(event:any) {
+    selectFile(event,200,(res)=>{
+      this.user.photo=res;
+      this.saveUser();
+    });
   }
 
   addshop() {
@@ -80,5 +90,17 @@ export class UserformComponent implements OnInit {
       });
 
     })
+  }
+
+  promptForPseudo() {
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?"}})
+        .afterClosed().subscribe((result) => {
+          this.user.pseudo = result;
+          this.saveUser();
+        });
+  }
+
+  private saveUser() {
+    this.api.setuser(this.user).subscribe(()=>{});
   }
 }

@@ -1,0 +1,66 @@
+{
+  "title":"ReducShare",
+  "version":"0.1",
+  "modeles":[
+    {
+      "title":"% sur le prix de vente",
+      "unity":"%",
+      "breakable":true,
+      "pluriel":false,
+      "label":"Réduisez sur votre total",
+      "share_bonus":0.1,
+      "pay_bonus":2,
+      "direct_bonus":1,
+      "max":15,
+      "duration":48,
+      "stock":200,
+      "max_coupon":500,
+      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+    },
+    {
+      "title":"Pour un restaurant",
+      "unity":"café",
+      "breakable":false,
+      "pluriel":true,
+      "label":"Offrez le café à vos amis",
+      "share_bonus":0.1,
+      "pay_bonus":2,
+      "direct_bonus":1,
+      "max":6,
+      "duration":480,
+      "stock":2000,
+      "max_coupon":5000,
+      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+    },
+    {
+      "title":"Marchand de légume",
+      "unity":"banane",
+      "pluriel":true,
+      "breakable":false,
+      "label":"Repartez avec des bananes gratuites",
+      "share_bonus":0.1,
+      "pay_bonus":2,
+      "direct_bonus":1,
+      "max":6,
+      "duration":480,
+      "stock":2000,
+      "max_coupon":5000,
+      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+    },
+    {
+      "title":"Cours particulier",
+      "unity":"minute",
+      "pluriel":true,
+      "breakable":false,
+      "label":"Obtenez des minutes supplémentaires pour votre cours",
+      "share_bonus":0.1,
+      "pay_bonus":2,
+      "direct_bonus":1,
+      "max":6,
+      "duration":480,
+      "stock":2000,
+      "max_coupon":5000,
+      "conditions":"Valable pour toute inscription a au minimum 5 heures de cours"
+    }
+  ]
+}

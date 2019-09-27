@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   domain_appli:"http://localhost:4200",
   root_api: 'http://localhost:5500/api',
-  socket_server: "http://localhost:5500"
+  socket_server: "http://localhost:5500",
+  config_file:"./assets/config.json"
 };
 
 /*
