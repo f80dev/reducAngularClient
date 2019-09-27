@@ -83,7 +83,6 @@ export class ListCouponsComponent implements OnInit {
   }
 
   addfollow(userid: string, shopid: string) {
-    debugger
     var operation="+";
     if(this.user.follow!=null){
       this.user.follow.forEach(item => {

@@ -60,9 +60,8 @@ export class UserformComponent implements OnInit {
 
 
   handleImage(event: any) {
-    debugger
     var decoded =jsQR(event.imageData(),400,400);
-    console.log(decoded);
+    this.user.message=decoded;
   }
 
   onSelectFile(event:any) {
@@ -146,7 +145,7 @@ export class UserformComponent implements OnInit {
   clearAccount(id:string) {
     // this.api.raz(id).subscribe(()=>{
     //
-    // })
+    // });
   }
 
   startScanner() {

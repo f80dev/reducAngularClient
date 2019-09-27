@@ -9,19 +9,19 @@ export class ApiService {
 
   constructor(public http: HttpClient) {}
 
-  public addCoupon(coupon: any) {
+  addCoupon(coupon: any) {
     return this.http.post(api('createcoupon'), coupon);
   }
 
-  public addshop(name: string, address: string, owner: string,lng:number,lat:number) {
+  addshop(name: string, address: string, owner: string,lng:number,lat:number) {
     return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat, ''));
   }
 
-  public stopdeal(couponid: string) {
+  stopdeal(couponid: string) {
     return this.http.get(api('stopdeal/'+couponid, ''));
   }
 
-  public raz(userid) {
+  raz(userid:string) {
     localStorage.removeItem('user');
     return this.http.get(api('raz/'+userid)).subscribe(() => {});
   }
