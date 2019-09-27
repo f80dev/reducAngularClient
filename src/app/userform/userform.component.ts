@@ -95,8 +95,11 @@ export class UserformComponent implements OnInit {
   promptForPseudo() {
     this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?"}})
         .afterClosed().subscribe((result) => {
-          this.user.pseudo = result;
-          this.saveUser();
+          if(result!=null && result.length>0){
+            this.user.pseudo = result;
+            this.saveUser();
+          }
+
         });
   }
 

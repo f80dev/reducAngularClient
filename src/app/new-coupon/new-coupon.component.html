@@ -88,7 +88,7 @@
 
 
         <mat-form-field class="form-field-style" style="width: 40%">
-          <input matInput type="number" placeholder="Bonus à chaque partage" [(ngModel)]="coupon.share_bonus">
+          <input matInput type="number" placeholder="Bonus pour partage" [(ngModel)]="coupon.share_bonus">
         </mat-form-field>
         <app-tuto type="tips"
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
@@ -107,10 +107,11 @@
       <mat-step>
         <ng-template matStepLabel>Conditions d'application</ng-template>
 
-        <div style="font-size: small">
+        <div style="font-size: x-small">
         Un client ne peut gagner plus de {{coupon.max}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.max>1">s</span>
         à chaque achat<br>
         </div>
+        <br>
 
         <mat-form-field class="form-field-style" style="width: 40%;margin-right: 10%;">
           <input matInput type="number" placeholder="Gain maximum pour le client" [(ngModel)]="coupon.max">
@@ -127,11 +128,11 @@
       <mat-step>
         <ng-template matStepLabel>Limites globales</ng-template>
 
-        <div style="font-size: small">
+        <div style="font-size: x-small">
         La promotion dure {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures,
         et s'interrompt si
         {{coupon.stock}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.stock>1">s</span> ont été distribué(es) ou si plus de {{coupon.max_coupon}} promotions ont été partagée
-        <br>
+        <br><br>
         </div>
 
         <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
@@ -143,11 +144,11 @@
         </mat-form-field>
         <br>
 
-        <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
-          <input matInput type="number" placeholder="Stock en {{coupon.unity}}" [(ngModel)]="coupon.stock">
+        <mat-form-field class="form-field-style">
+          <input matInput type="number" placeholder="Stock destiné à la promotion ({{coupon.unity}})" [(ngModel)]="coupon.stock">
         </mat-form-field>
 
-        <mat-form-field class="form-field-style" style="width: 40%">
+        <mat-form-field class="form-field-style">
           <input matInput type="number" placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
 

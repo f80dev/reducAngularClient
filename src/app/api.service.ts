@@ -31,7 +31,7 @@ export class ApiService {
   }
 
   setuser(user: any) {
-    return this.http.post(api('setuser' , ''), user);
+    return this.http.post(api('setuser/' , user["_id"]), user);
   }
 
   getoldcoupons(shopid: string,ownerid:string) {

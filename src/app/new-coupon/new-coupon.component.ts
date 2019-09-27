@@ -78,6 +78,7 @@ export class NewCouponComponent implements OnInit {
   }
 
   selectOldAsModel(coupon: any) {
+    coupon.shop=this.coupon.shop;
     this.coupon=coupon;
     this.coupon.dtStart=new Date().getTime();
     this.coupon.duration_hours=Math.trunc(coupon.duration);
