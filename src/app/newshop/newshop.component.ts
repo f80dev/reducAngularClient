@@ -40,7 +40,7 @@ export class NewshopComponent implements OnInit {
       ,
       view: new ol.View({
         center: ol.proj.fromLonLat([lon, lat]),
-        zoom: 10
+        zoom: 18
       })
     });
 

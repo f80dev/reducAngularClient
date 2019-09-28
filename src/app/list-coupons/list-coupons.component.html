@@ -2,21 +2,29 @@
   <mat-card-header (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
-      {{coupon.label}}&nbsp;
-      <span *ngIf="isVisible(coupon)">
-        chez "{{coupon.shop_complete.name}}"
+      <div *ngIf="coupon.origin!=coupon._id">
+      <span *ngIf="!isVisible(coupon)">
+          <strong>{{coupon.gain}}</strong>{{coupon.symbol}} - {{coupon.shop_complete.name}}
       </span>
-    </mat-card-title>
-    <mat-card-subtitle *ngIf="!isVisible(coupon)">
+        <span *ngIf="isVisible(coupon)">
+        {{coupon.shop_complete.name}}: {{coupon.label}}
+      </span>
+      </div>
+      <div *ngIf="coupon.origin==coupon._id">
+        {{coupon.title}} - <app-timer [end]="coupon.dtEnd"></app-timer>
+      </div>
 
-      <span *ngIf="coupon._id!=coupon.origin" style="font-size: large">
-          Vous avez <strong>{{coupon.gain}}</strong>{{coupon.symbol}}
+    </mat-card-title>
+
+    <mat-card-subtitle *ngIf="!isVisible(coupon)">
+      <span *ngIf="!isVisible(coupon) && coupon.origin!=coupon._id">
+        {{coupon.label}}
       </span>
 
       <div *ngIf="coupon._id==coupon.origin">
-        <span *ngIf="coupon.share>0">
+
              {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
-        </span>
+
 
         <span *ngIf="(coupon.gain/coupon.max)>0.8">
           (max:{{coupon.max}})
