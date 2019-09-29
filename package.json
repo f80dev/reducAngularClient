@@ -28,6 +28,7 @@
     "angular2-qrscanner": "^1.0.7",
     "hammerjs": "^2.0.8",
     "jsqr": "^1.2.0",
+    "ng-navigator-share": "^1.0.0",
     "ngx-clipboard": "^12.2.1",
     "ngx-print": "^1.2.0-beta.3",
     "ngx-social-button": "^1.0.4",

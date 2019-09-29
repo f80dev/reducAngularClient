@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
 import {SocialService} from "ngx-social-button"
 import { Meta } from '@angular/platform-browser';
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
 @Component({
   selector: 'app-list-coupons',
@@ -19,7 +20,9 @@ export class ListCouponsComponent implements OnInit {
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
-  constructor(public meta: Meta,public api: ApiService, public router: Router,private socialAuthService: SocialService) {
+  constructor(public meta: Meta,public api: ApiService,
+              public router: Router,private socialAuthService: SocialService,
+              public ngNavigatorShareService: NgNavigatorShareService) {
     meta.addTag({name:"application",content:"ReducShare"});
   }
 
@@ -46,6 +49,23 @@ export class ListCouponsComponent implements OnInit {
 
     if(coupon.showCode==null)coupon.showCode=false;
     coupon.showCode = !coupon.showCode;
+
+    if(coupon.showCode){
+      this.ngNavigatorShareService.share({
+        title: coupon.label,
+        text: "Ouvrir pour profiter vous aussi de la promotion",
+        url: coupon.url
+      }).then( (response) => {
+        console.log(response);
+      })
+        .catch( (error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  share(url) {
+
   }
 
   showInfos(coupon: any) {
