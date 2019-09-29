@@ -11,11 +11,13 @@ import { Location } from '@angular/common';
 })
 export class NewCouponComponent implements OnInit {
   coupon: any = {
+    title:"Mon titre",
     shop: 'test',
     symbol:"min",
     label: 'Super promo !',
     breakable:false,
     unity: 'minute',
+    delay:0,
     pluriel:true,
     conditions:"La promotion n'est valable que pour un achat d'un montant supérieur à ",
     share_bonus: 3,
@@ -24,8 +26,8 @@ export class NewCouponComponent implements OnInit {
     max: 60,
     stock:60,
     max_coupon:1000,
-    duration_jours: 2,
-    duration_hours: 0,
+    duration_jours: 2.0,
+    duration_hours: 0.0,
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
 
@@ -58,7 +60,9 @@ export class NewCouponComponent implements OnInit {
     //Mise en conformité du coupon
     if(coupon.duration_jours==null)coupon.duration_jours=0;
     if(coupon.duration_hours==null)coupon.duration_hours=0;
-    coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)/24;
+    coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
+    coupon.delay=0;
+
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
 

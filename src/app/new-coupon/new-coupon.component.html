@@ -148,18 +148,19 @@
         <ng-template matStepLabel>Limites globales</ng-template>
 
         <div style="font-size: x-small">
-        La promotion dure {{coupon.duration_jours}} jour(s) et {{coupon.duration_hours}} heures,
+          La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) et</span>
+          <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,
         et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es)
           ou si plus de {{coupon.max_coupon}} promotions ont été partagées.
         <br><br>
         </div>
 
         <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
-          <input matInput type="number" placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
+          <input matInput type="number" min="0" step="any"  placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
         </mat-form-field>
 
         <mat-form-field class="form-field-style" style="width: 40%;">
-          <input matInput type="number" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
+          <input matInput type="number" min="0" step="any" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
         </mat-form-field>
         <br>
 

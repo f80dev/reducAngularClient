@@ -165,7 +165,9 @@
             (click)="addfollow(user._id,coupon.shop)"
             title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'"
             mat-flat-button mat-icon-button>
-      <mat-icon>link</mat-icon>
+
+      <mat-icon *ngIf="isfollower(user._id,coupon.shop)">add_shopping_cart</mat-icon>
+      <mat-icon *ngIf="!isfollower(user._id,coupon.shop)">remove_shopping_cart</mat-icon>
     </button>
 
     <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
@@ -179,7 +181,7 @@
             *ngIf="coupon._id!=coupon.origin"
             title="Localiser l'enseigne proposant la réduction"
             mat-icon-button  (click)="showAddress(coupon.shop_complete)">
-      <mat-icon>map</mat-icon>
+      <mat-icon>my_location</mat-icon>
     </button>
 
     <button mat-button mat-flat-button

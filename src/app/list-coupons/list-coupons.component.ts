@@ -82,13 +82,19 @@ export class ListCouponsComponent implements OnInit {
     });
   }
 
-  addfollow(userid: string, shopid: string) {
-    var operation="+";
+  isfollower(userid: string, shopid: string){
     if(this.user.follow!=null){
       this.user.follow.forEach(item => {
-        if(item.shop_id==shopid)operation="-";
+        if(item.shop_id==shopid)return true;
       })
     }
+    return false;
+  }
+
+  addfollow(userid: string, shopid: string) {
+    var operation="+";
+    if(this.isfollower(userid,shopid))operation="-";
+
     this.api.follow(userid,operation,shopid).subscribe((r:any)=>{
       this.user.message=r.message;
     });
