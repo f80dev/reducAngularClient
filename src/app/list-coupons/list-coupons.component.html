@@ -120,75 +120,88 @@
 
   <mat-card-actions style="text-align: center;" *ngIf="isVisible(coupon)">
 
-    <div *ngIf="!coupon.closed" style="display: inline-block;">
-      <button mat-button mat-flat-button
-              *ngIf="coupon.canbedeal || coupon.origin!=coupon._id"
-              title="Partager le coupon pour augmenter votre promotion / réduction"
-              (click)="showCode(coupon)"
-              ngxClipboard [cbContent]="coupon.url">
+    <div *ngIf="coupon.owner==user?._id">
+      <div *ngIf="!coupon.closed" style="display: inline-block;">
+        <button mat-button mat-flat-button
+                *ngIf="coupon.canbedeal || coupon.origin!=coupon._id"
+                title="Partager le coupon pour augmenter votre promotion / réduction"
+                (click)="showCode(coupon)"
+                ngxClipboard [cbContent]="coupon.url">
           <span *ngIf="coupon.canbedeal">
             Partager
           </span>
 
-        <span *ngIf="!coupon.canbedeal">
+          <span *ngIf="!coupon.canbedeal">
             Utiliser
           </span>
 
+        </button>
+
+        <!--<button mat-button mat-flat-button-->
+        <!--mat-icon-button (click)="socialSharing(coupon)" >-->
+        <!--<span style="font-size: x-large">f</span>-->
+        <!--</button>-->
+
+        <!--<button mat-button mat-flat-button-->
+        <!--mat-icon-button (click)="socialSharing(coupon)" >-->
+        <!--<span style="font-size: large">g+</span>-->
+        <!--</button>-->
+
+      </div>
+      &nbsp;
+
+
+      <!--<button mat-button mat-flat-button mat-icon-button (click)="showInfos(coupon)">-->
+      <!--<mat-icon>attach_money</mat-icon>-->
+      <!--</button>-->
+
+      <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
+              (click)="openPrinter(coupon)"
+              title="Imprimer une affiche de votre bon plan"
+              mat-flat-button mat-icon-button>
+        <mat-icon>printer</mat-icon>
       </button>
 
-      <!--<button mat-button mat-flat-button-->
-      <!--mat-icon-button (click)="socialSharing(coupon)" >-->
-      <!--<span style="font-size: x-large">f</span>-->
-      <!--</button>-->
+      <button *ngIf="user && coupon.shop.owner!=user?._id" mat-button
+              (click)="addfollow(user._id,coupon.shop)"
+              title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'"
+              mat-flat-button mat-icon-button>
 
-      <!--<button mat-button mat-flat-button-->
-      <!--mat-icon-button (click)="socialSharing(coupon)" >-->
-      <!--<span style="font-size: large">g+</span>-->
-      <!--</button>-->
+        <mat-icon *ngIf="user && isfollower(user?._id,coupon.shop)">add_shopping_cart</mat-icon>
+        <mat-icon *ngIf="user && !isfollower(user?._id,coupon.shop)">remove_shopping_cart</mat-icon>
+      </button>
 
+      <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
+              (click)="stopDeal(coupon)"
+              title="Fermer prématurément la promotion"
+              mat-flat-button mat-icon-button>
+        <mat-icon>cancel</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button
+              *ngIf="coupon._id!=coupon.origin"
+              title="Localiser l'enseigne proposant la réduction"
+              mat-icon-button  (click)="showAddress(coupon.shop_complete)">
+        <mat-icon>my_location</mat-icon>
+      </button>
+
+      <button mat-button mat-flat-button
+              mat-icon-button
+              (click)="remove(coupon)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
-    &nbsp;
 
 
-    <!--<button mat-button mat-flat-button mat-icon-button (click)="showInfos(coupon)">-->
-    <!--<mat-icon>attach_money</mat-icon>-->
-    <!--</button>-->
 
-    <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
-            (click)="openPrinter(coupon)"
-            title="Imprimer une affiche de votre bon plan"
-            mat-flat-button mat-icon-button>
-      <mat-icon>printer</mat-icon>
-    </button>
-
-    <button *ngIf="coupon.shop.owner!=user?._id" mat-button
-            (click)="addfollow(user._id,coupon.shop)"
-            title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'"
-            mat-flat-button mat-icon-button>
-
-      <mat-icon *ngIf="isfollower(user._id,coupon.shop)">add_shopping_cart</mat-icon>
-      <mat-icon *ngIf="!isfollower(user._id,coupon.shop)">remove_shopping_cart</mat-icon>
-    </button>
-
-    <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
-            (click)="stopDeal(coupon)"
-            title="Fermer prématurément la promotion"
-            mat-flat-button mat-icon-button>
-      <mat-icon>cancel</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button
-            *ngIf="coupon._id!=coupon.origin"
-            title="Localiser l'enseigne proposant la réduction"
-            mat-icon-button  (click)="showAddress(coupon.shop_complete)">
-      <mat-icon>my_location</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button
-            mat-icon-button
-            (click)="remove(coupon)">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div *ngIf="coupon.owner!=user?._id">
+      <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
+              (click)="flash(coupon)"
+              title="Récupérer ce coupon"
+              mat-flat-button>
+        Récupérer
+      </button>
+    </div>
   </mat-card-actions>
 </mat-card>
 <br>

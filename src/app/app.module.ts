@@ -42,6 +42,8 @@ import { FlashscreenComponent } from './flashscreen/flashscreen.component';
 import { OldCouponsComponent } from './old-coupons/old-coupons.component';
 import { PrintCouponComponent } from './print-coupon/print-coupon.component';
 import { PromptComponent } from './prompt/prompt.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { InputComponent } from './input/input.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -62,7 +64,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     FlashscreenComponent,
     OldCouponsComponent,
     PrintCouponComponent,
-    PromptComponent
+    PromptComponent,
+    InputComponent
   ],
   entryComponents: [
     NewCouponComponent,
@@ -72,6 +75,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   imports: [
     SocketIoModule.forRoot(config),
     MatDialogModule,
+    MatProgressSpinnerModule,
     QRCodeModule,
     ClipboardModule,
     BrowserModule,

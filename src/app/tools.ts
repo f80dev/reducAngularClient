@@ -81,7 +81,7 @@ declare var ol: any;
 export function createMap(center:any,
                           icon="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
                           zoom=18,
-                          func_move=null){
+                          func_move=null,func_sel=null){
   var vectorSource = new ol.source.Vector({
     features: [
       createMarker(center.lng,center.lat,icon)
@@ -104,6 +104,15 @@ export function createMap(center:any,
     })
   });
 
+  if(func_sel){
+    rc.on("click", function(e) {
+      rc.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+        func_sel(feature);
+      })
+    });
+  }
+
+
   if(func_move!=null){
     rc.on("moveend",func_move);
   }
@@ -120,25 +129,38 @@ export function getMarkerLayer(map:any):any {
   return rc;
 }
 
-
-export function createMarker(lon,lat,icon,coupon={}){
-  var iconStyle = new ol.style.Style({
+export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
+  var iconStyle:any = new ol.style.Style({
     image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
       anchor: [0.5, 0.5],
-      scale:0.2,
+      scale:scale,
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: icon,
       opacity:0.8
-    }))
+    })),
   });
+
+  if(coupon!=null){
+    iconStyle.setText(new ol.style.Text({
+      text: coupon.direct_bonus+" "+coupon.symbol,
+      textAlign:"center",
+      font:"14px sans-serif",
+      stroke: new ol.style.Stroke({color: 'white', width: 2}),
+      padding:[2,2,2,2]
+    }));
+  }
 
   var marker = new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
-    //TODO: propriétés à insérer
-    //label:coupon.label,
-    //direct_bonus: coupon.direct_bonus
   });
+  marker.coupon=coupon;
+
+  if(func_sel!=null){
+    debugger;
+    marker.on("featureclick",func_sel);
+  }
+
   marker.setStyle(iconStyle);
   return marker;
 }

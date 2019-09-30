@@ -16,6 +16,7 @@ declare var ol: any;
 export class NewshopComponent implements OnInit {
   shopname = 'La maison du piano';
   address = '12, rue martel, paris 10';
+  show_address="";
   owner = '';
   map: any;
 
@@ -50,7 +51,7 @@ export class NewshopComponent implements OnInit {
     this.loc.getAddress(this.address,(res)=> {
       this.lng=Number(res[0].lon);
       this.lat= Number(res[0].lat);
-      this.address=res[0].display_name;
+      this.show_address=res[0].display_name;
       if(this.map==null)
         this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop);
       else{

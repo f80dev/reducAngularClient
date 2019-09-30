@@ -5,11 +5,10 @@ import {createMap, createMarker, getMarkerLayer, selectFile} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
-import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import {WebcamUtil} from 'ngx-webcam';
 import {Observable,Subject} from "rxjs";
 import jsQR from "jsqr"
 import {ConfigService} from "../config.service";
-
 
 declare var ol: any;
 
@@ -31,6 +30,7 @@ export class UserformComponent implements OnInit {
   private map: any;
   webcamsAvailable=0;
   handle:any;
+  showCouponOnMap:any[]=[];
 
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
@@ -92,15 +92,25 @@ export class UserformComponent implements OnInit {
 
   showPromoInSquare(){
     //voir https://openlayers.org/en/latest/examples/moveend.html
+    if(!this.map)return false;
+
     var square=this.map.getView().calculateExtent(this.map.getSize());
     var bottomLeft = ol.proj.toLonLat(ol.extent.getBottomLeft(square));
     var topRight = ol.proj.toLonLat(ol.extent.getTopRight(square));
     this.api.getcouponinsquare({x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1]}).subscribe((coupons:any)=>{
       var l=getMarkerLayer(this.map);
+      this.showCouponOnMap=[];
+      var markers=[
+        createMarker(this.user.position.lng,this.user.position.lat,this.config.values.icon_person)
+      ];
       coupons.forEach((c)=>{
-        var marker=createMarker(c.lng,c.lat,this.config.values.icon_coupon);
-        l.getSource().addFeature(marker);
+        var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.4);
+        markers.push(marker);
+        marker.coupon.visible=false;
+        this.showCouponOnMap.push(marker.coupon);
       });
+      l.getSource().clear();
+      l.getSource().addFeatures(markers);
     })
   }
 
@@ -109,14 +119,18 @@ export class UserformComponent implements OnInit {
     if(this.showMap){
       this.loc.getPosition().then((pos:any)=>{
         if(this.map==null){
-          this.map=createMap(pos,this.config.values.icon_person,15,()=>{
-            this.showPromoInSquare();
-          });
+          clearTimeout(this.handle);
+          this.handle=setTimeout(()=>{
+            this.user.position=pos;
+            this.map=createMap(pos,this.config.values.icon_person,15,()=>{
+              this.showPromoInSquare();
+            },(coupon)=>{
+              this.showCouponOnMap=[coupon];
+            });
+          },1000);
+
         }
         this.showPromoInSquare();
-
-        //this.user.coupons.forEach((c)=>{})
-
       });
     }
 
@@ -140,9 +154,9 @@ export class UserformComponent implements OnInit {
   }
 
   clearAccount(id:string) {
-    // this.api.raz(id).subscribe(()=>{
-    //
-    // });
+    this.api.raz(id).subscribe(()=>{
+      window.location.reload();
+    });
   }
 
   startScanner() {
@@ -155,6 +169,8 @@ export class UserformComponent implements OnInit {
     } else {
       clearInterval(this.handle);
     }
-
   }
+
+
+
 }

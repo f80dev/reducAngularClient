@@ -11,6 +11,7 @@ export class ConfigService {
   visibleTuto=false;
   values:any={};
   config:any=null;
+  waiting:boolean=false;
 
   constructor(private location: Location, private http: HttpClient){}
 

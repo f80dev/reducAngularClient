@@ -28,28 +28,26 @@
 
         <mat-form-field class="form-field-style">
           <input type="text" matInput
+                 autofocus
                  placeholder="Titre de la promotion (non visible du client)"
                  [(ngModel)]="coupon.title">
         </mat-form-field>
 
 
-        <mat-form-field class="form-field-style" style="width: 60%;margin-right: 10%;">
+        <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
           <input type="text" matInput
-
                  placeholder="Que gagne-t-on ?"
                  [(ngModel)]="coupon.unity">
         </mat-form-field>
 
-        <mat-form-field class="form-field-style" style="width: 20%;">
+        <mat-form-field class="form-field-style" style="width: 30%;">
           <input type="text" matInput max="3"
-                 placeholder="Symbole"
+                 placeholder="Symbole de l'unité"
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
-        <br><br>
-
-        <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>
-        <mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>
+        <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>-->
+        <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>-->
       </mat-step>
 
 

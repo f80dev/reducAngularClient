@@ -19,6 +19,7 @@ export class ListCouponsComponent implements OnInit {
 
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
+  @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
 
   constructor(public meta: Meta,public api: ApiService,
               public router: Router,private socialAuthService: SocialService,
@@ -131,5 +132,12 @@ export class ListCouponsComponent implements OnInit {
   isVisible(coupon:any){
     if(localStorage.getItem("showCoupon")==coupon._id)return true;
     return false;
+  }
+
+  flash(coupon:any){
+    this.api.flash(this.user._id, coupon._id).subscribe((result:any) => {
+      this.user.message = result.message;
+      this.onflash.emit({message:result.message});
+    });
   }
 }

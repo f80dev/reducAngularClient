@@ -9,6 +9,11 @@ export class ApiService {
 
   constructor(public http: HttpClient) {}
 
+  raz(userid:string) {
+    localStorage.removeItem('user');
+    return this.http.get(api('raz/'+userid));
+  }
+
   addCoupon(coupon: any) {
     return this.http.post(api('createcoupon'), coupon);
   }
@@ -21,10 +26,7 @@ export class ApiService {
     return this.http.get(api('stopdeal/'+couponid, ''));
   }
 
-  raz(userid:string) {
-    localStorage.removeItem('user');
-    return this.http.get(api('raz/'+userid)).subscribe(() => {});
-  }
+
 
   getuser(user: string) {
     return this.http.get(api('getuser/' + user));

@@ -4,13 +4,21 @@
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" cdkFocusInitial>
+      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" autofocus>
     </mat-form-field>
     <br>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="adresse" [(ngModel)]="address" (blur)="showOnMap()">
+      <input type="text" matInput placeholder="adresse" [(ngModel)]="address" (blur)="showOnMap()" (change)="showOnMap()">
+      <button mat-button *ngIf="address" matSuffix mat-icon-button aria-label="Clear" (click)="address=''">
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
+    <mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">
+      Adresse interprétée: {{show_address}}
+    </mat-label>
+    <br>
+
     <br>
     <div id="map" class="map form-field-style"></div>
     <app-tuto [delay]="5" label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>

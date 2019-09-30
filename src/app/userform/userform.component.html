@@ -11,6 +11,7 @@
       <span *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</span>
       <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
       <button *ngIf="user.pseudo?.length==0" mat-button mat-flat-button (click)="promptForPseudo()">Pseudo ?</button>
+      <mat-progress-spinner *ngIf="config.waiting"></mat-progress-spinner>
 
     </mat-card-title>
 
@@ -30,7 +31,18 @@
       </webcam>
     </div>
 
-    <div id="map" *ngIf="showMap" class="map" style="width:95%;display: inline-block;"></div>
+    <!--Montre la carte des promotions-->
+    <div *ngIf="showMap">
+      <div id="map" class="map" style="width:95%;display: inline-block;"></div>
+      <br>
+      <app-list-coupons *ngIf="showCouponOnMap"
+                        [user]="user"
+                        (flash)="showMap=false;onflash.emit({'message':$event.message})"
+                        [coupons]="showCouponOnMap">
+      </app-list-coupons>
+    </div>
+
+
 
     <app-old-coupons [user]="user"
                      *ngIf="showOldPromos">

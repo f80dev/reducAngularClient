@@ -27,14 +27,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.refresh(this.route.snapshot.queryParamMap.get("message"));
     this._location.replaceState("/home");
-
-    if(this.config.values.socket){
-      this.socket.on("refresh",(data:any)=>{
-        if(data.user==this.user._id){
-          this.refresh(data.message);
-        }
-      });
-    }
+    this.socket.on("refresh",(data:any)=>{
+      if(data.user==this.user._id){
+        this.refresh(data.message);
+      }
+    });
   }
 
   refresh(message="") {
@@ -48,7 +45,7 @@ export class HomeComponent implements OnInit {
 
 
         //Effacer le message
-        setTimeout(()=>{this.user.message=""},8000);
+        setTimeout(()=>{this.user.message=""},15000);
 
         if(this.user.coupons!=null){
           this.coupons=[];
