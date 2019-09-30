@@ -22,6 +22,7 @@ export class UserformComponent implements OnInit {
 
 
   @Input("user") user:any;
+  @Input("excludes") excludes:any[]=[];
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
 
   showScanner: boolean = false;
@@ -104,10 +105,20 @@ export class UserformComponent implements OnInit {
         createMarker(this.user.position.lng,this.user.position.lat,this.config.values.icon_person)
       ];
       coupons.forEach((c)=>{
-        var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.4);
-        markers.push(marker);
-        marker.coupon.visible=false;
-        this.showCouponOnMap.push(marker.coupon);
+        //Vérifie que l'utilisateur n'a pas déjà le coupon
+        c.visible=false;
+        var bContinue=true;
+        if(c.owner==this.user._id)bContinue=false;
+        this.excludes.forEach((exclude_c)=>{
+          if(c._id==exclude_c.origin)bContinue=false;
+        });
+
+        if(bContinue){
+          var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.4);
+          markers.push(marker);
+          marker.coupon.visible=false;
+          this.showCouponOnMap.push(marker.coupon);
+        }
       });
       l.getSource().clear();
       l.getSource().addFeatures(markers);
@@ -128,10 +139,12 @@ export class UserformComponent implements OnInit {
               this.showCouponOnMap=[coupon];
             });
           },1000);
-
+        } else {
+          this.showPromoInSquare();
         }
-        this.showPromoInSquare();
       });
+    } else {
+      this.map=null;
     }
 
   }

@@ -9,7 +9,8 @@
     <br>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="adresse" [(ngModel)]="address" (blur)="showOnMap()" (change)="showOnMap()">
+      <input type="text" matInput placeholder="adresse" [(ngModel)]="address"
+             (change)="showOnMap()">
       <button mat-button *ngIf="address" matSuffix mat-icon-button aria-label="Clear" (click)="address=''">
         <mat-icon>close</mat-icon>
       </button>
@@ -20,7 +21,7 @@
     <br>
 
     <br>
-    <div id="map" class="map form-field-style"></div>
+    <div id="map" class="map form-field-style" (mouseup)="reverseGeocode=true" (tap)="reverseGeocode=true"></div>
     <app-tuto [delay]="5" label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
   </mat-card-content>
 

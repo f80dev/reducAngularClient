@@ -8,6 +8,7 @@
 <div [hidden]="showMessage">
   <app-tuto label="Bienvenue dans ReducShare" subtitle="la première application qui récompense le bouche à oreille"></app-tuto>
   <app-userform [user]="user"
+                [excludes]="user.coupons"
                 (flash)="refresh($event?.message)">
   </app-userform>
 

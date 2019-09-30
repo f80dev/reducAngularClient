@@ -3,31 +3,32 @@
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
 
-      <!--Affichage des coupons standards, non propriétaire-->
-      <div *ngIf="coupon.origin!=coupon._id">
-        <span *ngIf="!isVisible(coupon)">
-            <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shop_complete?.name}} - <app-timer [end]="coupon.dtEnd"></app-timer>
-        </span>
-        <span *ngIf="isVisible(coupon)">
-        {{coupon.shop_complete?.name}}: {{coupon.label}}
-        </span>
-      </div>
-      <div *ngIf="coupon.origin==coupon._id">
+      <!--Affichage des coupons origine pour les non propriétaire-->
+      <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
+        {{coupon.direct_bonus}}{{coupon.symbol}} offert  - <app-timer [end]="coupon.dtEnd"></app-timer>
+      </span>
+
+      <!--Affichage des coupons copiés pour leur propriétaire-->
+      <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
+        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shop_complete?.name}} - <app-timer [end]="coupon.dtEnd"></app-timer>
+      </span>
+
+      <!--Affichage des coupons origines pour leur propriétaire-->
+      <span *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
         {{coupon.title}} - <app-timer [end]="coupon.dtEnd"></app-timer>
-      </div>
+      </span>
 
     </mat-card-title>
 
-    <mat-card-subtitle *ngIf="!isVisible(coupon)">
-      <span *ngIf="!isVisible(coupon) && coupon.origin!=coupon._id">
-        {{coupon.conditions}}
+    <mat-card-subtitle>
+      <!--Affichage des coupons origine pour les non propriétaire-->
+      <span *ngIf="coupon.owner!=user._id || coupon.origin!=coupon._id">
+        pour {{coupon.conditions}}
       </span>
 
-      <div *ngIf="coupon._id==coupon.origin">
-
+      <!--Affichage des coupons origines pour leur propriétaire-->
+      <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id">
              {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
-
-
         <span *ngIf="(coupon.gain/coupon.max)>0.8">
           (max:{{coupon.max}})
         </span>
@@ -71,7 +72,7 @@
         </qr-code>
 
         <!--Zone réserver au créateur-->
-        <div *ngIf="coupon._id==coupon.origin && coupon.share>0" style="font-size: small;">
+        <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
           {{coupon.share | number:'1.0-0'}}/{{coupon.max_coupon}} partages<br>
           {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} distribué(es) <br><br>
           Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}

@@ -8,23 +8,36 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TimerComponent implements OnInit {
 
   @Input("end") dtEnd:number=0;
+  @Input("short") short:boolean=false;
   dateToShow:string="";
+  delayInHour:number=0;
 
   constructor() { }
 
-  ngOnInit() {
-    setInterval(()=>{
-      var delay=(this.dtEnd*1000-new Date().getTime())/1000;
-      var delayInHour=Math.trunc(delay/3600);
-      var delayInDay=Math.trunc(delay/(24*3600));
-      var delayInMinutes=Math.trunc(delay/60);
-      var sec=""+Math.trunc((delay-delayInMinutes*60) % 60);
-      if(sec.length==1)sec="0"+sec;
-      this.dateToShow=delayInMinutes+":"+sec;
-      if(delayInHour>1)this.dateToShow=delayInHour+" heures"
-      if(delayInHour>=48)this.dateToShow=delayInDay+" jours";
+  refresh(){
+    var delay=(this.dtEnd*1000-new Date().getTime())/1000;
+    this.delayInHour=Math.trunc(delay/3600);
+    var delayInDay=Math.trunc(delay/(24*3600));
+    var delayInMinutes=Math.trunc(delay/60);
+    var sec=""+Math.trunc((delay-delayInMinutes*60) % 60);
+    if(sec.length==1)sec="0"+sec;
+    this.dateToShow=delayInMinutes+":"+sec;
+    if(this.delayInHour>1)this.dateToShow=this.delayInHour+" heures"
+    if(this.delayInHour>=48)this.dateToShow=delayInDay+" jours";
 
-    },1000);
+    if(this.short){
+      this.dateToShow=this.dateToShow.replace("jours","jrs").replace("heures","hrs");
+    }
+
+    if(delay<0)this.dateToShow="";
+
+  }
+
+  ngOnInit() {
+    this.refresh();
+
+    if(this.delayInHour<10) //Si le delai est long on ne met pas en place un timer
+      setInterval(()=>{this.refresh();},1000);
   }
 
 }

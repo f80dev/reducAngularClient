@@ -73,7 +73,7 @@
       "duration":480,
       "stock":200,
       "max_coupon":500,
-      "conditions":"Valable pour tout achat d'un billet de concert"
+      "conditions":"tout achat d'un billet de concert"
     },
     {
       "title":"Marchand de légumes",
@@ -90,7 +90,7 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+      "conditions":"tout achat d'un montant supérieur a 20€"
     },
     {
       "title":"Cours particulier",
@@ -106,8 +106,25 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"Valable pour toute inscription a au minimum 5 heures de cours",
+      "conditions":"toute inscription a au minimum 5 heures de cours",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/musical-keyboard_1f3b9.png"
+    },
+    {
+      "title":"Meilleurs influenceurs",
+      "unity":"points",
+      "symbol":"pts",
+      "pluriel":true,
+      "breakable":false,
+      "label":"Entrer gratuite pour les meilleurs influenceur",
+      "share_bonus":0.5,
+      "pay_bonus":2,
+      "direct_bonus":2,
+      "max":50,
+      "duration":480,
+      "stock":500,
+      "max_coupon":5000,
+      "conditions":"50 points cumulé via ReducShare",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/first-place-medal_1f947.png"
     }
   ]
 }

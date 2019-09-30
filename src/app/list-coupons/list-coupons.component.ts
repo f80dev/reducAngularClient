@@ -83,7 +83,12 @@ export class ListCouponsComponent implements OnInit {
 
   remove(coupon: any) {
     var question="Etes vous bien sur ?";
-    if(coupon.origin!=coupon._id)question="Vraiment ? Pourtant vous avez une réduction de "+coupon.gain+coupon.symbol+" à cet endroit";
+    if(coupon.origin!=coupon._id)
+      question="Vraiment ? Pourtant vous avez une réduction de "+coupon.gain+coupon.symbol+" à cet endroit";
+    else {
+      if(coupon.share>0)
+        question="Vraiment ? Supprimer une réduction, déjà récupérée va nuire à votre réputation de vendeur."
+    }
 
     if(coupon.gain>0){
       this.dialog.open(PromptComponent,{
