@@ -1,13 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {createMarker, selectFile} from "../tools";
+import {createMap, createMarker, getMarkerLayer, selectFile} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import {Observable,Subject} from "rxjs";
 import jsQR from "jsqr"
+import {ConfigService} from "../config.service";
+
 
 declare var ol: any;
 
@@ -27,11 +29,12 @@ export class UserformComponent implements OnInit {
   showMap: boolean=false;
   showOldPromos: boolean=false;
   private map: any;
-  private vectorLayer: any;
   webcamsAvailable=0;
   handle:any;
 
-  constructor(public dialog: MatDialog,public router:Router,public loc:LocService,public api:ApiService) { }
+  constructor(public dialog: MatDialog,public router:Router,
+              public loc:LocService,public api:ApiService,
+              public config:ConfigService) { }
 
   private trigger: Subject<void> = new Subject<void>();
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
@@ -86,54 +89,37 @@ export class UserformComponent implements OnInit {
     this.router.navigate(['shop']);
   }
 
-  showPromoInSquare(x0,y0,x1,y1){
-    this.api.getcouponinsquare({x0:x0,y0:y0,x1:x1,y1:y1}).subscribe((coupons:any)=>{
-      var markers=[];
+
+  showPromoInSquare(){
+    //voir https://openlayers.org/en/latest/examples/moveend.html
+    var square=this.map.getView().calculateExtent(this.map.getSize());
+    var bottomLeft = ol.proj.toLonLat(ol.extent.getBottomLeft(square));
+    var topRight = ol.proj.toLonLat(ol.extent.getTopRight(square));
+    this.api.getcouponinsquare({x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1]}).subscribe((coupons:any)=>{
+      var l=getMarkerLayer(this.map);
       coupons.forEach((c)=>{
-        markers.push(createMarker(ol,c.lng,c.lat,""));
+        var marker=createMarker(c.lng,c.lat,this.config.values.icon_coupon);
+        l.getSource().addFeature(marker);
       });
-      this.vectorLayer.features=markers;
     })
   }
 
   openLoc() {
-    this.loc.getPosition().then((pos:any)=>{
-      this.showMap=true;
-
-      setTimeout(()=>{
+    this.showMap=!this.showMap;
+    if(this.showMap){
+      this.loc.getPosition().then((pos:any)=>{
         if(this.map==null){
-
-          this.vectorLayer=new ol.layer.Vector({
-            source: new ol.source.Vector({
-              features: [
-                createMarker(ol,pos.lng,pos.lat,"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png")
-              ]
-            })
+          this.map=createMap(pos,this.config.values.icon_person,15,()=>{
+            this.showPromoInSquare();
           });
-
-          this.map = new ol.Map({
-            target: 'map',
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.OSM()
-              }),
-              this.vectorLayer,
-            ],
-            view: new ol.View({
-              center: ol.proj.fromLonLat([pos.lng, pos.lat]),
-              zoom: 18
-            })
-          });
-
-
         }
+        this.showPromoInSquare();
 
-        this.user.coupons.forEach((c)=>{
+        //this.user.coupons.forEach((c)=>{})
 
-        })
       });
+    }
 
-    })
   }
 
   promptForPseudo() {

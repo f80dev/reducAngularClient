@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {cropToSquare, resizeBase64Img, selectFile} from "../tools";
+import {cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 
@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class NewCouponComponent implements OnInit {
   coupon: any = {
     title:"Mon titre",
+    device:unique_id(),
     shop: 'test',
     symbol:"min",
     label: 'Super promo !',
@@ -19,6 +20,7 @@ export class NewCouponComponent implements OnInit {
     unity: 'minute',
     delay:0,
     pluriel:true,
+    min_price:0,  //prix minimum pour la promotion
     conditions:"La promotion n'est valable que pour un achat d'un montant supérieur à ",
     share_bonus: 3,
     direct_bonus: 5,

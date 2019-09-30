@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, createMarker} from '../tools';
+import {checkLogin, createMap, createMarker, getMarkerLayer} from '../tools';
 import { Router} from '@angular/router';
 import {LocService} from "../loc.service";
+import {ConfigService} from "../config.service";
 
 declare var ol: any;
 
@@ -17,44 +18,19 @@ export class NewshopComponent implements OnInit {
   address = '12, rue martel, paris 10';
   owner = '';
   map: any;
-  marker:any;
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   private lng: number;
   private lat: number;
 
-  constructor(public api: ApiService, public router: Router,public loc:LocService) {
+  constructor(public api: ApiService, public router: Router,public loc:LocService,public config:ConfigService) {
   }
 
 
-  showMap(lat,lon){
-
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({source: new ol.source.OSM()}),
-        new ol.layer.Vector({
-          source: new ol.source.Vector({features: []}),
-        })
-      ]
-      ,
-      view: new ol.View({
-        center: ol.proj.fromLonLat([lon, lat]),
-        zoom: 18
-      })
-    });
-
-    this.marker=createMarker(ol,lon,lat,"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png");
-    var l=this.map.getLayers().item(1);
-    l.getSource().addFeature(this.marker);
-    l.setZIndex(1000);
-
-  }
 
   ngOnInit() {
     checkLogin(this.router);
     this.showOnMap();
-    this.showMap(this.lat,this.lng);
   }
 
   add() {
@@ -69,15 +45,19 @@ export class NewshopComponent implements OnInit {
     this.router.navigate(['home'],{queryParams:{message:"Enseigne non créée"}});
   }
 
+
   showOnMap() {
     this.loc.getAddress(this.address,(res)=> {
-      var view = this.map.getView();
       this.lng=Number(res[0].lon);
       this.lat= Number(res[0].lat);
-      view.setCenter(ol.proj.fromLonLat([this.lng,this.lat]));
-      var lonLat = this.map.LonLat(this.lng, this.lat);
-      this.marker.setPosition(lonLat);
       this.address=res[0].display_name;
+      if(this.map==null)
+        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop);
+      else{
+        this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
+        getMarkerLayer(this.map).addFeatures(createMarker(this.lng, this.lat,this.config.values.icon_shop));
+      }
+
     });
   }
 

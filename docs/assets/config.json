@@ -2,7 +2,9 @@
   "title":"ReducShare",
   "version":"0.0.1",
   "socket":true,
-
+  "icon_coupon":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
+  "icon_shop":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
+  "icon_person":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
 
   "modeles":[
     {

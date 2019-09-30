@@ -5,7 +5,6 @@ import {
   SocialServiceConfig
 } from "ngx-social-button";
 
-
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
   if(param.length==0)
@@ -44,6 +43,23 @@ export function selectFile(event:any,maxsize:number,func:Function){
   }
 }
 
+//On cherche a produire une reference au terminal de l'utilisateur
+export function unique_id(){
+  var rc="";
+  rc=rc+navigator.userAgent; // User Agent
+  rc=rc+navigator.platform; // nom du système d'exploitation
+  rc=rc+navigator.product;
+  rc=rc+navigator.cookieEnabled; // si les cookies sont activés ou non
+  rc=rc+navigator.appName; // nom complet du navigateur
+  rc=rc+navigator.appCodeName; // nom de code du navigateur
+  rc=rc+screen.height;// hauteur de l'écran (en pixels)
+  rc=rc+screen.width; // largeur de l'écran (en pixels)
+  rc=rc+screen.colorDepth; // profondeur de couleur.
+  return rc;
+}
+
+
+
 export function $$(s: string, obj: any= null) {
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
   if (obj != null) {
@@ -55,7 +71,57 @@ export function $$(s: string, obj: any= null) {
   if (lg.indexOf('!!') > -1) {alert(lg); }
 }
 
-export function createMarker(ol,lon,lat,icon){
+
+/**
+ * Creation d'une carte
+ */
+
+declare var ol: any;
+
+export function createMap(center:any,
+                          icon="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
+                          zoom=18,
+                          func_move=null){
+  var vectorSource = new ol.source.Vector({
+    features: [
+      createMarker(center.lng,center.lat,icon)
+    ]
+  });
+
+  var vectorLayer=new ol.layer.Vector({source: vectorSource});
+
+  var rc=new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }),
+      vectorLayer,
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([center.lng, center.lat]),
+      zoom: zoom
+    })
+  });
+
+  if(func_move!=null){
+    rc.on("moveend",func_move);
+  }
+  return rc;
+}
+
+export function getMarkerLayer(map:any):any {
+  var rc=null;
+  map.getLayers().forEach((layer) => {
+    if (layer instanceof ol.layer.Vector) {
+      rc=layer;
+    }
+  });
+  return rc;
+}
+
+
+export function createMarker(lon,lat,icon,coupon={}){
   var iconStyle = new ol.style.Style({
     image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
       anchor: [0.5, 0.5],
@@ -68,9 +134,10 @@ export function createMarker(ol,lon,lat,icon){
   });
 
   var marker = new ol.Feature({
-    geometry: new ol.geom.Point(
-      ol.proj.fromLonLat([lon, lat])
-    ),
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+    //TODO: propriétés à insérer
+    //label:coupon.label,
+    //direct_bonus: coupon.direct_bonus
   });
   marker.setStyle(iconStyle);
   return marker;
