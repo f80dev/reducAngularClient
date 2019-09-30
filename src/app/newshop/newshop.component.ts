@@ -19,6 +19,7 @@ export class NewshopComponent implements OnInit {
   show_address="";
   owner = '';
   map: any;
+  handle:any;
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   private lng: number;
@@ -53,10 +54,21 @@ export class NewshopComponent implements OnInit {
       this.lat= Number(res[0].lat);
       this.show_address=res[0].display_name;
       if(this.map==null)
-        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop);
+        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,18,()=>{
+          clearTimeout(this.handle);
+          this.handle=setTimeout(()=>{
+            var l=getMarkerLayer(this.map);
+            //var features=l.getSource().getFeatures();
+            var center_pos=ol.proj.toLonLat(this.map.getView().getCenter());
+            this.lng=center_pos[0];
+            this.lat=center_pos[1];
+            l.getSource().clear();
+            l.getSource().addFeature(createMarker(center_pos[0], center_pos[1],this.config.values.icon_shop));
+          },500);
+        });
       else{
         this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
-        getMarkerLayer(this.map).addFeatures(createMarker(this.lng, this.lat,this.config.values.icon_shop));
+        getMarkerLayer(this.map).addFeature(createMarker(this.lng, this.lat,this.config.values.icon_shop));
       }
 
     });
