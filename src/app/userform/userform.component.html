@@ -52,9 +52,17 @@
               label="Vous pouvez voir les promos autour de vous en activant la carte">
     </app-tuto>
 
+    <app-tuto [delay]="6"
+              label="Si vous pensez utiliser souvent cette appli, enregistrez la directement sur votre bureau via l'option adéquate du menu de votre navigateur">
+    </app-tuto>
+
+    <app-tuto [delay]="4" icon="camera_alt" [if]="webcamsAvailable>0"
+              label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
+    </app-tuto>
+
 
     <app-tuto [delay]="6" icon="delete" [if]="user.shops==null || user.shops.length==0"
-              label="Vous pouvez totalement effacer votre compte de reducShare">
+              label="Si vous n'avez plus de promotion en cours, vous pouvez totalement effacer votre compte de reducShare">
     </app-tuto>
 
 
@@ -69,8 +77,8 @@
     </button>
 
 
-    <button *ngIf="webcamsAvailable>0" mat-button mat-raised-button (click)="startScanner()">
-      Scanner une promotion
+    <button *ngIf="webcamsAvailable>0" mat-button mat-raised-button mat-icon-button (click)="startScanner()">
+      <mat-icon>camera_alt</mat-icon>
     </button>
 
     <button mat-icon-button mat-button mat-raised-button (click)="openLoc()">
