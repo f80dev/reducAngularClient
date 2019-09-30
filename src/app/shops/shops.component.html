@@ -10,11 +10,20 @@
     </span>
   </mat-card-content>
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">
+
     <button mat-button mat-flat-button
             *ngIf="!shop.showAddCoupon"
             (click)="addCoupon(shop)">
       Lancer une promotion
     </button>
+
+    <button mat-button
+            (click)="openPrinter(shop)"
+            title="Imprimer le QRCode de l'enseigne"
+            mat-flat-button mat-icon-button>
+      <mat-icon>printer</mat-icon>
+    </button>
+
     <app-new-coupon *ngIf="shop.showAddCoupon"
                     [shop]="shop"
                     (insert)="onInsert(shop)"
@@ -33,7 +42,7 @@
               [if]="shop.coupons?.length>0"
               label="Une fois votre première promotion créée, vous pouvez, imprimer une affiche ou diffuser son lien internet à votre réseau">
     </app-tuto>
-    <app-list-coupons [coupons]="shop.coupons"
+    <app-list-coupons [coupons]="shop.coupons" [user]="user"
                       (delete)="onupdate.emit($event)">
     </app-list-coupons>
   </mat-card-content>

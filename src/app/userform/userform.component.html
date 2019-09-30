@@ -37,7 +37,7 @@
       <br>
       <app-list-coupons *ngIf="showCouponOnMap"
                         [user]="user"
-                        (flash)="showMap=false;onflash.emit({'message':$event.message})"
+                        (flash)="flash($event)"
                         [coupons]="showCouponOnMap">
       </app-list-coupons>
     </div>
@@ -47,6 +47,16 @@
     <app-old-coupons [user]="user"
                      *ngIf="showOldPromos">
     </app-old-coupons>
+
+    <app-tuto [delay]="5" icon="map"
+              label="Vous pouvez voir les promos autour de vous en activant la carte">
+    </app-tuto>
+
+
+    <app-tuto [delay]="6" icon="delete" [if]="user.shops==null || user.shops.length==0"
+              label="Vous pouvez totalement effacer votre compte de reducShare">
+    </app-tuto>
+
 
   </mat-card-content>
   <mat-card-actions class="app-card-action">
@@ -63,8 +73,8 @@
       Scanner une promotion
     </button>
 
-    <button mat-button mat-raised-button (click)="openLoc()">
-      Promo autour de moi
+    <button mat-icon-button mat-button mat-raised-button (click)="openLoc()">
+      <mat-icon>map</mat-icon>
     </button>
 
     <button mat-button mat-raised-button (click)="addshop()">

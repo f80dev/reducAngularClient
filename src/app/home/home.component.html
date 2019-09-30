@@ -24,6 +24,8 @@
   <app-tuto [if]="coupons?.length>0"
             label="Vous pouvez partager vos promotions pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
   </app-tuto>
+
+  <!--Affiche la liste des coupons en possession de l'utilisateur -->
   <app-list-coupons (delete)="refresh($event?.message)"
                     (insert)="refresh($event?.message)"
                     [coupons]="coupons" [user]="user">

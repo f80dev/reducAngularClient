@@ -40,7 +40,6 @@ export class UserformComponent implements OnInit {
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
 
-
   ngOnInit() {
     this.initAvailableCameras();
   }
@@ -86,6 +85,7 @@ export class UserformComponent implements OnInit {
   }
 
   addshop() {
+    this.showMap=false;
     this.router.navigate(['shop']);
   }
 
@@ -137,7 +137,7 @@ export class UserformComponent implements OnInit {
   }
 
   promptForPseudo() {
-    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?"}})
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?",onlyConfirm:false}})
         .afterClosed().subscribe((result) => {
           if(result!=null && result.length>0){
             this.user.pseudo = result;
@@ -169,6 +169,12 @@ export class UserformComponent implements OnInit {
     } else {
       clearInterval(this.handle);
     }
+  }
+
+  flash(event:any){
+    this.showCouponOnMap=[];
+    this.showMap=false;
+    this.onflash.emit({'message':event.message})
   }
 
 

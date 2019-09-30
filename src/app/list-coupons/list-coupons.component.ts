@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {SocialService} from "ngx-social-button"
 import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
+import {PromptComponent} from "../prompt/prompt.component";
+import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 
 @Component({
   selector: 'app-list-coupons',
@@ -21,13 +23,14 @@ export class ListCouponsComponent implements OnInit {
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
 
-  constructor(public meta: Meta,public api: ApiService,
+  constructor(public meta: Meta,public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
               public ngNavigatorShareService: NgNavigatorShareService) {
     meta.addTag({name:"application",content:"ReducShare"});
   }
 
   ngOnInit() {
+
   }
 
   showCode(coupon: any) {
@@ -79,9 +82,27 @@ export class ListCouponsComponent implements OnInit {
   }
 
   remove(coupon: any) {
-    this.api.removeCoupon( coupon._id).subscribe(() => {
-      this.ondelete.emit();
-    });
+    var question="Etes vous bien sur ?";
+    if(coupon.origin!=coupon._id)question="Vraiment ? Pourtant vous avez une réduction de "+coupon.gain+coupon.symbol+" à cet endroit";
+
+    if(coupon.gain>0){
+      this.dialog.open(PromptComponent,{
+        width: '250px',
+        data: {onlyConfirm:true,title: "Supprimer une réduction ?", question: question}
+      }).afterClosed().subscribe((result) => {
+        if(result=="yes"){
+          this.api.removeCoupon( coupon._id).subscribe(() => {
+            this.ondelete.emit();
+          });
+        }
+      });
+    } else {
+      this.api.removeCoupon( coupon._id).subscribe(() => {
+        this.ondelete.emit();
+      });
+    }
+
+
   }
 
   openPrinter(coupon: any) {

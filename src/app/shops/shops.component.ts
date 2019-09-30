@@ -66,4 +66,8 @@ export class ShopsComponent implements OnChanges {
       this.ondelete.emit(result);
     })
   }
+
+  openPrinter(shop:any){
+    //TODO: impression du qrcode de la boutique
+  }
 }
