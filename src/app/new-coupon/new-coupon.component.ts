@@ -3,6 +3,7 @@ import {ApiService} from '../api.service';
 import {cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-new-coupon',
@@ -43,7 +44,7 @@ export class NewCouponComponent implements OnInit {
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
   preview: string="";
 
-  constructor(public api: ApiService,public route: ActivatedRoute,public location: Location) { }
+  constructor(public config:ConfigService,public api: ApiService,public route: ActivatedRoute,public location: Location) { }
 
   ngOnInit() {
     this.shopNameEdit = false;
@@ -75,7 +76,9 @@ export class NewCouponComponent implements OnInit {
     coupon.unity=coupon.unity.toLowerCase();
 
 
+    this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
+      this.config.waiting=false;
       this.oninsert.emit({message:result.message});
     });
   }

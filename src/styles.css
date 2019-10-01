@@ -23,6 +23,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 .app-button {
   width:80px;
   padding:3px;

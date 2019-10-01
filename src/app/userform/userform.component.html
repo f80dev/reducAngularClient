@@ -10,7 +10,14 @@
       </div>
       <span *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</span>
       <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
-      <button *ngIf="user.pseudo?.length==0" mat-button mat-flat-button (click)="promptForPseudo()">Pseudo ?</button>
+
+      <button *ngIf="user.pseudo?.length==0"
+              id="cmdPseudo"
+              mat-button mat-flat-button (click)="promptForPseudo()">
+        Pseudo ?
+      </button>
+
+      <span class="spacer"></span>
       <mat-progress-spinner *ngIf="config.waiting"></mat-progress-spinner>
 
     </mat-card-title>
@@ -72,20 +79,27 @@
 
     <button mat-icon-button mat-button mat-raised-button
             *ngIf="user.shops==null || user.shops.length==0"
+            id="btnRAZ"
             (click)="clearAccount(user._id)">
       <mat-icon>delete</mat-icon>
     </button>
 
 
-    <button *ngIf="webcamsAvailable>0" mat-button mat-raised-button mat-icon-button (click)="startScanner()">
+    <button *ngIf="webcamsAvailable>0" mat-button
+            id="btnScan"
+            mat-raised-button mat-icon-button (click)="startScanner()">
       <mat-icon>camera_alt</mat-icon>
     </button>
 
-    <button mat-icon-button mat-button mat-raised-button (click)="openLoc()">
+    <button mat-icon-button mat-button
+            id="btnMap"
+            mat-raised-button (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
 
-    <button mat-button mat-raised-button (click)="addshop()">
+    <button mat-button
+            id="btnAddShop"
+            mat-raised-button (click)="addshop()">
       <span *ngIf="user.shops==null || user.shops.length==0">
         Créer sa promotion
       </span>

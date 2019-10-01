@@ -1,7 +1,13 @@
 <mat-card *ngFor="let shop of user.shops" class="app-card">
-  <mat-card-header (click)="shop.visible=!shop.visible">
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>{{shop.name}}</mat-card-title>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image" (click)="shop.visible=!shop.visible"></div>
+    <mat-card-title (click)="shop.visible=!shop.visible">{{shop.name}}</mat-card-title>
+    <span class="spacer"></span>
+    <div style="display: inline-block;cursor: pointer;" (click)="shop.visible=!shop.visible">
+      <mat-icon *ngIf="!shop.visible">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>
+    </div>
+
     <mat-card-subtitle>{{shop.address}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="app-card-content">
@@ -17,12 +23,13 @@
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">
 
     <button mat-button mat-flat-button
+            name="btnNewPromo"
             *ngIf="!shop.showAddCoupon"
             (click)="addCoupon(shop)">
       Lancer une promotion
     </button>
 
-    <button mat-button
+    <button mat-button name="btnPrint"
             (click)="openPrinter(shop)"
             ngxClipboard [cbContent]="shop.url"
             title="Imprimer le QRCode de l'enseigne"
@@ -31,6 +38,7 @@
     </button>
 
     <app-new-coupon *ngIf="shop.showAddCoupon"
+                    name="zoneNewCoupon"
                     [shop]="shop"
                     (insert)="onInsert(shop)"
                     (close)="shop.showAddCoupon=false">

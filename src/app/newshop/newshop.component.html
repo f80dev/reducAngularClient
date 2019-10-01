@@ -4,12 +4,12 @@
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" autofocus>
+      <input id="txtShopName" type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" autofocus>
     </mat-form-field>
     <br>
 
     <mat-form-field class="form-field-style">
-      <input type="text" matInput placeholder="adresse" [(ngModel)]="address"
+      <input id="txtShopAddress" type="text" matInput placeholder="adresse" [(ngModel)]="address"
              (change)="showOnMap()">
       <button mat-button *ngIf="address" matSuffix mat-icon-button aria-label="Clear" (click)="address=''">
         <mat-icon>close</mat-icon>
@@ -27,8 +27,12 @@
 
 
   <mat-card-actions class="app-card-action">
-    <button mat-button mat-flat-button class="app-button" (click)="cancel()">Annuler</button>
+    <button mat-button mat-flat-button
+            id="btnCancel"
+            class="app-button" (click)="cancel()">Annuler</button>
     &nbsp;
-    <button mat-button mat-flat-button class="app-button" (click)="add()">Valide</button>
+    <button mat-button mat-flat-button
+            id="btnValide"
+            class="app-button" (click)="add()">Valide</button>
   </mat-card-actions>
 </mat-card>

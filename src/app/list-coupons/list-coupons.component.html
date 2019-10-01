@@ -1,7 +1,7 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
-  <mat-card-header (click)="showCoupon(coupon)">
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title style="font-size: medium;">
+  <mat-card-header  name="promoTitle">
+    <div mat-card-avatar class="header-image" (click)="showCoupon(coupon)"></div>
+    <mat-card-title style="font-size: medium;" (click)="showCoupon(coupon)">
 
       <!--Affichage des coupons origine pour les non propriétaire-->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
@@ -19,6 +19,13 @@
       </span>
 
     </mat-card-title>
+
+    <span class="spacer"></span>
+    <div style="display: inline-block;cursor: pointer;" (click)="showCoupon(coupon)">
+      <mat-icon *ngIf="!isVisible(coupon)">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="isVisible(coupon)">arrow_drop_up</mat-icon>
+    </div>
+
 
     <mat-card-subtitle>
       <!--Affichage des coupons origine pour les non propriétaire-->
@@ -65,9 +72,10 @@
 
         <!--QRCode du coupon-->
 
-        <qr-code [value]="coupon.url"
+        <qr-code [value]="coupon.url" name="qrcode"
                  style="max-width:200px;max-height: 200px;display:inline;"
                  *ngIf="coupon.showCode"
+                 ngxClipboard [cbContent]="coupon.url"
                  [size]="150">
         </qr-code>
 
@@ -88,7 +96,7 @@
         <br><br>
 
         <table style="text-align: left;display: inline-block;font-size:small;"
-               cellpadding="2"
+               cellpadding="2" name="zoneInfo"
                *ngIf="coupon.canbedeal">
           <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
           <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
@@ -97,8 +105,6 @@
         <span style="font-size: small">
             Reste <app-timer [end]="coupon.dtEnd"></app-timer>
           </span>
-
-
       </td>
     </tr></table>
 
@@ -111,7 +117,9 @@
               label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
     </app-tuto>
 
-    <div style="width: 100%;text-align: center;font-size: x-small;color:lightgrey;" *ngIf="coupon.origin!=coupon._id && coupon.showCode">
+    <div style="width: 100%;text-align: center;font-size: x-small;color:lightgrey;"
+         name="zoneConditions"
+         *ngIf="coupon.origin!=coupon._id && coupon.showCode">
       <br>
       <strong>Conditions d'application:</strong><br>
       {{coupon.conditions}}
@@ -134,6 +142,7 @@
 
       <div *ngIf="!coupon.closed" style="display: inline-block;">
         <button mat-button mat-flat-button
+                name="btnShare"
                 *ngIf="coupon.canbedeal || coupon.origin!=coupon._id"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
                 (click)="showCode(coupon)"
@@ -168,6 +177,7 @@
 
       <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
               (click)="openPrinter(coupon)"
+              name="btnPrint"
               title="Imprimer une affiche de votre bon plan"
               mat-flat-button mat-icon-button>
         <mat-icon>printer</mat-icon>
@@ -190,6 +200,7 @@
       </button>
 
       <button mat-button mat-flat-button
+              name="btnMap"
               *ngIf="coupon._id!=coupon.origin"
               title="Localiser l'enseigne proposant la réduction"
               mat-icon-button  (click)="showAddress(coupon.shop_complete)">
@@ -198,6 +209,7 @@
 
       <button mat-button mat-flat-button
               mat-icon-button
+              id="btnRemove"
               (click)="remove(coupon)">
         <mat-icon>delete</mat-icon>
       </button>
@@ -208,6 +220,7 @@
     <div *ngIf="coupon.owner!=user?._id">
       <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
               (click)="flash(coupon)"
+              name="btnRecup"
               title="Récupérer ce coupon"
               mat-flat-button>
         Récupérer
