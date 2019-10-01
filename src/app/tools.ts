@@ -33,11 +33,12 @@ export function selectFile(event:any,maxsize:number,func:Function){
     reader.onload = ()=>{
       var dataURL = reader.result;
       resizeBase64Img(dataURL,maxsize,0.5,(result=>{
-        cropToSquare(result,0.5,(result_square)=>{
-          func(result_square);
+        autoRotate(result,0.5,(res)=>{
+          cropToSquare(res,0.5,(result_square)=>{
+            func(result_square);
+          })
         })
-      }))
-
+      }));
     };
     reader.readAsDataURL(event.target.files[0]);
   }
@@ -315,4 +316,57 @@ export function clear(elt: any, xpath: string) {
   to_keep.parentElement.childNodes.forEach((n) => {
     if (n != to_keep) {n.style.display = 'none'; }
   });
+}
+
+declare var EXIF: any;
+
+export function autoRotate(src: string, quality: number, func) {
+  var image = new Image();
+  image.onload = function () {
+    EXIF.getData(this, function () {
+      var tags = EXIF.getAllTags(this);
+      var angle = 0;
+      switch (tags.Orientation) {
+        case 8:
+          angle = -90;
+          break;
+        case 3:
+          angle = 180;
+          break;
+        case 6:
+          angle = 90;
+          break;
+      }
+      rotate(src, angle, quality, func);
+    });
+  };
+  image.src = src;
+}
+
+
+export function rotate(src: string, angle: number, quality: number, func) {
+  if (angle == 0)
+    func(src);
+  else {
+    var img = new Image();
+    img.onload = function () {
+      var canvas:any = document.createElement('canvas');
+      canvas.width = img.height;
+      canvas.height = img.width;
+      drawRotated(canvas, this, angle);
+      var rc = canvas.toDataURL("image/jpeg", quality);
+      func(rc);
+    }
+    img.src = src;
+  }
+}
+
+function drawRotated(canvas, image, degrees) {
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(degrees * Math.PI / 180);
+  ctx.drawImage(image, -image.width / 2, -image.height / 2);
+  ctx.restore();
 }

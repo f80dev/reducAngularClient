@@ -200,7 +200,4 @@ export class UserformComponent implements OnInit {
     this.onflash.emit({'message':event.message})
   }
 
-
-
-
 }

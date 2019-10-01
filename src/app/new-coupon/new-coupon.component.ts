@@ -79,6 +79,7 @@ export class NewCouponComponent implements OnInit {
     this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.config.waiting=false;
+      localStorage.setItem("showCoupon",result._id);
       this.oninsert.emit({message:result.message});
     });
   }
