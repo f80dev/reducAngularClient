@@ -9,6 +9,11 @@
       Vous avez {{shop.followers?.length}} followers
     </span>
   </mat-card-content>
+
+  <div id="print-section-{{shop._id}}" style="display: none;">
+    <app-print-coupon [shop]="shop"></app-print-coupon>
+  </div>
+
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">
 
     <button mat-button mat-flat-button

@@ -167,8 +167,18 @@ export class UserformComponent implements OnInit {
   }
 
   clearAccount(id:string) {
-    this.api.raz(id).subscribe(()=>{
-      window.location.reload();
+    this.dialog.open(PromptComponent, {
+      width: '250px', data: {
+        onlyConfirm: true,
+        title: "Supprimer votre compte ?",
+        question: "En supprimant votre compte, vous perdez toutes vos promotions en cours. Etes vous sûr ?"
+      }
+    }).afterClosed().subscribe((result) => {
+      if(result=="yes"){
+        this.api.raz(id).subscribe(()=> {
+          window.location.reload();
+        });
+      }
     });
   }
 
@@ -189,6 +199,7 @@ export class UserformComponent implements OnInit {
     this.showMap=false;
     this.onflash.emit({'message':event.message})
   }
+
 
 
 

@@ -58,7 +58,14 @@ export function unique_id(){
   return rc;
 }
 
-
+export function sendToPrint(section="print-section"){
+  const printContent:any = document.getElementById(section);
+  const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+  WindowPrt.document.write(printContent.innerHTML);
+  WindowPrt.document.close();
+  WindowPrt.focus();
+  WindowPrt.print();
+}
 
 export function $$(s: string, obj: any= null) {
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
@@ -296,6 +303,11 @@ export function getDelay(dtStart, lang= 'en', label_day= 'jours', serverNow= nul
   return affichage;
 }
 
+
+export function normeString(s){
+  if(s==null)return "";
+  return s;
+}
 
 export function clear(elt: any, xpath: string) {
   const doc = elt.contentDocument;

@@ -21,7 +21,7 @@ export class LocService {
 
   public getAddressFromCoord(lat:number,lng:number,func_success:Function,func_failed:Function=null){
     var url="https://nominatim.openstreetmap.org/reverse?lat="+lat+"&lon="+lng;
-    url+="&format=json&addressdetails=0";
+    url+="&format=json&addressdetails=1";
     fetch(url).then((r)=> { return r.json(); }).then((resp)=>{
       func_success(resp);
     }).catch((err)=>{

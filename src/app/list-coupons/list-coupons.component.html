@@ -1,4 +1,4 @@
-<mat-card *ngFor="let coupon of coupons" class="app-card">
+<mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
   <mat-card-header (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
@@ -45,7 +45,7 @@
     </app-tuto>
 
     <!-- Section destinée à l'imprression -->
-    <div name="print-section" style="display: none;">
+    <div id="print-section-{{coupon._id}}" style="display: none;">
       <app-print-coupon [coupon]="coupon"></app-print-coupon>
     </div>
 

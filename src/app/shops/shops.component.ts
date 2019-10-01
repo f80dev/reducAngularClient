@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {NewCouponComponent} from "../new-coupon/new-coupon.component";
+import {sendToPrint} from "../tools";
 
 
 @Component({
@@ -36,6 +37,10 @@ export class ShopsComponent implements OnChanges {
     this.refresh(0);
   }
 
+  /**
+   *
+   * @param showItem
+   */
   refresh(showItem=-1){
     if(this.user!=null && this.user.coupons!=null){
       this.coupons=[];
@@ -43,13 +48,15 @@ export class ShopsComponent implements OnChanges {
       this.user.coupons.forEach((coupon)=>{
         coupon.visible=false;
         if(i==showItem)coupon.visible=true;
-        if(coupon.origin==coupon._id)
+        if(coupon.origin==coupon._id){
           this.coupons.push(coupon);
-        i++;
+          i++;
+        }
       });
     }
 
   }
+
 
   addCoupon(shop: any) {
     shop.showAddCoupon=true;
@@ -68,6 +75,7 @@ export class ShopsComponent implements OnChanges {
   }
 
   openPrinter(shop:any){
+    sendToPrint("print-section-"+shop._id);
     //TODO: impression du qrcode de la boutique
   }
 }

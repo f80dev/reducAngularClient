@@ -153,6 +153,10 @@
       <mat-step>
         <ng-template matStepLabel>Limites globales</ng-template>
 
+        <app-tuto label="Plusieurs limites vous permette de maitriser la promotion en terme de coût, de stock, de durée de validité">
+        </app-tuto>
+
+
         <div style="font-size: x-small">
           La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) et</span>
           <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,

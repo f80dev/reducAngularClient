@@ -1,6 +1,6 @@
 {
-  "name": "reducClient",
-  "short_name": "reducClient",
+  "name": "ReducShare",
+  "short_name": "ReducShare",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

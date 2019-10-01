@@ -6,6 +6,9 @@
   "icon_shop":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
   "icon_person":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
 
+  "domain_server":"server.f80.fr",
+  "domain_appli":"https://reducshare.com",
+
   "modeles":[
     {
       "title":"Réduction sur le prix de vente",
@@ -22,7 +25,7 @@
       "duration":48,
       "stock":200,
       "max_coupon":500,
-      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+      "conditions":"tout achat d'un montant supérieur a 20€"
     },
     {
       "title":"Les cafés offerts",
@@ -39,7 +42,7 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"Valable pour tout achat d'un montant supérieur a 20€"
+      "conditions":"tout achat d'un montant supérieur a 20€"
     },
     {
       "title":"Les invendus",
@@ -56,7 +59,7 @@
       "duration":480,
       "stock":50,
       "max_coupon":5000,
-      "conditions":"Valable pour tout achat quelque soit le montant"
+      "conditions":"tout achat quelque soit le montant"
     },
     {
       "title":"Des binouzes pour le concert",

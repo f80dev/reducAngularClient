@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, createMap, createMarker, getMarkerLayer} from '../tools';
+import {checkLogin, createMap, createMarker, getMarkerLayer, normeString} from '../tools';
 import { Router} from '@angular/router';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
@@ -67,7 +67,18 @@ export class NewshopComponent implements OnInit {
             if(this.reverseGeocode){
               this.loc.getAddressFromCoord(this.lat,this.lng,(res)=>{
                 this.reverseGeocode=false;
-                if(res.display_name)this.address=res.display_name;
+                if(res.display_name){
+                  var name=null;
+                  if(res.address.address29!=null)name=res.address.address29;
+                  if(res.address.pub!=null)name=res.address.pub;
+                  if(res.address.hairdresser!=null)name=res.address.hairdresser;
+                  if(name==null && res.address.post_box!=null)name="BP "+res.address.post_box;
+                  var house_number=res.address.house_number;
+                  if(house_number==null && name!=null)house_number=name;
+                  if(name!=null)this.shopname=name;
+
+                  this.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
+                }
               },null);
             }
             l.getSource().clear();

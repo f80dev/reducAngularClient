@@ -7,6 +7,7 @@ import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
+import {sendToPrint} from "../tools";
 
 @Component({
   selector: 'app-list-coupons',
@@ -57,7 +58,7 @@ export class ListCouponsComponent implements OnInit {
     if(coupon.showCode){
       this.ngNavigatorShareService.share({
         title: coupon.label,
-        text: "Ouvrir pour profiter vous aussi de la promotion",
+        text: "Ouvrir pour gagner immédiatement "+coupon.direct_bonus+coupon.symbol,
         url: coupon.url
       }).then( (response) => {
         console.log(response);
@@ -91,9 +92,7 @@ export class ListCouponsComponent implements OnInit {
     }
 
     if(coupon.gain>0){
-      this.dialog.open(PromptComponent,{
-        width: '250px',
-        data: {onlyConfirm:true,title: "Supprimer une réduction ?", question: question}
+      this.dialog.open(PromptComponent,{width: '250px',data: {onlyConfirm:true,title: "Supprimer une réduction ?", question: question}
       }).afterClosed().subscribe((result) => {
         if(result=="yes"){
           this.api.removeCoupon( coupon._id).subscribe(() => {
@@ -111,12 +110,7 @@ export class ListCouponsComponent implements OnInit {
   }
 
   openPrinter(coupon: any) {
-    const printContent:any = document.getElementsByName("print-section")[0];
-    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
-    WindowPrt.document.write(printContent.innerHTML);
-    WindowPrt.document.close();
-    WindowPrt.focus();
-    WindowPrt.print();
+    sendToPrint("print-section-"+coupon._id);
   }
 
   socialSharing(coupon: any) {
