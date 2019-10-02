@@ -94,7 +94,7 @@
       <mat-icon>build</mat-icon>
     </button>
 
-    <button mat-button
+    <button mat-button *ngIf="user.level>0"
             id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications</mat-icon>
@@ -114,7 +114,7 @@
             id="btnAddShop" class="large-button"
             mat-raised-button (click)="addshop()">
       <span *ngIf="user.shops==null || user.shops.length==0">
-        Créer sa promotion
+        Votre promotion
       </span>
       <span *ngIf="user.shops?.length>0">
         Nouvelle enseigne
