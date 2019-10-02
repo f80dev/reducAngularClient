@@ -1,7 +1,7 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
-  <mat-card-header  name="promoTitle">
-    <div mat-card-avatar class="header-image" (click)="showCoupon(coupon)"></div>
-    <mat-card-title style="font-size: medium;" (click)="showCoupon(coupon)">
+  <mat-card-header  name="promoTitle" (click)="showCoupon(coupon)">
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title style="font-size: medium;">
 
       <!--Affichage des coupons origine pour les non propriétaire-->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
@@ -21,7 +21,7 @@
     </mat-card-title>
 
     <span class="spacer"></span>
-    <div style="display: inline-block;cursor: pointer;" (click)="showCoupon(coupon)">
+    <div style="display: inline-block;cursor: pointer;">
       <mat-icon *ngIf="!isVisible(coupon)">arrow_drop_down</mat-icon>
       <mat-icon *ngIf="isVisible(coupon)">arrow_drop_up</mat-icon>
     </div>
@@ -61,12 +61,9 @@
       <td style="text-align: center;width: fit-content;max-width: 40%;">
         <!--Visuel du coupon-->
 
-        <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0">
+        <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0 && coupon.origin!=coupon._id">
 
-          <img
-            *ngIf="coupon.origin!=coupon._id"
-            [src]="coupon.picture"
-            style="width: 130px;height:130px;display: inline-block;">
+          <app-visual [picture]="coupon.picture"></app-visual>
 
         </div>
 
@@ -82,7 +79,7 @@
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
           {{coupon.share | number:'1.0-0'}}/{{coupon.max_coupon}} partages<br>
-          {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} distribué(es) <br><br>
+          {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} proposé(es) via les partages<br><br>
           Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}
         </div>
 
@@ -125,7 +122,7 @@
       {{coupon.conditions}}
     </div>
 
-    <app-tuto [if]="!coupon.canbedeal" label="Le coupon ne peut plus être distribué, mais vous p"></app-tuto>
+    <app-tuto [if]="!coupon.canbedeal" label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur"></app-tuto>
     <app-tuto [if]="coupon.origin==coupon._id"
               [delay]="5" icon="not_interested"
               label="Vous pouvez interrompre la distribution d'une promotion à tout instant">
@@ -151,7 +148,7 @@
             Partager
           </span>
           <!--Lorsque le coupon ne peut plus être distribué on ne peut plus que l'utiliser-->
-          <span *ngIf="!coupon.canbedeal">
+          <span *ngIf="!coupon.canbedeal && coupon.gain>0">
             Utiliser
           </span>
 
@@ -183,13 +180,13 @@
         <mat-icon>printer</mat-icon>
       </button>
 
-      <button *ngIf="user && coupon.owner!=user?._id" mat-button
+      <button *ngIf="user && coupon.shop_complete?.owner!=user._id" mat-button
               (click)="addfollow(user._id,coupon.shop)"
               title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'"
               mat-flat-button mat-icon-button>
 
-        <mat-icon *ngIf="user && isfollower(user?._id,coupon.shop)">add_shopping_cart</mat-icon>
-        <mat-icon *ngIf="user && !isfollower(user?._id,coupon.shop)">remove_shopping_cart</mat-icon>
+        <mat-icon *ngIf="user && !isfollower(coupon.shop)">add_shopping_cart</mat-icon>
+        <mat-icon *ngIf="user && isfollower(coupon.shop)">remove_shopping_cart</mat-icon>
       </button>
 
       <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button

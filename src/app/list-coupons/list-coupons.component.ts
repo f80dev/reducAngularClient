@@ -123,21 +123,23 @@ export class ListCouponsComponent implements OnInit {
     });
   }
 
-  isfollower(userid: string, shopid: string){
+  isfollower(shopid: string){
+    var bc=false;
     if(this.user.follow!=null){
       this.user.follow.forEach(item => {
-        if(item.shop_id==shopid)return true;
+        if(item.shop_id==shopid)bc=true;
       })
     }
-    return false;
+    return bc;
   }
 
   addfollow(userid: string, shopid: string) {
     var operation="+";
-    if(this.isfollower(userid,shopid))operation="-";
+    if(this.isfollower(shopid))operation="-";
 
     this.api.follow(userid,operation,shopid).subscribe((r:any)=>{
       this.user.message=r.message;
+      this.onupdate.emit({"message":r.message});
     });
   }
 
@@ -150,12 +152,14 @@ export class ListCouponsComponent implements OnInit {
   }
 
   isVisible(coupon:any){
-    if(localStorage.getItem("showCoupon")==coupon._id)return true;
+    var couponToShow=localStorage.getItem("showCoupon");
+    if(couponToShow==coupon._id)return true;
     return false;
   }
 
   flash(coupon:any){
     this.api.flash(this.user._id, coupon._id).subscribe((result:any) => {
+      localStorage.setItem("showCoupon",result.newcoupon);
       this.user.message = result.message;
       this.onflash.emit({message:result.message});
     });

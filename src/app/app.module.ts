@@ -44,6 +44,8 @@ import { PrintCouponComponent } from './print-coupon/print-coupon.component';
 import { PromptComponent } from './prompt/prompt.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { InputComponent } from './input/input.component';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { VisualComponent } from './visual/visual.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -65,7 +67,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     OldCouponsComponent,
     PrintCouponComponent,
     PromptComponent,
-    InputComponent
+    InputComponent,
+    VisualComponent
   ],
   entryComponents: [
     NewCouponComponent,
@@ -93,7 +96,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatInputModule,
     MatListModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     ApiService,

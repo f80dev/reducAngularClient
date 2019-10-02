@@ -10,11 +10,12 @@
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Selectionnez un modèle pour construire votre promotion"
                      [shop]="shop"
+                     [filter]="shop.tags"
+                     (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)"></app-old-coupons>
-    <br>
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
-      <mat-step name="step1">
+      <mat-step>
         <ng-template matStepLabel>Nature de la promotion</ng-template>
 
 
@@ -57,7 +58,7 @@
 
 
 
-      <mat-step  name="step2">
+      <mat-step>
         <ng-template matStepLabel>Teaser</ng-template>
 
         <mat-form-field class="form-field-style">
@@ -69,9 +70,18 @@
 
 
         <!--Gestion du visuel-->
+
+        <app-tuto label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
+
         <div style="width: 100%;text-align: center;">
 
-          <button mat-flat-button mat-button (click)="showIcons=!showIcons;addIcons();">Icones</button>
+          <button mat-flat-button
+                  *ngIf="!deviceService.isDesktop()"
+                  mat-button (click)="addEmoji()">Emojis</button>
+
+          <button mat-flat-button mat-button
+                  *ngIf="deviceService.isDesktop()"
+                  (click)="showIcons=!showIcons;addIcons();">Emojis</button>
           &nbsp;&nbsp;
 
           <button mat-flat-button mat-button
@@ -91,15 +101,13 @@
                  (click)="selIcon(icon)">
           </div>
 
-          <img style="max-height:200px"
-               *ngIf="preview?.length>0"
-               [src]="preview">
+          <app-visual [picture]="preview"></app-visual>
         </div>
 
       </mat-step>
 
 
-      <mat-step  name="step3">
+      <mat-step>
         <ng-template matStepLabel>Gains pour les clients</ng-template>
         <div style="font-size: x-small">
         le client gagne {{coupon.direct_bonus}} {{coupon.symbol}}
@@ -134,8 +142,8 @@
         </mat-form-field>
       </mat-step>
 
-      <mat-step  name="step4">
-        <ng-template matStepLabel>Conditions d'application</ng-template>
+      <mat-step>
+        <ng-template matStepLabel>Conditions d'application de l'offre</ng-template>
 
         <div style="font-size: x-small">
         Un client ne peut gagner plus de {{coupon.max}} {{coupon.unity}}<span *ngIf="coupon.pluriel && coupon.max>1">s</span>
@@ -153,7 +161,8 @@
         <mat-form-field class="form-field-style">
           <textarea matInput rows="3"
                     id="txtConditions"
-                    placeholder="Condition d'obtention de la promotion"
+                    title="Condition d'application de l'offre / de la promo"
+                    placeholder="Offre valable pour ..."
                     [(ngModel)]="coupon.conditions"
                     (change)="normalize_conditions(coupon)"></textarea>
         </mat-form-field>

@@ -21,18 +21,31 @@
     <br>
 
     <br>
-    <div id="map" class="map form-field-style" (mouseup)="reverseGeocode=true" (tap)="reverseGeocode=true"></div>
+    <div id="map" class="map form-field-style"
+         (mouseup)="reverseGeocode=true"
+         (touchend)="reverseGeocode=true">
+    </div>
+
     <app-tuto [delay]="5" label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
+
+    <br>
+    <mat-form-field class="form-field-style">
+      <input id="txtShopTags" type="text" matInput placeholder="Tags (séparés par un espace ou une virgule)" [(ngModel)]="tags" autofocus>
+    </mat-form-field>
+
+
   </mat-card-content>
 
 
   <mat-card-actions class="app-card-action">
     <button mat-button mat-flat-button
+            id="btnValide" *ngIf="shopname?.length>0"
+            class="app-button" (click)="add()">Valide</button>
+
+    <button mat-button mat-flat-button
             id="btnCancel"
             class="app-button" (click)="cancel()">Annuler</button>
     &nbsp;
-    <button mat-button mat-flat-button
-            id="btnValide"
-            class="app-button" (click)="add()">Valide</button>
+
   </mat-card-actions>
 </mat-card>

@@ -18,8 +18,8 @@ export class ApiService {
     return this.http.post(api('createcoupon'), coupon);
   }
 
-  addshop(name: string, address: string, owner: string,lng:number,lat:number) {
-    return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat, ''));
+  addshop(name: string, address: string, owner: string,lng:number,lat:number,tags="") {
+    return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat+"/"+tags, ''));
   }
 
   stopdeal(couponid: string) {

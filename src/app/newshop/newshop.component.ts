@@ -18,6 +18,7 @@ export class NewshopComponent implements OnInit {
   address = '12, rue martel, paris 10';
   show_address="";
   owner = '';
+  tags="";
   map: any;
   handle:any;
 
@@ -38,7 +39,7 @@ export class NewshopComponent implements OnInit {
 
   add() {
     const owner = localStorage.getItem('user');
-    this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat).subscribe((result: any) => {
+    this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,this.tags).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
     });
@@ -54,8 +55,8 @@ export class NewshopComponent implements OnInit {
       this.lng=Number(res[0].lon);
       this.lat= Number(res[0].lat);
       this.show_address=res[0].display_name;
-      if(this.map==null)
-        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,18,(event)=>{
+      if(this.map==null){
+        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,18,0.2,(event)=>{
           //Déplacement de la carte
           clearTimeout(this.handle);
           this.handle=setTimeout(()=>{
@@ -68,26 +69,28 @@ export class NewshopComponent implements OnInit {
               this.loc.getAddressFromCoord(this.lat,this.lng,(res)=>{
                 this.reverseGeocode=false;
                 if(res.display_name){
-                  var name=null;
-                  if(res.address.address29!=null)name=res.address.address29;
-                  if(res.address.pub!=null)name=res.address.pub;
-                  if(res.address.hairdresser!=null)name=res.address.hairdresser;
-                  if(name==null && res.address.post_box!=null)name="BP "+res.address.post_box;
+                  this.shopname="";
+                  "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
+                    if(res.address[type]!=null)this.shopname=res.address[type];
+                  });
                   var house_number=res.address.house_number;
-                  if(house_number==null && name!=null)house_number=name;
-                  if(name!=null)this.shopname=name;
+                  if(house_number==null && this.shopname!=null)house_number=this.shopname;
 
-                  this.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
+                  if(res.address.road==null)
+                    this.address=res.display_name;
+                  else
+                    this.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
                 }
               },null);
             }
             l.getSource().clear();
-            l.getSource().addFeature(createMarker(center_pos[0], center_pos[1],this.config.values.icon_shop,null,0.4));
+            l.getSource().addFeature(createMarker(center_pos[0], center_pos[1],this.config.values.icon_shop,null,0.2));
           },500);
         });
+      }
       else{
         this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
-        getMarkerLayer(this.map).addFeature(createMarker(this.lng, this.lat,this.config.values.icon_shop,null,0.4));
+        getMarkerLayer(this.map).addFeature(createMarker(this.lng, this.lat,this.config.values.icon_shop,null,0.2));
       }
 
     });

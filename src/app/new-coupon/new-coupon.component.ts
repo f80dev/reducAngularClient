@@ -4,6 +4,9 @@ import {cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
+import {PromptComponent} from "../prompt/prompt.component";
+import {MatDialog} from "../../../node_modules/@angular/material/dialog";
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-new-coupon',
@@ -22,7 +25,7 @@ export class NewCouponComponent implements OnInit {
     delay:0,
     pluriel:true,
     min_price:0,  //prix minimum pour la promotion
-    conditions:"La promotion n'est valable que pour un achat d'un montant supérieur à ",
+    conditions:"un achat d'un montant supérieur à 15€",
     share_bonus: 3,
     direct_bonus: 5,
     pay_bonus: 10,
@@ -44,7 +47,12 @@ export class NewCouponComponent implements OnInit {
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
   preview: string="";
 
-  constructor(public config:ConfigService,public api: ApiService,public route: ActivatedRoute,public location: Location) { }
+  constructor(public dialog: MatDialog,
+              public config:ConfigService,
+              public api: ApiService,
+              public deviceService: DeviceDetectorService,
+              public route: ActivatedRoute,
+              public location: Location) { }
 
   ngOnInit() {
     this.shopNameEdit = false;
@@ -108,5 +116,15 @@ export class NewCouponComponent implements OnInit {
     this.coupon.duration_hours=Math.trunc(coupon.duration);
     this.preview=coupon.picture;
     this.showOldCoupon=false;
+  }
+
+  addEmoji() {
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Utiliser un emoji", question: ""}
+    }).afterClosed().subscribe((result) => {
+      if(result){
+        this.coupon.picture=result;
+        this.preview=result;
+      }
+    });
   }
 }

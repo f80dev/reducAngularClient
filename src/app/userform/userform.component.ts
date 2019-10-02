@@ -71,7 +71,7 @@ export class UserformComponent implements OnInit {
       var coupon=decoded.data.split("/login/")[1];
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
-        localStorage.setItem("showCoupon",coupon);
+        localStorage.setItem("showCoupon",result.newcoupon);
         this.user.message = result.message;
         this.onflash.emit({message:result.message});
       });
@@ -133,7 +133,7 @@ export class UserformComponent implements OnInit {
           clearTimeout(this.handle);
           this.handle=setTimeout(()=>{
             this.user.position=pos;
-            this.map=createMap(pos,this.config.values.icon_person,15,()=>{
+            this.map=createMap(pos,this.config.values.icon_person,15,0.1,()=>{
               this.showPromoInSquare();
             },(coupon)=>{
               this.showCouponOnMap=[coupon];
@@ -156,7 +156,6 @@ export class UserformComponent implements OnInit {
             this.user.pseudo = result;
             this.saveUser();
           }
-
         });
   }
 
@@ -170,8 +169,8 @@ export class UserformComponent implements OnInit {
     this.dialog.open(PromptComponent, {
       width: '250px', data: {
         onlyConfirm: true,
-        title: "Supprimer votre compte ?",
-        question: "En supprimant votre compte, vous perdez toutes vos promotions en cours. Etes vous sûr ?"
+        title: "Etes vous sûr ?",
+        question: "En supprimant votre compte, vous perdez toutes vos promotions en cours."
       }
     }).afterClosed().subscribe((result) => {
       if(result=="yes"){
@@ -200,4 +199,15 @@ export class UserformComponent implements OnInit {
     this.onflash.emit({'message':event.message})
   }
 
+  setWebhook() {
+    this.dialog.open(PromptComponent,{width:'90vw',data: {result:this.user.webhook,title: "URL de notification ?"}})
+      .afterClosed().subscribe((result) => {
+        if(result){
+          this.user.webhook=result;
+          this.api.setuser(this.user).subscribe(()=>{
+            this.user.message="Notification mise en place";
+          });
+        }
+    });
+  }
 }

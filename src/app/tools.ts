@@ -88,11 +88,11 @@ declare var ol: any;
 
 export function createMap(center:any,
                           icon="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
-                          zoom=18,
+                          zoom=18,scale=0.2,
                           func_move=null,func_sel=null){
   var vectorSource = new ol.source.Vector({
     features: [
-      createMarker(center.lng,center.lat,icon)
+      createMarker(center.lng,center.lat,icon,null,scale)
     ]
   });
 
@@ -145,7 +145,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
       src: icon,
-      opacity:0.8
+      opacity:1.0,
     })),
   });
 
