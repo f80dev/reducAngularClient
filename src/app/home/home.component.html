@@ -6,7 +6,12 @@
 </app-flashscreen>
 
 <div [hidden]="showMessage">
-  <app-tuto label="Bienvenue dans ReducShare" subtitle="la première application qui récompense le bouche à oreille"></app-tuto>
+  <app-tuto label="Bienvenue dans ReducShare !"
+            [duration]="30" height="100vh"
+            image="./assets/icons/icon-384x384.png"
+            subtitle="la première application qui récompense le bouche à oreille">
+  </app-tuto>
+
   <app-userform [user]="user"
                 [excludes]="user.coupons"
                 (flash)="refresh($event?.message)">
@@ -22,16 +27,17 @@
              (insert)="refresh($event?.message)">
   </app-shops>
 
-  <app-tuto [if]="coupons?.length>0"
-            label="Vous pouvez partager vos promotions pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
-  </app-tuto>
-
   <!--Affiche la liste des coupons en possession de l'utilisateur -->
   <app-list-coupons (delete)="refresh($event?.message)"
                     (insert)="refresh($event?.message)"
                     (update)="refresh($event?.message)"
                     [coupons]="coupons" [user]="user">
   </app-list-coupons>
+
+  <app-tuto [if]="coupons.length>0"
+            label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
+  </app-tuto>
+
 </div>
 
 <!--<br><br><br>-->

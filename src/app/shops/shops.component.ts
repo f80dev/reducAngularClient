@@ -13,6 +13,7 @@ import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {NewCouponComponent} from "../new-coupon/new-coupon.component";
 import {sendToPrint} from "../tools";
+import {PromptComponent} from "../prompt/prompt.component";
 
 
 @Component({
@@ -30,6 +31,7 @@ export class ShopsComponent implements OnChanges {
 
   constructor(public snackBar: MatSnackBar,
               public router: Router,
+              public dialog:MatDialog,
               public api:ApiService) {}
 
 
@@ -71,11 +73,17 @@ export class ShopsComponent implements OnChanges {
   delShop(shop: any) {
     this.api.removeShop(shop._id).subscribe((result)=>{
       this.ondelete.emit(result);
-    })
+    });
   }
 
   openPrinter(shop:any){
     sendToPrint("print-section-"+shop._id);
     //TODO: impression du qrcode de la boutique
+  }
+
+  edit(shop:any,coupon:any){
+    this.dialog.open(NewCouponComponent,{width: '90vw',data: {shop:shop,coupon: coupon, title:"Edit"}}).afterClosed().subscribe((result) => {
+      debugger;
+    });
   }
 }

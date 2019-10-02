@@ -41,3 +41,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .app-card-action {
   text-align: right;
 }
+
+.large-button {
+  width:150px;
+}
+
+.app-card-title {
+  width:100%;
+}
+
+.medium-button {
+  width:70px;
+}
+
+.small-button {
+  width:50px;
+}

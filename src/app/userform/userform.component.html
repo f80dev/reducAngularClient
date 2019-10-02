@@ -12,7 +12,7 @@
       <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
 
       <button *ngIf="user.pseudo?.length==0"
-              id="cmdPseudo"
+              id="cmdPseudo" class="large-button"
               mat-button mat-flat-button (click)="promptForPseudo()">
         Pseudo ?
       </button>
@@ -49,13 +49,11 @@
       </app-list-coupons>
     </div>
 
-
-
     <app-old-coupons [user]="user"
                      *ngIf="showOldPromos">
     </app-old-coupons>
 
-    <app-tuto [delay]="5" icon="map"
+    <app-tuto [delay]="1" icon="map"
               label="Vous pouvez voir les promos autour de vous en activant la carte">
     </app-tuto>
 
@@ -63,12 +61,12 @@
               label="Si vous pensez utiliser souvent cette appli, enregistrez la directement sur votre bureau via l'option adéquate du menu de votre navigateur">
     </app-tuto>
 
-    <app-tuto [delay]="4" icon="camera_alt" [if]="webcamsAvailable>0"
+    <app-tuto [delay]="2" icon="camera_alt" [if]="webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 
 
-    <app-tuto [delay]="6" icon="delete" [if]="user.shops==null || user.shops.length==0"
+    <app-tuto [delay]="6" icon="delete" [if]="user.level>0 && (user.shops==null || user.shops.length==0)"
               label="Si vous n'avez plus de promotion en cours, vous pouvez totalement effacer votre compte de reducShare">
     </app-tuto>
 
@@ -78,40 +76,50 @@
     <!--<button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>-->
 
     <button mat-icon-button mat-button mat-raised-button
-            *ngIf="user.shops==null || user.shops.length==0"
+            *ngIf="(user.shops==null || user.shops.length==0) && user.level>0"
             id="btnRAZ"
             (click)="clearAccount(user._id)">
       <mat-icon>delete</mat-icon>
     </button>
 
-
     <button *ngIf="webcamsAvailable>0" mat-button
-            id="btnScan"
+            id="btnScan" title="Scanner des coupons directement depuis l'application"
             mat-raised-button mat-icon-button (click)="startScanner()">
       <mat-icon>camera_alt</mat-icon>
     </button>
 
+    <button *ngIf="user.level==0" mat-button
+            id="btnExpert" title="Simplifier l'interface pour les utilisateurs habitués"
+            mat-raised-button mat-icon-button (click)="upgradeLevel()">
+      <mat-icon>build</mat-icon>
+    </button>
+
     <button mat-button
-            id="btnNotif"
+            id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications</mat-icon>
     </button>
-
     <button mat-icon-button mat-button
-            id="btnMap"
+            id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             mat-raised-button (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
+    <button mat-button *ngIf="user.level>0"
+            id="btnAddShopPlus" mat-icon-button
+            mat-raised-button (click)="addshop()">
+      <mat-icon >add_shopping_cart</mat-icon>
+    </button>
 
-    <button mat-button
-            id="btnAddShop"
+    <button mat-button *ngIf="user.level==0"
+            id="btnAddShop" class="large-button"
             mat-raised-button (click)="addshop()">
       <span *ngIf="user.shops==null || user.shops.length==0">
         Créer sa promotion
       </span>
       <span *ngIf="user.shops?.length>0">
-        Ajouter une enseigne
+        Nouvelle enseigne
       </span>
+
     </button>
   </mat-card-actions>
 </mat-card>

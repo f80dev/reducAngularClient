@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
 
 
         //Effacer le message
-        setTimeout(()=>{this.user.message=""},15000);
+        setTimeout(()=>{this.user.message=""},30000);
 
         if(this.user.coupons!=null){
           this.coupons=[];

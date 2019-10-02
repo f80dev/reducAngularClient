@@ -1,0 +1,53 @@
+<div *ngIf="coupon" style="text-align: center;width:100%;">
+  <h2>
+    {{coupon?.label}}&nbsp;chez "{{coupon.shop_complete?.name}}"
+  </h2>
+  <br>
+  <br>
+  <span style="font-size: 2em;">
+          Gagner immédiatement <strong>{{coupon.direct_bonus}}</strong>&nbsp;{{coupon.unity}}
+        </span>
+  <br>
+  <br>
+  <h3>Flasher ce code pour en bénéficier</h3>
+
+  <qr-code [value]="coupon.url"
+           style="max-width:400px;max-height: 400px;display:inline;"
+           [size]="400">
+  </qr-code>
+  <br><br>
+
+  <br><br><br>
+  <h1>Votre réduction peut facilement augmenter !</h1>
+
+  <div style="font-size: xx-large">
+    <strong>+ {{coupon.share_bonus}}</strong>&nbsp;{{coupon.unity}}(s) pour vous à chaque fois que vous la partagez avec vos proches<br><br>
+    <strong>+ {{coupon.pay_bonus}}</strong>&nbsp;{{coupon.unity}}(s) pour vous à chaque fois qu'un client utilise le coupon que vous lui avez partagez
+  </div>
+
+
+</div>
+<div *ngIf="shop" style="text-align: center;width:100%;">
+  <h2>
+    {{shop.name}}
+  </h2>
+  <br>
+  <br>
+  <span style="font-size: 2em;">
+          Découvrez nos supers promos en flashant ce code
+        </span>
+  <br>
+  <br>
+
+  <qr-code [value]="shop.url"
+           style="max-width:400px;max-height: 400px;display:inline;"
+           [size]="400">
+  </qr-code>
+  <br><br>
+
+  <br><br><br>
+  <h1>Grâce à ReducShare, votre réduction peut augmenter en partageant cette promotion avec vos amis</h1>
+
+
+</div>
+

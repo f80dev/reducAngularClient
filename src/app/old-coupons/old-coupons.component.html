@@ -1,0 +1,44 @@
+<mat-card class="app-card" style="background: none;">
+  <mat-card-title class="app-card-title">
+    {{title}}
+    <span class="spacer">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+
+      <button class="small-button" mat-button mat-flat-button *ngIf="filter?.length>0" (click)="opereFilter()">Filtrer</button>
+      <button class="small-button" mat-button mat-flat-button (click)="refresh()">Tous</button>
+      <button class="small-button" mat-button mat-flat-button (click)="oncancel.emit()">Fermer</button>
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-list style="padding:0px;">
+      <mat-list-item *ngFor="let coupon of coupons" name="coupon" (click)="onselect.emit(coupon)">
+        <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture" style="cursor: pointer;">
+        <h2 matLine (click)="onselect.emit(coupon)">
+          <span *ngIf="coupon.title">{{coupon.title}}</span>
+          <span *ngIf="!coupon.title">
+        {{coupon.label}} sur {{coupon.unity}}
+      </span>
+        </h2>
+        <p matLine style="margin-top: 2px;">
+          Promo sur des {{coupon.unity}}(s)
+        </p>
+        <p matLine style="margin-top: 2px;"  *ngIf="coupon.share">
+          <span> Distribution:{{coupon.share}} </span>
+        </p>
+        <p matLine style="font-size: small;">
+          <span> Partage: {{coupon.share_bonus}}{{coupon.symbol}} / Immédiat: {{coupon.direct_bonus}}{{coupon.symbol}} / Utilisé: {{coupon.pay_bonus}}{{coupon.symbol}}</span>
+        </p>
+        <p matLine style="font-size: x-small;">
+          <span> Tags: {{coupon.tags}}</span>
+        </p>
+        <button style="display: inline-block;"
+                *ngIf="canDelete"
+                mat-flat-button mat-icon-button (click)="deleteCoupon(coupon)"><mat-icon>delete</mat-icon></button>
+        &nbsp;
+
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+

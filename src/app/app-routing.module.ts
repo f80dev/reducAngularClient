@@ -7,12 +7,14 @@ import {NewshopComponent} from './newshop/newshop.component';
 import {HomeComponent} from './home/home.component';
 import {NgxPrintModule} from "ngx-print";
 import {NgxSocialButtonModule} from "ngx-social-button";
+import {NewCouponComponent} from "./new-coupon/new-coupon.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'login/:coupon', component: LoginComponent},
   { path: 'shop', component: NewshopComponent},
   { path: 'coupons', component: ListCouponsComponent},
+  { path: 'new_coupon', component: NewCouponComponent},
   { path: 'home', component: HomeComponent},
   { path: '', component: HomeComponent},
 ];

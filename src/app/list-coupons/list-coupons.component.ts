@@ -23,6 +23,7 @@ export class ListCouponsComponent implements OnInit {
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
+  @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
   constructor(public meta: Meta,public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
@@ -79,7 +80,8 @@ export class ListCouponsComponent implements OnInit {
   }
 
   showAddress(shop: any) {
-    window.open('https://www.google.fr/maps/place/' + shop.address);
+    window.open("https://www.google.com/maps/dir/?api=1&destination="+shop.lat+","+shop.lng+"&travelmode=recommended")
+    //window.open('https://www.google.fr/maps/place/' + shop.address);
   }
 
   remove(coupon: any) {
@@ -163,5 +165,8 @@ export class ListCouponsComponent implements OnInit {
       this.user.message = result.message;
       this.onflash.emit({message:result.message});
     });
+  }
+
+  edit(coupon: any) {
   }
 }

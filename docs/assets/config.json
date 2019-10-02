@@ -128,6 +128,23 @@
       "max_coupon":5000,
       "conditions":"50 points cumulé via ReducShare",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/first-place-medal_1f947.png"
+    },
+    {
+      "title":"Invitation événement",
+      "unity":"pourcentage prix d'entrée",
+      "symbol":"%",
+      "pluriel":true,
+      "breakable":true,
+      "label":"Exposition Picasso - Réduction sur le prix d'entrée",
+      "share_bonus":0.5,
+      "pay_bonus":5,
+      "direct_bonus":2,
+      "max":100,
+      "duration":480,
+      "stock":500,
+      "max_coupon":5000,
+      "conditions":"l'achat d'une entrée",
+      "picture":"https://cdn.dribbble.com/users/1526121/screenshots/3322609/circus.gif"
     }
   ]
 }

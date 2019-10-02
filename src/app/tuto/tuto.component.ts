@@ -18,22 +18,25 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('if') _if: boolean=true;
   @Input('image') image: string="./assets/img/tips.png";
   @Input('icon') icon:string="";
+  @Input('height') height:string="auto";
 
   constructor(public config:ConfigService) {}
+
+  handle:any;
 
   ngOnChanges() {
     setTimeout(()=>{
       if(this.text==null || this.text.length==0)this.text=this.label;
       if(this._if && !this.config.visibleTuto){
-        let code=hashCode(this.text);
+        let code="histo"+hashCode(this.text);
         let res=localStorage.getItem(code);
         if(res==null){
           this.config.visibleTuto=true;
           localStorage.setItem(code,"read"+new Date().getTime());
 
-          if(this.duration==0)this.duration=this.text.split(" ").length*0.8;
+          if(this.duration==0)this.duration=this.text.split(" ").length;
 
-          setTimeout(()=>{
+          this.handle=setTimeout(()=>{
             this.text="";
             this.config.visibleTuto=false;
           },3000+this.duration*1000);
@@ -49,6 +52,8 @@ export class TutoComponent implements OnChanges,OnInit {
 
   hideTuto() {
     this.text="";
+    this.config.visibleTuto=false;
+    clearTimeout(this.handle);
   }
 
   ngOnInit(): void {

@@ -1,14 +1,17 @@
-<mat-card class="app-card" style="padding:5px;">
-  <mat-card-title>Nouvelle Promotion</mat-card-title>
+<mat-card class="app-card" style="padding:5px;background-color: #8f8f8f;">
+  <mat-card-title *ngIf="level==0">Nouvelle Promotion</mat-card-title>
   <button mat-button mat-flat-button
+          class="large-button"
           id="btnShowModels"
           *ngIf="!showOldCoupon"
-          (click)="showOldCoupon=true">Utiliser un modèle</button>
+          (click)="showOldCoupon=true">
+    Utiliser un modèle
+  </button>
 
-  <mat-card-content class="app-card-content" style="text-align: left;margin:0px;padding:0px;">
+  <mat-card-content class="app-card-content" style="text-align: left;margin:5px;">
 
     <app-old-coupons *ngIf="showOldCoupon"
-                     title="Selectionnez un modèle pour construire votre promotion"
+                     title="Selectionnez un modèle"
                      [shop]="shop"
                      [filter]="shop.tags"
                      (cancel)="showOldCoupon=false"
@@ -17,12 +20,6 @@
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
       <mat-step>
         <ng-template matStepLabel>Nature de la promotion</ng-template>
-
-
-
-        <mat-form-field class="form-field-style" *ngIf="shopNameEdit">
-          <input type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="coupon.shop">
-        </mat-form-field>
 
         <app-tuto label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
                   [delay]="5">
@@ -218,17 +215,17 @@
     </mat-vertical-stepper>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="app-card-action">
     <button mat-flat-button class="app-button"
             id="btnValide"
-            *ngIf="coupon.label?.length>0" mat-button
+            *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
             (click)="addcoupon(coupon)">Valide</button>
 
     <button mat-flat-button
             id="btnCancel"
             class="app-button"
             mat-button (click)="onclose.emit()">Annuler</button>
-    <br><br>
+    &nbsp;&nbsp;&nbsp;<br><br>
   </mat-card-actions>
 </mat-card>
 

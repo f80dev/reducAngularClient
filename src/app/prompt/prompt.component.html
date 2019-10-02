@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p *ngIf="data.question?.length>0">{{data.question}}</p>
+  <mat-form-field *ngIf="!data.onlyConfirm" style="width: 95%;">
+    <input id="txtPrompt" matInput [(ngModel)]="data.result" cdkFocusInitial (keypress)="onEnter($event)">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions style="text-align: right;">
+  <div *ngIf="!data.onlyConfirm">
+    <button id="cmdCancel" mat-button mat-raised-button (click)="onNoClick()">Annuler</button>
+    <button id="cmdValide" mat-button mat-raised-button [mat-dialog-close]="data.result" >Ok</button>
+  </div>
+  <div *ngIf="data.onlyConfirm">
+    <button id="cmdNo" mat-button mat-raised-button [mat-dialog-close]="'no'">Non</button>
+    <button id="cmdYes" mat-button mat-raised-button [mat-dialog-close]="'yes'">Oui</button>
+  </div>
+
+</div>

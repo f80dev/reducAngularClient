@@ -10,24 +10,43 @@
 
     <mat-card-subtitle>{{shop.address}}</mat-card-subtitle>
   </mat-card-header>
+
+
   <mat-card-content class="app-card-content">
+    <div id="print-section-{{shop._id}}" style="display: none;">
+      <app-print-coupon [shop]="shop"></app-print-coupon>
+    </div>
+
     <span *ngIf="shop.followers?.length>0">
       Vous avez {{shop.followers?.length}} followers
     </span>
+
+    <app-new-coupon *ngIf="shop.showAddCoupon"
+                    name="zoneNewCoupon"
+                    [shop]="shop"
+                    [level]="user.level"
+                    (insert)="onInsert(shop)"
+                    (close)="shop.showAddCoupon=false">
+    </app-new-coupon>
+
+    <app-tuto [delay]="1"
+              [if]="shop.coupons?.length>0"
+              label="Une fois votre première promotion créée, vous pouvez, imprimer une affiche ou diffuser son lien internet à votre réseau">
+    </app-tuto>
+
+
+    <app-list-coupons [coupons]="shop.coupons" [user]="user"
+                      (delete)="onupdate.emit($event)"
+                      (edit)="edit(shop,$event)">
+    </app-list-coupons>
+
+
+
+
   </mat-card-content>
 
-  <div id="print-section-{{shop._id}}" style="display: none;">
-    <app-print-coupon [shop]="shop"></app-print-coupon>
-  </div>
 
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">
-
-    <button mat-button mat-flat-button
-            name="btnNewPromo"
-            *ngIf="!shop.showAddCoupon"
-            (click)="addCoupon(shop)">
-      Lancer une promotion
-    </button>
 
     <button mat-button name="btnPrint"
             (click)="openPrinter(shop)"
@@ -37,28 +56,27 @@
       <mat-icon>printer</mat-icon>
     </button>
 
-    <app-new-coupon *ngIf="shop.showAddCoupon"
-                    name="zoneNewCoupon"
-                    [shop]="shop"
-                    (insert)="onInsert(shop)"
-                    (close)="shop.showAddCoupon=false">
-    </app-new-coupon>
-
     <button mat-button mat-flat-button mat-icon-button
             *ngIf="!shop.showAddCoupon"
             (click)="delShop(shop)">
       <mat-icon>delete</mat-icon>
     </button>
+
+    <button mat-button mat-flat-button mat-icon-button
+            name="btnNewPromoAdvanced"
+            *ngIf="!shop.showAddCoupon && user.level>0"
+            (click)="addCoupon(shop)">
+      <mat-icon>note_add</mat-icon>
+    </button>
+
+    <button mat-button mat-flat-button
+            name="btnNewPromo" class="large-button"
+            *ngIf="!shop.showAddCoupon && user.level==0"
+            (click)="addCoupon(shop)">
+      Nouvelle promotion
+    </button>
+
   </mat-card-actions>
 
-  <mat-card-content class="app-card-content" *ngIf="shop.visible">
-    <app-tuto [delay]="1"
-              [if]="shop.coupons?.length>0"
-              label="Une fois votre première promotion créée, vous pouvez, imprimer une affiche ou diffuser son lien internet à votre réseau">
-    </app-tuto>
-    <app-list-coupons [coupons]="shop.coupons" [user]="user"
-                      (delete)="onupdate.emit($event)">
-    </app-list-coupons>
-  </mat-card-content>
 </mat-card>
 

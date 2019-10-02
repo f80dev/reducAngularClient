@@ -1,0 +1,9 @@
+<img
+  *ngIf="picture.startsWith('http') || picture.startsWith('data')"
+  [src]="picture"
+  style="width: 130px;height:130px;display: inline-block;">
+
+<span style="font-size: 5em" *ngIf="!picture.startsWith('http') && !picture.startsWith('data')">
+  {{picture}}
+</span>
+

@@ -26,13 +26,16 @@
          (touchend)="reverseGeocode=true">
     </div>
 
-    <app-tuto [delay]="5" label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
+    <app-tuto [delay]="5"
+              label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
     <br>
     <mat-form-field class="form-field-style">
       <input id="txtShopTags" type="text" matInput placeholder="Tags (séparés par un espace ou une virgule)" [(ngModel)]="tags" autofocus>
     </mat-form-field>
 
+    <app-tuto [delay]="10"
+              label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
   </mat-card-content>
 

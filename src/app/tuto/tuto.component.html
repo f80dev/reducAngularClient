@@ -13,9 +13,11 @@
     </table>
   </div>
 
-  <div *ngIf="_type=='title'" class="app-card" style="background:none;width: 100%;text-align: center;">
+  <div *ngIf="_type=='title'" class="app-card" [ngStyle]="{'background':'none','width':'100%','height':height,'text-align':'center'}">
     <br><br>
     <div style="width:100%;text-align:center;font-size: 2em;">{{text}}</div><br><br>
+    <img [src]="image" style="max-width: 80%;max-height: 80%;">
+    <br><br>
     <div style="width:100%;text-align:center;font-size: medium;">{{subtitle}}</div>
     <br><br><br>
   </div>

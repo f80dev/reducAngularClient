@@ -1,12 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
-import {PromptComponent} from "../prompt/prompt.component";
-import {MatDialog} from "../../../node_modules/@angular/material/dialog";
+import {DialogData, PromptComponent} from "../prompt/prompt.component";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import { DeviceDetectorService } from 'ngx-device-detector';
+
+export interface DialogDataCoupon {
+  coupon: any;
+  title: string;
+}
+
 
 @Component({
   selector: 'app-new-coupon',
@@ -15,7 +21,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class NewCouponComponent implements OnInit {
   coupon: any = {
-    title:"Mon titre",
+    title:"",
     device:unique_id(),
     shop: 'test',
     symbol:"min",
@@ -42,12 +48,15 @@ export class NewCouponComponent implements OnInit {
   icons=[];
 
   @Input("shop") shop:any={};
-  shopNameEdit = true;
+  @Input("level") level=0;
+
+  //mode="add";
+
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
   preview: string="";
 
-  constructor(public dialog: MatDialog,
+  constructor(public dialog:MatDialog,
               public config:ConfigService,
               public api: ApiService,
               public deviceService: DeviceDetectorService,
@@ -55,7 +64,11 @@ export class NewCouponComponent implements OnInit {
               public location: Location) { }
 
   ngOnInit() {
-    this.shopNameEdit = false;
+    // if(this.data!=null && this.data.coupon){
+    //   this.mode="edit";
+    //   this.coupon=this.data.coupon;
+    //   this.shop=this.data.shop;
+    // }
     this.coupon.shop = this.shop._id;
   }
 
@@ -83,12 +96,15 @@ export class NewCouponComponent implements OnInit {
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
 
-
     this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.config.waiting=false;
       localStorage.setItem("showCoupon",result._id);
-      this.oninsert.emit({message:result.message});
+
+      // if(this.mode=="edit")
+      //   this.dialogRef.close({result:true});
+      // else
+        this.oninsert.emit({message:result.message});
     });
   }
 

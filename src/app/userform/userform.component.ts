@@ -210,4 +210,11 @@ export class UserformComponent implements OnInit {
         }
     });
   }
+
+  upgradeLevel() {
+    this.user.level++;
+    this.api.setuser(this.user).subscribe(()=>{
+      this.user.message="vous avez maintenant un profil avancé";
+    })
+  }
 }
