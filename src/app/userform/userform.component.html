@@ -82,14 +82,22 @@
     </app-old-coupons>
 
     <app-tuto [delay]="1" icon="map"
-              label="Vous pouvez voir les promos autour de vous en activant la carte">
+              label="Vous pouvez voir les promotions autours de vous en activant la carte">
     </app-tuto>
 
-    <app-tuto [delay]="6"
-              label="Si vous pensez utiliser souvent cette appli, enregistrez la directement sur votre bureau via l'option adéquate du menu de votre navigateur">
+    <app-tuto [delay]="2" icon="account_balance"
+              label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="2" icon="camera_alt" [if]="config.webcamsAvailable>0"
+    <app-tuto [delay]="15" icon="account_balance"
+              label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
+    </app-tuto>
+
+    <app-tuto [delay]="3" icon="build"
+              label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
+    </app-tuto>
+
+    <app-tuto [delay]="4" icon="camera_alt" [if]="config.webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 

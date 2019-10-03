@@ -1,6 +1,6 @@
 {
   "title":"ReducShare",
-  "version":"0.0.2",
+  "version":"0.0.3",
   "socket":true,
   "icon_coupon":"./assets/img/pin.png",
   "icon_shop":"./assets/img/pin.png",
