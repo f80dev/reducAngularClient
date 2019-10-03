@@ -31,7 +31,7 @@
       </button>
       &nbsp;
       <button mat-icon-button
-              *ngIf="user.email?.indexOf('fictif.com')==-1"
+              *ngIf="user.email?.indexOf('fictif.com')>-1"
               id="btnEmailLogin"
               mat-button mat-flat-button (click)="securise()">
         <mat-icon>verified_user</mat-icon>
