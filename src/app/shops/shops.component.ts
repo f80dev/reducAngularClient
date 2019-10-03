@@ -101,7 +101,7 @@ export class ShopsComponent implements OnChanges {
           this.api.delegate(result,shop._id,"+").subscribe(()=>{});
       });
     } else {
-      this.showWebCam=true;
+      this.showWebCam=!this.showWebCam;
     }
 
   }

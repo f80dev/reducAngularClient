@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1570109941034,
+  "timestamp": 1570111435625,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "https://reducshare.com/favicon.ico",
         "https://reducshare.com/index.html",
-        "https://reducshare.com/main-es2015.f5c7f98db1a8e9057b0f.js",
-        "https://reducshare.com/main-es5.f5c7f98db1a8e9057b0f.js",
+        "https://reducshare.com/main-es2015.586b24d896c52111d993.js",
+        "https://reducshare.com/main-es5.586b24d896c52111d993.js",
         "https://reducshare.com/manifest.webmanifest",
         "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js",
         "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js",
@@ -67,10 +67,10 @@
     "https://reducshare.com/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
     "https://reducshare.com/assets/logo.svg": "dac769c4349b89ba3efeea938f0a704b0e618e6e",
     "https://reducshare.com/favicon.ico": "0179a3a5f59d7d18c4265c8a5c7394ee948b767b",
-    "https://reducshare.com/index.html": "d69b2f90e8b12b16231b653e90695e0342af5ef4",
-    "https://reducshare.com/main-es2015.f5c7f98db1a8e9057b0f.js": "730ce7afbb2a62863b596ec4d0df3276f68b3893",
-    "https://reducshare.com/main-es5.f5c7f98db1a8e9057b0f.js": "180a9a8a0b79d053870b9aabdc8429c527fb5472",
-    "https://reducshare.com/manifest.webmanifest": "33c258faf252a782d60d09eb81ccc04a4a614d4b",
+    "https://reducshare.com/index.html": "a7caa6a0b7e4639af73042cf7a666306da2bef51",
+    "https://reducshare.com/main-es2015.586b24d896c52111d993.js": "4f0e87a0eeaf0bd5384fcbb3ec97beeadac72ee7",
+    "https://reducshare.com/main-es5.586b24d896c52111d993.js": "bbdde9c2059ced2973402b170fc5bdfb72009bfa",
+    "https://reducshare.com/manifest.webmanifest": "143ffc387b7e88aa36797f13a570c442281afbbb",
     "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js": "5b86bf2fc3a305573ac97b371bca6cb7b99b4b49",
     "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js": "2104c0d25888eafce9d175549237362823b71853",
     "https://reducshare.com/runtime-es2015.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
