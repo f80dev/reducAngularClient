@@ -9,6 +9,7 @@ import {WebcamUtil} from 'ngx-webcam';
 import {Observable,Subject} from "rxjs";
 import jsQR from "jsqr"
 import {ConfigService} from "../config.service";
+import {LoginComponent} from "../login/login.component";
 
 declare var ol: any;
 
@@ -51,7 +52,7 @@ export class UserformComponent implements OnInit {
   }
 
   onflash_event(decoded: any) {
-      var coupon=decoded.data.split("/login/")[1];
+      var coupon=decoded.data.split("/home/")[1];
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
         localStorage.setItem("showCoupon",result.newcoupon);
@@ -191,5 +192,12 @@ export class UserformComponent implements OnInit {
     this.api.setuser(this.user).subscribe(()=>{
       this.user.message="vous avez maintenant un profil avancé";
     })
+  }
+
+  securise() {
+    this.dialog.open(LoginComponent,{width:'70vw',data: {facebook:true,google:true,user:this.user}})
+      .afterClosed().subscribe((result) => {
+        this.user=result.user;
+    });
   }
 }

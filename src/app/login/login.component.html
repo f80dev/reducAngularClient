@@ -1,24 +1,21 @@
-<mat-card class="app-card" *ngIf="showLogin">
-<mat-card-title>Login</mat-card-title>
-  <mat-card-content class="app-card-content">
+
+  <div class="mat-dialog-title">Indiquer votre email</div>
+  <mat-dialog-content>
     <h4>{{message}}</h4>
     <br><br>
     <div style="width: 100%;text-align: center;">
-      <button class="large-button" mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook</button>
+      <button *ngIf="data.facebook" class="large-button" mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook</button>
       <br><br>
-      <button class="large-button" mat-button mat-flat-button (click)="socialSignIn('google')">Google</button>
+      <button *ngIf="data.google" class="large-button" mat-button mat-flat-button (click)="socialSignIn('google')">Google</button>
       <br><br>
-      <button class="large-button" mat-button mat-flat-button (click)="email_login()">Email</button>
-      <br><br>
-      <button class="large-button" mat-button mat-flat-button (click)="anonymous_login()">Anonyme</button>
-      <br><br>
+      <button *ngIf="data.email"  class="large-button" mat-button mat-flat-button (click)="email_login()">Email</button>
     </div>
 
     <mat-form-field class="example-full-width">
       <input matInput type="email" placeholder="Email" [(ngModel)]="email">
     </mat-form-field>
 
+  </mat-dialog-content>
 
-  </mat-card-content>
 
-</mat-card>
+

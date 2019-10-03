@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {checkLogin} from '../tools';
+import {$$, checkLogin} from '../tools';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
@@ -25,11 +25,37 @@ export class HomeComponent implements OnInit {
   coupons=[];
 
   ngOnInit() {
+    if(localStorage.getItem("user")==null){
+      $$("Si c'est la premier connexion, on créé un compte fictif")
+      debugger
+      localStorage.setItem("user","user"+new Date().getTime()+"@fictif.com");
+    }
+
+    this.connect();
     this.refresh(this.route.snapshot.queryParamMap.get("message"));
-    this._location.replaceState("/home");
+    //this._location.replaceState("/home");
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
         this.refresh(data.message);
+      }
+    });
+  }
+
+  connect(){
+    this.route.params.subscribe((params)=>{
+      var coupon=params["coupon"];
+      if(coupon!=null){
+        this.api.flash(this.user._id, coupon).subscribe((result:any) => {
+          localStorage.setItem("showCoupon",result.newcoupon);
+          this.user.message=result.message;
+        });
+      }
+
+      var password=params["pass"];
+      if(password!=null){
+        if(localStorage.getItem("code")==password){
+          localStorage.setItem("user",params["user"]);
+        }
       }
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ErrorStateMatcher} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -9,6 +9,8 @@ import {
   GoogleLoginProvider,
   SocialService
 } from "ngx-social-button";
+import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
+import {DialogData} from "../prompt/prompt.component";
 //import {LinkedinLoginProvider} from "../../../node_modules/ngx-social-button/lib/providers/linkedinProvider";
 
 
@@ -32,54 +34,22 @@ export class LoginComponent implements OnInit {
     hashtag:"#FACEBOOK-SHARE-HASGTAG"
   };
 
-  constructor(public api: ApiService, public router: Router, public route: ActivatedRoute,
+  constructor(public api: ApiService,
+              public router: Router,
+              public dialogRef: MatDialogRef<LoginComponent>,@Inject(MAT_DIALOG_DATA) public data: any,
               private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
-  showLogin=false;
   message="";
 
   ngOnInit() {
-
-
-    if (localStorage.getItem('user') != null) {
-      this.email = localStorage.getItem('user');
-      this.login();
-    } else
-      this.showLogin=true;
   }
 
   email_login(){
     var firstname=this.email.split("@")[0];
     this.api.adduser(this.email,firstname).subscribe((res:any)=>{
       localStorage.setItem("code",res.code);
-      this.message="Un lien est disponible dans votre boite "+this.email+" pour votre première connexion";
-    });
-  }
-
-  anonymous_login(){
-    if(localStorage.getItem("user")==null){localStorage.setItem("user","user"+new Date().getTime()+"@fictif.com");}
-    this.login();
-  }
-
-  login() {
-    this.route.params.subscribe((params)=>{
-      var coupon=params["coupon"];
-      if(coupon!=null){
-        this.api.flash(this.email, coupon).subscribe((result:any) => {
-          localStorage.setItem("showCoupon",result.newcoupon);
-          this.router.navigate(['home'],{queryParams:{message:result.message}});
-        });
-      }
-
-      var password=params["pass"];
-      if(password!=null){
-        if(localStorage.getItem("code")==password){
-          localStorage.setItem("user",params["user"]);
-          this.router.navigate(['home']);
-        }
-      }
-
-      this.router.navigate(['home']);
+      res.message="Un lien est disponible dans votre boite "+this.email+" pour votre première connexion";
+      this.dialogRef.close(res);
     });
   }
 
@@ -106,13 +76,15 @@ export class LoginComponent implements OnInit {
 
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (socialUser) => {
-          this.api.adduser(socialUser.email,socialUser.name).subscribe((res:any)=>{
-            localStorage.setItem("user",res._id);
-            this.router.navigate(['home'],{queryParams:{message:res.message}});
+          this.data.user.email=socialUser.email;
+          this.data.user.pseudo=socialUser.name;
+          this.api.setuser(this.data.user).subscribe((res:any)=>{
+            res.user=this.data.user;
+            localStorage.setItem("user",res.user.email);
+            this.dialogRef.close(res);
           })
       });
   }
-
 
 
 }
