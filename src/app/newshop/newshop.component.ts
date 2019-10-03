@@ -30,8 +30,6 @@ export class NewshopComponent implements OnInit {
   constructor(public api: ApiService, public router: Router,public loc:LocService,public config:ConfigService) {
   }
 
-
-
   ngOnInit() {
     checkLogin(this.router);
     this.showOnMap();

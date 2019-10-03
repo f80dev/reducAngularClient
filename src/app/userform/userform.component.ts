@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {createMap, createMarker, getMarkerLayer, selectFile} from "../tools";
+import {createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
@@ -29,45 +29,28 @@ export class UserformComponent implements OnInit {
   showMap: boolean=false;
   showOldPromos: boolean=false;
   private map: any;
-  webcamsAvailable=0;
   handle:any;
+
   showCouponOnMap:any[]=[];
+  showPersonalCode: boolean=false;
 
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
               public config:ConfigService) { }
 
-  private trigger: Subject<void> = new Subject<void>();
-  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
 
   ngOnInit() {
-    this.initAvailableCameras();
-  }
 
-  public get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
-  }
-
-  public get nextWebcamObservable(): Observable<boolean|string> {
-    return this.nextWebcam.asObservable();
-  }
-
-  initAvailableCameras(){
-    WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => {
-        if(mediaDevices==null)
-          this.webcamsAvailable =0;
-        else
-          this.webcamsAvailable = mediaDevices.length;
-      });
   }
 
 
-  handleImage(event: any) {
-    var rc=event.imageData;
-    var decoded =jsQR(rc.data,rc.width,rc.height);
-    if(decoded!=null && decoded.data!=null && decoded.data.startsWith("http") && decoded.data.indexOf("/login")>-1){
+  flash(){
+    this.showCouponOnMap=[];
+    this.showMap=false;
+  }
+
+  onflash_event(decoded: any) {
       var coupon=decoded.data.split("/login/")[1];
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
@@ -75,7 +58,6 @@ export class UserformComponent implements OnInit {
         this.user.message = result.message;
         this.onflash.emit({message:result.message});
       });
-    }
   }
 
   onSelectFile(event:any) {
@@ -87,7 +69,7 @@ export class UserformComponent implements OnInit {
 
   addshop() {
     this.showMap=false;
-    this.router.navigate(['shop']);
+    this.router.navigate(['shop'],{queryParams:{userid:this.user._id}});
   }
 
 
@@ -185,19 +167,12 @@ export class UserformComponent implements OnInit {
     this.showScanner=! this.showScanner;
     if(this.showScanner){
       this.user.message="Ouverture du scanner";
-      this.handle=setInterval(()=>{
-        this.trigger.next();
-      },250);
+
     } else {
-      clearInterval(this.handle);
+
     }
   }
 
-  flash(event:any){
-    this.showCouponOnMap=[];
-    this.showMap=false;
-    this.onflash.emit({'message':event.message})
-  }
 
   setWebhook() {
     this.dialog.open(PromptComponent,{width:'90vw',data: {result:this.user.webhook,title: "URL de notification ?"}})

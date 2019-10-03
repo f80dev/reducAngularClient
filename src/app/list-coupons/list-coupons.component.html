@@ -16,6 +16,13 @@
       <!--Affichage des coupons origines pour leur propriétaire-->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
         {{coupon.title}}
+
+        <mat-icon style="font-size: small;margin:0;padding:0;display: inline;cursor: pointer;" id="btnEdit"
+                  (click)="onedit.emit(coupon)"
+                  *ngIf="coupon.share==0 && coupon.origin==coupon._id">
+          create
+        </mat-icon>
+
         <span *ngIf="!isVisible(coupon)">
           - <app-timer [end]="coupon.dtEnd"></app-timer>
         </span>
@@ -183,13 +190,6 @@
               (click)="remove(coupon)">
         <mat-icon>delete</mat-icon>
       </button>
-
-      <!--TODO: a rétablir -->
-       <!--<button mat-button mat-flat-button mat-icon-button-->
-              <!--id="btnEdit" *ngIf="coupon.share==0 && coupon.origin==coupon._id"-->
-              <!--(click)="onedit.emit(coupon)">-->
-        <!--<mat-icon>create</mat-icon>-->
-      <!--</button>-->
 
 
       <div *ngIf="!coupon.closed" style="display: inline-block;margin:0;padding:0;">

@@ -4,6 +4,7 @@ import {
   NgxSocialButtonModule,
   SocialServiceConfig
 } from "ngx-social-button";
+import {WebcamUtil} from "ngx-webcam";
 
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
@@ -253,6 +254,17 @@ export function checkLogin(router: Router, params: any = null) {
     return true;
   }
 }
+
+export function initAvailableCameras(func){
+  WebcamUtil.getAvailableVideoInputs()
+    .then((mediaDevices: MediaDeviceInfo[]) => {
+      if(mediaDevices==null)
+        func(0)
+      else
+        func(mediaDevices.length);
+    });
+}
+
 //
 // export function openGeneral(item, domain)  {
 //   return new Promise((resolve, reject) => {

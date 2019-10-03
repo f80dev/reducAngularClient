@@ -1,12 +1,13 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
-import {ActivatedRoute} from "@angular/router";
+import {checkLogin, cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
+import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
 import {DialogData, PromptComponent} from "../prompt/prompt.component";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Router} from '@angular/router';
 
 export interface DialogDataCoupon {
   coupon: any;
@@ -44,32 +45,42 @@ export class NewCouponComponent implements OnInit {
   };
 
   showIcons=false;
+  title="";
   showOldCoupon=false;
   icons=[];
 
-  @Input("shop") shop:any={};
-  @Input("level") level=0;
+  //@Input("shop") shop:any={};
+  //@Input("level") level=0;
 
   //mode="add";
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
   preview: string="";
+  tags:string="";
+  userid:string="";
 
   constructor(public dialog:MatDialog,
               public config:ConfigService,
               public api: ApiService,
               public deviceService: DeviceDetectorService,
               public route: ActivatedRoute,
+              public router:Router,
               public location: Location) { }
 
   ngOnInit() {
-    // if(this.data!=null && this.data.coupon){
-    //   this.mode="edit";
-    //   this.coupon=this.data.coupon;
-    //   this.shop=this.data.shop;
-    // }
-    this.coupon.shop = this.shop._id;
+    checkLogin(this.router);
+    var params:ParamMap=this.route.snapshot.queryParamMap;
+    if(params.has("shopid"))this.coupon.shop = params.get("shopid");
+    if(params.has("couponid")){
+      this.coupon=this.api.coupon;
+      var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
+      this.coupon.duration_jours=Math.trunc(hrs/24);
+      this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
+    }
+    this.userid=params.get("user") || "";
+    this.title=params.get("title") || "";
+    this.tags=params.get("tags") || "";
   }
 
   addIcons(){
@@ -92,6 +103,7 @@ export class NewCouponComponent implements OnInit {
     if(coupon.duration_hours==null)coupon.duration_hours=0;
     coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
     coupon.delay=0;
+    coupon.owner=this.userid;
 
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
@@ -100,11 +112,8 @@ export class NewCouponComponent implements OnInit {
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.config.waiting=false;
       localStorage.setItem("showCoupon",result._id);
-
-      // if(this.mode=="edit")
-      //   this.dialogRef.close({result:true});
-      // else
-        this.oninsert.emit({message:result.message});
+      this.oninsert.emit({message:result.message});
+      this.router.navigate(['home'],{queryParams:{message:result.message}});
     });
   }
 
@@ -132,6 +141,10 @@ export class NewCouponComponent implements OnInit {
     this.coupon.duration_hours=Math.trunc(coupon.duration);
     this.preview=coupon.picture;
     this.showOldCoupon=false;
+  }
+
+  cancel(){
+    this.router.navigate(['home'],{queryParams:{message:"création de coupon annulée"}});
   }
 
   addEmoji() {

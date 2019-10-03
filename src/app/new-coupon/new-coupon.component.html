@@ -1,5 +1,5 @@
 <mat-card class="app-card" style="padding:5px;background-color: #8f8f8f;">
-  <mat-card-title *ngIf="level==0">Nouvelle Promotion</mat-card-title>
+  <mat-card-title>{{title}}</mat-card-title>
   <button mat-button mat-flat-button
           class="large-button"
           id="btnShowModels"
@@ -12,8 +12,8 @@
 
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Selectionnez un modèle"
-                     [shop]="shop"
-                     [filter]="shop.tags"
+                     [shop]="{'_id':coupon.shop,'owner':coupon.owner}"
+                     [filter]="tags"
                      (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)"></app-old-coupons>
 
@@ -224,7 +224,7 @@
     <button mat-flat-button
             id="btnCancel"
             class="app-button"
-            mat-button (click)="onclose.emit()">Annuler</button>
+            mat-button (click)="cancel()">Annuler</button>
     &nbsp;&nbsp;&nbsp;<br><br>
   </mat-card-actions>
 </mat-card>

@@ -9,6 +9,10 @@ export class ApiService {
 
   constructor(public http: HttpClient) {}
 
+  coupon:any=null;
+  user:any=null;
+  shop:any=null;
+
   raz(userid:string) {
     localStorage.removeItem('user');
     return this.http.get(api('raz/'+userid));
@@ -26,8 +30,6 @@ export class ApiService {
   stopdeal(couponid: string) {
     return this.http.get(api('stopdeal/'+couponid, ''));
   }
-
-
 
   getuser(user: string) {
     return this.http.get(api('getuser/' + user));
@@ -59,5 +61,9 @@ export class ApiService {
 
   follow(userid: string, operation: string, shopid: string) {
     return this.http.get(api('updatefollow/'  + userid+'/'+operation+'/'+shopid, ''));
+  }
+
+  delegate(userid: string, shopid: string,operation:string="+") {
+    return this.http.get(api('delegate/'  + shopid+'/'+operation+'/'+userid, ''));
   }
 }

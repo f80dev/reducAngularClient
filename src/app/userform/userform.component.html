@@ -1,41 +1,55 @@
 <mat-card class="app-card">
-  <mat-card-header>
+
     <mat-card-title>
-      <div style="display:inline-block;width:100px;vertical-align: middle;">
-        <label for="file_profil"><img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo"></label>
+      <div *ngIf="!showPersonalCode"
+           style="display:inline-block;width:90px;vertical-align: middle;">
+        <label for="file_profil">
+          <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
+        </label>
         <input style="display:none;width:50px;" type="file" id="file_profil"
                (change)="onSelectFile($event)"
                accept="image/gif,image/jpeg,image/png" />
 
       </div>
+      <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"
+               *ngIf="showPersonalCode"
+               ngxClipboard
+               [cbContent]="user._id"
+               [value]="user._id"></qr-code>
+
       <span *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</span>
       <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
 
       <button *ngIf="user.pseudo?.length==0"
-              id="cmdPseudo" class="large-button"
-              mat-button mat-flat-button (click)="promptForPseudo()">
-        Pseudo ?
+              id="cmdPseudo" class="medium-button"
+              mat-button mat-flat-button (click)="promptForPseudo()">Pseudo
       </button>
 
-      <span class="spacer"></span>
+      <!--<button mat-button *ngIf="user.level==0"-->
+              <!--id="btnAddShop" class="mediyum-button" style="display: inline-block;margin-left:5px;"-->
+              <!--mat-raised-button (click)="addshop()">-->
+      <!--<span *ngIf="user.shops==null || user.shops.length==0">-->
+        <!--Nvlle promotion-->
+      <!--</span>-->
+        <!--<span *ngIf="user.shops?.length>0">-->
+        <!--Nvlle enseigne-->
+      <!--</span>-->
+      <!--</button>-->
+
       <mat-progress-spinner *ngIf="config.waiting"></mat-progress-spinner>
 
     </mat-card-title>
 
     <mat-card-subtitle *ngIf="user.message?.length>0">{{user.message}}</mat-card-subtitle>
     <app-tuto label="Cette zone affiche les informations de votre profil"></app-tuto>
-  </mat-card-header>
+
+
   <mat-card-content class="app-card-content">
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
-      <webcam
-              [height]="400" [width]="400"
-              [trigger]="triggerObservable"
-              [allowCameraSwitch]="false"
-              [imageQuality]="0.85"
-              [captureImageData]="true"
-              imageType="image/jpeg"
-              (imageCapture)="handleImage($event)">
-      </webcam>
+      <app-scanner [size]="400"
+                   filter="/login"
+                   (flash)="onflash_event($event)">
+      </app-scanner>
     </div>
 
     <!--Montre la carte des promotions-->
@@ -44,7 +58,7 @@
       <br>
       <app-list-coupons *ngIf="showCouponOnMap"
                         [user]="user"
-                        (flash)="flash($event)"
+                        (flash)="flash()"
                         [coupons]="showCouponOnMap">
       </app-list-coupons>
     </div>
@@ -61,7 +75,7 @@
               label="Si vous pensez utiliser souvent cette appli, enregistrez la directement sur votre bureau via l'option adéquate du menu de votre navigateur">
     </app-tuto>
 
-    <app-tuto [delay]="2" icon="camera_alt" [if]="webcamsAvailable>0"
+    <app-tuto [delay]="2" icon="camera_alt" [if]="config.webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 
@@ -82,7 +96,13 @@
       <mat-icon>delete</mat-icon>
     </button>
 
-    <button *ngIf="webcamsAvailable>0" mat-button
+    <button mat-button
+            id="btnShowCode" title="Afficher son qrcode personnel"
+            mat-raised-button mat-icon-button (click)="showPersonalCode=!showPersonalCode">
+      <mat-icon>tap_and_play</mat-icon>
+    </button>
+
+    <button *ngIf="config.webcamsAvailable>0" mat-button
             id="btnScan" title="Scanner des coupons directement depuis l'application"
             mat-raised-button mat-icon-button (click)="startScanner()">
       <mat-icon>camera_alt</mat-icon>
@@ -97,29 +117,18 @@
     <button mat-button *ngIf="user.level>0"
             id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">
-      <mat-icon>notifications</mat-icon>
+      <mat-icon>notifications_active</mat-icon>
     </button>
-    <button mat-icon-button mat-button
+    <button mat-raised-button mat-icon-button mat-button
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
-            mat-raised-button (click)="openLoc()">
+            (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
-    <button mat-button *ngIf="user.level>0"
+    <button mat-button title="Créer une nouvelle enseigne"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
       <mat-icon >add_shopping_cart</mat-icon>
     </button>
 
-    <button mat-button *ngIf="user.level==0"
-            id="btnAddShop" class="large-button"
-            mat-raised-button (click)="addshop()">
-      <span *ngIf="user.shops==null || user.shops.length==0">
-        Votre promotion
-      </span>
-      <span *ngIf="user.shops?.length>0">
-        Nouvelle enseigne
-      </span>
-
-    </button>
   </mat-card-actions>
 </mat-card>

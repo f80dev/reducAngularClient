@@ -46,6 +46,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { InputComponent } from './input/input.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { VisualComponent } from './visual/visual.component';
+import { ScannerComponent } from './scanner/scanner.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -68,7 +69,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PrintCouponComponent,
     PromptComponent,
     InputComponent,
-    VisualComponent
+    VisualComponent,
+    ScannerComponent
   ],
   entryComponents: [
     NewCouponComponent,

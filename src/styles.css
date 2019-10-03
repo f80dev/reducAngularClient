@@ -51,7 +51,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .medium-button {
-  width:70px;
+  text-align: center;
+  width:75px;
 }
 
 .small-button {

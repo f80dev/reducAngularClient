@@ -14,6 +14,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {NewCouponComponent} from "../new-coupon/new-coupon.component";
 import {sendToPrint} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
+import {ConfigService} from "../config.service";
 
 
 @Component({
@@ -28,9 +29,11 @@ export class ShopsComponent implements OnChanges {
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
   coupons=[];
+  showWebCam=false;
 
   constructor(public snackBar: MatSnackBar,
               public router: Router,
+              public config:ConfigService,
               public dialog:MatDialog,
               public api:ApiService) {}
 
@@ -60,12 +63,8 @@ export class ShopsComponent implements OnChanges {
   }
 
 
-  addCoupon(shop: any) {
-    shop.showAddCoupon=true;
-  }
-
-  onInsert(shop:any){
-    shop.showAddCoupon=false;
+  onInsert(){
+    //shop.showAddCoupon=false;
     this.oninsert.emit('coupon ajouté');
     this.refresh(0);
   }
@@ -78,12 +77,38 @@ export class ShopsComponent implements OnChanges {
 
   openPrinter(shop:any){
     sendToPrint("print-section-"+shop._id);
-    //TODO: impression du qrcode de la boutique
   }
 
   edit(shop:any,coupon:any){
-    this.dialog.open(NewCouponComponent,{width: '90vw',data: {shop:shop,coupon: coupon, title:"Edit"}}).afterClosed().subscribe((result) => {
-      debugger;
-    });
+    this.api.shop=shop;
+    this.api.coupon=coupon;
+    this.api.user=this.user;
+    this.router.navigate(["new_coupon"],{queryParams:{couponid:coupon._id,title:"Editer "+coupon.title,userid:this.user._id}});
+  }
+
+  addCoupon(shop: any) {
+    this.api.shop=shop;
+    this.api.user=this.user;
+    this.router.navigate(["new_coupon"],{queryParams:{shopid:shop._id,title:"Promotion pour "+shop.name,tags:shop.tags,userid:this.user._id}});
+  }
+
+
+  setDelegate(shop:any) {
+    if(this.config.webcamsAvailable==0){
+      this.dialog.open(PromptComponent, {width: '250px',data: {title: "Code utilisateur", question:"", onlyConfirm: false}
+      }).afterClosed().subscribe((result) => {
+        if(result!=null && result.length>0)
+          this.api.delegate(result,shop._id,"+").subscribe(()=>{});
+      });
+    } else {
+      this.showWebCam=true;
+    }
+
+  }
+
+  onFlash_event(shop:any,$event: any) {
+    var result=$event.data;
+    if(result!=null && result.length>0)
+      this.api.delegate(result,shop._id,"").subscribe(()=>{});
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '../../node_modules/@angular/common/http';
 import { Location } from '@angular/common';
 import {environment} from '../environments/environment';
+import {initAvailableCameras} from "./tools";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class ConfigService {
   values:any={};
   config:any=null;
   waiting:boolean=false;
+  webcamsAvailable:number=0;
 
   constructor(private location: Location, private http: HttpClient){}
 
@@ -21,6 +23,11 @@ export class ConfigService {
   }
 
   init(func=null){
+
+    initAvailableCameras((res)=>{
+      this.webcamsAvailable=res;
+    });
+
     this.getConfig().then(r=>{
       this.values=r;
       if(func!=null)func(this.values);
