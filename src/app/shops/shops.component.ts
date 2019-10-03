@@ -107,10 +107,11 @@ export class ShopsComponent implements OnChanges {
 
   }
 
-  onFlash_event(shop:any,decoded: any) {
-    if(decoded){
+  onFlash_event(decoded: any,shop:any) {
+    if(decoded!=null){
       var result=decoded.data;
       if(result!=null && result.length>0){
+        this.user.message="Utilisateur ajouté comme délégataire";
         this.api.delegate(result,shop._id,"").subscribe(()=>{
           this.showWebCam=false;
         });

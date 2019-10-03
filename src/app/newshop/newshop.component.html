@@ -30,8 +30,12 @@
               label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
     <br>
+
     <mat-form-field class="form-field-style">
-      <input id="txtShopTags" type="text" matInput placeholder="Tags (séparés par un espace ou une virgule)" [(ngModel)]="tags" autofocus>
+      <mat-label>Etiquettes</mat-label>
+      <mat-select id="txtShopTags" [(ngModel)]="tags"  multiple>
+        <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">{{tag}}</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <app-tuto [delay]="10"

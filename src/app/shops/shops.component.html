@@ -49,7 +49,7 @@
   <app-scanner [size]="300"
                *ngIf="showWebCam && shop.visible"
                [filter]=""
-               (flash)="onFlash_event(shop,$event)">
+               (flash)="onFlash_event($event,shop)">
   </app-scanner>
 
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">

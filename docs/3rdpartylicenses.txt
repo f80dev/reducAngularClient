@@ -101,6 +101,8 @@ THE SOFTWARE.
 
 @angular/material/progress-spinner
 
+@angular/material/select
+
 @angular/material/snack-bar
 
 @angular/material/stepper

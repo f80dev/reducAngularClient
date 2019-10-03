@@ -23,7 +23,7 @@ import {
   MatCardModule, MatCheckboxModule,
   MatDialogModule,
   MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule, MatListModule, MatSelectModule,
   MatSnackBarModule, MatStepperModule
 } from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
@@ -84,6 +84,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     QRCodeModule,
     ClipboardModule,
     BrowserModule,
+    MatSelectModule,
     HttpClientModule,
     WebcamModule,
     MatCheckboxModule,

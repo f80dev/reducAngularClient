@@ -98,6 +98,7 @@ export class NewCouponComponent implements OnInit {
   }
 
   addcoupon(coupon: any) {
+    debugger
     //Mise en conformité du coupon
     if(coupon.duration_jours==null)coupon.duration_jours=0;
     if(coupon.duration_hours==null)coupon.duration_hours=0;

@@ -1,5 +1,4 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
-  <mat-card-title *ngIf="title?.length>0">{{title}}</mat-card-title>
   <mat-card-header  name="promoTitle" (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">

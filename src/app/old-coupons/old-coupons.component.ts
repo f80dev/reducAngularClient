@@ -47,20 +47,21 @@ export class OldCouponsComponent implements OnInit {
     });
   }
 
+  it(x,y){
+    var c=0,o=0;
+    x.sort((a,b) => {return a - b;}).forEach(i => { if (i>o){ if(y.indexOf(i) >= 0) c++; } o=i });
+    return c;
+  }
+
   opereFilter() {
     var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
     var index=0;
     lst_coupons.forEach((it)=>{
-      var bc=false;
-      if(it.tags){
-        it.tags.forEach((tag)=>{
-          if(this.filter.indexOf(tag)>-1)bc=true;
-        });
+      if(it.tags.length>0){
+        var intersect=this.filter.split(",").filter(value => -1 !== it.tags.split(",").indexOf(value));
+        if(intersect.length==0)
+          this.coupons.splice(index,1);
       }
-      if(!bc){
-        this.coupons.splice(index,1);
-      }
-
     });
   }
 }

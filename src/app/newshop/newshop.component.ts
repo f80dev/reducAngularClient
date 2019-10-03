@@ -18,9 +18,9 @@ export class NewshopComponent implements OnInit {
   address = '12, rue martel, paris 10';
   show_address="";
   owner = '';
-  tags="";
   map: any;
   handle:any;
+  tags="";
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   private lng: number;
@@ -28,6 +28,7 @@ export class NewshopComponent implements OnInit {
   reverseGeocode: boolean=false;
 
   constructor(public api: ApiService, public router: Router,public loc:LocService,public config:ConfigService) {
+
   }
 
   ngOnInit() {
@@ -36,8 +37,9 @@ export class NewshopComponent implements OnInit {
   }
 
   add() {
+    var tags:any=this.tags;
     const owner = localStorage.getItem('user');
-    this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,this.tags).subscribe((result: any) => {
+    this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
     });
