@@ -79,7 +79,11 @@ export class HomeComponent implements OnInit {
       this.user=u;
       this.user.message=message;
       if(this.user.message.startsWith("#"))this.user.message=this.user.message.substr(1);
-      if(message.startsWith("#"))this.showMessage=true;
+      if(message.startsWith("#")){
+        setTimeout(()=>{
+          this.showMessage=true;
+        },2000);
+      }
 
       //Effacer le message
       setTimeout(()=>{this.user.message=""},30000);

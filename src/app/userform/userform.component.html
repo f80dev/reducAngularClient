@@ -55,8 +55,6 @@
     </mat-card-title>
 
     <mat-card-subtitle *ngIf="user.message?.length>0">{{user.message}}</mat-card-subtitle>
-    <app-tuto label="Cette zone affiche les informations de votre profil"></app-tuto>
-
 
   <mat-card-content class="app-card-content">
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
@@ -81,11 +79,11 @@
                      *ngIf="showOldPromos">
     </app-old-coupons>
 
-    <app-tuto [delay]="1" icon="map"
+    <app-tuto [delay]="10" icon="map"
               label="Vous pouvez voir les promotions autours de vous en activant la carte">
     </app-tuto>
 
-    <app-tuto [delay]="2" icon="account_balance"
+    <app-tuto [delay]="12" icon="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
@@ -93,16 +91,16 @@
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="3" icon="build"
+    <app-tuto [delay]="5" icon="build"
               label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
     </app-tuto>
 
-    <app-tuto [delay]="4" icon="camera_alt" [if]="config.webcamsAvailable>0"
+    <app-tuto [delay]="8" icon="camera_alt" [if]="config.webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 
 
-    <app-tuto [delay]="6" icon="delete" [if]="user.level>0 && (user.shops==null || user.shops.length==0)"
+    <app-tuto [delay]="18" icon="delete" [if]="user.level>0 && (user.shops==null || user.shops.length==0)"
               label="Si vous n'avez plus de promotion en cours, vous pouvez totalement effacer votre compte de reducShare">
     </app-tuto>
 

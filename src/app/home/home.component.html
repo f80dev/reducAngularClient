@@ -7,8 +7,7 @@
 
 <div [hidden]="showMessage">
   <app-tuto label="Bienvenue dans ReducShare !"
-            [delay]="5"
-            [duration]="20" height="100vh"
+            [duration]="5" height="100vh"
             image="./assets/icons/icon-384x384.png"
             subtitle="Une application pour gagner plein de réductions dont la valeur augmente quand vous les redistribuées !">
   </app-tuto>
@@ -28,6 +27,10 @@
              (insert)="refresh($event?.message)">
   </app-shops>
 
+  <app-tuto [if]="coupons.length>0"
+            label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
+  </app-tuto>
+
   <!--Affiche la liste des coupons en possession de l'utilisateur -->
   <app-list-coupons (delete)="refresh($event?.message)"
                     title="Vos réductions"
@@ -36,9 +39,6 @@
                     [coupons]="coupons" [user]="user">
   </app-list-coupons>
 
-  <app-tuto [if]="coupons.length>0"
-            label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
-  </app-tuto>
 
 </div>
 
