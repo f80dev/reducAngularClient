@@ -28,6 +28,7 @@ export class ShopsComponent implements OnChanges {
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
+
   coupons=[];
   showWebCam=false;
 
@@ -106,9 +107,10 @@ export class ShopsComponent implements OnChanges {
 
   }
 
-  onFlash_event(shop:any,$event: any) {
-    var result=$event.data;
+  onFlash_event(shop:any,result: string) {
     if(result!=null && result.length>0)
-      this.api.delegate(result,shop._id,"").subscribe(()=>{});
+      this.api.delegate(result,shop._id,"").subscribe(()=>{
+        this.showWebCam=false;
+      });
   }
 }
