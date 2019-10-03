@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if(localStorage.getItem("user")==null){
       $$("Si c'est la premier connexion, on créé un compte fictif")
-      debugger
       localStorage.setItem("user","user"+new Date().getTime()+"@fictif.com");
     }
 
