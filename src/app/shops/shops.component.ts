@@ -107,10 +107,14 @@ export class ShopsComponent implements OnChanges {
 
   }
 
-  onFlash_event(shop:any,result: string) {
-    if(result!=null && result.length>0)
-      this.api.delegate(result,shop._id,"").subscribe(()=>{
-        this.showWebCam=false;
-      });
+  onFlash_event(shop:any,decoded: any) {
+    if(decoded){
+      var result=decoded.data;
+      if(result!=null && result.length>0){
+        this.api.delegate(result,shop._id,"").subscribe(()=>{
+          this.showWebCam=false;
+        });
+      }
+    }
   }
 }
