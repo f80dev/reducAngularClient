@@ -7,7 +7,7 @@
 
       <button class="small-button" mat-button mat-flat-button *ngIf="filter?.length>0" (click)="opereFilter()">Filtrer</button>
     &nbsp;
-      <button class="small-button" mat-button mat-flat-button (click)="refresh()">Tous</button>
+      <button class="small-button" mat-button mat-flat-button *ngIf="filter?.length>0" (click)="refresh()">Tous</button>
     &nbsp;
       <button class="small-button" mat-button mat-flat-button (click)="oncancel.emit()">Fermer</button>
   </mat-card-title>

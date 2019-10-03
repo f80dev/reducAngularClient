@@ -6,6 +6,8 @@ import {
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
 
+export const ADMIN_PASSWORD="hh4271"
+
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   if (encode) { param = encodeURI(param); }
   if(param.length==0)

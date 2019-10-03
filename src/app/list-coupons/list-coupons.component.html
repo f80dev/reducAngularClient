@@ -5,12 +5,13 @@
 
       <!--Affichage des coupons origine pour les non propriétaire-->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.direct_bonus}}{{coupon.symbol}} offert  - <app-timer [end]="coupon.dtEnd"></app-timer>
+        {{coupon.direct_bonus}}{{coupon.symbol}} offert  -
       </span>
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
       <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shop_complete?.name}} - <app-timer [end]="coupon.dtEnd"></app-timer>
+        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shop_complete?.name}}
+        <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
       </span>
 
       <!--Affichage des coupons origines pour leur propriétaire-->
@@ -80,12 +81,14 @@
 
         <!--QRCode du coupon-->
 
-        <qr-code [value]="coupon.url" name="qrcode"
-                 style="max-width:200px;max-height: 200px;display:inline;"
-                 *ngIf="coupon.showCode"
-                 ngxClipboard [cbContent]="coupon.url"
-                 [size]="150">
-        </qr-code>
+
+          <qr-code [value]="coupon.url" name="qrcode"
+                   *ngIf="coupon.showCode"
+                   style="width:150px;height: 150px;"
+                   ngxClipboard [cbContent]="coupon.url"
+                   [size]="145">
+          </qr-code>
+
 
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
@@ -127,7 +130,7 @@
 
     <div style="width: 100%;text-align: center;font-size: medium;color:lightgrey;"
          name="zoneConditions"
-         *ngIf="coupon.origin!=coupon._id && coupon.showCode">
+         *ngIf="coupon.origin!=coupon._id && coupon.showCode && !coupon.canbedeal">
       <br>
       <strong>Rappel des conditions d'application:</strong><br>
       Offre valable pour {{coupon.conditions}}

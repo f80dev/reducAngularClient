@@ -47,6 +47,7 @@ import { InputComponent } from './input/input.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { VisualComponent } from './visual/visual.component';
 import { ScannerComponent } from './scanner/scanner.component';
+import { AdminComponent } from './admin/admin.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -70,7 +71,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     PromptComponent,
     InputComponent,
     VisualComponent,
-    ScannerComponent
+    ScannerComponent,
+    AdminComponent
   ],
   entryComponents: [
     NewCouponComponent,

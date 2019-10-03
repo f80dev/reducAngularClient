@@ -99,7 +99,7 @@ export class ShopsComponent implements OnChanges {
       this.dialog.open(PromptComponent, {width: '250px',data: {title: "Code utilisateur", question:"", onlyConfirm: false}
       }).afterClosed().subscribe((result) => {
         if(result!=null && result.length>0)
-          this.api.delegate(result,shop._id,"+").subscribe(()=>{});
+          this.api.delegate(result,shop._id).subscribe(()=>{});
       });
     } else {
       this.showWebCam=!this.showWebCam;
@@ -112,7 +112,7 @@ export class ShopsComponent implements OnChanges {
       var result=decoded.data;
       if(result!=null && result.length>0){
         this.user.message="Utilisateur ajouté comme délégataire";
-        this.api.delegate(result,shop._id,"").subscribe(()=>{
+        this.api.delegate(result,shop._id).subscribe(()=>{
           this.showWebCam=false;
         });
       }

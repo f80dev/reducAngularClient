@@ -38,6 +38,8 @@ export class NewshopComponent implements OnInit {
 
   add() {
     var tags:any=this.tags;
+    if(typeof tags=="string")tags=tags.split(",");
+
     const owner = localStorage.getItem('user');
     this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});

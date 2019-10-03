@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {api} from './tools';
+import {api,ADMIN_PASSWORD} from './tools';
 
 @Injectable({
   providedIn: 'root'
@@ -63,11 +63,15 @@ export class ApiService {
     return this.http.get(api('updatefollow/'  + userid+'/'+operation+'/'+shopid, ''));
   }
 
-  delegate(userid: string, shopid: string,operation:string="+") {
+  delegate(userid: string, shopid: string,operation:string="*") {
     return this.http.get(api('delegate/'  + shopid+'/'+operation+'/'+userid, ''));
   }
 
   adduser(email: string, firstname: any) {
     return this.http.get(api('adduser/'  + email+'/'+firstname, ''));
+  }
+
+  getusers() {
+    return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }
 }
