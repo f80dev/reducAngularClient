@@ -1,4 +1,5 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
+  <mat-card-title *ngIf="title?.length>0">{{title}}</mat-card-title>
   <mat-card-header  name="promoTitle" (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
@@ -201,7 +202,8 @@
                 (click)="showCode(coupon)"
                 ngxClipboard [cbContent]="coupon.url">
           <span *ngIf="coupon.canbedeal">
-            Partager / Utiliser
+            Partager
+            <span *ngIf="coupon.origin!=coupon._id">/ Utiliser</span>
           </span>
           <!--Lorsque le coupon ne peut plus être distribué on ne peut plus que l'utiliser-->
           <span *ngIf="!coupon.canbedeal && coupon.gain>0">

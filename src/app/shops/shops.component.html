@@ -37,6 +37,7 @@
     </app-tuto>
 
 
+    <br>
     <app-list-coupons [coupons]="shop.coupons" [user]="user"
                       (delete)="onupdate.emit($event)"
                       (edit)="edit(shop,$event)">
@@ -70,21 +71,21 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
-            *ngIf="!shop.showAddCoupon"
+            *ngIf="coupons?.length==0"
             (click)="delShop(shop)">
       <mat-icon>delete</mat-icon>
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
-            *ngIf="!shop.showAddCoupon && user.level>0"
+            *ngIf="user.level>0"
             (click)="addCoupon(shop)">
       <mat-icon>note_add</mat-icon>
     </button>
 
     <button mat-button mat-flat-button
             name="btnNewPromo" class="large-button"
-            *ngIf="!shop.showAddCoupon && user.level==0"
+            *ngIf="user.level==0"
             (click)="addCoupon(shop)">
       Nouvelle promotion
     </button>

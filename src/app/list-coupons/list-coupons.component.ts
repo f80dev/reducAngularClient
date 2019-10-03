@@ -19,6 +19,7 @@ export class ListCouponsComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('coupons') coupons: any[] = [];
   @Input('user') user: any;
+  @Input('title') title="";
 
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
