@@ -83,6 +83,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatProgressSpinnerModule,
     QRCodeModule,
     ClipboardModule,
+    NgxSocialButtonModule,
     BrowserModule,
     MatSelectModule,
     HttpClientModule,

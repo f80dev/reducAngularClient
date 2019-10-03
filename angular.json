@@ -21,6 +21,8 @@
             "aot": false,
             "assets": [
               "src/404.html",
+              "src/privacy.html",
+              "src/cgu.html",
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",

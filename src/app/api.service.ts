@@ -66,4 +66,8 @@ export class ApiService {
   delegate(userid: string, shopid: string,operation:string="+") {
     return this.http.get(api('delegate/'  + shopid+'/'+operation+'/'+userid, ''));
   }
+
+  adduser(email: string, firstname: any) {
+    return this.http.get(api('adduser/'  + email+'/'+firstname, ''));
+  }
 }
