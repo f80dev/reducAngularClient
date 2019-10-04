@@ -66,7 +66,8 @@ export class HomeComponent implements OnInit {
     this.route.params.subscribe((params)=>{
       var coupon=params["coupon"];
       if(coupon!=null){
-        $$("Traitement du coupon",coupon)
+        this._location.replaceState(this._location.path().split('?')[0], '');
+        $$("Traitement du coupon",coupon);
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
           this.refresh(result.message);
