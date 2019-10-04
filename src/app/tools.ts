@@ -154,7 +154,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
 
   if(coupon!=null){
     iconStyle.setText(new ol.style.Text({
-      text: coupon.direct_bonus+" "+coupon.symbol,
+      text: coupon.label,
       textAlign:"center",
       font:"14px sans-serif",
       stroke: new ol.style.Stroke({color: 'white', width: 2}),
@@ -168,8 +168,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   marker.coupon=coupon;
 
   if(func_sel!=null){
-    debugger;
-    marker.on("featureclick",func_sel);
+    marker.on("featureclick",func_sel(marker.coupon));
   }
 
   marker.setStyle(iconStyle);

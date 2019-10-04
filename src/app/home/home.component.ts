@@ -5,7 +5,6 @@ import {$$, checkLogin} from '../tools';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
-import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -66,7 +65,7 @@ export class HomeComponent implements OnInit {
     this.route.params.subscribe((params)=>{
       var coupon=params["coupon"];
       if(coupon!=null){
-        this._location.replaceState(this._location.path().split('?')[0], '');
+        this._location.replaceState(this._location.path().split('/home')[0], '');
         $$("Traitement du coupon",coupon);
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);

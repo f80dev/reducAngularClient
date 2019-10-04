@@ -50,6 +50,7 @@ export class UserformComponent implements OnInit {
   flash(){
     this.showCouponOnMap=[];
     this.showMap=false;
+    this.onflash.emit();
   }
 
   onflash_event(decoded: any) {
@@ -98,7 +99,9 @@ export class UserformComponent implements OnInit {
         });
 
         if(bContinue){
-          var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.15);
+          var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.15,(coupon_sel)=>{
+            this.user.message=coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol;
+          });
           markers.push(marker);
           marker.coupon.visible=false;
           this.showCouponOnMap.push(marker.coupon);

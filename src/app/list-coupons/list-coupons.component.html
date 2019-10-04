@@ -3,9 +3,9 @@
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
 
-      <!--Affichage des coupons origine pour les non propriétaire-->
+      <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.direct_bonus}}{{coupon.symbol}} offert  -
+        {{coupon.label}}
       </span>
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
@@ -40,9 +40,9 @@
 
 
     <mat-card-subtitle>
-      <!--Affichage des coupons origine pour les non propriétaire-->
+      <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
       <span *ngIf="coupon.owner!=user._id || coupon.origin!=coupon._id">
-        pour {{coupon.conditions}}
+        {{coupon.direct_bonus}}{{coupon.symbol}} offert pour {{coupon.conditions}}
       </span>
 
       <!--Affichage des coupons origines pour leur propriétaire-->
