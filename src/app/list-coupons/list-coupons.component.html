@@ -10,7 +10,7 @@
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
       <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shopname}}
+        {{coupon.shopname}}
         <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
       </span>
 

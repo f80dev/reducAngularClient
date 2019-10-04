@@ -10,7 +10,11 @@
       <mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>
     </div>
 
-    <mat-card-subtitle>{{shop.address}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <span *ngIf="shop.followers?.length>0">
+        Vous avez {{shop.followers?.length}} followers
+      </span>
+    </mat-card-subtitle>
   </mat-card-header>
 
 
@@ -19,9 +23,6 @@
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
 
-    <span *ngIf="shop.followers?.length>0">
-      Vous avez {{shop.followers?.length}} followers
-    </span>
 
     <!--<app-new-coupon *ngIf="shop.showAddCoupon"-->
                     <!--name="zoneNewCoupon"-->
