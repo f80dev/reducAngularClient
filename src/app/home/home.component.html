@@ -40,8 +40,19 @@
                     [coupons]="coupons" [user]="user">
   </app-list-coupons>
 
+  <div style="width: 100%;text-align: center;font-size: small;">
+    {{config.values.appname+" "+config.values.version}}<br>
+    <br>
+    Réalisé par {{config.values.editor.author}}<br>
+    <strong>{{config.values.editor.name}}</strong><br>
+    <a [href]="config.values.editor.website" target="_blank">{{config.values.editor.website}}</a>
+    <br>
+    <br>
+    Contact:{{config.values.support.email}}<br>
 
-  <span style="font-size: small;">{{config.values.appname+" "+config.values.version}}</span>
+
+  </div>
+
 </div>
 
 <!--<br><br><br>-->

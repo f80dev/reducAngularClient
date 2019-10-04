@@ -3,6 +3,17 @@
   "title":"ReducShare",
 
   "website":"https://reducshare.com/web",
+  "editor":{
+    "name":"F80",
+    "website":"https://f80.fr",
+    "author":"Hervé HOAREAU",
+    "contact":"herve.hoareau@f80.fr"
+  },
+
+  "support":{
+    "forum":"",
+    "email":"contact@reducshare.com"
+  },
 
   "version":"0.0.4",
   "socket":true,

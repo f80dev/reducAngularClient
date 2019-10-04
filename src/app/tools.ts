@@ -167,9 +167,10 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   });
   marker.coupon=coupon;
 
-  if(func_sel!=null){
-    marker.on("featureclick",func_sel(marker.coupon));
-  }
+  //TODO a rétablir
+  // if(func_sel!=null){
+  //   marker.on("featureclick",func_sel(this.coupon));
+  // }
 
   marker.setStyle(iconStyle);
   return marker;

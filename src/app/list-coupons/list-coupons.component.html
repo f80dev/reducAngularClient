@@ -5,7 +5,7 @@
 
       <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.label}}
+        {{coupon.shop_complete?.name}} - {{coupon.label}}
       </span>
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
