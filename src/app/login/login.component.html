@@ -1,19 +1,25 @@
 
   <div class="mat-dialog-title">Indiquer votre email</div>
-  <mat-dialog-content>
-    <h4>{{message}}</h4>
-    <br><br>
+  <mat-dialog-content style="background: none;">
+    <div *ngIf="message?.length>0">
+      <h4>{{message}}</h4>
+      <br><br>
+    </div>
+
     <div style="width: 100%;text-align: center;">
-      <button *ngIf="data.facebook" class="large-button" mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook</button>
+      <br>
+      <button *ngIf="data.email"  class="large-button" mat-button mat-flat-button (click)="email_login()">Email</button>
       <br><br>
       <button *ngIf="data.google" class="large-button" mat-button mat-flat-button (click)="socialSignIn('google')">Google</button>
       <br><br>
-      <button *ngIf="data.email"  class="large-button" mat-button mat-flat-button (click)="email_login()">Email</button>
+      <button *ngIf="data.facebook" class="large-button" mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook</button>
+      <br><br>
+
     </div>
 
-    <mat-form-field class="example-full-width">
-      <input matInput type="email" placeholder="Email" [(ngModel)]="email">
-    </mat-form-field>
+    <!--<mat-form-field class="example-full-width">-->
+      <!--<input matInput type="email" placeholder="Email" [(ngModel)]="email">-->
+    <!--</mat-form-field>-->
 
   </mat-dialog-content>
 

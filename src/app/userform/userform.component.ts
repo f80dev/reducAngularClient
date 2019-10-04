@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile} from "../tools";
+import {$$, createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
@@ -25,6 +25,7 @@ export class UserformComponent implements OnInit {
   @Input("user") user:any;
   @Input("excludes") excludes:any[]=[];
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
+  @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
   showScanner: boolean = false;
   showMap: boolean=false;
@@ -194,10 +195,21 @@ export class UserformComponent implements OnInit {
     })
   }
 
+  logout(){
+    localStorage.clear();
+    this.onupdate.emit(this.user);
+  }
+
   securise() {
-    this.dialog.open(LoginComponent,{width:'70vw',data: {facebook:true,google:true,user:this.user}})
-      .afterClosed().subscribe((result) => {
-        this.user=result.user;
+    this.dialog.open(LoginComponent,{width:'250px',data: {facebook:true,google:true,user:this.user}})
+      .afterClosed().subscribe((result:any) => {
+        if(result){
+          this.user=result.user;
+          this.onupdate.emit(this.user);
+        } else {
+          $$("Probleme de récupération du user")
+        }
+
     });
   }
 }

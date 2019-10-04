@@ -5,6 +5,7 @@ import {$$, checkLogin} from '../tools';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -24,38 +25,48 @@ export class HomeComponent implements OnInit {
   user: any = {message:""};
   coupons=[];
 
-  ngOnInit() {
-    if(localStorage.getItem("user")==null){
-      $$("Si c'est la premier connexion, on créé un compte fictif")
-      localStorage.setItem("user","user"+new Date().getTime()+"@fictif.com");
-    }
-
-    this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
-      this.user = u;
-
-      this.connect();
-      this.refresh(this.route.snapshot.queryParamMap.get("message"));
-      //this._location.replaceState("/home");
-
-
-
-      //Mise en place de la socket
-      this.socket.on("refresh",(data:any)=>{
-        if(data.user==this.user._id){
-          $$("Refresh depuis la socket avec "+data.message);
-          setTimeout(()=>{this.refresh(data.message);},1500);
+  analyse_login(func){
+    $$("Analyse le device pour détecter les ancienes connexions")
+    if(localStorage.getItem("user")==null || localStorage.getItem("user")=="undefined"){
+      $$("C'est la premier connexion sur ce device, on créé un compte fictif");
+      this.api.adduser("user"+new Date().getTime()+"@fictif.com","").subscribe((res)=>{
+        func(res);
+      })
+    } else {
+      this.api.getuser(localStorage.getItem('user')).subscribe((u:any) => {
+        if(u.code==500){
+          $$("Le compte stocker sur le device a été effacé de la base. On l'efface sur le device")
+          localStorage.clear();
+          this.analyse_login(func);
+        } else {
+          func(u);
         }
       });
+    }
+  }
 
+  ngOnInit() {
+    this.analyse_login((u)=>{
+      localStorage.setItem("user",u._id);
+      this.user = u;
+      this.connect();
+      this.refresh(this.route.snapshot.queryParamMap.get("message"));
     });
-
-
   }
 
   connect(){
+    $$("Mise en place de la socket");
+    this.socket.on("refresh",(data:any)=>{
+      if(data.user==this.user._id){
+        $$("Refresh depuis la socket avec "+data.message);
+        setTimeout(()=>{this.refresh(data.message);},1500);
+      }
+    });
+
     this.route.params.subscribe((params)=>{
       var coupon=params["coupon"];
       if(coupon!=null){
+        $$("Traitement du coupon",coupon)
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
           this.refresh(result.message);
@@ -105,5 +116,12 @@ export class HomeComponent implements OnInit {
 
   closeFlashScreen() {
     this.showMessage=false;
+  }
+
+  updateUser(user) {
+    if(localStorage.getItem("user")==user._id)
+      this.refresh();
+    else
+      this.ngOnInit();
   }
 }

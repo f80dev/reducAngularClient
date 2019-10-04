@@ -37,6 +37,13 @@
         <mat-icon>verified_user</mat-icon>
       </button>
 
+      <button mat-icon-button
+              *ngIf="user.email?.indexOf('fictif.com')==-1"
+              id="btnLogout"
+              mat-button mat-flat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+
 
 
       <!--<button mat-button *ngIf="user.level==0"-->

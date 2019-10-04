@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ErrorStateMatcher} from '@angular/material';
+import {ErrorStateMatcher, MatDialog} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../api.service';
@@ -10,7 +10,8 @@ import {
   SocialService
 } from "ngx-social-button";
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
-import {DialogData} from "../prompt/prompt.component";
+import {DialogData, PromptComponent} from "../prompt/prompt.component";
+import {$$} from "../tools";
 //import {LinkedinLoginProvider} from "../../../node_modules/ngx-social-button/lib/providers/linkedinProvider";
 
 
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(public api: ApiService,
+              public dialog:MatDialog,
               public router: Router,
               public dialogRef: MatDialogRef<LoginComponent>,@Inject(MAT_DIALOG_DATA) public data: any,
               private socialAuthService: SocialService) { }
@@ -76,13 +78,40 @@ export class LoginComponent implements OnInit {
 
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (socialUser) => {
-          this.data.user.email=socialUser.email;
-          this.data.user.pseudo=socialUser.name;
-          this.api.setuser(this.data.user).subscribe((res:any)=>{
-            res.user=this.data.user;
-            localStorage.setItem("user",res.user.email);
-            this.dialogRef.close(res);
-          })
+        this.data.user.email=socialUser.email;
+        this.data.user.pseudo=socialUser.name;
+        this.data.user.photo=socialUser.image;
+        this.api.getuser(socialUser.email).subscribe((u:any)=>{
+          if(u.code==500){
+            $$("L'email "+socialUser.email+" n'était pas encore enregistré. On l'affecte au compte existant");
+            this.api.setuser(this.data.user).subscribe((res:any)=>{
+              localStorage.setItem("user",res.user._id);
+              res.force_refresh=true;
+              this.dialogRef.close(res);
+            });
+          } else {
+            $$("L'email "+socialUser.email+" est déjà utilisé par le compte "+u._id);
+            if(u._id!=localStorage.getItem("user")){
+              if(this.data.user.coupons.length>0 || this.data.user.shops.length>0){
+                this.dialog.open(PromptComponent, {width: '250px',data: {title: "Compte déjà présent", question:"Cet email correspond à un autre compte, si vous souhaitez vous y connecté vous perder le compte actuel", onlyConfirm: true}
+                }).afterClosed().subscribe((result) => {
+                  if(result=="yes"){
+                    $$("On change l'attribution du compte")
+                    localStorage.setItem("user",u._id);
+                  }
+                  this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
+                });
+              } else {
+                $$("Le compte n'avait aucun coupon ni magazin donc on s'en déconnecte sans poser de question")
+                localStorage.setItem("user",u._id);
+                this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
+              }
+            }
+          }
+
+        });
+
+
       });
   }
 
