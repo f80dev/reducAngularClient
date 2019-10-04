@@ -41,14 +41,14 @@
   </app-list-coupons>
 
   <div style="width: 100%;text-align: center;font-size: small;">
-    {{config.values.appname+" "+config.values.version}}<br>
+    {{config.values.appname+" - "+config.values.version}}<br>
     <br>
     Réalisé par {{config.values.editor.author}}<br>
     <strong>{{config.values.editor.name}}</strong><br>
     <a [href]="config.values.editor.website" target="_blank">{{config.values.editor.website}}</a>
     <br>
     <br>
-    Contact:{{config.values.support.email}}<br>
+    <mat-icon>contact_support</mat-icon>&nbsp;<a href="mailto:{{config.values.support.email}}">{{config.values.support.email}}</a><br>
 
 
   </div>

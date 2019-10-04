@@ -40,6 +40,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card-action {
   text-align: right;
+  margin-bottom: 5px;
 }
 
 .large-button {
