@@ -5,12 +5,12 @@
 
       <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.shop_complete?.name}} - {{coupon.label}}
+        {{coupon.shopname}} - {{coupon.label}}
       </span>
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
       <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shop_complete?.name}}
+        <strong>{{coupon.gain}}</strong>{{coupon.symbol}} offert à {{coupon.shopname}}
         <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
       </span>
 
@@ -42,7 +42,7 @@
     <mat-card-subtitle>
       <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
       <span *ngIf="coupon.owner!=user._id || coupon.origin!=coupon._id">
-        {{coupon.direct_bonus}}{{coupon.symbol}} offert pour {{coupon.conditions}}
+        {{coupon.direct_bonus}}{{coupon.symbol}} offert immédiatement pour {{coupon.conditions}}
       </span>
 
       <!--Affichage des coupons origines pour leur propriétaire-->
