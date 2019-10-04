@@ -1,5 +1,5 @@
 <mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
-  <mat-card-header  name="promoTitle" (click)="showCoupon(coupon)">
+  <mat-card-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
 
@@ -61,9 +61,6 @@
     </mat-card-subtitle>
 
 
-
-
-
   </mat-card-header>
 
   <mat-card-content class="app-card-content" *ngIf="isVisible(coupon)">
@@ -82,14 +79,13 @@
       <td style="text-align: center;width: fit-content;max-width: 40%;">
         <!--Visuel du coupon-->
 
-        <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0 && coupon.origin!=coupon._id">
+        <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>350)">
 
           <app-visual [picture]="coupon.picture"></app-visual>
 
         </div>
 
         <!--QRCode du coupon-->
-
 
           <qr-code [value]="coupon.url" name="qrcode"
                    *ngIf="coupon.showCode"
@@ -115,14 +111,15 @@
         </div>
         <br><br>
 
+        <!--La table des gains-->
         <table style="text-align: left;display: inline-block;font-size:small;"
                cellpadding="2" name="zoneInfo"
-               *ngIf="coupon.canbedeal">
+               *ngIf="coupon.canbedeal && coupon.showCode">
           <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
           <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
           <tr><td>Immédiat</td><td>+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
-        </table><br><br>
-        <span style="font-size: small">
+        </table><br>
+        <span style="font-size: medium">
             Reste <app-timer [end]="coupon.dtEnd"></app-timer>
           </span>
       </td>
@@ -156,7 +153,7 @@
 
   <!--Info sur le coupon-->
 
-  <mat-card-actions style="text-align: right;" *ngIf="isVisible(coupon)">
+  <mat-card-actions class="app-card-action" style="text-align: right;" *ngIf="isVisible(coupon)">
 
     <div *ngIf="coupon.owner==user?._id">
 

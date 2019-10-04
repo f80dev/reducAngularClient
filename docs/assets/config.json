@@ -1,6 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
+  "version":"0.0.5",
 
   "website":"https://reducshare.com/web",
   "editor":{
@@ -15,7 +16,7 @@
     "email":"contact@reducshare.com"
   },
 
-  "version":"0.0.4",
+
   "socket":true,
   "icon_coupon":"./assets/img/pin.png",
   "icon_shop":"./assets/img/pin.png",

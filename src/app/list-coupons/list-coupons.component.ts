@@ -8,6 +8,7 @@ import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {sendToPrint} from "../tools";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-list-coupons',
@@ -28,6 +29,7 @@ export class ListCouponsComponent implements OnInit {
 
   constructor(public meta: Meta,public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
+              public config:ConfigService,
               public ngNavigatorShareService: NgNavigatorShareService) {
     meta.addTag({name:"application",content:"ReducShare"});
   }

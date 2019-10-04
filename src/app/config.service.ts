@@ -14,6 +14,7 @@ export class ConfigService {
   config:any=null;
   waiting:boolean=false;
   webcamsAvailable:number=0;
+  width_screen=300;
 
   constructor(private location: Location, private http: HttpClient){}
 
@@ -23,6 +24,8 @@ export class ConfigService {
   }
 
   init(func=null){
+
+    this.width_screen=screen.availWidth;
 
     initAvailableCameras((res)=>{
       this.webcamsAvailable=res;
