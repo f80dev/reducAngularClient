@@ -1,0 +1,12 @@
+<table matSort>
+  <tr>
+    <th mat-sort-header="_id">ID</th>
+    <th mat-sort-header="email">Email</th>
+    <th mat-sort-header="pseudo">Pseudo</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td mat-cell>{{user._id}}</td>
+    <td mat-cell>{{user.email}}</td>
+    <td mat-cell>{{user.pseudo}}</td>
+  </tr>
+</table>
