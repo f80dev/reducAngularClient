@@ -23,6 +23,7 @@ export class ApiService {
   }
 
   addshop(name: string, address: string, owner: string,lng:number,lat:number,tags=null) {
+    debugger
     if(tags==null || tags=="")tags="null";
     return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat+"/"+tags, ''));
   }
@@ -67,8 +68,11 @@ export class ApiService {
     return this.http.get(api('delegate/'  + shopid+'/'+operation+'/'+userid, ''));
   }
 
-  adduser(email: string, firstname: any) {
-    return this.http.get(api('adduser/'  + email+'/'+firstname, ''));
+  adduser(email: string, firstname:string="",tags="") {
+    if(firstname=="")firstname="null"; //sinon l'appel de l'api n'est pas correct
+    if(tags=="")tags="null"; //sinon l'appel de l'api n'est pas correct
+    var url=api('adduser/'  + email+'/'+firstname+"/"+tags,);
+    return this.http.get(url);
   }
 
   getusers() {

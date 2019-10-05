@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, checkLogin} from '../tools';
+import {$$, checkLogin, showError} from '../tools';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public socket:Socket,
               public api: ApiService,
+              public toast:MatSnackBar,
               public router: Router,
               public config:ConfigService,
               public _location:Location,
@@ -24,36 +26,63 @@ export class HomeComponent implements OnInit {
   user: any = {message:""};
   coupons=[];
 
-  analyse_login(func){
-    $$("Analyse le device pour détecter les ancienes connexions")
+  analyse_params(func){
+    var params=this.route.snapshot.queryParamMap;
+    $$("Récupération des paramètres",params);
+      this.config.params={
+        coupon:params.get("coupon") || "",
+        pass  :params.get("pass") || "",
+        tags  :params.get("tags") || "",
+        user  :params.get("user") || ""
+      };
+
+      $$("Netoyage de l'url de lancement");
+      var url=this._location.path();
+      this._location.replaceState(url, '');
+
+      func(this.config.params);
+  }
+
+  /**
+   *
+   * @param tags utilisé pour configurer l'utilisateur si création
+   * @param func
+   */
+  analyse_login(tags,func){
+    $$("Analyse le device pour détecter les ancienes connexions");
     if(localStorage.getItem("user")==null || localStorage.getItem("user")=="undefined"){
       $$("C'est la premier connexion sur ce device, on créé un compte fictif");
-      this.api.adduser("user"+new Date().getTime()+"@fictif.com","").subscribe((res)=>{
+      this.api.adduser("user"+new Date().getTime()+"@fictif.com","",tags).subscribe((res)=>{
         func(res);
-      })
+      },(error)=>{showError(this,error);})
     } else {
       this.api.getuser(localStorage.getItem('user')).subscribe((u:any) => {
         if(u.code==500){
           $$("Le compte stocker sur le device a été effacé de la base. On l'efface sur le device")
           localStorage.clear();
-          this.analyse_login(func);
+          this.analyse_login(tags,func);
         } else {
           func(u);
         }
-      });
+      },(error)=>{showError(this,error);});
     }
   }
 
   ngOnInit() {
-    this.analyse_login((u)=>{
-      localStorage.setItem("user",u._id);
-      this.user = u;
-      this.connect();
-      this.refresh(this.route.snapshot.queryParamMap.get("message"));
-    });
+    this.analyse_params((p)=>{
+      this.analyse_login(p.tags,(u)=>{
+        localStorage.setItem("user",u._id);
+        this.user = u;
+        this.connect(p.coupon,p.pass);
+        this.refresh(this.route.snapshot.queryParamMap.get("message"));
+      });
+    })
   }
 
-  connect(){
+  /**
+   * Ouverture des sockets et récupération des paramètres
+   */
+  connect(coupon:any=null,pass:string=null,user:string=null){
     $$("Mise en place de la socket");
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
@@ -62,24 +91,23 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.route.params.subscribe((params)=>{
-      var coupon=params["coupon"];
-      if(coupon!=null){
-        this._location.replaceState(this._location.path().split('/home')[0], '');
+
+
+      if(this.config.params.coupon!=null){
         $$("Traitement du coupon",coupon);
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
           this.refresh(result.message);
-        });
+        },(error)=>{showError(this,error);});
       }
 
-      var password=params["pass"];
-      if(password!=null){
-        if(localStorage.getItem("code")==password){
-          localStorage.setItem("user",params["user"]);
+
+
+      if(pass!=null){
+        if(localStorage.getItem("code")==pass){
+          localStorage.setItem("user",user);
         }
       }
-    });
   }
 
   refresh(message="") {
@@ -110,7 +138,7 @@ export class HomeComponent implements OnInit {
           }
         });
       }
-    });
+    },(error)=>{showError(this,error);});
 
   }
 

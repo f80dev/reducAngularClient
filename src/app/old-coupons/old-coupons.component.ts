@@ -23,6 +23,7 @@ export class OldCouponsComponent implements OnInit {
   @Input("filter") filter: string="";
 
   ngOnInit() {
+    this.opereFilter();
     this.refresh();
   }
 

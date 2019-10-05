@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {checkLogin, createMap, createMarker, getMarkerLayer, normeString} from '../tools';
-import { Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
 
@@ -27,16 +27,19 @@ export class NewshopComponent implements OnInit {
   private lat: number;
   reverseGeocode: boolean=false;
 
-  constructor(public api: ApiService, public router: Router,public loc:LocService,public config:ConfigService) {
+  constructor(public api: ApiService, public route:ActivatedRoute, public router: Router,public loc:LocService,public config:ConfigService) {
 
   }
 
   ngOnInit() {
     checkLogin(this.router);
+    var t:any=this.route.snapshot.queryParamMap.get("tags");
+    if(t!=null)this.tags=t.split(",");
     this.showOnMap();
   }
 
   add() {
+    debugger
     var tags:any=this.tags;
     if(typeof tags=="string")tags=tags.split(",");
 

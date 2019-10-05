@@ -8,7 +8,15 @@ import {WebcamUtil} from "ngx-webcam";
 
 export const ADMIN_PASSWORD="hh4271"
 
+export function showError(vm:any,err:any){
+  $$("Error ",err);
+  if(vm.toast!=null)
+    vm.toast.open("L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants","dance",{duration:2000});
+
+}
+
 export function api(service: string , param: string= '', encode: boolean = true): string  {
+  service=service.replace("//","/");
   if (encode) { param = encodeURI(param); }
   if(param.length==0)
     return(environment.root_api + '/' + service);

@@ -2,6 +2,7 @@
   "appname":"ReducShare",
   "title":"ReducShare",
   "version":"0.0.5",
+  "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
   "editor":{
