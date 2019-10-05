@@ -7,7 +7,7 @@ import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {sendToPrint} from "../tools";
+import {sendToPrint, showError} from "../tools";
 import {ConfigService} from "../config.service";
 
 @Component({
@@ -167,7 +167,7 @@ export class ListCouponsComponent implements OnInit {
       localStorage.setItem("showCoupon",result.newcoupon);
       this.user.message = result.message;
       this.onflash.emit({message:result.message});
-    });
+    },(error)=>{showError(this,error);});
   }
 
   edit(coupon: any) {

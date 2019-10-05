@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, cropToSquare, resizeBase64Img, selectFile, unique_id} from "../tools";
+import {checkLogin, cropToSquare, resizeBase64Img, selectFile, showError, unique_id} from "../tools";
 import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
@@ -114,7 +114,7 @@ export class NewCouponComponent implements OnInit {
       localStorage.setItem("showCoupon",result._id);
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
-    });
+    },(error)=>{showError(this,error);});
   }
 
   refreshPicture() {

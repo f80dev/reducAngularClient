@@ -36,6 +36,11 @@ export class HomeComponent implements OnInit {
         user  :params.get("user") || ""
       };
 
+      if(this.config.params.coupon==""){
+        var params2=this._location.path();
+        if(params2.indexOf("/home/")>-1)this.config.params.coupon=params2.split("/home/")[1];
+      }
+
       $$("Netoyage de l'url de lancement");
       var url=this._location.path();
       this._location.replaceState(url, '');
@@ -93,7 +98,7 @@ export class HomeComponent implements OnInit {
 
 
 
-      if(this.config.params.coupon!=null){
+      if(coupon!=null && coupon!=""){
         $$("Traitement du coupon",coupon);
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
@@ -103,7 +108,7 @@ export class HomeComponent implements OnInit {
 
 
 
-      if(pass!=null){
+      if(pass!=null && coupon!=""){
         if(localStorage.getItem("code")==pass){
           localStorage.setItem("user",user);
         }

@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {NewCouponComponent} from "../new-coupon/new-coupon.component";
-import {sendToPrint} from "../tools";
+import {sendToPrint, showError} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
 
@@ -73,7 +73,7 @@ export class ShopsComponent implements OnChanges {
   delShop(shop: any) {
     this.api.removeShop(shop._id).subscribe((result)=>{
       this.ondelete.emit(result);
-    });
+    },(error)=>{showError(this,error);});
   }
 
   openPrinter(shop:any){
@@ -99,7 +99,7 @@ export class ShopsComponent implements OnChanges {
       this.dialog.open(PromptComponent, {width: '250px',data: {title: "Code utilisateur", question:"", onlyConfirm: false}
       }).afterClosed().subscribe((result) => {
         if(result!=null && result.length>0)
-          this.api.delegate(result,shop._id).subscribe(()=>{});
+          this.api.delegate(result,shop._id).subscribe(()=>{},(error)=>{showError(this,error);});
       });
     } else {
       this.showWebCam=!this.showWebCam;
@@ -114,7 +114,7 @@ export class ShopsComponent implements OnChanges {
         this.user.message="Utilisateur ajouté comme délégataire";
         this.api.delegate(result,shop._id).subscribe(()=>{
           this.showWebCam=false;
-        });
+        },(error)=>{showError(this,error);});
       }
     }
   }

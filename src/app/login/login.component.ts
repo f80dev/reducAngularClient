@@ -11,7 +11,7 @@ import {
 } from "ngx-social-button";
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import {DialogData, PromptComponent} from "../prompt/prompt.component";
-import {$$} from "../tools";
+import {$$, showError} from "../tools";
 //import {LinkedinLoginProvider} from "../../../node_modules/ngx-social-button/lib/providers/linkedinProvider";
 
 
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("code",res.code);
       res.message="Un lien est disponible dans votre boite "+this.email+" pour votre première connexion";
       this.dialogRef.close(res);
-    });
+    },(error)=>{showError(this,error);});
   }
 
   signOut(){

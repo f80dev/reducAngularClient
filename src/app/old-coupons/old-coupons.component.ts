@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
+import {showError} from "../tools";
 
 @Component({
   selector: 'app-old-coupons',
@@ -23,18 +24,20 @@ export class OldCouponsComponent implements OnInit {
   @Input("filter") filter: string="";
 
   ngOnInit() {
-    this.opereFilter();
-    this.refresh();
+    this.refresh(()=>{
+      if(this.filter!="")this.opereFilter();
+    });
   }
 
-  refresh(){
+  refresh(func=null){
     this.coupons=JSON.parse(JSON.stringify(this.config.values.modeles));
     if(this.shop){
       this.api.getoldcoupons(this.shop._id,this.shop.owner).subscribe((r:any)=>{
         r.forEach((it)=>{
           this.coupons.splice(0,0,it);
         });
-      });
+        if(func!=null)func();
+      },(error)=>{showError(this,error);});
     } else {
       this.coupons=JSON.parse(JSON.stringify(this.user.old_coupons));
       this.coupons.push(this.config.values.modeles);
@@ -45,7 +48,7 @@ export class OldCouponsComponent implements OnInit {
   deleteCoupon(coupon: any) {
     this.api.removeCoupon(coupon._id,true).subscribe(()=>{
       this.ondelete.emit();
-    });
+    },(error)=>{showError(this,error);});
   }
 
   it(x,y){
@@ -56,13 +59,15 @@ export class OldCouponsComponent implements OnInit {
 
   opereFilter() {
     var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
+    this.coupons=[];
     var index=0;
     lst_coupons.forEach((it)=>{
       if(it.tags.length>0){
         var intersect=this.filter.split(",").filter(value => -1 !== it.tags.split(",").indexOf(value));
-        if(intersect.length==0)
-          this.coupons.splice(index,1);
+        if(intersect.length>0)
+          this.coupons.push(it);
       }
     });
+    if(this.coupons.length==0)this.coupons=lst_coupons;
   }
 }

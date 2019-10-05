@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
+import {showError} from "../tools";
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.api.getusers().subscribe((r:any)=>{
       this.users=r;
-    })
+    },(error)=>{showError(this,error);})
   }
 
 }

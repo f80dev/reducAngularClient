@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, createMap, createMarker, getMarkerLayer, normeString} from '../tools';
+import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, showError} from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
@@ -39,7 +39,6 @@ export class NewshopComponent implements OnInit {
   }
 
   add() {
-    debugger
     var tags:any=this.tags;
     if(typeof tags=="string")tags=tags.split(",");
 
@@ -47,7 +46,7 @@ export class NewshopComponent implements OnInit {
     this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
-    });
+    },(error)=>{showError(this,error);});
   }
 
   cancel(){

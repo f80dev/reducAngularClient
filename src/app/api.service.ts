@@ -23,7 +23,6 @@ export class ApiService {
   }
 
   addshop(name: string, address: string, owner: string,lng:number,lat:number,tags=null) {
-    debugger
     if(tags==null || tags=="")tags="null";
     return this.http.get(api('addshop/' + name + '/' + address + '/' + owner+"/"+lng+"/"+lat+"/"+tags, ''));
   }

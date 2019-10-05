@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {$$, createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile} from "../tools";
+import {$$, createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile, showError} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
@@ -60,7 +60,7 @@ export class UserformComponent implements OnInit {
         localStorage.setItem("showCoupon",result.newcoupon);
         this.user.message = result.message;
         this.onflash.emit({message:result.message});
-      });
+      },(error)=>{showError(this,error);});
   }
 
   onSelectFile(event:any) {
@@ -149,7 +149,7 @@ export class UserformComponent implements OnInit {
   private saveUser() {
     this.api.setuser(this.user).subscribe((r:any)=>{
       this.user.message=r.message;
-    });
+    },(error)=>{showError(this,error);});
   }
 
   clearAccount(id:string) {

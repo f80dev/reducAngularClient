@@ -11,7 +11,7 @@ export const ADMIN_PASSWORD="hh4271"
 export function showError(vm:any,err:any){
   $$("Error ",err);
   if(vm.toast!=null)
-    vm.toast.open("L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants","dance",{duration:2000});
+    vm.toast.open("L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants","",{duration:2000});
 
 }
 
