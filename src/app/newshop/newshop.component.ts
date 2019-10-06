@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, showError} from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
 
@@ -14,8 +15,8 @@ declare var ol: any;
 })
 
 export class NewshopComponent implements OnInit {
-  shopname = 'La maison du piano';
-  address = '12, rue martel, paris 10';
+  shopname = '';
+  address = 'paris 10';
   show_address="";
   owner = '';
   map: any;
@@ -27,7 +28,9 @@ export class NewshopComponent implements OnInit {
   private lat: number;
   reverseGeocode: boolean=false;
 
-  constructor(public api: ApiService, public route:ActivatedRoute, public router: Router,public loc:LocService,public config:ConfigService) {
+  constructor(public api: ApiService,
+              public route:ActivatedRoute, public _location:Location,
+              public router: Router,public loc:LocService,public config:ConfigService) {
 
   }
 
@@ -50,7 +53,8 @@ export class NewshopComponent implements OnInit {
   }
 
   cancel(){
-    this.router.navigate(['home'],{queryParams:{message:"Enseigne non créée"}});
+    this._location.back();
+    //this.router.navigate(['home'],{queryParams:{message:"Enseigne non créée"}});
   }
 
   refresh_map(){

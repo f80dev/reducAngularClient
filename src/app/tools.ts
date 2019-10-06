@@ -162,7 +162,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
 
   if(coupon!=null){
     iconStyle.setText(new ol.style.Text({
-      text: coupon.label,
+      text: coupon.max+coupon.symbol,
       textAlign:"center",
       font:"14px sans-serif",
       stroke: new ol.style.Stroke({color: 'white', width: 2}),

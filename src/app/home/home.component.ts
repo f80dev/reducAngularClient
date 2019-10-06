@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {$$, checkLogin, showError} from '../tools';
+import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
+import {LoginComponent} from "../login/login.component";
+import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
   selector: 'app-home',
@@ -18,6 +21,7 @@ export class HomeComponent implements OnInit {
               public api: ApiService,
               public toast:MatSnackBar,
               public router: Router,
+              public dialog:MatDialog,
               public config:ConfigService,
               public _location:Location,
               public route: ActivatedRoute) { }
@@ -31,9 +35,10 @@ export class HomeComponent implements OnInit {
     $$("Récupération des paramètres",params);
       this.config.params={
         coupon:params.get("coupon") || "",
-        pass  :params.get("pass") || "",
-        tags  :params.get("tags") || "",
-        user  :params.get("user") || ""
+        pass:params.get("pass") || "",
+        tags:params.get("tags") || "",
+        user:params.get("user") || "",
+        map:params.get("map") || "",
       };
 
       if(this.config.params.coupon==""){
@@ -121,6 +126,22 @@ export class HomeComponent implements OnInit {
 
     this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
       this.user=u;
+      if(this.user.lastCGU<this.config.values.cgu.dtModif && this.user.email.index("fictif.com")==-1){
+        this.dialog.open(PromptComponent,{
+          width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
+            question:this.config.values.cgu.content,
+            onlyConfirm:true}})
+          .afterClosed().subscribe((result:any) => {
+            if(result=="yes") {
+              this.user.lastCGU = new Date().getTime();
+              this.api.setuser(this.user).subscribe(() => {
+              });
+            }
+            else{
+              this.router.navigate(["home"]);
+            }
+        });
+      }
       this.user.message=message;
       if(this.user.message.startsWith("#"))this.user.message=this.user.message.substr(1);
       if(message.startsWith("#")){

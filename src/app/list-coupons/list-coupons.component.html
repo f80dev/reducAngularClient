@@ -109,17 +109,22 @@
           {{coupon.gain}}{{coupon.symbol}} offert(es)
           <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
-        <br><br>
 
+
+        <div *ngIf="coupon.canbedeal && coupon.showCode">
+          <br><br>
+          <table style="text-align: left;display: inline-block;font-size:small;"
+                 cellpadding="2" name="zoneInfo"
+          >
+            <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
+            <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
+            <tr><td>Immédiat</td><td>+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
+          </table><br>
+        </div>
         <!--La table des gains-->
-        <table style="text-align: left;display: inline-block;font-size:small;"
-               cellpadding="2" name="zoneInfo"
-               *ngIf="coupon.canbedeal && coupon.showCode">
-          <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
-          <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
-          <tr><td>Immédiat</td><td>+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
-        </table><br>
+
         <span style="font-size: medium">
+          <br>
             Reste <app-timer [end]="coupon.dtEnd"></app-timer>
           </span>
       </td>

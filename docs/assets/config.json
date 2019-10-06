@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.0.5",
+  "version":"0.0.6",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -15,6 +15,11 @@
   "support":{
     "forum":"",
     "email":"contact@reducshare.com"
+  },
+
+  "cgu":{
+    "dtModif":1570395953,
+    "content":"https://reducshare.com/cgu.html"
   },
 
 

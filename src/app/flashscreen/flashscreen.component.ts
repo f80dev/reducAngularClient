@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-flashscreen',
@@ -8,7 +9,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 export class FlashscreenComponent implements OnInit {
   private timer: any;
 
-  constructor() { }
+  constructor(public config:ConfigService) { }
 
   @Input("duration") duration:number=5;
   @Input("message") message:string="";
@@ -21,11 +22,13 @@ export class FlashscreenComponent implements OnInit {
 
   close(){
     clearTimeout(this.timer);
+    this.config.visibleTuto=false;
     this.onclose.emit();
   }
 
   ngOnInit(): void {
     this.localMessage=""+this.message;
+    this.config.visibleTuto=true;
     if(this.message!=null){
       if(this.message.startsWith("#"))this.message=this.message.substr(1);
       this.timer=setTimeout(()=>{

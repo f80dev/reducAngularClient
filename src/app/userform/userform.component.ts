@@ -43,7 +43,16 @@ export class UserformComponent implements OnInit {
 
 
   ngOnInit() {
-
+    if(this.config.params.map!=null){
+      this.openLoc();
+      if(this.config.params.map.indexOf(",")>-1){
+        setTimeout(()=>{
+          var latlon=this.config.params.map.split(",");
+          this.map.getView().setCenter(ol.proj.fromLonLat([Number(latlon[1]), Number(latlon[0])]));
+          this.showPromoInSquare();
+        },500)
+      }
+    }
   }
 
 
@@ -99,7 +108,10 @@ export class UserformComponent implements OnInit {
         });
 
         if(bContinue){
-          var marker=createMarker(Number(c.lng),Number(c.lat),this.config.values.icon_coupon,c,0.15,(coupon_sel)=>{
+          var icon=this.config.values.icon_coupon;
+          var scale=Math.max(0.35/coupons.length,0.10);
+          if(coupons.length<3)icon=c.picture;
+          var marker=createMarker(Number(c.lng),Number(c.lat),icon,c,scale,(coupon_sel)=>{
             this.user.message=coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol;
           });
           markers.push(marker);

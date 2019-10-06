@@ -48,6 +48,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import { VisualComponent } from './visual/visual.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { AdminComponent } from './admin/admin.component';
+import { CguComponent } from './cgu/cgu.component';
+import { SafePipe } from './safe.pipe';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -72,7 +74,9 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     InputComponent,
     VisualComponent,
     ScannerComponent,
-    AdminComponent
+    AdminComponent,
+    CguComponent,
+    SafePipe
   ],
   entryComponents: [
     NewCouponComponent,
