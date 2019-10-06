@@ -8,13 +8,19 @@
     </mat-form-field>
     <br>
 
-    <mat-form-field class="form-field-style">
+    <mat-form-field class="form-field-style" style="width:85%;margin-right:5px;">
       <input id="txtShopAddress" type="text" matInput placeholder="adresse" [(ngModel)]="address"
              (change)="showOnMap()">
       <button mat-button *ngIf="address" matSuffix mat-icon-button aria-label="Clear" (click)="address=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+
+    <button mat-button mat-flat-button mat-icon-button (click)="localize()">
+      <mat-icon>map</mat-icon>
+    </button>
+    <br>
+
     <mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">
       Adresse interprétée: {{show_address}}
     </mat-label>
