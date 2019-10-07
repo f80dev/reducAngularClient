@@ -19,6 +19,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('if') _if: boolean=true;
   @Input('image') image: string="./assets/img/tips.png";
   @Input('icon') icon:string="";
+  @Input('button') _button:string="";
   @Input('height') height:string="auto";
 
   constructor(public config:ConfigService,public transPipe:TransPipe) {}
@@ -62,6 +63,7 @@ export class TutoComponent implements OnChanges,OnInit {
   ngOnInit(): void {
     if(this.subtitle.length>0)this._type="title";
     if(this.icon!=null && this.icon.length>0)this.image="";
+    if(this._button!=null && this._button.length>0)this.image="";
     if(this._type=="tips"){
       this._if=false;
     }

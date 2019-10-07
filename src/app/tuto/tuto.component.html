@@ -7,6 +7,9 @@
           <span *ngIf="icon?.length>0">
             <mat-icon style="margin:10px;">{{icon}}</mat-icon>
           </span>
+          <span *ngIf="_button?.length>0">
+            <button mat-button mat-flat-button mat-icon-button><mat-icon style="margin:10px;">{{_button}}</mat-icon></button>
+          </span>
         </td>
         <td><span style="font-size: small;font-weight: normal;">{{text}}</span></td>
       </tr>

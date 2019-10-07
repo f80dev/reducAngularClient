@@ -119,7 +119,6 @@ export class NewshopComponent implements OnInit {
         this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
         getMarkerLayer(this.map).addFeature(createMarker(this.lng, this.lat,this.config.values.icon_shop,null,0.2));
       }
-
     });
   }
 
@@ -131,6 +130,8 @@ export class NewshopComponent implements OnInit {
       this.reverseGeocode=true;
       this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
       this.refresh_map();
+    },()=>{
+      this.toast.open("Vous avez désactivé la localisation",null,{duration:2000});
     });
   }
 

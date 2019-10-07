@@ -83,7 +83,15 @@ export class UserformComponent implements OnInit {
 
   addshop() {
     this.showMap=false;
-    this.router.navigate(['shop'],{queryParams:{userid:this.user._id,tags:this.user.tags,anonymous:this.user.email.indexOf("fictif.com")>-1}});
+    this.router.navigate(
+      ['shop'],
+      {queryParams:
+          {
+            userid:this.user._id,
+            tags:this.user.tags,
+            anonymous:this.user.email.indexOf("fictif.com")>-1
+          }
+      });
   }
 
 

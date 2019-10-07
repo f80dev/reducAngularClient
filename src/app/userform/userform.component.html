@@ -86,23 +86,23 @@
                      *ngIf="showOldPromos">
     </app-old-coupons>
 
-    <app-tuto [delay]="10" icon="map"
+    <app-tuto [delay]="10" button="map"
               label="Vous pouvez voir les promotions autours de vous en activant la carte">
     </app-tuto>
 
-    <app-tuto [delay]="12" icon="account_balance"
+    <app-tuto [delay]="12" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="15" icon="account_balance"
+    <app-tuto [delay]="15" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="5" icon="build"
+    <app-tuto [delay]="5" button="build"
               label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
     </app-tuto>
 
-    <app-tuto [delay]="8" icon="camera_alt" [if]="config.webcamsAvailable>0"
+    <app-tuto [delay]="8" button="camera_alt" [if]="config.webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 

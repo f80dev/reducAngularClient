@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
         tags:params.get("tags") || "",
         user:params.get("user") || "",
         map:params.get("map") || "",
+        message:params.get("message") || "",
       };
 
       if(this.config.params.coupon==""){
@@ -84,7 +85,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem("user",u._id);
         this.user = u;
         this.connect(p.coupon,p.pass);
-        this.refresh(this.route.snapshot.queryParamMap.get("message"));
+        this.refresh(p.message);
       });
     })
   }

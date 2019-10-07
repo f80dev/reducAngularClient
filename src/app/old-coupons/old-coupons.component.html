@@ -1,16 +1,21 @@
 <mat-card class="app-card" style="background: none;">
-  <mat-card-title class="app-card-title">
+  <mat-toolbar class="app-toolbar">
     {{title}}
     <span class="spacer">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </span>
-
-      <button class="small-button" mat-button mat-flat-button *ngIf="filter?.length>0" (click)="opereFilter()">Filtrer</button>
+    <button class="small-button" mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0" (click)="opereFilter()">
+      <mat-icon>filter_list</mat-icon>
+    </button>
     &nbsp;
-      <button class="small-button" mat-button mat-flat-button *ngIf="filter?.length>0" (click)="refresh()">Tous</button>
+    <button class="small-button" mat-button mat-icon-button mat-flat-button *ngIf="filter?.length>0" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
     &nbsp;
-      <button class="small-button" mat-button mat-flat-button (click)="oncancel.emit()">Fermer</button>
-  </mat-card-title>
+    <button class="small-button" mat-icon-button mat-button mat-flat-button (click)="oncancel.emit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
 
   <mat-card-content>
     <mat-list style="padding:0px;">
