@@ -4,18 +4,26 @@
     <span class="spacer">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </span>
-    <button class="small-button" mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0" (click)="opereFilter()">
+    <button class="small-button" mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
       <mat-icon>filter_list</mat-icon>
     </button>
     &nbsp;
-    <button class="small-button" mat-button mat-icon-button mat-flat-button *ngIf="filter?.length>0" (click)="refresh()">
-      <mat-icon>refresh</mat-icon>
-    </button>
+
     &nbsp;
     <button class="small-button" mat-icon-button mat-button mat-flat-button (click)="oncancel.emit()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar>
+  <span *ngIf="withFilter" style="font-size: small">
+    Filtre actif : {{filter}}
+    <button mat-button mat-icon-button (click)="refresh()">
+      <mat-icon>cancel</mat-icon>
+    </button>
+
+  </span>
+
+  <br>
+
 
   <mat-card-content>
     <mat-list style="padding:0px;">

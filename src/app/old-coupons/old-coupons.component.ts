@@ -13,6 +13,7 @@ export class OldCouponsComponent implements OnInit {
   constructor(public api:ApiService,public config:ConfigService) { }
 
   coupons:any[]=[];
+  withFilter=false;
 
   @Input("shop") shop:any;
   @Input("user") user:any;
@@ -30,6 +31,7 @@ export class OldCouponsComponent implements OnInit {
   }
 
   refresh(func=null){
+    this.withFilter=false;
     this.coupons=JSON.parse(JSON.stringify(this.config.values.modeles));
     if(this.shop){
       this.api.getoldcoupons(this.shop._id,this.shop.owner).subscribe((r:any)=>{
@@ -58,6 +60,7 @@ export class OldCouponsComponent implements OnInit {
   }
 
   opereFilter() {
+    this.withFilter=true;
     var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
     this.coupons=[];
     var index=0;

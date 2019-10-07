@@ -18,3 +18,8 @@
   cursor: inherit;
   display: block;
 }
+
+.detail_promo {
+  font-size: 1em;
+  margin-bottom: 10px;
+}

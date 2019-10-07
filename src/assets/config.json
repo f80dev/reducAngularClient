@@ -69,7 +69,7 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"tout achat d'un montant supérieur a 20€",
+      "conditions":"pour tout achat d'un montant supérieur a 20€",
       "tags":"restaurant,bar"
     },
     {
@@ -87,7 +87,7 @@
       "duration":480,
       "stock":200,
       "max_coupon":5000,
-      "conditions":"tout séjour de minimum 3 nuits",
+      "conditions":"pour tout séjour de minimum 3 nuits",
       "tags":"hôtel"
     },
     {
@@ -105,7 +105,7 @@
       "duration":480,
       "stock":50,
       "max_coupon":5000,
-      "conditions":"tout achat quelque soit le montant",
+      "conditions":"pour tout achat quelque soit le montant",
       "tags":"alimentaire"
     },
     {
@@ -123,7 +123,7 @@
       "duration":480,
       "stock":200,
       "max_coupon":500,
-      "conditions":"simple présentation du coupon",
+      "conditions":"sur simple présentation du coupon",
       "tags":"concert,événement"
     },
     {
@@ -141,7 +141,7 @@
       "duration":480,
       "stock":200,
       "max_coupon":500,
-      "conditions":"tout achat d'une bière minimum",
+      "conditions":"pour tout achat d'une bière minimum",
       "tags":"bar"
     },
     {
@@ -159,7 +159,7 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"tout achat d'un montant supérieur a 20€",
+      "conditions":"pour tout achat d'un montant supérieur a 20€",
       "tags":"alimentaire"
     },
     {
@@ -176,7 +176,7 @@
       "duration":480,
       "stock":2000,
       "max_coupon":5000,
-      "conditions":"toute inscription a au minimum 5 heures de cours",
+      "conditions":"pour toute inscription à au minimum 5 heures de cours",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/musical-keyboard_1f3b9.png",
       "tags":"services"
     },
@@ -194,7 +194,7 @@
       "duration":480,
       "stock":500,
       "max_coupon":5000,
-      "conditions":"50 points cumulé via ReducShare",
+      "conditions":"pour 50 points cumulé via ReducShare",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/first-place-medal_1f947.png",
       "tags":"fidélisation"
     },
@@ -212,7 +212,7 @@
       "duration":480,
       "stock":500,
       "max_coupon":5000,
-      "conditions":"l'achat d'une entrée",
+      "conditions":"sur l'achat d'une entrée",
       "picture":"https://cdn.dribbble.com/users/1526121/screenshots/3322609/circus.gif",
       "tags":"événementiel,exposition"
     }

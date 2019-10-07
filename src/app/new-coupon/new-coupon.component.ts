@@ -30,9 +30,10 @@ export class NewCouponComponent implements OnInit {
     breakable:false,
     unity: 'minute',
     delay:0,
+    nb_partage:100,
     pluriel:true,
     min_price:0,  //prix minimum pour la promotion
-    conditions:"un achat d'un montant supérieur à 15€",
+    conditions:"pour un achat d'un montant supérieur à 15€",
     share_bonus: 3,
     direct_bonus: 5,
     pay_bonus: 10,
@@ -94,7 +95,7 @@ export class NewCouponComponent implements OnInit {
 
   normalize_conditions(coupon){
     //Traitement des conditions pour coller au texte
-    if(coupon.conditions.startsWith("pour "))coupon.conditions=coupon.conditions.substr(5);
+    if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;
     coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
   }
 
@@ -105,6 +106,11 @@ export class NewCouponComponent implements OnInit {
     coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
     coupon.delay=0;
     coupon.owner=this.userid;
+
+    if(coupon.nb_partage==0)
+      coupon.share_bonus=0;
+    else
+      coupon.share_bonus=1/coupon.nb_partage;
 
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
@@ -138,6 +144,7 @@ export class NewCouponComponent implements OnInit {
   selectOldAsModel(coupon: any) {
     coupon.shop=this.coupon.shop;
     this.coupon=coupon;
+    this.coupon.nb_partage=Math.round(1/coupon.share_bonus);
     this.coupon.dtStart=new Date().getTime();
     this.coupon.duration_hours=Math.trunc(coupon.duration);
     this.preview=coupon.picture;
