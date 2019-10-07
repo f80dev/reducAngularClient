@@ -45,9 +45,14 @@
     <mat-card-subtitle>
 
       <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
-      <span *ngIf="coupon.owner!=user._id || coupon.origin!=coupon._id">
+      <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
+      <span *ngIf="coupon.canbedeal">
         jusqu'a {{coupon.max}}{{coupon.symbol}} offert pour {{coupon.conditions}}
       </span>
+      <span *ngIf="!coupon.canbedeal">
+        Récupérer {{coupon.gain}}{{coupon.symbol}} offert
+      </span>
+      </div>
 
 
       <!--Affichage des coupons origines pour leur propriétaire-->

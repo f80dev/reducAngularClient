@@ -29,7 +29,7 @@
           <input type="text" matInput
                  id="txtTitle"
                  autofocus
-                 placeholder="{{'Titre de la promotion (titre non visible du client' | trans}})"
+                 placeholder="{{'Titre de la promotion (titre non visible du client)' | trans}}"
                  [(ngModel)]="coupon.title">
         </mat-form-field>
 
@@ -107,9 +107,9 @@
       <mat-step>
         <ng-template matStepLabel>Gains pour les clients</ng-template>
         <div class="detail_promo">
-        le client gagne immédiatement {{coupon.direct_bonus}}{{coupon.symbol}}
-        lorsqu'il flash le coupon, puis 1{{coupon.symbol}} supplémentaire pour {{coupon.nb_partage}} partages
-         , et enfin {{coupon.pay_bonus}}{{coupon.symbol}} si un client fait un achat avec.
+          le client gagne immédiatement {{coupon.direct_bonus}}{{coupon.symbol}}
+          lorsqu'il flash le coupon, puis 1{{coupon.symbol}} supplémentaire pour {{coupon.nb_partage}} partages
+          ,et enfin {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) pour chaque usage des promotions distribuées.
         </div>
         <br>
 

@@ -5,6 +5,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card {
   margin:4px;
+  margin-bottom: 10px;
   background-color: #6e6e6e;
   max-width:700px;
   vertical-align: text-top;

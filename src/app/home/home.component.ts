@@ -47,9 +47,10 @@ export class HomeComponent implements OnInit {
         if(params2.indexOf("/home/")>-1)this.config.params.coupon=params2.split("/home/")[1];
       }
 
-      $$("Netoyage de l'url de lancement");
-      var url=this._location.path();
-      this._location.replaceState(url, '');
+      $$("Netoyage de l'url de lancement:"+this._location.path());
+      this._location.replaceState(this._location.path().split('?')[0],"");
+      this._location.replaceState(this._location.path().split('/home')[0],"");
+
 
       func(this.config.params);
   }
