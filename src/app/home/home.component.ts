@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
 
     this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
       this.user=u;
-      if(this.user.lastCGU<this.config.values.cgu.dtModif && this.user.email.index("fictif.com")==-1){
+      if(this.user.lastCGU<this.config.values.cgu.dtModif && this.user.email.indexOf("fictif.com")==-1){
         this.dialog.open(PromptComponent,{
           width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
             question:this.config.values.cgu.content,

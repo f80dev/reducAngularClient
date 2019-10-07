@@ -16,6 +16,7 @@ declare var ol: any;
 
 export class NewshopComponent implements OnInit {
   shopname = '';
+  _public=false;
   address = 'paris 10';
   show_address="";
   owner = '';
@@ -46,7 +47,7 @@ export class NewshopComponent implements OnInit {
     if(typeof tags=="string")tags=tags.split(",");
 
     const owner = localStorage.getItem('user');
-    this.api.addshop(this.shopname, this.address, owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
+    this.api.addshop(this.shopname, this.address, this._public,owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
     },(error)=>{showError(this,error);});
@@ -60,7 +61,6 @@ export class NewshopComponent implements OnInit {
   refresh_map(){
     clearTimeout(this.handle);
     this.handle=setTimeout(()=>{
-      debugger
       var l=getMarkerLayer(this.map);
       //var features=l.getSource().getFeatures();
       var center_pos=ol.proj.toLonLat(this.map.getView().getCenter());
