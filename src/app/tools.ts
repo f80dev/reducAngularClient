@@ -10,7 +10,7 @@ import {LoginComponent} from "./login/login.component";
 export const ADMIN_PASSWORD="hh4271"
 
 export function showError(vm:any,err:any){
-  $$("Error ",err);
+  $$("!Error ",err);
   if(vm.toast!=null)
     vm.toast.open("L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants","",{duration:2000});
 
@@ -112,13 +112,17 @@ export function createMap(center:any,
   });
 
   var vectorLayer=new ol.layer.Vector({source: vectorSource});
+  //var olSource=new ol.layer.Tile({source: new ol.source.OSM()});
+  //Info sur la source : https://www.bingmapsportal.com/Application
+  var olSource=new ol.layer.Tile({source: new ol.source.BingMaps({
+      imagerySet: 'Road',
+      key: 'Am04xtfIsPy43By5-20LAeD2uxvrX9Yfe3DVunnWQoCeT3Kzks9J7-9DU63EzEaf'
+    })});
 
   var rc=new ol.Map({
     target: 'map',
     layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
-      }),
+      olSource,
       vectorLayer,
     ],
     view: new ol.View({

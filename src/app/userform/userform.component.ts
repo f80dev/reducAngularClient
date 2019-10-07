@@ -216,8 +216,8 @@ export class UserformComponent implements OnInit {
   }
 
   securise(){
+    localStorage.setItem("old_user",localStorage.getItem("user"));
     loginWithEmail(this,this.user,(result:any)=>{
-      debugger
       this.user=result.user;
       this.onupdate.emit(this.user);
     },()=>{

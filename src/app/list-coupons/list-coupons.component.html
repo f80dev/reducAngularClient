@@ -152,9 +152,16 @@
       Offre valable pour {{coupon.conditions}}
     </div>
 
-    <app-tuto [if]="!coupon.canbedeal" label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur"></app-tuto>
+    <app-tuto [if]="!coupon.canbedeal"
+              label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
+    </app-tuto>
+
+    <app-tuto [if]="coupon.origin==coupon._id" [delay]="3" button="printer"
+              label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promo">
+    </app-tuto>
+
     <app-tuto [if]="coupon.origin==coupon._id"
-              [delay]="5" icon="not_interested"
+              [delay]="5" button="not_interested"
               label="Vous pouvez interrompre la distribution d'une promotion à tout instant">
     </app-tuto>
 

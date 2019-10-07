@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
-import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog, MatSnackBar} from "@angular/material";
 
 declare var ol: any;
@@ -19,7 +18,7 @@ declare var ol: any;
 export class NewshopComponent implements OnInit {
   shopname = '';
   _public=false;
-  address = 'paris 10';
+  address = 'paris,france';
   show_address="";
   anonymous=true;
   owner = '';
@@ -104,13 +103,13 @@ export class NewshopComponent implements OnInit {
   }
 
 
-  showOnMap() {
+  showOnMap(zoom=15) {
     this.loc.getAddress(this.address,(res)=> {
       this.lng=Number(res[0].lon);
       this.lat= Number(res[0].lat);
       this.show_address=res[0].display_name;
       if(this.map==null){
-        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,18,0.2,(event)=>{
+        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,zoom,0.2,(event)=>{
           //Déplacement de la carte
           this.refresh_map();
         });

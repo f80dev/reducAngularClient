@@ -86,8 +86,8 @@
                      *ngIf="showOldPromos">
     </app-old-coupons>
 
-    <app-tuto [delay]="10" button="map"
-              label="Vous pouvez voir les promotions autours de vous en activant la carte">
+    <app-tuto [delay]="10" button="map" [if]="user.coupons?.length==0"
+              label="Vous pouvez voir les promotions disponibles autour de vous en activant la carte">
     </app-tuto>
 
     <app-tuto [delay]="12" button="account_balance"
@@ -98,7 +98,7 @@
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="5" button="build"
+    <app-tuto [delay]="10" button="build"
               label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
     </app-tuto>
 

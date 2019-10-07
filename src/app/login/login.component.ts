@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
   }
 
   public socialSignIn(socialPlatform : string) {
-    debugger
     let socialPlatformProvider;
     if(socialPlatform == "facebook"){
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
@@ -86,10 +85,8 @@ export class LoginComponent implements OnInit {
             $$("L'email "+socialUser.email+" n'était pas encore enregistré. On l'affecte au compte existant");
             this.api.setuser(this.data.user).subscribe((res:any)=>{
               localStorage.setItem("user",res.user._id);
-              res.force_refresh=true;
-              res.message="Vous êtes maintenant authentifier";
-              this.dialogRef.close(res);
-            });
+              this.dialogRef.close({user:res.user,message:"Vous êtes maintenant authentifier",code:200,force_refresh:true});
+            },(err)=>{showError(this,err)});
           } else {
             $$("L'email "+socialUser.email+" est déjà utilisé par le compte "+u._id);
             if(u._id!=localStorage.getItem("user")){
@@ -111,9 +108,7 @@ export class LoginComponent implements OnInit {
           }
         });
       },
-      (err)=>{
-        $$("!Erreur, rejet de l'authentification",err);
-      }
+      (err)=>{showError(this,err);}
       );
   }
 

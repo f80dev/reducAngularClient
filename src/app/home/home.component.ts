@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.analyse_params((p)=>{
-      this.analyse_login(p.tags,(u)=>{
+      this.analyse_login(p.tags,(u:any)=>{
         localStorage.setItem("user",u._id);
         this.user = u;
         this.connect(p.coupon,p.pass);
@@ -127,31 +127,48 @@ export class HomeComponent implements OnInit {
   refresh(message="") {
 
     if(message==null)message="";
+    var user_id=localStorage.getItem('user');
+    $$("Récupération du compte "+user_id);
+    this.api.getuser(user_id).subscribe((u:any) => {
+      if(u==null || u._id==null){
+        this.raz();
+      }
 
-    this.api.getuser(localStorage.getItem('user')).subscribe((u) => {
       this.user=u;
-      if(this.user.lastCGU<this.config.values.cgu.dtModif && this.user.email.indexOf("fictif.com")==-1){
-        this.dialog.open(PromptComponent,{
-          width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
-            question:this.config.values.cgu.content,
-            onlyConfirm:true}})
-          .afterClosed().subscribe((result:any) => {
+
+      if(this.user.email.indexOf("fictif.com")==-1){
+
+        if(this.user.lastCGU<this.config.values.cgu.dtModif){
+          this.dialog.open(PromptComponent,{
+            width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
+              question:this.config.values.cgu.content,
+              onlyConfirm:true}})
+            .afterClosed().subscribe((result:any) => {
+
             if(result=="yes") {
               this.user.lastCGU = new Date().getTime();
               this.api.setuser(this.user).subscribe(() => {
               });
             }
             else{
-              this.router.navigate(["home"]);
+              var id_old_user=localStorage.getItem("old_user");
+              if(localStorage.getItem("user")==id_old_user)
+                localStorage.clear();
+              else
+                localStorage.setItem("user",id_old_user);
+
+              this.refresh("Vous ne pouvez pas être authentifier sans valider les CGUs");
             }
-        });
+          });
+        }
       }
+
       showMessage(this,message);
 
       if(this.user.coupons!=null){
         this.coupons=[];
         var i=0;
-        this.user.coupons.forEach((coupon)=>{
+        this.user.coupons.forEach((coupon:any)=>{
           if(coupon.origin!=coupon._id){
             if(i==0)coupon.visible=true;
             this.coupons.push(coupon);
@@ -167,10 +184,15 @@ export class HomeComponent implements OnInit {
     this.showMessage=false;
   }
 
-  updateUser(user) {
+  updateUser(user:any) {
     if(localStorage.getItem("user")==user._id)
       this.refresh();
     else
       this.ngOnInit();
+  }
+
+  private raz() {
+    localStorage.clear();
+    this.ngOnInit();
   }
 }
