@@ -124,7 +124,7 @@
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  id="txtShareBonus" title="Bonus récupérer à chaque ouverture du coupon partagé"
-                 placeholder="Partages pour 1{{coupon.symbol}} supplémentaire" [(ngModel)]="coupon.nb_partage">
+                 placeholder="Nombre de partages pour 1{{coupon.symbol}} supplémentaire" [(ngModel)]="coupon.nb_partage">
         </mat-form-field>
         <app-tuto type="tips"
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
@@ -219,7 +219,7 @@
     <button mat-flat-button class="app-button"
             id="btnValide"
             *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
-            (click)="addcoupon(coupon)">Valide</button>
+            (click)="addcoupon(coupon)">Valider</button>
 
     <button mat-flat-button
             id="btnCancel"

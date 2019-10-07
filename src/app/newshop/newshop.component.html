@@ -49,8 +49,9 @@
       Rendre la promotion public (visible sur la carte)
     </mat-checkbox>
 
+    <br>
     <mat-form-field class="form-field-style">
-      <mat-label>Etiquettes</mat-label>
+      <mat-label>Type d'établissement (plusieurs choix possible)</mat-label>
       <mat-select id="txtShopTags" [(ngModel)]="tags"  multiple>
         <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">{{tag}}</mat-option>
       </mat-select>

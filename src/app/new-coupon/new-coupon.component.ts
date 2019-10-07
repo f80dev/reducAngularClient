@@ -143,10 +143,16 @@ export class NewCouponComponent implements OnInit {
 
   selectOldAsModel(coupon: any) {
     coupon.shop=this.coupon.shop;
+
+    if(coupon.duration!=null)coupon["duration_hours"]=Math.trunc(coupon.duration/3600);
+    if(coupon.duration_jours==null)coupon["duration_jours"]=0;
+    if(coupon.duration_hours==null)coupon["duration_hours"]=0;
+    if(coupon.duration==null)coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)*3600;
+    if(coupon.duration<=0)coupon.duration=3600;
+
     this.coupon=coupon;
     this.coupon.nb_partage=Math.round(1/coupon.share_bonus);
     this.coupon.dtStart=new Date().getTime();
-    this.coupon.duration_hours=Math.trunc(coupon.duration);
     this.preview=coupon.picture;
     this.showOldCoupon=false;
   }

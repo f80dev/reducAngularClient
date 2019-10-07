@@ -104,6 +104,8 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem("user",u._id);
                 this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
               }
+             } else {
+              $$("!Il s'agit d'une reconnexion au compte déjà enregistré, normalement c'est une erreur")
             }
           }
         });
