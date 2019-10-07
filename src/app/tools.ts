@@ -173,7 +173,7 @@ export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Fun
   vm.dialog.open(LoginComponent,{width:'250px',data: {facebook:true,google:true,user:user}})
     .afterClosed().subscribe((result:any) => {
     if(result){
-      if(func)func();
+      if(func)func(result);
     } else {
       $$("Probleme de récupération du user");
       if(func_error)func_error();

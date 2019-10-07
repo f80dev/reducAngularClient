@@ -52,17 +52,19 @@
           <td>Edition</td>
           <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
         </tr>
+        <tr><td><br></td></tr>
+        <tr>
+          <td>
+            <mat-icon>mail</mat-icon>
+          </td>
+          <td>
+            : <a href="mailto:{{config.values.support?.email}}">{{config.values.support?.email}}</a><br>
+          </td>
+        </tr>
       </table>
-      <br>
-
-      <br>
-      <br>
-      contact:<br>
-      <a href="mailto:{{config.values.support?.email}}">{{config.values.support?.email}}</a><br>
-
-
-      <br><br>
     </div>
+    <br>
+
   </mat-card>
 
 

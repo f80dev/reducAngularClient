@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, checkLogin, showError, showMessage} from '../tools';
+import {$$, showError, showMessage} from '../tools';
 import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
-import {LoginComponent} from "../login/login.component";
 import {PromptComponent} from "../prompt/prompt.component";
 
 @Component({
