@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <p *ngIf="data.question?.length>0 && !data.question.startsWith('http') && !data.question.startsWith('./')">{{data.question}}</p>
   <div *ngIf="data.question?.length>0 && (data.question.startsWith('http') || data.question.startsWith('./'))">
-    <iframe [src]="data.question | safe: 'url'" width="100%"></iframe>
+    <iframe [src]="data.question | safe: 'resourceUrl'" width="100%"></iframe>
   </div>
 
   <mat-form-field *ngIf="!data.onlyConfirm" style="width: 95%;">

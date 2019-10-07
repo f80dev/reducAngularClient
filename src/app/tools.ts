@@ -81,6 +81,9 @@ export function sendToPrint(section="print-section"){
 }
 
 export function $$(s: string, obj: any= null) {
+  if(s.startsWith("!")){
+    debugger;
+  }
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
   if (obj != null) {
     obj = JSON.stringify(obj);

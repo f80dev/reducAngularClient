@@ -4,7 +4,7 @@
     <span class="spacer"></span>
     <button mat-button mat-flat-button
             id="btnValide" *ngIf="shopname?.length>0"
-            class="app-button" (click)="add()">Valide</button>
+            class="app-button" (click)="add()">Valider</button>
   </mat-toolbar>
 
 
@@ -62,6 +62,11 @@
   </mat-card-content>
 
   <mat-card-actions class="app-card-action">
+
+    <button mat-button mat-flat-button
+            id="btnValide2" *ngIf="shopname?.length>0"
+            class="app-button" (click)="add()">Valider</button>
+
 
     <button mat-button mat-flat-button
             id="btnCancel"

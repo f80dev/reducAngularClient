@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
   }
 
   public socialSignIn(socialPlatform : string) {
+    debugger
     let socialPlatformProvider;
     if(socialPlatform == "facebook"){
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
@@ -75,10 +76,9 @@ export class LoginComponent implements OnInit {
     // else if(socialPlatform == "linkedin"){
     //   socialPlatformProvider = LinkedinLoginProvider.PROVIDER_TYPE;
     // }
-
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (socialUser) => {
-        this.data.user.email=socialUser.email;
+    $$("Appel de la plateforme d'authentification "+socialPlatform);
+    this.socialAuthService.signIn(socialPlatformProvider).then((socialUser) => {
+      this.data.user.email=socialUser.email;
         this.data.user.pseudo=socialUser.name;
         this.data.user.photo=socialUser.image;
         this.api.getuser(socialUser.email).subscribe((u:any)=>{
@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
             this.api.setuser(this.data.user).subscribe((res:any)=>{
               localStorage.setItem("user",res.user._id);
               res.force_refresh=true;
+              res.message="Vous êtes maintenant authentifier";
               this.dialogRef.close(res);
             });
           } else {
@@ -108,11 +109,12 @@ export class LoginComponent implements OnInit {
               }
             }
           }
-
         });
-
-
-      });
+      },
+      (err)=>{
+        $$("!Erreur, rejet de l'authentification",err);
+      }
+      );
   }
 
 

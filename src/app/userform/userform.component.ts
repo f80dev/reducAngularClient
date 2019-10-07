@@ -217,6 +217,7 @@ export class UserformComponent implements OnInit {
 
   securise(){
     loginWithEmail(this,this.user,(result:any)=>{
+      debugger
       this.user=result.user;
       this.onupdate.emit(this.user);
     },()=>{
