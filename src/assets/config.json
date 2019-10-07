@@ -52,7 +52,7 @@
       "stock":400,
       "max_coupon":500,
       "conditions":"tout achat d'un montant supérieur a 20€",
-      "tags":""
+      "tags":"boutique,restaurant,alimentaire,bar,concert,services,exposition,hôtel"
     },
     {
       "title":"Les cafés offerts",
@@ -109,7 +109,7 @@
       "tags":"alimentaire"
     },
     {
-      "title":"Des boissons pour le spectacle",
+      "title":"Des boissons offertes à l'entracte",
       "unity":"boisson",
       "symbol":"🍺",
       "breakable":false,
@@ -145,7 +145,7 @@
       "tags":"bar"
     },
     {
-      "title":"Marchand de légumes",
+      "title":"Promo chez le marchand de légumes",
       "unity":"banane",
       "symbol":"🍌",
       "pluriel":true,
