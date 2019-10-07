@@ -1,12 +1,13 @@
 <mat-card class="app-card">
-  <mat-card-title>
+  <mat-toolbar class="app-toolbar">
     Nouvelle enseigne
-    <!--<span class="spacer"></span>-->
-    <!--<button mat-button mat-flat-button-->
-            <!--id="btnValide2" *ngIf="shopname?.length>0"-->
-            <!--class="app-button" (click)="add()">Valide</button>-->
+    <span class="spacer"></span>
+    <button mat-button mat-flat-button
+            id="btnValide" *ngIf="shopname?.length>0"
+            class="app-button" (click)="add()">Valide</button>
+  </mat-toolbar>
 
-  </mat-card-title>
+
   <mat-card-content class="app-card-content">
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
@@ -44,7 +45,7 @@
 
     <br>
 
-    <mat-checkbox [(ngModel)]="_public" id="chkPublic">
+    <mat-checkbox [(ngModel)]="_public" id="chkPublic" (change)="checkLogin()">
       Rendre la promotion public (visible sur la carte)
     </mat-checkbox>
 
@@ -62,9 +63,6 @@
 
 
   <mat-card-actions class="app-card-action">
-    <button mat-button mat-flat-button
-            id="btnValide" *ngIf="shopname?.length>0"
-            class="app-button" (click)="add()">Valide</button>
 
     <button mat-button mat-flat-button
             id="btnCancel"

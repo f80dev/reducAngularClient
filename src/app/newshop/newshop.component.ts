@@ -1,10 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, showError} from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
+import {PromptComponent} from "../prompt/prompt.component";
+import {MatDialog, MatSnackBar} from "@angular/material";
 
 declare var ol: any;
 
@@ -19,26 +21,38 @@ export class NewshopComponent implements OnInit {
   _public=false;
   address = 'paris 10';
   show_address="";
+  anonymous=true;
   owner = '';
   map: any;
   handle:any;
   tags="";
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
+
   private lng: number;
   private lat: number;
   reverseGeocode: boolean=false;
 
   constructor(public api: ApiService,
-              public route:ActivatedRoute, public _location:Location,
-              public router: Router,public loc:LocService,public config:ConfigService) {
+              public toast:MatSnackBar,
+              public dialog:MatDialog,
+              public route:ActivatedRoute,
+              public _location:Location,
+              public router: Router,
+              public loc:LocService,
+              public config:ConfigService) {
 
   }
 
   ngOnInit() {
     checkLogin(this.router);
+
     var t:any=this.route.snapshot.queryParamMap.get("tags");
     if(t!=null)this.tags=t.split(",");
+
+    this.anonymous=(this.route.snapshot.queryParamMap.get("anonymous")!="false");
+    if(!this.anonymous)this._public=true;
+
     this.showOnMap();
   }
 
@@ -118,5 +132,18 @@ export class NewshopComponent implements OnInit {
       this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
       this.refresh_map();
     });
+  }
+
+
+  checkLogin() {
+    if(this.anonymous){
+      this.toast.open("Seul les comptes enregistrés peuvent rendre leurs promotions 'public'","Se connecter",{duration:2000})
+        .onAction().subscribe(()=>{
+          this._location.back();
+      });
+      setTimeout(()=>{
+        this._public=false;
+      },1500);
+    }
   }
 }

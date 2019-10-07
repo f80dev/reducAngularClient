@@ -1,18 +1,20 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
-import {$$, createMap, createMarker, getMarkerLayer, initAvailableCameras, selectFile, showError} from "../tools";
+import {
+  createMap,
+  createMarker,
+  getMarkerLayer,
+  loginWithEmail,
+  selectFile,
+  showError, showMessage
+} from "../tools";
 import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
-import {WebcamUtil} from 'ngx-webcam';
-import {Observable,Subject} from "rxjs";
-import jsQR from "jsqr"
 import {ConfigService} from "../config.service";
-import {LoginComponent} from "../login/login.component";
 
 declare var ol: any;
-
 
 @Component({
   selector: 'app-userform',
@@ -43,7 +45,7 @@ export class UserformComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.config.params.map!=null){
+    if(this.config.params.map!=null && this.config.params.map.length>0){
       this.openLoc();
       if(this.config.params.map.indexOf(",")>-1){
         setTimeout(()=>{
@@ -81,7 +83,7 @@ export class UserformComponent implements OnInit {
 
   addshop() {
     this.showMap=false;
-    this.router.navigate(['shop'],{queryParams:{userid:this.user._id,tags:this.user.tags}});
+    this.router.navigate(['shop'],{queryParams:{userid:this.user._id,tags:this.user.tags,anonymous:this.user.email.indexOf("fictif.com")>-1}});
   }
 
 
@@ -215,16 +217,13 @@ export class UserformComponent implements OnInit {
     this.onupdate.emit(this.user);
   }
 
-  securise() {
-    this.dialog.open(LoginComponent,{width:'250px',data: {facebook:true,google:true,user:this.user}})
-      .afterClosed().subscribe((result:any) => {
-        if(result){
-          this.user=result.user;
-          this.onupdate.emit(this.user);
-        } else {
-          $$("Probleme de récupération du user")
-        }
-
+  securise(){
+    loginWithEmail(this,this.user,(result:any)=>{
+      this.user=result.user;
+      this.onupdate.emit(this.user);
+    },()=>{
+      showMessage(this,"Authentification annulée, vous restez anonyme");
     });
   }
+
 }

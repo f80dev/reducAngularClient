@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {hashCode} from '../tools';
 import {ConfigService} from "../config.service";
+import {TransPipe} from "../trans.pipe";
 
 @Component({
   selector: 'app-tuto',
@@ -20,13 +21,15 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('icon') icon:string="";
   @Input('height') height:string="auto";
 
-  constructor(public config:ConfigService) {}
+  constructor(public config:ConfigService,public transPipe:TransPipe) {}
 
   handle:any;
 
   ngOnChanges() {
     setTimeout(()=>{
       if(this.text==null || this.text.length==0)this.text=this.label;
+      this.text=this.transPipe.transform(this.text);
+
       if(this._if && !this.config.visibleTuto){
         let code="histo"+hashCode(this.text);
         let res=localStorage.getItem(code);

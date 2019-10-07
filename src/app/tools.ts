@@ -5,6 +5,7 @@ import {
   SocialServiceConfig
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
+import {LoginComponent} from "./login/login.component";
 
 export const ADMIN_PASSWORD="hh4271"
 
@@ -147,6 +148,26 @@ export function getMarkerLayer(map:any):any {
   });
   return rc;
 }
+
+export function showMessage(vm:any,s:string,duration=2000){
+  vm.user.message=s;
+  setTimeout(()=>{vm.user.message=""},duration);
+}
+
+export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Function=null) {
+  if(!vm.dialog)$$("La fenetre ne dispose pas de 'dialog'");
+  vm.dialog.open(LoginComponent,{width:'250px',data: {facebook:true,google:true,user:user}})
+    .afterClosed().subscribe((result:any) => {
+    if(result){
+      if(func)func();
+    } else {
+      $$("Probleme de récupération du user");
+      if(func_error)func_error();
+    }
+  });
+}
+
+
 
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   var iconStyle:any = new ol.style.Style({

@@ -1,5 +1,5 @@
 
-  <div class="mat-dialog-title">Indiquer votre email</div>
+  <div class="mat-dialog-title">S'authentifier</div>
   <mat-dialog-content style="background: none;">
     <div *ngIf="message?.length>0">
       <h4>{{message}}</h4>
@@ -8,13 +8,13 @@
 
     <div style="width: 100%;text-align: center;">
       <br>
-      <button *ngIf="data.email"  class="large-button" mat-button mat-flat-button (click)="email_login()">Email</button>
+      <button *ngIf="data.email"  class="large-button" mat-button mat-raised-button (click)="email_login()">Email</button>
       <br><br>
-      <button *ngIf="data.google" class="large-button" mat-button mat-flat-button (click)="socialSignIn('google')">Google</button>
+      <button *ngIf="data.google" class="large-button" mat-button mat-raised-button (click)="socialSignIn('google')">Google</button>
       <br><br>
-      <button *ngIf="data.facebook" class="large-button" mat-button mat-flat-button (click)="socialSignIn('facebook')">Facebook</button>
-      <br><br>
-
+      <button *ngIf="data.facebook" class="large-button" mat-button mat-raised-button (click)="socialSignIn('facebook')">Facebook</button>
+      <br><br><br><br>
+      <button mat-button mat-flat-button (click)="dialogRef.close()">Annuler</button>
     </div>
 
     <!--<mat-form-field class="example-full-width">-->

@@ -74,6 +74,7 @@ export class NewCouponComponent implements OnInit {
     if(params.has("shopid"))this.coupon.shop = params.get("shopid");
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
+      this.preview=this.api.coupon.picture;
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;

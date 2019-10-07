@@ -46,14 +46,22 @@
       <br>
       <img [src]="config.values.logo" style="width:30%;max-width:150px;margin:15px;">
       <br>
-      Réalisé par {{config.values.editor?.author}}<br>
-      <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a>
-      <br><br>
+      <table style="display: inline-block;text-align: left;">
+        <tr><td>Réalisation</td><td>: <a [href]="config.values.editor?.link_author" target="_blank">{{config.values.editor?.author}}</a></td></tr>
+        <tr>
+          <td>Edition</td>
+          <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
+        </tr>
+      </table>
+      <br>
+
+      <br>
       <br>
       contact:<br>
       <a href="mailto:{{config.values.support?.email}}">{{config.values.support?.email}}</a><br>
 
 
+      <br><br>
     </div>
   </mat-card>
 

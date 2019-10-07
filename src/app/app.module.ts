@@ -24,7 +24,7 @@ import {
   MatDialogModule,
   MatIconModule,
   MatInputModule, MatListModule, MatSelectModule,
-  MatSnackBarModule, MatStepperModule
+  MatSnackBarModule, MatStepperModule, MatToolbarModule
 } from '@angular/material';
 import { NewshopComponent } from './newshop/newshop.component';
 import { HomeComponent } from './home/home.component';
@@ -50,6 +50,7 @@ import { ScannerComponent } from './scanner/scanner.component';
 import { AdminComponent } from './admin/admin.component';
 import { CguComponent } from './cgu/cgu.component';
 import { SafePipe } from './safe.pipe';
+import { TransPipe } from './trans.pipe';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -76,7 +77,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ScannerComponent,
     AdminComponent,
     CguComponent,
-    SafePipe
+    SafePipe,
+    TransPipe
   ],
   entryComponents: [
     NewCouponComponent,
@@ -86,6 +88,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   imports: [
     SocketIoModule.forRoot(config),
     MatDialogModule,
+    MatToolbarModule,
     MatProgressSpinnerModule,
     QRCodeModule,
     ClipboardModule,
@@ -110,7 +113,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     DeviceDetectorModule.forRoot()
   ],
   providers: [
-    ApiService,
+    ApiService,TransPipe,SafePipe,
     {provide: SocialServiceConfig,useFactory: getAuthServiceConfigs},
     {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
   ],

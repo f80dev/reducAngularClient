@@ -33,6 +33,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width:80px;
   padding:3px;
   margin:3px;
+  display:inline-block;
 }
 
 @media print {
@@ -51,7 +52,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-title {
-  width:100%;
+  width:100vw;
 }
 
 .medium-button {
@@ -65,4 +66,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card-header {
   margin-bottom: 5px;
+}
+
+.app-toolbar {
+  margin:0px;
+  padding: 0px;
+  background: None;
 }
