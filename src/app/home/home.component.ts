@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, checkLogin, showError} from '../tools';
+import {$$, checkLogin, showError, showMessage} from '../tools';
 import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
@@ -120,6 +120,8 @@ export class HomeComponent implements OnInit {
       }
   }
 
+
+
   refresh(message="") {
 
     if(message==null)message="";
@@ -142,16 +144,7 @@ export class HomeComponent implements OnInit {
             }
         });
       }
-      this.user.message=message;
-      if(this.user.message.startsWith("#"))this.user.message=this.user.message.substr(1);
-      if(message.startsWith("#")){
-        setTimeout(()=>{
-          this.showMessage=true;
-        },2000);
-      }
-
-      //Effacer le message
-      setTimeout(()=>{this.user.message=""},30000);
+      showMessage(this,message);
 
       if(this.user.coupons!=null){
         this.coupons=[];

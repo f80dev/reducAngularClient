@@ -130,19 +130,9 @@ export class UserformComponent implements OnInit {
     this.showMap=!this.showMap;
     if(this.showMap){
       this.loc.getPosition().then((pos:any)=>{
-        if(this.map==null){
-          clearTimeout(this.handle);
-          this.handle=setTimeout(()=>{
-            this.user.position=pos;
-            this.map=createMap(pos,this.config.values.icon_person,15,0.1,()=>{
-              this.showPromoInSquare();
-            },(coupon)=>{
-              this.showCouponOnMap=[coupon];
-            });
-          },1000);
-        } else {
-          this.showPromoInSquare();
-        }
+        this.initMap(pos,15);
+      },()=>{
+        this.initMap({lng:2,lat:48},5);
       });
     } else {
       this.map=null;
@@ -226,4 +216,19 @@ export class UserformComponent implements OnInit {
     });
   }
 
+  private initMap(pos: any,zoom:number=15) {
+    if(this.map==null){
+      clearTimeout(this.handle);
+      this.handle=setTimeout(()=>{
+        this.user.position=pos;
+        this.map=createMap(pos,this.config.values.icon_person,zoom,0.1,()=>{
+          this.showPromoInSquare();
+        },(coupon)=>{
+          this.showCouponOnMap=[coupon];
+        });
+      },1000);
+    } else {
+      this.showPromoInSquare();
+    }
+  }
 }

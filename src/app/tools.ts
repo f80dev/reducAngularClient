@@ -149,10 +149,17 @@ export function getMarkerLayer(map:any):any {
   return rc;
 }
 
-export function showMessage(vm:any,s:string,duration=2000){
+export function showMessage(vm:any,s:string,duration=20000){
+  if(s.startsWith("#")){
+    s=s.substr(1);
+    setTimeout(()=>{vm.showMessage=true;},500);
+  }
+
   vm.user.message=s;
   setTimeout(()=>{vm.user.message=""},duration);
 }
+
+
 
 export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Function=null) {
   if(!vm.dialog)$$("La fenetre ne dispose pas de 'dialog'");
