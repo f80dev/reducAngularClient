@@ -80,7 +80,7 @@ export class NewCouponComponent implements OnInit {
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
     }
-    this.userid=params.get("user") || "";
+    this.userid=params.get("userid") || "";
     this.title=params.get("title") || "";
     this.tags=params.get("tags") || "";
   }

@@ -12,7 +12,7 @@
 
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Selectionnez un modèle"
-                     [shop]="{'_id':coupon.shop,'owner':coupon.owner}"
+                     [shop]="{'_id':coupon.shop,'owner':userid}"
                      [filter]="tags"
                      (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)"></app-old-coupons>

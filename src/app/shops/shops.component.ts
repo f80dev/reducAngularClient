@@ -84,7 +84,13 @@ export class ShopsComponent implements OnChanges {
     this.api.shop=shop;
     this.api.coupon=coupon;
     this.api.user=this.user;
-    this.router.navigate(["new_coupon"],{queryParams:{couponid:coupon._id,title:"Editer "+coupon.title,userid:this.user._id}});
+    this.router.navigate(["new_coupon"],{queryParams:
+        {
+          couponid:coupon._id,
+          title:"Editer "+coupon.title,
+          userid:this.user._id
+        }
+    });
   }
 
   addCoupon(shop: any) {
