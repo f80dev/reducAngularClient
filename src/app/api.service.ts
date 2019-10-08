@@ -77,4 +77,8 @@ export class ApiService {
   getusers() {
     return this.http.get(api("getusers/"+ADMIN_PASSWORD));
   }
+
+  getcoupons() {
+    return this.http.get(api("getcoupons/"+ADMIN_PASSWORD));
+  }
 }

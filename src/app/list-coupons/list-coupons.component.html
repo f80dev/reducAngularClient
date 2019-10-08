@@ -152,7 +152,7 @@
       Offre valable pour {{coupon.conditions}}
     </div>
 
-    <app-tuto [if]="!coupon.canbedeal"
+    <app-tuto [if]="!coupon.canbedeal && coupon.origin!=coupon._id"
               label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
     </app-tuto>
 

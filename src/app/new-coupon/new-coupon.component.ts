@@ -97,6 +97,7 @@ export class NewCouponComponent implements OnInit {
     //Traitement des conditions pour coller au texte
     if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;
     coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
+    this.refresh();
   }
 
   addcoupon(coupon: any) {
@@ -150,6 +151,9 @@ export class NewCouponComponent implements OnInit {
     if(coupon.duration==null)coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)*3600;
     if(coupon.duration<=0)coupon.duration=3600;
 
+    coupon.duration_jours=Math.trunc(coupon.duration/(24*3600));
+    if(coupon.duration_jours>0)coupon.duration_hours=coupon.duration-coupon.duration_jours*(24*3600);
+
     this.coupon=coupon;
     this.coupon.nb_partage=Math.round(1/coupon.share_bonus);
     this.coupon.dtStart=new Date().getTime();
@@ -169,5 +173,9 @@ export class NewCouponComponent implements OnInit {
         this.preview=result;
       }
     });
+  }
+
+  refresh(){
+    this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.gain+this.coupon.symbol;
   }
 }

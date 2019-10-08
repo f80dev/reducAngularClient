@@ -21,32 +21,55 @@
       <mat-step>
         <ng-template matStepLabel>Nature de la promotion</ng-template>
 
+        <div class="detail_promo">
+          {{coupon.label}}
+          Gagnez jusqu'a {{coupon.max}}{{coupon.symbol}} {{coupon.conditions}}
+        </div>
+        <br>
+
         <app-tuto label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
                   [delay]="5">
         </app-tuto>
 
-        <mat-form-field class="form-field-style">
-          <input type="text" matInput
-                 id="txtTitle"
-                 autofocus
-                 placeholder="{{'Titre de la promotion (titre non visible du client)' | trans}}"
-                 [(ngModel)]="coupon.title">
-        </mat-form-field>
-
-
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
           <input type="text" matInput
-                 id="txtUnity"
-                 placeholder="Que gagne-t-on ?"
+                 id="txtUnity" (change)="refresh()"
+                 placeholder="Unité : Que gagne-t-on ?"
                  [(ngModel)]="coupon.unity">
         </mat-form-field>
 
         <mat-form-field class="form-field-style" style="width: 30%;">
           <input type="text" matInput max="3"
-                 id="txtSymbol"
+                 id="txtSymbol" (change)="refresh()"
                  placeholder="Symbole de l'unité"
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
+
+        <mat-form-field class="form-field-style">
+          <input matInput type="number" (change)="refresh()"
+                 id="txtMaxGainByUser" title="Gain maximum cumulable par réduction"
+                 placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
+        </mat-form-field>
+
+        <mat-form-field class="form-field-style">
+          <textarea matInput rows="3"
+                    id="txtConditions"
+                    title="Condition d'application de l'offre / de la promo"
+                    placeholder="Offre valable ..."
+                    [(ngModel)]="coupon.conditions"
+                    (change)="normalize_conditions(coupon)"></textarea>
+        </mat-form-field>
+        <app-tuto label="Les conditions seront présentées précédées de la phrase 'valable pour'. Il ne faut donc pas mettre ces mots au début des conditions rédigées">
+        </app-tuto>
+
+
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput
+                 id="txtLabel"
+                 title="{{'Préciser une description de la promotion' | trans}}"
+                 placeholder="Introduction (teaser) de la promotion" [(ngModel)]="coupon.label">
+        </mat-form-field>
+
 
         <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>-->
         <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>-->
@@ -56,14 +79,7 @@
 
 
       <mat-step>
-        <ng-template matStepLabel>Teaser</ng-template>
-
-        <mat-form-field class="form-field-style">
-          <input type="text" matInput
-                 id="txtLabel"
-                 title="{{'Préciser une description de la promotion' | trans}}"
-                 placeholder="Teasing de la promotion" [(ngModel)]="coupon.label">
-        </mat-form-field>
+        <ng-template matStepLabel>Ajouter un visuel</ng-template>
 
 
         <!--Gestion du visuel-->
@@ -105,18 +121,18 @@
 
 
       <mat-step>
-        <ng-template matStepLabel>Gains pour les clients</ng-template>
+        <ng-template matStepLabel>Détailler l'augmentation de la promotion</ng-template>
         <div class="detail_promo">
           le client gagne immédiatement {{coupon.direct_bonus}}{{coupon.symbol}}
-          lorsqu'il flash le coupon, puis 1{{coupon.symbol}} supplémentaire pour {{coupon.nb_partage}} partages
-          ,et enfin {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) pour chaque usage des promotions distribuées.
+          lorsqu'il flash le promotion, puis 1{{coupon.symbol}} supplémentaire pour {{coupon.nb_partage}} partages
+          ,et enfin {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) chaque fois qu'un coupon qu'il a distribué est utilisé.
         </div>
         <br>
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  id="txtDirectBonus"
-                 title="Promotion directement récupéré à l'obtention du coupon"
+                 title="Promotion directement récupéré à l'obtention de la promotion"
                  placeholder="Bonus immédiat (en {{coupon.symbol}})" [(ngModel)]="coupon.direct_bonus">
         </mat-form-field>
 
@@ -139,48 +155,16 @@
         </mat-form-field>
       </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Conditions d'application de l'offre</ng-template>
-
-        <div class="detail_promo">
-        Un client ne peut gagner plus de {{coupon.max}}{{coupon.symbol}}
-        à chaque achat.<br>
-          Offre valable pour {{coupon.conditions}}
-        </div>
-        <br>
-
-        <mat-form-field class="form-field-style">
-          <input matInput type="number"
-                 id="txtMaxGainByUser" title="Gain maximum cumulable par coupon"
-                 placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
-        </mat-form-field>
-
-        <mat-form-field class="form-field-style">
-          <textarea matInput rows="3"
-                    id="txtConditions"
-                    title="Condition d'application de l'offre / de la promo"
-                    placeholder="Offre valable ..."
-                    [(ngModel)]="coupon.conditions"
-                    (change)="normalize_conditions(coupon)"></textarea>
-        </mat-form-field>
-
-        <app-tuto label="Les conditions seront présentées précédées de la phrase 'valable pour'. Il ne faut donc pas mettre ces mots au début des conditions rédigées">
-
-        </app-tuto>
-
-
-      </mat-step>
-
 
       <mat-step  name="step5">
-        <ng-template matStepLabel>Limites globales</ng-template>
+        <ng-template matStepLabel>Maitriser le budget</ng-template>
 
         <app-tuto label="Plusieurs limites vous permette de maitriser la promotion en terme de coût, de stock, de durée de validité">
         </app-tuto>
 
 
         <div class="detail_promo">
-          La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) et</span>
+          La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) </span>
           <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,
         et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es)
           ou si plus de {{coupon.max_coupon}} promotions ont été partagées.
@@ -209,6 +193,17 @@
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
 
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Références de la promo</ng-template>
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput
+                 id="txtTitle"
+                 autofocus
+                 placeholder="{{'Titre de la promotion (titre non visible du client)' | trans}}"
+                 [(ngModel)]="coupon.title">
+        </mat-form-field>
       </mat-step>
 
 

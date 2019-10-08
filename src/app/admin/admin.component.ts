@@ -10,13 +10,13 @@ import {showError} from "../tools";
 export class AdminComponent implements OnInit {
 
   users=[];
+  coupons=[];
 
   constructor(public api:ApiService) { }
 
   ngOnInit() {
-    this.api.getusers().subscribe((r:any)=>{
-      this.users=r;
-    },(error)=>{showError(this,error);})
+    this.api.getusers().subscribe((r:any)=>{this.users=r;},(error)=>{showError(this,error);})
+    this.api.getcoupons().subscribe((r:any)=>{this.coupons=r;},(error)=>{showError(this,error);})
   }
 
 }
