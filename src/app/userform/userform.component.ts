@@ -23,7 +23,6 @@ declare var ol: any;
 })
 export class UserformComponent implements OnInit {
 
-
   @Input("user") user:any;
   @Input("excludes") excludes:any[]=[];
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
@@ -108,6 +107,7 @@ export class UserformComponent implements OnInit {
       var markers=[
         createMarker(this.user.position.lng,this.user.position.lat,this.config.values.icon_person)
       ];
+
       coupons.forEach((c)=>{
         //Vérifie que l'utilisateur n'a pas déjà le coupon
         c.visible=false;
@@ -119,7 +119,7 @@ export class UserformComponent implements OnInit {
 
         if(bContinue){
           var icon=this.config.values.icon_coupon;
-          var scale=Math.max(0.35/coupons.length,0.10);
+          var scale=Math.max(0.20/coupons.length,0.10);
           if(coupons.length<3)icon=c.picture;
           var marker=createMarker(Number(c.lng),Number(c.lat),icon,c,scale,(coupon_sel)=>{
             this.user.message=coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol;

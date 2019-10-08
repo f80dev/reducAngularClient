@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, showError, showMessage} from '../tools';
+import {$$, showError, showMessage, traitement_coupon} from '../tools';
 import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
@@ -136,7 +136,6 @@ export class HomeComponent implements OnInit {
       this.user=u;
 
       if(this.user.email.indexOf("fictif.com")==-1){
-
         if(this.user.lastCGU<this.config.values.cgu.dtModif){
           this.dialog.open(PromptComponent,{
             width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
@@ -164,17 +163,9 @@ export class HomeComponent implements OnInit {
 
       showMessage(this,message);
 
-      if(this.user.coupons!=null){
-        this.coupons=[];
-        var i=0;
-        this.user.coupons.forEach((coupon:any)=>{
-          if(coupon.origin!=coupon._id){
-            if(i==0)coupon.visible=true;
-            this.coupons.push(coupon);
-            i++;
-          }
-        });
-      }
+
+      //this.coupons=traitement_coupon(this.user.coupons,localStorage.getItem("showCoupon"));
+
     },(error)=>{showError(this,error);});
 
   }

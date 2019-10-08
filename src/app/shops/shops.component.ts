@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {NewCouponComponent} from "../new-coupon/new-coupon.component";
-import {sendToPrint, showError} from "../tools";
+import {sendToPrint, showError, traitement_coupon} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
 
@@ -22,14 +22,14 @@ import {ConfigService} from "../config.service";
   templateUrl: './shops.component.html',
   styleUrls: ['./shops.component.css']
 })
-export class ShopsComponent implements OnChanges {
+export class ShopsComponent implements OnInit {
   @Input('user') user:any={};
 
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
 
-  coupons=[];
+  //coupons=[];
   showWebCam=false;
 
   constructor(public snackBar: MatSnackBar,
@@ -39,35 +39,10 @@ export class ShopsComponent implements OnChanges {
               public api:ApiService) {}
 
 
-  ngOnChanges(){
-    this.refresh(0);
-  }
-
-  /**
-   *
-   * @param showItem
-   */
-  refresh(showItem=-1){
-    if(this.user!=null && this.user.coupons!=null){
-      this.coupons=[];
-      var i=0;
-      this.user.coupons.forEach((coupon)=>{
-        coupon.visible=false;
-        if(i==showItem)coupon.visible=true;
-        if(coupon.origin==coupon._id){
-          this.coupons.push(coupon);
-          i++;
-        }
-      });
-    }
-
-  }
-
 
   onInsert(){
     //shop.showAddCoupon=false;
     this.oninsert.emit('coupon ajouté');
-    this.refresh(0);
   }
 
   delShop(shop: any) {
@@ -123,5 +98,9 @@ export class ShopsComponent implements OnChanges {
         },(error)=>{showError(this,error);});
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 }

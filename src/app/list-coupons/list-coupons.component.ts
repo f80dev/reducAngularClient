@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
@@ -7,7 +16,7 @@ import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {sendToPrint, showError} from "../tools";
+import {sendToPrint, showError, traitement_coupon} from "../tools";
 import {ConfigService} from "../config.service";
 
 @Component({
@@ -15,7 +24,7 @@ import {ConfigService} from "../config.service";
   templateUrl: './list-coupons.component.html',
   styleUrls: ['./list-coupons.component.css']
 })
-export class ListCouponsComponent implements OnInit {
+export class ListCouponsComponent implements OnChanges {
 
   // tslint:disable-next-line:no-input-rename
   @Input('coupons') coupons: any[] = [];
@@ -27,15 +36,16 @@ export class ListCouponsComponent implements OnInit {
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
-  constructor(public meta: Meta,public api: ApiService,public dialog: MatDialog,
+  constructor(public meta: Meta,
+              public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
               public config:ConfigService,
               public ngNavigatorShareService: NgNavigatorShareService) {
-    meta.addTag({name:"application",content:"ReducShare"});
+
   }
 
-  ngOnInit() {
-
+  ngOnChanges() {
+    this.coupons=traitement_coupon(this.coupons,localStorage.getItem("showCoupon"));
   }
 
   showCode(coupon: any) {
@@ -62,7 +72,7 @@ export class ListCouponsComponent implements OnInit {
     if(coupon.showCode){
       this.ngNavigatorShareService.share({
         title: coupon.label,
-        text: "Ouvrir pour gagner immédiatement "+coupon.direct_bonus+coupon.symbol,
+        text: coupon.message+" ",
         url: coupon.url
       }).then( (response) => {
         console.log(response);

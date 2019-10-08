@@ -37,7 +37,7 @@
                     title="Vos réductions"
                     (insert)="refresh($event?.message)"
                     (update)="refresh($event?.message)"
-                    [coupons]="coupons" [user]="user">
+                    [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
   <mat-card class="app-card" style="background-color: #d9d9d9;color:black;">

@@ -52,7 +52,7 @@
       "stock":400,
       "max_coupon":500,
       "conditions":"pour tout achat d'un montant supérieur a 20€",
-      "tags":"boutique,restaurant,alimentaire,bar,concert,services,exposition,hôtel"
+      "tags":""
     },
     {
       "title":"Les cafés offerts",
@@ -89,6 +89,24 @@
       "max_coupon":5000,
       "conditions":"Valable pour tout dejeuné du Lundi au Vendredi",
       "tags":"restaurant,hôtel"
+    },
+    {
+      "title":"Nuit offerte",
+      "unity":"nuit",
+      "symbol":"🛌",
+      "breakable":false,
+      "pluriel":true,
+      "label":"On vous offre des nuits d'hôtel !",
+      "share_bonus":0.05,
+      "pay_bonus":1,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/sleeping-accommodation_emoji-modifier-fitzpatrick-type-6_1f6cc-1f3ff_1f3ff.png",
+      "direct_bonus":0.2,
+      "max":3,
+      "duration_hours":480,
+      "stock":30,
+      "max_coupon":500,
+      "conditions":"Pour l'achat de 3 nuits hors haute saison",
+      "tags":"hôtel"
     },
     {
       "title":"Petit déj offert",

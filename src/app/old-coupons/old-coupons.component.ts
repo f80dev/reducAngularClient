@@ -35,6 +35,7 @@ export class OldCouponsComponent implements OnInit {
     this.coupons=JSON.parse(JSON.stringify(this.config.values.modeles));
     if(this.shop){
       this.api.getoldcoupons(this.shop._id,this.shop.owner).subscribe((r:any)=>{
+        debugger
         r.forEach((it)=>{
           this.coupons.splice(0,0,it);
         });
@@ -69,6 +70,8 @@ export class OldCouponsComponent implements OnInit {
         var intersect=this.filter.split(",").filter(value => -1 !== it.tags.split(",").indexOf(value));
         if(intersect.length>0)
           this.coupons.push(it);
+      } else {
+        this.coupons.push(it);
       }
     });
     if(this.coupons.length==0)this.coupons=lst_coupons;

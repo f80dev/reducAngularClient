@@ -181,11 +181,23 @@ export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Fun
   });
 }
 
+export function traitement_coupon(coupons:any[],showCoupon:string) : any {
+  var rc=[];
+  if(coupons==null)return rc;
 
+  coupons.forEach((coupon:any)=>{
+    if(coupon._id==showCoupon)coupon.visible=true;
+    coupon["visible"]=false;
+    coupon["message"]="Je recommande cette promotion. "+coupon.shop_complete.name+" : "+ coupon.label+". Gagnez jusqu'a "+coupon.max+coupon.symbol+" "+coupon.conditions;
+    coupon["message"]=coupon["message"].replace("..",".").replace("!.","!");
+    rc.push(coupon);
+  });
+  return rc;
+}
 
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   var iconStyle:any = new ol.style.Style({
-    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+    image: new ol.style.Icon(({
       anchor: [0.5, 0.5],
       scale:scale,
       anchorXUnits: 'fraction',
@@ -199,7 +211,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
     iconStyle.setText(new ol.style.Text({
       text: coupon.max+coupon.symbol,
       textAlign:"center",
-      font:"14px sans-serif",
+      font:"18px sans-serif",
       stroke: new ol.style.Stroke({color: 'white', width: 2}),
       padding:[2,2,2,2]
     }));

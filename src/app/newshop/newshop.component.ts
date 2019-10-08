@@ -21,6 +21,7 @@ export class NewshopComponent implements OnInit {
   address = 'paris,france';
   show_address="";
   anonymous=true;
+  website="";
   owner = '';
   map: any;
   handle:any;
@@ -60,7 +61,7 @@ export class NewshopComponent implements OnInit {
     if(typeof tags=="string")tags=tags.split(",");
 
     const owner = localStorage.getItem('user');
-    this.api.addshop(this.shopname, this.address, this._public,owner,this.lng,this.lat,tags.join(",")).subscribe((result: any) => {
+    this.api.addshop(this.shopname, this.address, this._public,owner,this.lng,this.lat,tags.join(","),this.website).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
     },(error)=>{showError(this,error);});

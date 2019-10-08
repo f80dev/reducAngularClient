@@ -23,15 +23,6 @@
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
 
-
-    <!--<app-new-coupon *ngIf="shop.showAddCoupon"-->
-                    <!--name="zoneNewCoupon"-->
-                    <!--[shop]="shop"-->
-                    <!--[level]="user.level"-->
-                    <!--(insert)="onInsert(shop)"-->
-                    <!--(close)="shop.showAddCoupon=false">-->
-    <!--</app-new-coupon>-->
-
     <app-tuto
               [if]="shop.coupons?.length>0"
               label="Votre première promotion est créée, vous pouvez imprimer une affiche ou commencer à diffuser son lien à votre réseau">
@@ -72,7 +63,7 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
-            *ngIf="coupons?.length==0"
+            *ngIf="shop.coupons?.length==0"
             (click)="delShop(shop)">
       <mat-icon>delete</mat-icon>
     </button>

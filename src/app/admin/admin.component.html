@@ -16,12 +16,30 @@
   <tr>
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="owner">owner</th>
-    <th mat-sort-header="precoupon">père</th>
+    <th mat-sort-header="old_coupon">père</th>
+    <th mat-sort-header="public">public</th>
   </tr>
   <tr *ngFor="let coupon of coupons">
     <td mat-cell>{{coupon._id}}</td>
     <td mat-cell>{{coupon.owner}}</td>
     <td mat-cell>{{coupon.old_coupon}}</td>
+    <td mat-cell>{{coupon.public}}</td>
+  </tr>
+</table>
+
+<h1>Shops</h1>
+<table matSort>
+  <tr>
+    <th mat-sort-header="_id">ID</th>
+    <th mat-sort-header="name">name</th>
+    <th mat-sort-header="tags">tags</th>
+    <th mat-sort-header="owner">owner</th>
+  </tr>
+  <tr *ngFor="let shop of shops">
+    <td mat-cell>{{shop._id}}</td>
+    <td mat-cell>{{shop.name}}</td>
+    <td mat-cell>{{shop.tags}}</td>
+    <td mat-cell>{{shop.owner}}</td>
   </tr>
 </table>
 

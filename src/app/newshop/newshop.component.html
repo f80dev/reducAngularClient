@@ -60,6 +60,12 @@
     <app-tuto [delay]="10"
               label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
+    <mat-form-field class="form-field-style">
+      <input id="txtWebsite" type="text" matInput placeholder="Site web" [(ngModel)]="website">
+    </mat-form-field>
+    <br>
+
+
   </mat-card-content>
 
   <mat-card-actions class="app-card-action">
@@ -67,7 +73,6 @@
     <button mat-button mat-flat-button
             id="btnValide2" *ngIf="shopname?.length>0"
             class="app-button" (click)="add()">Valider</button>
-
 
     <button mat-button mat-flat-button
             id="btnCancel"

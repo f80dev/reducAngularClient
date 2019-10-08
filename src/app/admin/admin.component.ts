@@ -11,12 +11,14 @@ export class AdminComponent implements OnInit {
 
   users=[];
   coupons=[];
+  shops=[];
 
   constructor(public api:ApiService) { }
 
   ngOnInit() {
     this.api.getusers().subscribe((r:any)=>{this.users=r;},(error)=>{showError(this,error);})
     this.api.getcoupons().subscribe((r:any)=>{this.coupons=r;},(error)=>{showError(this,error);})
+    this.api.getshops().subscribe((r:any)=>{this.shops=r;},(error)=>{showError(this,error);})
   }
 
 }

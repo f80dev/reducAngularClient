@@ -1,19 +1,24 @@
 <div *ngIf="coupon" style="text-align: center;width:100%;">
-  <h2>
-    {{coupon?.label}}&nbsp;chez "{{coupon.shop_complete?.name}}"
-  </h2>
   <br>
+  <h2>
+    Ici, {{coupon?.label}}
+  </h2>
+  <br><br>
+  <img [src]="coupon.picture" style="max-width: 60vw"><br>
   <br>
   <span style="font-size: 2em;">
-          Gagner immédiatement <strong>{{coupon.direct_bonus}}</strong>&nbsp;{{coupon.unity}}
+          Gagner jusqu'a <strong>{{coupon.max}}</strong>&nbsp;{{coupon.unity}}(s) {{coupon.conditions}}
         </span>
   <br>
+
+
+
   <br>
   <h3>Flasher ce code pour en bénéficier</h3>
 
   <qr-code [value]="coupon.url"
            style="max-width:400px;max-height: 400px;display:inline;"
-           [size]="400">
+           [size]="410" [padding]="3">
   </qr-code>
   <br><br>
 
@@ -21,7 +26,7 @@
   <h1>Votre réduction peut facilement augmenter !</h1>
 
   <div style="font-size: xx-large">
-    <strong>+ {{coupon.share_bonus}}</strong>&nbsp;{{coupon.unity}}(s) pour vous à chaque fois que vous la partagez avec vos proches<br><br>
+    + <strong>1</strong> {{coupon.unity}} supplémentaire chaque fois que vous partagez {{1/coupon.share_bonus | number:'1.0-0'}} fois avec vos proches<br><br>
     <strong>+ {{coupon.pay_bonus}}</strong>&nbsp;{{coupon.unity}}(s) pour vous à chaque fois qu'un client utilise le coupon que vous lui avez partagez
   </div>
 

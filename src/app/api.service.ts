@@ -22,9 +22,8 @@ export class ApiService {
     return this.http.post(api('createcoupon'), coupon);
   }
 
-  addshop(name: string, address: string, _public:boolean, owner: string,lng:number,lat:number,tags=null) {
-    if(tags==null || tags=="")tags="null";
-    return this.http.get(api('addshop/' + name + '/' + address + '/' + _public+"/"+owner+"/"+lng+"/"+lat+"/"+tags, ''));
+  addshop(name: string, address: string, _public:boolean, owner: string,lng:number,lat:number,tags="",website="") {
+    return this.http.get(api('addshop/' + name + '/' + address + '/' + _public+"/"+owner+"/"+lng+"/"+lat+"/"+tags+"/"+website, ''));
   }
 
   stopdeal(couponid: string) {
@@ -80,5 +79,9 @@ export class ApiService {
 
   getcoupons() {
     return this.http.get(api("getcoupons/"+ADMIN_PASSWORD));
+  }
+
+  getshops() {
+    return this.http.get(api("getshops/"+ADMIN_PASSWORD));
   }
 }

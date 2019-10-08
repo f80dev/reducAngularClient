@@ -92,12 +92,14 @@
 
         <!--QRCode du coupon-->
 
+        <a [href]="coupon.url" target="_blank">
           <qr-code [value]="coupon.url" name="qrcode"
                    *ngIf="coupon.showCode"
-                   style="width:150px;height: 150px;"
+                   style="width:150px;height: 150px"
                    ngxClipboard [cbContent]="coupon.url"
                    [size]="145">
           </qr-code>
+        </a>
 
 
         <!--Zone réserver au créateur-->
@@ -225,7 +227,7 @@
                 *ngIf="(coupon.canbedeal || coupon.origin!=coupon._id) && user.level==0"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
                 (click)="showCode(coupon)"
-                ngxClipboard [cbContent]="coupon.url">
+                ngxClipboard [cbContent]="coupon.message+': '+coupon.url">
           <span *ngIf="coupon.canbedeal">
             Partager
             <span *ngIf="coupon.origin!=coupon._id">/ Utiliser</span>
