@@ -176,6 +176,6 @@ export class NewCouponComponent implements OnInit {
   }
 
   refresh(){
-    this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.gain+this.coupon.symbol;
+    this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.max+this.coupon.symbol;
   }
 }

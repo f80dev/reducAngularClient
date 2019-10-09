@@ -1,7 +1,8 @@
 <mat-card *ngFor="let shop of user.shops" class="app-card">
   <mat-card-header>
-    <div mat-card-avatar (click)="shop.visible=!shop.visible">
-      <img [src]="config.values.icon_card_shop" style="width:50px;height:50px;">
+    <div mat-card-avatar (click)="shop.visible=!shop.visible" style="margin-right: 30px;margin-bottom: 30px;">
+      <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
+      <app-visual *ngIf="shop.picture?.length>0" [picture]="shop.picture" size="75px"></app-visual>
     </div>
     <mat-card-title (click)="shop.visible=!shop.visible">{{shop.name}}</mat-card-title>
     <span class="spacer"></span>

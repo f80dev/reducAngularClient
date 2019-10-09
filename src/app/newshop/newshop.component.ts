@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, showError} from '../tools';
+import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, selectFile, showError} from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
@@ -16,21 +16,27 @@ declare var ol: any;
 })
 
 export class NewshopComponent implements OnInit {
-  shopname = '';
-  _public=false;
-  address = 'paris,france';
+  new_shop={
+    "name":"",
+    "public":false,
+    "address":"paris, france",
+    "website":"",
+    "owner":"",
+    "picture":"",
+    "lng":0,
+    "lat":0,
+    "tags":""
+  };
+
   show_address="";
+
   anonymous=true;
-  website="";
-  owner = '';
   map: any;
   handle:any;
-  tags="";
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
 
-  private lng: number;
-  private lat: number;
+
   reverseGeocode: boolean=false;
 
   constructor(public api: ApiService,
@@ -48,20 +54,23 @@ export class NewshopComponent implements OnInit {
     checkLogin(this.router);
 
     var t:any=this.route.snapshot.queryParamMap.get("tags");
-    if(t!=null)this.tags=t.split(",");
+    if(t!=null)this.new_shop.tags=t.split(",");
 
     this.anonymous=(this.route.snapshot.queryParamMap.get("anonymous")!="false");
-    if(!this.anonymous)this._public=true;
+    this.new_shop.owner=(this.route.snapshot.queryParamMap.get("userid"));
+    if(!this.anonymous)this.new_shop.public=true;
+
 
     this.showOnMap();
   }
 
   add() {
-    var tags:any=this.tags;
+    var tags:any=this.new_shop.tags;
     if(typeof tags=="string")tags=tags.split(",");
 
+    this.new_shop.tags=tags.join(",");
     const owner = localStorage.getItem('user');
-    this.api.addshop(this.shopname, this.address, this._public,owner,this.lng,this.lat,tags.join(","),this.website).subscribe((result: any) => {
+    this.api.addshop(this.new_shop).subscribe((result: any) => {
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
     },(error)=>{showError(this,error);});
@@ -69,7 +78,6 @@ export class NewshopComponent implements OnInit {
 
   cancel(){
     this._location.back();
-    //this.router.navigate(['home'],{queryParams:{message:"Enseigne non créée"}});
   }
 
   refresh_map(){
@@ -78,23 +86,23 @@ export class NewshopComponent implements OnInit {
       var l=getMarkerLayer(this.map);
       //var features=l.getSource().getFeatures();
       var center_pos=ol.proj.toLonLat(this.map.getView().getCenter());
-      this.lng=center_pos[0];
-      this.lat=center_pos[1];
+      this.new_shop.lng=center_pos[0];
+      this.new_shop.lat=center_pos[1];
       if(this.reverseGeocode){
-        this.loc.getAddressFromCoord(this.lat,this.lng,(res)=>{
+        this.loc.getAddressFromCoord(this.new_shop.lat,this.new_shop.lng,(res)=>{
           this.reverseGeocode=false;
           if(res.display_name){
-            this.shopname="";
+            this.new_shop.name="";
             "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
-              if(res.address[type]!=null)this.shopname=res.address[type];
+              if(res.address[type]!=null)this.new_shop.name=res.address[type];
             });
             var house_number=res.address.house_number;
-            if(house_number==null && this.shopname!=null)house_number=this.shopname;
+            if(house_number==null && this.new_shop.name!=null)house_number=this.new_shop.name;
 
             if(res.address.road==null)
-              this.address=res.display_name;
+              this.new_shop.address=res.display_name;
             else
-              this.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
+              this.new_shop.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
           }
         },null);
       }
@@ -105,19 +113,19 @@ export class NewshopComponent implements OnInit {
 
 
   showOnMap(zoom=15) {
-    this.loc.getAddress(this.address,(res)=> {
-      this.lng=Number(res[0].lon);
-      this.lat= Number(res[0].lat);
+    this.loc.getAddress(this.new_shop.address,(res)=> {
+      this.new_shop.lng=Number(res[0].lon);
+      this.new_shop.lat= Number(res[0].lat);
       this.show_address=res[0].display_name;
       if(this.map==null){
-        this.map =createMap({lng:this.lng,lat:this.lat},this.config.values.icon_shop,zoom,0.2,(event)=>{
+        this.map =createMap({lng:this.new_shop.lng,lat:this.new_shop.lat},this.config.values.icon_shop,zoom,0.2,(event)=>{
           //Déplacement de la carte
           this.refresh_map();
         });
       }
       else{
-        this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
-        getMarkerLayer(this.map).addFeature(createMarker(this.lng, this.lat,this.config.values.icon_shop,null,0.2));
+        this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
+        getMarkerLayer(this.map).addFeature(createMarker(this.new_shop.lng, this.new_shop.lat,this.config.values.icon_shop,null,0.2));
       }
     });
   }
@@ -125,10 +133,10 @@ export class NewshopComponent implements OnInit {
 
   localize() {
     this.loc.getPosition().then((pos:any)=>{
-      this.lng=pos.lng;
-      this.lat=pos.lat;
+      this.new_shop.lng=pos.lng;
+      this.new_shop.lat=pos.lat;
       this.reverseGeocode=true;
-      this.map.getView().setCenter(ol.proj.fromLonLat([this.lng, this.lat]));
+      this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
       this.refresh_map();
     },()=>{
       this.toast.open("Vous avez désactivé la localisation",null,{duration:2000});
@@ -143,8 +151,14 @@ export class NewshopComponent implements OnInit {
           this._location.back();
       });
       setTimeout(()=>{
-        this._public=false;
+        this.new_shop.public=false;
       },1500);
     }
+  }
+
+  onSelectFile(event:any) {
+    selectFile(event,150,(res)=>{
+      this.new_shop.picture=res;
+    });
   }
 }

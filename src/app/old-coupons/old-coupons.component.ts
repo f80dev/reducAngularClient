@@ -34,8 +34,7 @@ export class OldCouponsComponent implements OnInit {
     this.withFilter=false;
     this.coupons=JSON.parse(JSON.stringify(this.config.values.modeles));
     if(this.shop){
-      this.api.getoldcoupons(this.shop._id,this.shop.owner).subscribe((r:any)=>{
-        debugger
+      this.api.getoldcoupons(this.shop._id).subscribe((r:any)=>{
         r.forEach((it)=>{
           this.coupons.splice(0,0,it);
         });

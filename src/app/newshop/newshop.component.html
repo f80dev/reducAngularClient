@@ -1,25 +1,37 @@
 <mat-card class="app-card">
+  <mat-card-title>
   <mat-toolbar class="app-toolbar">
-    Nouvelle enseigne
+    <div mat-card-avatar style="margin-right: 50px">
+      <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
+      <app-visual *ngIf="new_shop.picture?.length>0" size="75" [picture]="new_shop.picture"></app-visual>
+    </div>
+
+    <h2>
+      <span *ngIf="new_shop.name?.length<=3">Nouvelle enseigne</span>
+      <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
+    </h2>
+
     <span class="spacer"></span>
     <button mat-button mat-flat-button
-            id="btnValide" *ngIf="shopname?.length>0"
+            id="btnValide" *ngIf="new_shop.name?.length>0"
             class="app-button" (click)="add()">Valider</button>
   </mat-toolbar>
+  </mat-card-title>
 
 
   <mat-card-content class="app-card-content">
+    <br><br>
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style">
-      <input id="txtShopName" type="text" matInput placeholder="Nom de la boutique" [(ngModel)]="shopname" autofocus>
+      <input id="txtShopName" type="text" matInput placeholder="Nom de l'enseigne" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
     <br>
 
     <mat-form-field class="form-field-style" style="width:85%;margin-right:5px;">
-      <input id="txtShopAddress" type="text" matInput placeholder="adresse" [(ngModel)]="address"
+      <input id="txtShopAddress" type="text" matInput placeholder="adresse de l'enseigne" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
-      <button mat-button *ngIf="address" matSuffix mat-icon-button aria-label="Clear" (click)="address=''">
+      <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -45,14 +57,14 @@
 
     <br>
 
-    <mat-checkbox [(ngModel)]="_public" id="chkPublic" (change)="checkLogin()">
+    <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic" (change)="checkLogin()">
       Rendre la promotion public (visible sur la carte)
     </mat-checkbox>
 
     <br>
     <mat-form-field class="form-field-style">
       <mat-label>Type d'établissement (plusieurs choix possible)</mat-label>
-      <mat-select id="txtShopTags" [(ngModel)]="tags"  multiple>
+      <mat-select id="txtShopTags" [(ngModel)]="new_shop.tags"  multiple>
         <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">{{tag}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -60,8 +72,17 @@
     <app-tuto [delay]="10"
               label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
+    <button mat-flat-button mat-button
+            id="cmdFile"
+            style="width:70px;text-align: center;">
+      <label for="file">Photos</label>
+      <input type="file" id="file" style="opacity: 0;"
+             (change)="onSelectFile($event)"
+             accept="image/gif,image/jpeg,image/png" />
+    </button>
+
     <mat-form-field class="form-field-style">
-      <input id="txtWebsite" type="text" matInput placeholder="Site web" [(ngModel)]="website">
+      <input id="txtWebsite" type="text" matInput placeholder="Site web" [(ngModel)]="new_shop.website">
     </mat-form-field>
     <br>
 
@@ -71,7 +92,7 @@
   <mat-card-actions class="app-card-action">
 
     <button mat-button mat-flat-button
-            id="btnValide2" *ngIf="shopname?.length>0"
+            id="btnValide2" *ngIf="new_shop.name?.length>0"
             class="app-button" (click)="add()">Valider</button>
 
     <button mat-button mat-flat-button

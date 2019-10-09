@@ -22,8 +22,8 @@ export class ApiService {
     return this.http.post(api('createcoupon'), coupon);
   }
 
-  addshop(name: string, address: string, _public:boolean, owner: string,lng:number,lat:number,tags="",website="") {
-    return this.http.get(api('addshop/' + name + '/' + address + '/' + _public+"/"+owner+"/"+lng+"/"+lat+"/"+tags+"/"+website, ''));
+  addshop(shop:any) {
+    return this.http.post(api('addshop'),shop);
   }
 
   stopdeal(couponid: string) {
@@ -38,8 +38,8 @@ export class ApiService {
     return this.http.post(api('setuser/' + user["_id"]), user);
   }
 
-  getoldcoupons(shopid: string,ownerid:string) {
-    return this.http.get(api('getoldcoupons/' + shopid+"/"+ownerid, ''));
+  getoldcoupons(shopid: string) {
+    return this.http.get(api('getoldcoupons/' + shopid, ''));
   }
 
   flash(user: string, couponid: string) {

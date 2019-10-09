@@ -10,8 +10,10 @@ export class VisualComponent implements OnInit {
   constructor() { }
 
   @Input("picture") picture="";
+  @Input("size") size="150px";
 
   ngOnInit() {
+    if(!this.size.endsWith("px"))this.size=this.size+"px";
   }
 
 }
