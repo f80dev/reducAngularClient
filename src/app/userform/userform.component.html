@@ -18,7 +18,6 @@
                [value]="user._id"></qr-code>
 
       <div style="display: inline-block;">
-        <span style="font-size: small;" *ngIf="!user.email?.endsWith('fictif.com')">{{user.email}}</span><br>
         <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
       </div>
 
@@ -86,24 +85,24 @@
                      *ngIf="showOldPromos">
     </app-old-coupons>
 
-    <app-tuto [delay]="10" button="map" [if]="user.coupons?.length==0"
-              label="Vous pouvez voir les promotions disponibles autour de vous en activant la carte">
+    <app-tuto button="map" *ngIf="user.coupons?.length==0 && user.level>0.3"
+              label="Voir les promotions autour de vous sur une carte">
     </app-tuto>
 
     <app-tuto [delay]="15" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="10" button="build" [if]="user.level>0.6"
+    <app-tuto [delay]="10" button="build" *ngIf="user.level>0.6 && user.level<1"
               label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
     </app-tuto>
 
-    <app-tuto [delay]="8" button="camera_alt" [if]="config.webcamsAvailable>0"
+    <app-tuto [delay]="8" button="camera_alt" *ngIf="user.level>0.2 && config.webcamsAvailable>0"
               label="Vous pouvez flasher les QRCodes de promotion directement depuis reducshare">
     </app-tuto>
 
 
-    <app-tuto [delay]="18" icon="delete" [if]="user.level>0 && (user.shops==null || user.shops.length==0)"
+    <app-tuto button="delete" *ngIf="user.level==1 && (user.shops?.length==0)"
               label="Si vous n'avez plus de promotion en cours, vous pouvez totalement effacer votre compte de reducShare">
     </app-tuto>
 
@@ -151,7 +150,7 @@
     <button mat-raised-button mat-button *ngIf="user.coupons?.length==0 && user.shops.length==0"
             id="btnMapRookie" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
-      Promos localisées
+      Trouver des promos
     </button>
 
 

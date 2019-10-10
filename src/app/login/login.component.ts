@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     $$("Appel de la plateforme d'authentification "+socialPlatform);
     this.socialAuthService.signIn(socialPlatformProvider).then((socialUser) => {
       this.data.user.email=socialUser.email;
-        this.data.user.pseudo=socialUser.name;
+        this.data.user.pseudo=socialUser.name.split(" ")[0];
         this.data.user.photo=socialUser.image;
         this.api.getuser(socialUser.email).subscribe((u:any)=>{
           if(u.code==500){

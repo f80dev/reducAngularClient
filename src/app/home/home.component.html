@@ -8,6 +8,7 @@
 <div [hidden]="showMessage">
   <app-tuto title="Bienvenue dans ReducShare !"
             [duration]="5" height="100vh"
+            *ngIf="user.level<0.3"
             image="./assets/icons/icon-384x384.png"
             subtitle="Une application pour gagner plein de réductions dont la valeur augmente quand vous les redistribuées !">
   </app-tuto>
@@ -19,7 +20,7 @@
   </app-userform>
 
   <app-tuto
-    [if]="user.shops?.length>0" [delay]="1"
+    *ngIf="user?.shops?.length>0"
     type="title"
     title="Bravo votre première enseigne est prête."
     image="./assets/img/bravo.gif"
@@ -27,7 +28,7 @@
   </app-tuto>
 
 
-  <app-tuto [if]="user.shops?.length>0"
+  <app-tuto *ngIf="user.shops?.length>0"
             label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
   </app-tuto>
 
@@ -38,7 +39,7 @@
              (insert)="refresh($event?.message)">
   </app-shops>
 
-  <app-tuto [if]="coupons.length>0"
+  <app-tuto *ngIf="coupons.length>0"
             label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
   </app-tuto>
 
@@ -50,40 +51,7 @@
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
-  <mat-card class="app-card" style="background-color: #d9d9d9;color:black;" *ngIf="user.level>0.3">
-    <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
-      {{config.values.appname+" - "+config.values.version}}<br>
-      <br>
-      <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
-      <br>
-      <table style="display: inline-block;text-align: left;">
-        <tr><td>Réalisation</td><td>: <a [href]="config.values.editor?.link_author" target="_blank">{{config.values.editor?.author}}</a></td></tr>
-        <tr>
-          <td>Edition</td>
-          <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
-        </tr>
-        <tr><td><br></td></tr>
-
-      </table>
-      <br><br>
-      <div style="width: 100%;text-align: center;">
-        <a href="mailto:{{config.values.support?.email}}" style="display:inline-block;width: 55px;">
-          <mat-icon class="big-icon">mail</mat-icon>
-        </a>
-
-        <a href="{{config.values.support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
-          <mat-icon class="big-icon">persons</mat-icon>
-        </a>
-
-        <a href="{{config.values.support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
-          <img style="width:50px;" src="./assets/icons/facebook.png">
-        </a>
-      </div>
-    </div>
-
-    <br>
-
-  </mat-card>
+  <app-about *ngIf="user.level>0.3"></app-about>
 
 
 </div>

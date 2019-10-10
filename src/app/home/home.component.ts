@@ -84,8 +84,10 @@ export class HomeComponent implements OnInit {
       this.analyse_login(p.tags,(u:any)=>{
         localStorage.setItem("user",u._id);
         this.user = u;
-        this.connect(p.coupon,p.pass);
-        this.refresh(p.message);
+        setTimeout(()=>{
+          this.connect(p.coupon,p.pass);
+          this.refresh(p.message);
+        },500);
       });
     })
   }

@@ -1,5 +1,5 @@
-<div *ngIf="_type!='tips' && text?.length>0 && _if"  (click)="hideTuto()">
-  <div *ngIf="_type!='title'" style="display:inline-block;margin:3px;">
+<div *ngIf="_if && text?.length>0" (click)="hideTuto()">
+  <div *ngIf="_type=='tips'" style="display:inline-block;margin:3px;">
     <table>
       <tr>
         <td>
@@ -24,16 +24,17 @@
     <div style="width:90%;margin:5%;text-align:center;font-size: medium;">{{subtitle}}</div>
     <br>
     <button mat-button mat-raised-button>Commencer</button>
-    <br>
-    <br>
   </div>
 
+
+  <!--<div *ngIf="_type=='tips'" style="display: inline-block;">-->
+    <!--<img *ngIf="image?.length>0 && text?.length>0"-->
+         <!--[src]="image" style="width:15px;height:15px;padding:3px;display: inline-block;"-->
+         <!--(mousedown)="hideTuto()"-->
+    <!--&gt;-->
+    <!--<div *ngIf="_if" style="font-size: x-small;display: inline;">{{text}}</div>-->
+  <!--</div>-->
+
+
 </div>
 
-<div *ngIf="_type=='tips'" style="display: inline-block;">
-  <img *ngIf="image?.length>0 && text?.length>0"
-       [src]="image" style="width:15px;height:15px;padding:3px;display: inline-block;"
-       (mousedown)="showText(true)" (mouseup)="showText(false)"
-  >
-  <div *ngIf="_if" style="font-size: x-small;display: inline;">{{text}}</div>
-</div>

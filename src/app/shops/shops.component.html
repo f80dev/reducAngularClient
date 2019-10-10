@@ -24,18 +24,20 @@
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
 
-    <app-tuto [if]="shop.coupons?.length>0" [delay]="2"
-              icon="./assets/img/bravo.gif"
-              label="Votre première promotion est prête. faites le savoir ! Imprimez une première affiche ou partager la avec votre réseau"
-              >
-    </app-tuto>
-
 
     <br>
     <app-list-coupons [coupons]="shop.coupons" [user]="user"
                       (delete)="onupdate.emit($event)"
                       (edit)="edit(shop,$event)">
     </app-list-coupons>
+
+
+    <app-tuto *ngIf="shop.coupons?.length>0" [duration]="6"
+              title="Votre première promotion est prête!"
+              image="./assets/img/bravo.gif"
+              subtitle="faites le savoir, Imprimez une première affiche ou partager la"
+    >
+    </app-tuto>
 
 
   </mat-card-content>
@@ -45,6 +47,7 @@
                [filter]=""
                (flash)="onFlash_event($event,shop)">
   </app-scanner>
+
 
   <mat-card-actions class="app-card-action" *ngIf="shop.visible">
 

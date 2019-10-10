@@ -51,6 +51,7 @@ import { AdminComponent } from './admin/admin.component';
 import { CguComponent } from './cgu/cgu.component';
 import { SafePipe } from './safe.pipe';
 import { TransPipe } from './trans.pipe';
+import { AboutComponent } from './about/about.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -78,7 +79,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     AdminComponent,
     CguComponent,
     SafePipe,
-    TransPipe
+    TransPipe,
+    AboutComponent
   ],
   entryComponents: [
     NewCouponComponent,

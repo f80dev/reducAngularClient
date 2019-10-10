@@ -22,27 +22,27 @@
   </span>
 
   <mat-card-content>
-    <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos propres promotions" [if]="coupons.length>0"></app-tuto>
+    <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos propres promotions" *ngIf="coupons.length>0"></app-tuto>
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons" name="coupon" (click)="onselect.emit(coupon)">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture" style="cursor: pointer;">
         <h2 matLine (click)="onselect.emit(coupon)">
-          <span *ngIf="coupon.title">{{coupon.title}}</span>
+          <span *ngIf="coupon.title">{{coupon.title}} : Promo sur des {{coupon.unity}}(s)</span>
           <span *ngIf="!coupon.title">
         {{coupon.label}} sur {{coupon.unity}}
       </span>
         </h2>
-        <p matLine style="margin-top: 2px;">
-          Promo sur des {{coupon.unity}}(s)
+        <p matLine style="margin-top: 0px;">
+          <span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span> {{coupon.conditions}}
         </p>
-        <p matLine style="margin-top: 2px;"  *ngIf="coupon.share">
+        <p matLine style="margin-top: 10px;"  *ngIf="coupon.share">
           <span> Distribution:{{coupon.share}} </span>
         </p>
-        <p matLine style="font-size: small;">
-          <span> Partage: {{coupon.share_bonus}}{{coupon.symbol}} / Immédiat: {{coupon.direct_bonus}}{{coupon.symbol}} / Utilisé: {{coupon.pay_bonus}}{{coupon.symbol}}</span>
-        </p>
-        <p matLine style="font-size: x-small;">
-          <span> Tags: {{coupon.tags}}</span>
+        <!--<p matLine style="font-size: small;margin-top:5px;">-->
+          <!--<span> Partage: {{coupon.share_bonus}}{{coupon.symbol}} / Immédiat: {{coupon.direct_bonus}}{{coupon.symbol}} / Utilisé: {{coupon.pay_bonus}}{{coupon.symbol}}</span>-->
+        <!--</p>-->
+        <p matLine style="font-size: x-small;margin-top:3px;" *ngIf="coupon.tags.length>0">
+          <span>Utile pour {{coupon.tags.replace(',',' / ')}}</span>
         </p>
         <button style="display: inline-block;"
                 *ngIf="canDelete"
