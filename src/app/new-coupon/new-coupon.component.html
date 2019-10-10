@@ -23,7 +23,8 @@
 
         <div class="detail_promo">
           {{coupon.label}}
-          Gagnez jusqu'a {{coupon.max}}{{coupon.symbol}} {{coupon.conditions}}
+          <span *ngIf="coupon.max>0">Gagnez jusqu'a {{coupon.max}}{{coupon.symbol}}</span>
+          {{coupon.conditions}}
         </div>
         <br>
 
@@ -45,11 +46,13 @@
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
-        <mat-form-field class="form-field-style">
-          <input matInput type="number" (change)="refresh()"
+        <mat-checkbox [(ngModel)]="hasMax">Plafonner le gain</mat-checkbox><br>
+        <mat-form-field class="form-field-style" *ngIf="hasMax">
+          <input matInput type="number" (change)="refresh()" (update)="refresh()"
                  id="txtMaxGainByUser" title="Gain maximum cumulable par réduction"
                  placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
         </mat-form-field>
+        <br>
 
         <mat-form-field class="form-field-style">
           <textarea matInput rows="3"

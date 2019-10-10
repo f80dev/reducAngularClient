@@ -60,6 +60,7 @@ export class NewCouponComponent implements OnInit {
   preview: string="";
   tags:string="";
   userid:string="";
+  hasMax: boolean = true;
 
   constructor(public dialog:MatDialog,
               public config:ConfigService,
@@ -176,6 +177,7 @@ export class NewCouponComponent implements OnInit {
   }
 
   refresh(){
+    this.hasMax=(this.coupon.max>0);
     this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.max+this.coupon.symbol;
   }
 }
