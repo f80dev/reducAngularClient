@@ -90,15 +90,11 @@
               label="Vous pouvez voir les promotions disponibles autour de vous en activant la carte">
     </app-tuto>
 
-    <app-tuto [delay]="12" button="account_balance"
-              label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
-    </app-tuto>
-
     <app-tuto [delay]="15" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
-    <app-tuto [delay]="10" button="build"
+    <app-tuto [delay]="10" button="build" [if]="user.level>0.6"
               label="Vous êtes un habitué de reducshare ? Passer l'interface en mode avancée">
     </app-tuto>
 
@@ -117,7 +113,7 @@
     <!--<button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>-->
 
     <button mat-icon-button mat-button mat-raised-button
-            *ngIf="(user.shops==null || user.shops.length==0) && user.level>0"
+            *ngIf="(user.shops==null || user.shops.length==0) && user.level>0.5"
             id="btnRAZ"
             (click)="clearAccount(user._id)">
       <mat-icon>delete</mat-icon>
@@ -135,22 +131,30 @@
       <mat-icon>camera_alt</mat-icon>
     </button>
 
-    <button *ngIf="user.level==0" mat-button
+    <button *ngIf="user.level<1 && user.level>0" mat-button
             id="btnExpert" title="Simplifier l'interface pour les utilisateurs habitués"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>
     </button>
 
-    <button mat-button *ngIf="user.level>0"
+    <button mat-button *ngIf="user.level>0.5"
             id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications_active</mat-icon>
     </button>
-    <button mat-raised-button mat-icon-button mat-button
+    <button mat-raised-button mat-icon-button mat-button *ngIf="user.coupons?.length>0 || user.shops?.length>0"
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
+
+    <button mat-raised-button mat-button *ngIf="user.coupons?.length==0 && user.shops.length==0"
+            id="btnMapRookie" title="Voir les promos autour de soit (nécéssite de partager sa position)"
+            (click)="openLoc()">
+      Promos localisées
+    </button>
+
+
     <button mat-button title="Créer une nouvelle enseigne"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">

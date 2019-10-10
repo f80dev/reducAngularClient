@@ -11,6 +11,7 @@ import {TransPipe} from "../trans.pipe";
 export class TutoComponent implements OnChanges,OnInit {
 
   @Input("text") text: string="";
+  @Input("title") title: string="";
   @Input("type") _type: string="";
   @Input("label") label: string="";
   @Input("subtitle")subtitle: string="";
@@ -19,6 +20,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('if') _if: boolean=true;
   @Input('image') image: string="./assets/img/tips.png";
   @Input('icon') icon:string="";
+  @Input('force') force:boolean=false;
   @Input('button') _button:string="";
   @Input('height') height:string="auto";
 
@@ -27,35 +29,39 @@ export class TutoComponent implements OnChanges,OnInit {
   handle:any;
 
   ngOnChanges() {
-    setTimeout(()=>{
-      if(this.text==null || this.text.length==0)this.text=this.label;
-      this.text=this.transPipe.transform(this.text);
-
-      if(this._if && !this.config.visibleTuto){
-        let code="histo"+hashCode(this.text);
-        let res=localStorage.getItem(code);
-        if(res==null){
-          this.config.visibleTuto=true;
-          localStorage.setItem(code,"read"+new Date().getTime());
-
-          if(this.duration==0)this.duration=this.text.split(" ").length;
-
-          this.handle=setTimeout(()=>{
-            this.text="";
-            this.config.visibleTuto=false;
-          },3000+this.duration*1000);
-        } else {
-          this.config.visibleTuto=false;
-          this.text="";
+    if(this._if){
+      setTimeout(()=>{
+        if(this.text==null || this.text.length==0)this.text=this.label;
+        if(this.title!=null && this.title.length>0){
+          this._type="title";
+          this.text=this.title;
         }
-      } else {
-        this.text="";
-      }
-    },this.delay*1000);
+        this.text=this.transPipe.transform(this.text);
+        let code="histo"+hashCode(this.text+this.subtitle);
+
+        if(this.duration==-1)this.duration=(this.text.split(" ").length+this.subtitle.split(" ").length)/3;
+
+        let res=localStorage.getItem(code);
+        if((res==null || this.force) && !this.config.visibleTuto){
+          this.config.visibleTuto=true;
+          localStorage.setItem(code,"read"+new Date().getTime()); //Marque l'affichage
+
+          if(this.duration>0){
+            this.handle=setTimeout(()=>{this.hideTuto();},3000+this.duration*1000);
+          }
+        } else {
+          this.hideTuto();
+        }
+      },this.delay*1000);
+    } else {
+      this.config.visibleTuto=false;
+      this.text="";
+    }
   }
 
   hideTuto() {
     this.text="";
+    this.subtitle="";
     this.config.visibleTuto=false;
     clearTimeout(this.handle);
   }

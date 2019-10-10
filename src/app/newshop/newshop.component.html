@@ -24,7 +24,9 @@
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style">
-      <input id="txtShopName" type="text" matInput placeholder="Nom de l'enseigne" [(ngModel)]="new_shop.name" autofocus>
+      <input id="txtShopName" type="text"
+             (keyup)="canUpdateName=false"
+             matInput placeholder="Nom de l'enseigne" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
     <br>
 

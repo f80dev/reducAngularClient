@@ -14,12 +14,14 @@
   },
 
   "support":{
-    "forum":"",
-    "email":"contact@reducshare.com"
+    "forum":"http://reducshare.les-forums.com/",
+    "email":"contact@reducshare.com",
+    "facebook":"https://www.facebook.com/pg/reducshare/"
   },
 
   "cgu":{
     "dtModif":1570395953,
+    "online":false,
     "content":"https://reducshare.com/cgu.html"
   },
 
@@ -262,7 +264,7 @@
       "share_bonus":0.5,
       "pay_bonus":2,
       "direct_bonus":2,
-      "max":50,
+      "max":0,
       "duration_hours":480,
       "stock":500,
       "max_coupon":5000,

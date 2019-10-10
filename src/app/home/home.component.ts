@@ -136,7 +136,7 @@ export class HomeComponent implements OnInit {
       this.user=u;
 
       if(this.user.email.indexOf("fictif.com")==-1){
-        if(this.user.lastCGU<this.config.values.cgu.dtModif){
+        if(this.user.lastCGU<this.config.values.cgu.dtModif && this.config.values.cgu.online){
           this.dialog.open(PromptComponent,{
             width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
               question:this.config.values.cgu.content,

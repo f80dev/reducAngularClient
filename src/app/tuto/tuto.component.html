@@ -16,13 +16,13 @@
     </table>
   </div>
 
-  <div *ngIf="_type=='title'" class="app-card" [ngStyle]="{'background':'none','width':'80%','margin-left':'10%','height':height,'text-align':'center'}">
-    <br><br>
-    <div style="width:100%;text-align:center;font-size: 2em;">{{text}}</div><br><br>
-    <img [src]="image" style="max-width: 80%;max-height: 80%;">
-    <br><br>
-    <div style="width:100%;text-align:center;font-size: medium;">{{subtitle}}</div>
-    <br><br><br>
+  <div *ngIf="_type=='title'" class="app-card"
+       style="background-color:white;color:black;z-index:1000;display:inline-block;position:fixed;top:0px;left:0px;width:100vw;height:100vh;text-align:center;">
+    <div style="width:80%;text-align:center;font-size: 6vmin;margin:10%;">{{text}}</div>
+    <img [src]="image" style="max-width: 80%;max-height: 80%;margin-bottom:10%;display: inline-block;">
+    <br>
+    <div style="width:90%;margin:5%;text-align:center;font-size: medium;">{{subtitle}}</div>
+    <br>
     <button mat-button mat-raised-button>Commencer</button>
     <br>
     <br>

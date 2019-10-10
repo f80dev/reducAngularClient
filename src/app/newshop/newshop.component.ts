@@ -38,6 +38,7 @@ export class NewshopComponent implements OnInit {
 
 
   reverseGeocode: boolean=false;
+  canUpdateName: boolean=true;
 
   constructor(public api: ApiService,
               public toast:MatSnackBar,
@@ -92,9 +93,9 @@ export class NewshopComponent implements OnInit {
         this.loc.getAddressFromCoord(this.new_shop.lat,this.new_shop.lng,(res)=>{
           this.reverseGeocode=false;
           if(res.display_name){
-            this.new_shop.name="";
+            if(this.canUpdateName)this.new_shop.name="";
             "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
-              if(res.address[type]!=null)this.new_shop.name=res.address[type];
+              if(res.address[type]!=null && this.canUpdateName)this.new_shop.name=res.address[type];
             });
             var house_number=res.address.house_number;
             if(house_number==null && this.new_shop.name!=null)house_number=this.new_shop.name;

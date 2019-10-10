@@ -45,6 +45,8 @@ export class NewCouponComponent implements OnInit {
     picture: 'https://img.bonne-promo.com/image/reduction.png'
   };
 
+  saveMax=0;
+
   showIcons=false;
   title="";
   showOldCoupon=false;
@@ -160,6 +162,8 @@ export class NewCouponComponent implements OnInit {
     this.coupon.dtStart=new Date().getTime();
     this.preview=coupon.picture;
     this.showOldCoupon=false;
+
+    this.refresh();
   }
 
   cancel(){
@@ -179,5 +183,14 @@ export class NewCouponComponent implements OnInit {
   refresh(){
     this.hasMax=(this.coupon.max>0);
     this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.max+this.coupon.symbol;
+  }
+
+  changeMax() {
+    if(!this.hasMax){
+      this.saveMax=this.coupon.max;
+      this.coupon.max=0;
+    }
+    else
+      this.coupon.max=this.saveMax;
   }
 }

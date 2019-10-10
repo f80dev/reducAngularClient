@@ -6,7 +6,7 @@
 </app-flashscreen>
 
 <div [hidden]="showMessage">
-  <app-tuto label="Bienvenue dans ReducShare !"
+  <app-tuto title="Bienvenue dans ReducShare !"
             [duration]="5" height="100vh"
             image="./assets/icons/icon-384x384.png"
             subtitle="Une application pour gagner plein de réductions dont la valeur augmente quand vous les redistribuées !">
@@ -18,9 +18,19 @@
                 (flash)="refresh($event?.message)">
   </app-userform>
 
+  <app-tuto
+    [if]="user.shops?.length>0" [delay]="1"
+    type="title"
+    title="Bravo votre première enseigne est prête."
+    image="./assets/img/bravo.gif"
+    subtitle="Vous pouvez maintenant y associé autant de promotion que vous le souhaitez">
+  </app-tuto>
+
+
   <app-tuto [if]="user.shops?.length>0"
             label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
   </app-tuto>
+
   <app-shops
              [user]="user"
              (update)="refresh($event?.message)"
@@ -34,14 +44,14 @@
 
   <!--Affiche la liste des coupons en possession de l'utilisateur -->
   <app-list-coupons (delete)="refresh($event?.message)"
-                    title="Vos réductions"
+                    title="Supprimer cette réduction"
                     (insert)="refresh($event?.message)"
                     (update)="refresh($event?.message)"
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
-  <mat-card class="app-card" style="background-color: #d9d9d9;color:black;">
-    <div style="width: 100%;text-align: center;font-size: small;margin-top:20px;">
+  <mat-card class="app-card" style="background-color: #d9d9d9;color:black;" *ngIf="user.level>0.3">
+    <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
       {{config.values.appname+" - "+config.values.version}}<br>
       <br>
       <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
@@ -53,16 +63,24 @@
           <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
         </tr>
         <tr><td><br></td></tr>
-        <tr>
-          <td>
-            <mat-icon>mail</mat-icon>
-          </td>
-          <td>
-            : <a href="mailto:{{config.values.support?.email}}">{{config.values.support?.email}}</a><br>
-          </td>
-        </tr>
+
       </table>
+      <br><br>
+      <div style="width: 100%;text-align: center;">
+        <a href="mailto:{{config.values.support?.email}}" style="display:inline-block;width: 55px;">
+          <mat-icon class="big-icon">mail</mat-icon>
+        </a>
+
+        <a href="{{config.values.support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
+          <mat-icon class="big-icon">persons</mat-icon>
+        </a>
+
+        <a href="{{config.values.support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
+          <img style="width:50px;" src="./assets/icons/facebook.png">
+        </a>
+      </div>
     </div>
+
     <br>
 
   </mat-card>

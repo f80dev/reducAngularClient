@@ -46,7 +46,7 @@
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
-        <mat-checkbox [(ngModel)]="hasMax">Plafonner le gain</mat-checkbox><br>
+        <mat-checkbox [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
         <mat-form-field class="form-field-style" *ngIf="hasMax">
           <input matInput type="number" (change)="refresh()" (update)="refresh()"
                  id="txtMaxGainByUser" title="Gain maximum cumulable par réduction"
@@ -62,8 +62,6 @@
                     [(ngModel)]="coupon.conditions"
                     (change)="normalize_conditions(coupon)"></textarea>
         </mat-form-field>
-        <app-tuto label="Les conditions seront présentées précédées de la phrase 'valable pour'. Il ne faut donc pas mettre ces mots au début des conditions rédigées">
-        </app-tuto>
 
 
         <mat-form-field class="form-field-style">
@@ -79,11 +77,8 @@
       </mat-step>
 
 
-
-
       <mat-step>
         <ng-template matStepLabel>Ajouter un visuel</ng-template>
-
 
         <!--Gestion du visuel-->
 

@@ -101,15 +101,6 @@
           </qr-code>
         </a>
 
-
-        <!--Zone réserver au créateur-->
-        <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
-          {{coupon.share | number:'1.0-0'}}/{{coupon.max_coupon}} partages<br>
-          {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} proposé(es) via les partages<br><br>
-          Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}
-        </div>
-
-
       </td>
       <td style="text-align: center;vertical-align: top;width:auto;">
         <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
@@ -117,12 +108,10 @@
           <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
 
-
         <div *ngIf="coupon.canbedeal && coupon.showCode">
           <br><br>
           <table style="text-align: left;display: inline-block;font-size:small;"
-                 cellpadding="2" name="zoneInfo"
-          >
+                 cellpadding="2" name="zoneInfo">
             <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
             <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
             <tr><td>Immédiat</td><td>+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
@@ -134,6 +123,15 @@
           <br>
             Reste <app-timer [end]="coupon.dtEnd"></app-timer>
           </span>
+
+        <!--Zone réserver au créateur-->
+        <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
+          <br>
+          {{coupon.share | number:'1.0-0'}}/{{coupon.max_coupon}} partages<br>
+          {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} proposé(es) via les partages<br><br>
+          Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}
+        </div>
+
       </td>
     </tr></table>
 
@@ -158,8 +156,8 @@
               label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
     </app-tuto>
 
-    <app-tuto [if]="coupon.origin==coupon._id" [delay]="3" button="printer"
-              label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promo">
+    <app-tuto [if]="coupon.origin==coupon._id" [delay]="10" button="printer"
+              label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promotion">
     </app-tuto>
 
     <app-tuto [if]="coupon.origin==coupon._id"
@@ -272,4 +270,3 @@
     </div>
   </mat-card-actions>
 </mat-card>
-<br>

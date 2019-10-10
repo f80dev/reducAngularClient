@@ -24,9 +24,10 @@
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
 
-    <app-tuto
-              [if]="shop.coupons?.length>0"
-              label="Votre première promotion est créée, vous pouvez imprimer une affiche ou commencer à diffuser son lien à votre réseau">
+    <app-tuto [if]="shop.coupons?.length>0" [delay]="2"
+              icon="./assets/img/bravo.gif"
+              label="Votre première promotion est prête. faites le savoir ! Imprimez une première affiche ou partager la avec votre réseau"
+              >
     </app-tuto>
 
 
@@ -71,14 +72,14 @@
 
     <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
-            *ngIf="user.level>0"
+            *ngIf="user.level==1"
             (click)="addCoupon(shop)">
       <mat-icon>note_add</mat-icon>
     </button>
 
     <button mat-button mat-flat-button
             name="btnNewPromo" class="large-button"
-            *ngIf="user.level==0"
+            *ngIf="user.level<1"
             (click)="addCoupon(shop)">
       Nouvelle promotion
     </button>
