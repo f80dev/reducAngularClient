@@ -16,7 +16,8 @@
   "support":{
     "forum":"http://reducshare.les-forums.com/",
     "email":"contact@reducshare.com",
-    "facebook":"https://www.facebook.com/pg/reducshare/"
+    "facebook":"https://www.facebook.com/reducshare/",
+    "faq":"https://web.reducshare.com/faq.html"
   },
 
   "cgu":{
@@ -29,7 +30,7 @@
   "socket":true,
   "icon_coupon":"./assets/img/pin.png",
   "icon_shop":"./assets/img/pin.png",
-  "icon_card_shop":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/department-store_1f3ec.png",
+  "icon_card_shop":"./assets/img/shop.png",
   "icon_person":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
 
   "domain_server":"server.f80.fr",
@@ -228,7 +229,7 @@
       "share_bonus":0.02,
       "pay_bonus":2,
       "duration_jours":3,
-      "picture":"https://images.pexels.com/photos/1269025/pexels-photo-1269025.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/tropical-drink_1f379.png",
       "direct_bonus":0.5,
       "max":6,
       "stock":200,

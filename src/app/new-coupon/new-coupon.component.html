@@ -175,8 +175,8 @@
         <div class="detail_promo">
           La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) </span>
           <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,
-        et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es)
-          ou si plus de {{coupon.max_coupon}} promotions ont été partagées.
+        et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es).
+          La promotion ne peut plus être distribuée si {{coupon.max_coupon}} ont été partagées.
         <br><br>
         </div>
 

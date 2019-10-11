@@ -104,7 +104,7 @@ declare var ol: any;
 export function createMap(center:any,
                           icon="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/google/223/man_1f468.png",
                           zoom=18,scale=0.2,
-                          func_move=null,func_sel=null){
+                          func_move=null,func_sel=null,func_click=null){
   var vectorSource = new ol.source.Vector({
     features: [
       createMarker(center.lng,center.lat,icon,null,scale)
@@ -132,13 +132,18 @@ export function createMap(center:any,
   });
 
   if(func_sel){
-    rc.on("click", function(e) {
+    rc.on("dblclick", function(e) {
       rc.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
         func_sel(feature);
       })
     });
   }
 
+  if(func_click){
+    rc.on("click", function(e) {
+      func_click(e);
+    });
+  }
 
   if(func_move!=null){
     rc.on("moveend",func_move);
@@ -198,7 +203,7 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   var iconStyle:any = new ol.style.Style({
     image: new ol.style.Icon(({
-      anchor: [0.5, 0.5],
+      anchor: [0.6, 1.0],
       scale:scale,
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',

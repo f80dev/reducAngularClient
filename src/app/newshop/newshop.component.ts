@@ -119,12 +119,15 @@ export class NewshopComponent implements OnInit {
       this.new_shop.lat= Number(res[0].lat);
       this.show_address=res[0].display_name;
       if(this.map==null){
-        this.map =createMap({lng:this.new_shop.lng,lat:this.new_shop.lat},this.config.values.icon_shop,zoom,0.2,(event)=>{
-          //Déplacement de la carte
+        this.map =createMap({lng:this.new_shop.lng,lat:this.new_shop.lat},this.config.values.icon_shop,zoom,0.2,
+          (event)=>{
           this.refresh_map();
-        });
-      }
-      else{
+          },
+          null,
+          (event)=>{
+            this.map.getView().setCenter(event.coordinate);
+          });
+      }else{
         this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
         getMarkerLayer(this.map).addFeature(createMarker(this.new_shop.lng, this.new_shop.lat,this.config.values.icon_shop,null,0.2));
       }

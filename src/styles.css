@@ -77,7 +77,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .big-icon {
-  font-size:50px;
+  font-size:40px;
+  opacity: 0.5;
   color:black;
   display: inline-block;
 }
