@@ -12,9 +12,12 @@
     </h2>
 
     <span class="spacer"></span>
-    <button mat-button mat-flat-button
+    <button mat-button mat-flat-button mat-icon-button
             id="btnValide" *ngIf="new_shop.name?.length>0"
-            class="app-button" (click)="add()">Valider</button>
+            class="app-button" (click)="add()">
+      <mat-icon>checkmark</mat-icon>
+
+    </button>
   </mat-toolbar>
   </mat-card-title>
 
@@ -23,24 +26,25 @@
     <br><br>
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
 
-    <mat-form-field class="form-field-style">
+    <mat-form-field class="form-field-style" style="width:75%;margin-right:10px;">
       <input id="txtShopName" type="text"
              (keyup)="canUpdateName=false"
              matInput placeholder="Nom de l'enseigne" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
+    <button mat-button mat-flat-button mat-icon-button (click)="localize()">
+      <mat-icon>gps_fixed</mat-icon>
+    </button>
+
+
     <br>
 
-    <mat-form-field class="form-field-style" style="width:85%;margin-right:5px;">
-      <input id="txtShopAddress" type="text" matInput placeholder="adresse de l'enseigne" [(ngModel)]="new_shop.address"
+    <mat-form-field class="form-field-style">
+      <input id="txtShopAddress" type="text" matInput placeholder="Adresse de l'enseigne" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
       <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-
-    <button mat-button mat-flat-button mat-icon-button (click)="localize()">
-      <mat-icon>gps_fixed</mat-icon>
-    </button>
     <br>
 
     <mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">
@@ -65,9 +69,9 @@
 
     <br>
     <mat-form-field class="form-field-style">
-      <mat-label>Type d'établissement (plusieurs choix possible)</mat-label>
+      <mat-label>Type d'établissement (plusieurs choix possible par #htag)</mat-label>
       <mat-select id="txtShopTags" [(ngModel)]="new_shop.tags"  multiple>
-        <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">{{tag}}</mat-option>
+        <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
       </mat-select>
     </mat-form-field>
 

@@ -31,7 +31,7 @@ export class TutoComponent implements OnChanges,OnInit {
 
   refresh(){
 
-    if(!this.config.visibleTuto || this._type=="title"){
+    if(!this.config.visibleTuto || this._type=="title" || this.force){
       if(this._if){
           this.config.visibleTuto=true;
           localStorage.setItem(this.code,"read"+new Date().getTime()); //Marque l'affichage

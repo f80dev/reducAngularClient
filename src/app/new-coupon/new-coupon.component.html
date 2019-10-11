@@ -1,7 +1,6 @@
-<mat-card class="app-card" style="padding:5px;background-color: #8f8f8f;">
+<mat-card class="app-card" style="background-color: #8f8f8f;">
   <table style="width: 100%"><tr>
     <td>
-      <mat-card-title>{{title}}</mat-card-title>
       <button mat-button mat-flat-button
               class="large-button"
               id="btnShowModels"
@@ -30,23 +29,26 @@
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
       <mat-step>
-        <ng-template matStepLabel>Nature de la promotion</ng-template>
+        <ng-template matStepLabel>Décrire votre promotion</ng-template>
+
 
         <div class="detail_promo">
+          <div *ngIf="level<1" style="font-size: x-small">Résumé de votre saisie:<br></div>
           {{coupon.label}}
-          <span *ngIf="coupon.max>0">Gagnez jusqu'a {{coupon.max}}{{coupon.symbol}}</span>
+          <span *ngIf="coupon.max>0">Gagnez jusqu'a {{coupon.max}}&nbsp;{{coupon.unity}}(s) ({{coupon.symbol}}) </span>
           {{coupon.conditions}}
         </div>
         <br>
 
-        <app-tuto label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
+        <app-tuto *ngIf="level<1"
+                  label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
                   [delay]="5">
         </app-tuto>
 
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
           <input type="text" matInput
                  id="txtUnity" (change)="refresh()"
-                 placeholder="Unité : Que gagne-t-on ?"
+                 placeholder="Que gagne-t-on ? (en 1 mot)"
                  [(ngModel)]="coupon.unity">
         </mat-form-field>
 

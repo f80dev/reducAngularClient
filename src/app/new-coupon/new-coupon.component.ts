@@ -52,8 +52,7 @@ export class NewCouponComponent implements OnInit {
   showOldCoupon=false;
   icons=[];
 
-  //@Input("shop") shop:any={};
-  //@Input("level") level=0;
+  level=0;
 
   //mode="add";
 
@@ -84,6 +83,7 @@ export class NewCouponComponent implements OnInit {
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
     }
     this.userid=params.get("userid") || "";
+    this.level=Number(params.get("level") || "0");
     this.title=params.get("title") || "";
     this.tags=params.get("tags") || "";
   }

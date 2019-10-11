@@ -70,8 +70,7 @@ export class HomeComponent implements OnInit {
       this.api.getuser(localStorage.getItem('user')).subscribe((u:any) => {
         if(u.code==500){
           $$("Le compte stocker sur le device a été effacé de la base. On l'efface sur le device")
-          localStorage.clear();
-          this.analyse_login(tags,func);
+          this.raz();
         } else {
           func(u);
         }
@@ -135,7 +134,6 @@ export class HomeComponent implements OnInit {
         this.raz();
       }
 
-      debugger
       if(message!=null && message.indexOf("#submessage#")>-1){
         u["submessage"]=message.split("#submessage#")[1];
         message=message.split("#submessage#")[0];
@@ -158,7 +156,7 @@ export class HomeComponent implements OnInit {
             else{
               var id_old_user=localStorage.getItem("old_user");
               if(localStorage.getItem("user")==id_old_user)
-                localStorage.clear();
+                this.raz();
               else
                 localStorage.setItem("user",id_old_user);
 

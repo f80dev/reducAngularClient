@@ -89,7 +89,7 @@
               label="Voir les promotions autour de vous sur une carte">
     </app-tuto>
 
-    <app-tuto [delay]="15" button="account_balance"
+    <app-tuto *ngIf="user.level>0" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 
