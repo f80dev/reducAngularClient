@@ -29,12 +29,24 @@
         Pseudo
       </button>
       &nbsp;
-      <button mat-icon-button
-              *ngIf="user.email?.indexOf('fictif.com')>-1"
-              id="btnEmailLogin"
-              mat-button mat-flat-button (click)="securise()">
-        <mat-icon>verified_user</mat-icon>
-      </button>
+      <div *ngIf="user.email?.indexOf('fictif.com')>-1">
+        <button
+                *ngIf="user.level<0.5"
+                title="S'authentifier permet de se connecter depuis plusieurs appareils"
+                id="btnEmailLogin"
+                mat-button mat-flat-button (click)="securise()">
+          S'enregistrer
+        </button>
+
+        <button mat-icon-button
+                title="S'authentifier permet de se connecter depuis plusieurs appareils"
+                *ngIf="user.level>=0.5"
+                id="btnEmailLogin2"
+                mat-button mat-flat-button (click)="securise()">
+          <mat-icon>verified_user</mat-icon>
+        </button>
+
+      </div>
 
       <button mat-icon-button
               *ngIf="user.email?.indexOf('fictif.com')==-1"

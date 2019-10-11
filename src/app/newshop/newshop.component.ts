@@ -1,6 +1,15 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, createMap, createMarker, getMarkerLayer, normeString, selectFile, showError} from '../tools';
+import {
+  checkLogin,
+  createMap,
+  createMarker,
+  getMarkerLayer,
+  loginWithEmail,
+  normeString,
+  selectFile,
+  showError
+} from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
@@ -150,7 +159,7 @@ export class NewshopComponent implements OnInit {
 
   checkLogin() {
     if(this.anonymous){
-      this.toast.open("Seul les comptes enregistrés peuvent rendre leurs promotions 'public'","Se connecter",{duration:2000})
+      this.toast.open("Vous devez vous enregistrer pour pouvoir rendre vos promotions visibles sur la carte des promotions localisées","Se connecter",{duration:6000})
         .onAction().subscribe(()=>{
           this._location.back();
       });
