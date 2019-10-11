@@ -1,9 +1,9 @@
 <img
-  *ngIf="picture.startsWith('http') || picture.startsWith('data')"
+  *ngIf="picture?.startsWith('http') || picture?.startsWith('data')"
   [src]="picture"
   [ngStyle]="{'width': size,'height':size,'display': 'inline-block'}">
 
-<span style="font-size: 5em" *ngIf="!picture.startsWith('http') && !picture.startsWith('data')">
+<span style="font-size: 5em" *ngIf="!picture?.startsWith('http') && !picture?.startsWith('data')">
   {{picture}}
 </span>
 

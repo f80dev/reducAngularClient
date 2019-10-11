@@ -1,5 +1,5 @@
 <app-flashscreen [message]="user.message"
-                 submessage="Vous pouvez augmenter vos gains en partageant vos réductions"
+                 [submessage]="user.submessage"
                  *ngIf="showMessage"
                  [duration]="15"
                  (close)="closeFlashScreen()">
@@ -27,8 +27,8 @@
   </app-tuto>
 
 
-  <app-tuto *ngIf="user.shops?.length>0"
-            label="Retrouvez ici toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
+  <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
+            label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
   </app-tuto>
 
   <app-shops

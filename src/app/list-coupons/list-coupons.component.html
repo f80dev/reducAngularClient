@@ -86,7 +86,7 @@
 
         <div *ngIf="(coupon.showCode==null || !coupon.showCode) && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>350)">
 
-          <app-visual [picture]="coupon.picture"></app-visual>
+          <app-visual [picture]="coupon.picture" (click)="coupon.showCode=true"></app-visual>
 
         </div>
 
@@ -136,7 +136,7 @@
     </tr></table>
 
 
-    <app-tuto *ngIf="coupon.showCode && isVisible(coupon)" [delay]="1" [duration]="15"
+    <app-tuto *ngIf="coupon.showCode && isVisible(coupon)" [delay]="1" [duration]="30"
               label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
 

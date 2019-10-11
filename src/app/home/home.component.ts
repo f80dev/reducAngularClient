@@ -135,6 +135,11 @@ export class HomeComponent implements OnInit {
         this.raz();
       }
 
+      debugger
+      if(message!=null && message.indexOf("#submessage#")>-1){
+        u["submessage"]=message.split("#submessage#")[1];
+        message=message.split("#submessage#")[0];
+      }
       this.user=u;
 
       if(this.user.email.indexOf("fictif.com")==-1){
