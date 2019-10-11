@@ -140,7 +140,7 @@
               label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
     </app-tuto>
 
-    <app-tuto [delay]="2" [duration]="15" *ngIf="coupon.canbedeal"
+    <app-tuto [duration]="15" *ngIf="coupon.canbedeal && coupon.origin!=coupon._id"
               label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
     </app-tuto>
 

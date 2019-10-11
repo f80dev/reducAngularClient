@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
               public dialogRef: MatDialogRef<LoginComponent>,@Inject(MAT_DIALOG_DATA) public data: any,
               private socialAuthService: SocialService) { }
   email = 'paul.dudule@gmail.com';
-  message="";
+  message="L'authentification va permettre d'utiliser un même compte sur plusieurs appareils. Elle permet également de rendre vos promotions publiques donc visible sur la carte des promotions localisées";
 
   ngOnInit() {
   }

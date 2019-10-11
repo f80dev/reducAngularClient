@@ -175,7 +175,10 @@ export function showMessage(vm:any,s:string,duration=20000){
 
 export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Function=null) {
   if(!vm.dialog)$$("La fenetre ne dispose pas de 'dialog'");
-  vm.dialog.open(LoginComponent,{width:'250px',data: {facebook:true,google:true,user:user}})
+  var _width="250px";
+  if(screen.width>600)_width="400px";
+
+  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,user:user}})
     .afterClosed().subscribe((result:any) => {
     if(result){
       if(func)func(result);
@@ -201,16 +204,30 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
 }
 
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
-  var iconStyle:any = new ol.style.Style({
-    image: new ol.style.Icon(({
-      anchor: [0.6, 1.0],
-      scale:scale,
-      anchorXUnits: 'fraction',
-      anchorYUnits: 'pixels',
-      src: icon,
-      opacity:1.0,
-    })),
-  });
+  if(!icon)icon="";
+
+  var iconStyle:any;
+
+  if(icon){
+    iconStyle = new ol.style.Style({
+      image: new ol.style.Icon(({
+        anchor: [0.6, 1.0],
+        scale:scale,
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        src: icon,
+        opacity:1.0,
+      })),
+    });
+  } else {
+    iconStyle = new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: 15,
+        fill: new ol.style.Fill({color: 'white'})
+      })
+    });
+  }
+
 
   if(coupon!=null){
     iconStyle.setText(new ol.style.Text({

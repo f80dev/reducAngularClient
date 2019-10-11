@@ -1,9 +1,10 @@
-<mat-card class="app-card" style="background-color: #8f8f8f;">
+<mat-card class="app-card" style="margin:0px;padding:3px;background-color: #8f8f8f;">
   <table style="width: 100%"><tr>
     <td>
       <button mat-button mat-flat-button
               class="large-button"
               id="btnShowModels"
+              style="margin-left:10px;"
               *ngIf="!showOldCoupon"
               (click)="showOldCoupon=true">
         Utiliser un modèle
@@ -15,10 +16,10 @@
   </tr></table>
 
   <app-tuto [delay]="5"
-            label="Si vous ne voyez pas par oû commencer pour fabriquer votre promotion, consulter les modèles disponibles">
+            label="Remplissez bien les 5 étapes pour décrire votre promotion. Les résumés au début de chaque section présentent l'information saisie sous un format lisible. Si vous ne voyez pas par oû commencer, consulter les modèles disponibles">
   </app-tuto>
 
-  <mat-card-content class="app-card-content" style="text-align: left;margin:5px;">
+  <mat-card-content class="app-card-content" style="text-align: left;margin:0;padding:0;">
 
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Selectionnez un modèle"
@@ -45,31 +46,45 @@
                   [delay]="5">
         </app-tuto>
 
+
+        <app-tuto label="Dans ce cas, il faut préciser ce que l'on gagne dans la promotion, si possible en 1 seul mot au singulier. Par exemple : minute, euro, café, repas"
+                  *ngIf="focusElt=='unity'"></app-tuto>
+
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
           <input type="text" matInput
                  id="txtUnity" (change)="refresh()"
-                 placeholder="Que gagne-t-on ? (en 1 mot)"
+                 (focus)="focusElt='unity'"
+                 placeholder="Unitée offerte"
                  [(ngModel)]="coupon.unity">
         </mat-form-field>
 
         <mat-form-field class="form-field-style" style="width: 30%;">
           <input type="text" matInput max="3"
+                 (focus)="focusElt='symbol'"
                  id="txtSymbol" (change)="refresh()"
                  placeholder="Symbole de l'unité"
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
+        <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
+                  *ngIf="focusElt=='max'"></app-tuto>
+
         <mat-checkbox [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
         <mat-form-field class="form-field-style" *ngIf="hasMax">
           <input matInput type="number" (change)="refresh()" (update)="refresh()"
+                 (focus)="focusElt='max'"
                  id="txtMaxGainByUser" title="Gain maximum cumulable par réduction"
                  placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
         </mat-form-field>
         <br>
 
+        <app-tuto label="Pour toute promotion on va préciser dans quel cadre le client peut utiliser la promotion. Par exemple : pour tout achat hors weekend, pour tout achat d'un montant minimum de ..."
+                  *ngIf="focusElt=='conditions'"></app-tuto>
+
         <mat-form-field class="form-field-style">
           <textarea matInput rows="3"
                     id="txtConditions"
+                    (focus)="focusElt='conditions'"
                     title="Condition d'application de l'offre / de la promo"
                     placeholder="Offre valable ..."
                     [(ngModel)]="coupon.conditions"
@@ -95,7 +110,8 @@
 
         <!--Gestion du visuel-->
 
-        <app-tuto label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
+        <app-tuto *ngIf="focusElt=='symbol'"
+          label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
 
         <div style="width: 100%;text-align: center;">
 
@@ -135,8 +151,7 @@
         <ng-template matStepLabel>Détailler l'augmentation de la promotion</ng-template>
         <div class="detail_promo">
           le client gagne immédiatement {{coupon.direct_bonus}}{{coupon.symbol}}
-          lorsqu'il flash le promotion, puis 1{{coupon.symbol}} supplémentaire pour {{coupon.nb_partage}} partages
-          ,et enfin {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) chaque fois qu'un coupon qu'il a distribué est utilisé.
+          lorsqu'il flash la promotion. Il gagne 1{{coupon.symbol}} supplémentaire chaque fois qu'il partage {{coupon.nb_partage}} fois la promotion, et {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) chaque fois qu'un coupon qu'il a distribué est utilisé.
         </div>
         <br>
 
@@ -177,7 +192,7 @@
         <div class="detail_promo">
           La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) </span>
           <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,
-        et s'interrompt si les {{coupon.stock}} {{coupon.symbol}} ont été distribué(es).
+        et s'interrompt si le stocke de {{coupon.stock}} {{coupon.symbol}} à été distribué.
           La promotion ne peut plus être distribuée si {{coupon.max_coupon}} ont été partagées.
         <br><br>
         </div>
@@ -206,13 +221,17 @@
 
       </mat-step>
 
+
+      <app-tuto *ngIf="focusElt=='title'"
+                label="Ce titre ne sera pas visible du client. Il est fait pour vous aidez à retrouver votre promotion pour la réutiliser depuis la liste des modèles">
+      </app-tuto>
       <mat-step>
         <ng-template matStepLabel>Références de la promo</ng-template>
         <mat-form-field class="form-field-style">
           <input type="text" matInput
                  id="txtTitle"
-                 autofocus
-                 placeholder="{{'Titre de la promotion (titre non visible du client)' | trans}}"
+                 (focus)="focusElt='title'"
+                 placeholder="{{'Titre de la promotion (non visible du client)' | trans}}"
                  [(ngModel)]="coupon.title">
         </mat-form-field>
       </mat-step>

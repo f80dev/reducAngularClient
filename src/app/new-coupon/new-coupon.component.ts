@@ -62,6 +62,7 @@ export class NewCouponComponent implements OnInit {
   tags:string="";
   userid:string="";
   hasMax: boolean = true;
+  focusElt="";
 
   constructor(public dialog:MatDialog,
               public config:ConfigService,

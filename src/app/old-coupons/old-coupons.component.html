@@ -22,7 +22,7 @@
   </span>
 
   <mat-card-content>
-    <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos propres promotions" *ngIf="coupons.length>0"></app-tuto>
+    <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos nouvelles promotions" *ngIf="coupons.length>0"></app-tuto>
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons" name="coupon" (click)="onselect.emit(coupon)">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture" style="cursor: pointer;">

@@ -1,4 +1,4 @@
-<div *ngIf="_if && text?.length>0" (click)="hideTuto()">
+<div *ngIf="_if && text?.length>0" (click)="hideTuto(true)">
   <div *ngIf="_type=='tips'" style="display:inline-block;margin:3px;">
     <table>
       <tr>
@@ -19,11 +19,9 @@
 
   <div *ngIf="_type=='title'"
        style="background-color:white;color:black;z-index:1000;display:inline-block;position:fixed;top:0px;left:0px;width:100vw;height:100vh;text-align:center;">
-    <div style="width:80%;text-align:center;font-size: 6vmin;margin:10%;">{{text}}</div>
-    <img [src]="image" style="max-width: 80%;max-height: 80%;margin-bottom:10%;display: inline-block;">
-    <br>
+    <div style="width:80%;text-align:center;font-size: 6vmin;margin:5%;">{{text}}</div>
+    <img [src]="image" style="max-width: 80%;max-height: 80%;margin-bottom:5%;display: inline-block;">
     <div style="width:90%;margin:5%;text-align:center;font-size: medium;">{{subtitle}}</div>
-    <br>
     <button mat-button mat-raised-button>Commencer</button>
   </div>
 

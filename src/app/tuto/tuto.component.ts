@@ -34,9 +34,8 @@ export class TutoComponent implements OnChanges,OnInit {
     if(!this.config.visibleTuto || this._type=="title" || this.force){
       if(this._if){
           this.config.visibleTuto=true;
-          localStorage.setItem(this.code,"read"+new Date().getTime()); //Marque l'affichage
           this.handle=setTimeout(()=>{
-            this.hideTuto();
+            this.hideTuto(true);
           },3000+this.duration*1000);
       } else {
         this.hideTuto();
@@ -49,7 +48,8 @@ export class TutoComponent implements OnChanges,OnInit {
 
   }
 
-  hideTuto() {
+  hideTuto(addHisto=false) {
+    if(addHisto)localStorage.setItem(this.code,"read"+new Date().getTime()); //Marque l'affichage
     this.text="";
     this._if=false;
     this.config.visibleTuto=false;
@@ -71,7 +71,7 @@ export class TutoComponent implements OnChanges,OnInit {
     if(this.subtitle.length>0)this._type="title";
 
     this.text=this.transPipe.transform(this.text);
-    $$("Analyse de "+this.text);
+    //$$("Analyse de "+this.text);
 
     this.code="histo"+hashCode(this.text+this.subtitle);
     if(localStorage.hasOwnProperty(this.code)){

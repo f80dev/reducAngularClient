@@ -119,9 +119,11 @@ export class UserformComponent implements OnInit {
 
         if(bContinue){
           var icon=this.config.values.icon_coupon;
+
           var scale=Math.max(0.20/coupons.length,0.10);
           if(coupons.length<3)icon=c.picture;
-          var marker=createMarker(Number(c.lng),Number(c.lat),icon,c,scale,(coupon_sel)=>{
+
+          var marker=createMarker(Number(c.lng),Number(c.lat),null,c,scale,(coupon_sel)=>{
             this.user.message=coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol;
           });
           markers.push(marker);
