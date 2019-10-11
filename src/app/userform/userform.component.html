@@ -21,7 +21,6 @@
         <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
       </div>
 
-
       <button *ngIf="user.pseudo?.length==0"
               id="cmdPseudo" class="medium-button"
               mat-button mat-flat-button
@@ -29,7 +28,7 @@
         Pseudo
       </button>
       &nbsp;
-      <div *ngIf="user.email?.indexOf('fictif.com')>-1">
+      <div style="display: inline-block;" *ngIf="user.email?.indexOf('fictif.com')>-1">
         <button
                 *ngIf="user.level<0.5"
                 title="S'authentifier permet de se connecter depuis plusieurs appareils"
