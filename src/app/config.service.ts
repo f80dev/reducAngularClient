@@ -3,6 +3,7 @@ import {HttpClient} from '../../node_modules/@angular/common/http';
 import { Location } from '@angular/common';
 import {environment} from '../environments/environment';
 import {initAvailableCameras} from "./tools";
+import {Platform} from "@angular/cdk/platform";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ConfigService {
   width_screen=300;
   params:any={pass:"",tags:"",coupon:{},user:""};
 
-  constructor(private location: Location, private http: HttpClient){}
+  constructor(private location: Location, private http: HttpClient,public platform:Platform){}
 
   async logo(): Promise<string> {
     let conf = await this.getConfig();

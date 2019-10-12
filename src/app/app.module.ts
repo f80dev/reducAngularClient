@@ -30,7 +30,7 @@ import { NewshopComponent } from './newshop/newshop.component';
 import { HomeComponent } from './home/home.component';
 import { ShopsComponent } from './shops/shops.component';
 import { UserformComponent } from './userform/userform.component';
-import { ClipboardModule } from 'ngx-clipboard';
+import {ClipboardModule, ClipboardService} from 'ngx-clipboard';
 import { PrintLayoutComponent } from './print-layout/print-layout.component';
 import { ShowcodeComponent } from './showcode/showcode.component';
 import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
@@ -115,7 +115,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     DeviceDetectorModule.forRoot()
   ],
   providers: [
-    ApiService,TransPipe,SafePipe,
+    ApiService,TransPipe,SafePipe,ClipboardService,
     {provide: SocialServiceConfig,useFactory: getAuthServiceConfigs},
     {provide: MAT_DIALOG_DATA, useValue: {hasBackdrop: false}}
   ],

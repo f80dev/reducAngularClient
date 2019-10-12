@@ -8,6 +8,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import {ClipboardService} from 'ngx-clipboard';
 import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
@@ -18,6 +19,7 @@ import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {sendToPrint, showError, traitement_coupon} from "../tools";
 import {ConfigService} from "../config.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-list-coupons',
@@ -37,6 +39,8 @@ export class ListCouponsComponent implements OnChanges {
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
   constructor(public meta: Meta,
+              public snackBar: MatSnackBar,
+              private _clipboardService: ClipboardService,
               public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
               public config:ConfigService,
@@ -72,13 +76,15 @@ export class ListCouponsComponent implements OnChanges {
     if(coupon.showCode){
       this.ngNavigatorShareService.share({
         title: coupon.label,
-        text: coupon.message+" ",
+        text: coupon.message+". Ouvrir le lien pour en bénéficier",
         url: coupon.url
       }).then( (response) => {
         console.log(response);
       })
         .catch( (error) => {
-          console.log(error);
+          debugger;
+          this._clipboardService.copyFromContent(coupon.message+". Pour en bénéficier, ouvrir "+coupon.url);
+          this.snackBar.open("Invitation dans le presse-papier, prête à être envoyé via SMS, WhatsApp, etc ...");
         });
     }
   }

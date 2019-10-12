@@ -196,7 +196,7 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
   coupons.forEach((coupon:any)=>{
     if(coupon._id==showCoupon)coupon.visible=true;
     coupon["visible"]=false;
-    coupon["message"]="Je recommande cette promotion. "+buildTeaser(coupon,coupon.shop_complete.name)+" Ouvrez "+coupon.url+" pour en bénéficier";
+    coupon["message"]="Je recommande cette promotion. "+buildTeaser(coupon,coupon.shop_complete.name);
     rc.push(coupon);
   });
   return rc;
@@ -212,11 +212,10 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
  */
 export function buildTeaser(coupon:any,lieu:string){
   var rc=coupon.label;
-  var prefixe="au";
+  var prefixe="à";
   if(lieu.toLowerCase().startsWith("chez"))prefixe="";
-  if(lieu.toLowerCase().startsWith("au"))prefixe="";
-  if(lieu.toLowerCase().startsWith("a") || lieu.toLowerCase().startsWith("e"))prefixe="à l'"
-  rc=rc+" "+prefixe+lieu;
+  if(lieu.toLowerCase().startsWith("au ") || lieu.toLowerCase().startsWith("à ") || lieu.toLowerCase().startsWith("a "))prefixe="";
+  rc=rc+" "+prefixe+"'"+lieu+"'";
 
   var pluriel="s";
   var firstWord=coupon.unity.split(" ")[0];
@@ -229,7 +228,7 @@ export function buildTeaser(coupon:any,lieu:string){
   }
 
   var prefixe_conditions="pour ";
-  if(coupon.conditions.toLowerCase().startsWith("pour"))prefixe_conditions="";
+  if(coupon.conditions.toLowerCase().startsWith("pour") || coupon.conditions.toLowerCase().startsWith("sur"))prefixe_conditions="";
   rc=rc+", "+prefixe_conditions+coupon.conditions;
 
   rc=rc.replace("..",".").replace("!.","!");

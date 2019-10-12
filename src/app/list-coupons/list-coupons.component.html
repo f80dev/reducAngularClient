@@ -223,8 +223,7 @@
                 name="btnShare"
                 *ngIf="(coupon.canbedeal || coupon.origin!=coupon._id) && user.level==0"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
-                (click)="showCode(coupon)"
-                ngxClipboard [cbContent]="coupon.message">
+                (click)="showCode(coupon)">
           <span *ngIf="coupon.canbedeal">
             Partager
             <span *ngIf="coupon.origin!=coupon._id">/ Utiliser</span>
@@ -240,8 +239,7 @@
                 name="btnShareAdvanced"
                 *ngIf="(coupon.canbedeal || coupon.origin!=coupon._id) && user.level>0"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
-                (click)="showCode(coupon)"
-                ngxClipboard [cbContent]="coupon.message">
+                (click)="showCode(coupon)">
           <mat-icon>share</mat-icon>
         </button>
 
