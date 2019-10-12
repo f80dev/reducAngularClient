@@ -1,20 +1,24 @@
 <h1>Users</h1>
-<table matSort>
+<table matSort class="data-table" cellpadding="4">
   <tr>
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="email">Email</th>
-    <th mat-sort-header="pseudo">Pseudo</th>
+    <th>Pseudo</th>
     <th>Level</th>
+    <th>ip</th>
+    <th>dtCreate</th>
   </tr>
   <tr *ngFor="let user of users">
     <td mat-cell>{{user._id}}</td>
     <td mat-cell>{{user.email}}</td>
     <td mat-cell>{{user.pseudo}}</td>
     <td mat-cell>{{user.level}}</td>
+    <td mat-cell>{{user.ip}}</td>
+    <td mat-cell>{{user.dtCreate*1000 | date:'short'}}</td>
   </tr>
 </table>
 <h1>Coupons</h1>
-<table matSort>
+<table matSort class="data-table"  cellpadding="4">
   <tr>
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="owner">owner</th>
@@ -34,11 +38,12 @@
     <td mat-cell>{{coupon.public}}</td>
     <td mat-cell>{{coupon.closed}}</td>
     <td mat-cell>{{coupon.deleted}}</td>
+    <td mat-cell>{{coupon.dtCreate*1000 | date}}</td>
   </tr>
 </table>
 
 <h1>Shops</h1>
-<table matSort>
+<table matSort class="data-table"  cellpadding="4">
   <tr>
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="name">name</th>
@@ -56,4 +61,27 @@
     <td mat-cell>{{shop.lat}}</td>
   </tr>
 </table>
+<br>
+
+<h1>Moneys</h1>
+<table matSort class="data-table"  cellpadding="4">
+  <tr>
+    <th mat-sort-header="_id">ID</th>
+    <th>coupon</th>
+    <th>user (target)</th>
+    <th>value</th>
+    <th>date</th>
+  </tr>
+  <tr *ngFor="let money of moneys">
+    <td mat-cell>{{money._id}}</td>
+    <td mat-cell>{{money.coupon}}</td>
+    <td mat-cell>{{money.user}}</td>
+    <td mat-cell>{{money.value}}</td>
+    <td mat-cell>{{money.dtCreate*1000 | date}}</td>
+  </tr>
+</table>
+
+<button mat-button mat-flat-button (click)="raz()">RAZ</button>&nbsp;
+<button mat-button mat-flat-button (click)="openAppli()">Open</button>
+
 

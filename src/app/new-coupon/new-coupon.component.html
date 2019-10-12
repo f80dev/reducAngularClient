@@ -35,9 +35,7 @@
 
         <div class="detail_promo">
           <div *ngIf="level<1" style="font-size: x-small">Résumé de votre saisie:<br></div>
-          {{coupon.label}}
-          <span *ngIf="coupon.max>0">Gagnez jusqu'a {{coupon.max}}&nbsp;{{coupon.unity}}(s) ({{coupon.symbol}}) </span>
-          {{coupon.conditions}}
+          {{buildCouponTeaser(coupon,shopname)}}
         </div>
         <br>
 

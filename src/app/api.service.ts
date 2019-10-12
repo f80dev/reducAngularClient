@@ -84,4 +84,8 @@ export class ApiService {
   getshops() {
     return this.http.get(api("getshops/"+ADMIN_PASSWORD));
   }
+
+  getmoneys() {
+    return this.http.get(api("getmoneys/"+ADMIN_PASSWORD));
+  }
 }

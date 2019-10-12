@@ -1,0 +1,8 @@
+.data-table {
+  margin:3px;
+  background-color: #ebebeb;
+  padding: 6px;
+  border: #6e6e6e solid 1px;
+  width:100%;
+  text-align: center;
+}

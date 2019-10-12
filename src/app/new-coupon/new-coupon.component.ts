@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {checkLogin, cropToSquare, resizeBase64Img, selectFile, showError, unique_id} from "../tools";
+import {buildTeaser, checkLogin, cropToSquare, resizeBase64Img, selectFile, showError, unique_id} from "../tools";
 import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
@@ -48,7 +48,7 @@ export class NewCouponComponent implements OnInit {
   saveMax=0;
 
   showIcons=false;
-  title="";
+  shopname="";
   showOldCoupon=false;
   icons=[];
 
@@ -85,7 +85,7 @@ export class NewCouponComponent implements OnInit {
     }
     this.userid=params.get("userid") || "";
     this.level=Number(params.get("level") || "0");
-    this.title=params.get("title") || "";
+    this.shopname=params.get("shopname") || "";
     this.tags=params.get("tags") || "";
   }
 
@@ -193,5 +193,9 @@ export class NewCouponComponent implements OnInit {
     }
     else
       this.coupon.max=this.saveMax;
+  }
+
+  buildCouponTeaser(coupon: any, shopname: string) {
+    return buildTeaser(coupon,shopname);
   }
 }

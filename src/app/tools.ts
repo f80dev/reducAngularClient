@@ -196,12 +196,49 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
   coupons.forEach((coupon:any)=>{
     if(coupon._id==showCoupon)coupon.visible=true;
     coupon["visible"]=false;
-    coupon["message"]="Je recommande cette promotion. "+coupon.shop_complete.name+" : "+ coupon.label+". Gagnez jusqu'a "+coupon.max+coupon.symbol+" "+coupon.conditions;
-    coupon["message"]=coupon["message"].replace("..",".").replace("!.","!");
+    coupon["message"]="Je recommande cette promotion. "+buildTeaser(coupon,coupon.shop_complete.name)+" Ouvrez "+coupon.url+" pour en bénéficier";
     rc.push(coupon);
   });
   return rc;
 }
+
+
+/**
+ * Mise en forme du teaser de la promotion
+ * @param c
+ * @param lieu
+ *
+ *
+ */
+export function buildTeaser(coupon:any,lieu:string){
+  var rc=coupon.label;
+  var prefixe="au";
+  if(lieu.toLowerCase().startsWith("chez"))prefixe="";
+  if(lieu.toLowerCase().startsWith("au"))prefixe="";
+  if(lieu.toLowerCase().startsWith("a") || lieu.toLowerCase().startsWith("e"))prefixe="à l'"
+  rc=rc+" "+prefixe+lieu;
+
+  var pluriel="s";
+  var firstWord=coupon.unity.split(" ")[0];
+  if(firstWord.endsWith("x") || firstWord.endsWith("%") || firstWord.endsWith("s"))pluriel="";
+  if(coupon.max<=1)pluriel="";
+
+  if(coupon.max>0){
+    if(!rc.toLowerCase().startsWith("gagne"))rc=rc+". Gagnez";
+    rc=rc+", jusqu'a "+coupon.max+" "+coupon.unity.replace(firstWord,firstWord+pluriel)+" ("+coupon.symbol+")";
+  }
+
+  var prefixe_conditions="pour ";
+  if(coupon.conditions.toLowerCase().startsWith("pour"))prefixe_conditions="";
+  rc=rc+", "+prefixe_conditions+coupon.conditions;
+
+  rc=rc.replace("..",".").replace("!.","!");
+
+  return rc;
+}
+
+
+
 
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   if(!icon)icon="";

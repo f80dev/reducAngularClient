@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
   users=[];
   coupons=[];
   shops=[];
+  moneys=[];
 
   constructor(public api:ApiService) { }
 
@@ -19,6 +20,26 @@ export class AdminComponent implements OnInit {
     this.api.getusers().subscribe((r:any)=>{this.users=r;},(error)=>{showError(this,error);})
     this.api.getcoupons().subscribe((r:any)=>{this.coupons=r;},(error)=>{showError(this,error);})
     this.api.getshops().subscribe((r:any)=>{this.shops=r;},(error)=>{showError(this,error);})
+    this.api.getmoneys().subscribe((r:any)=>{this.moneys=r;},(error)=>{showError(this,error);})
   }
 
+  convertDate(dt){
+    var rc=new Date();
+    rc.setTime(dt*1000);
+    return rc;
+  }
+
+  raz(){
+    var hwnd=window.open("http://localhost:5500/api/raz/hh4271");
+    setTimeout(()=>{
+      hwnd.location.href="http://localhost:4200";
+      setTimeout(()=> {
+        window.location.reload();
+      },2000);
+    },2000)
+  }
+
+  openAppli() {
+
+  }
 }

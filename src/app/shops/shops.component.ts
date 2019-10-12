@@ -74,7 +74,7 @@ export class ShopsComponent implements OnInit {
     this.router.navigate(["new_coupon"],{queryParams:{
         shopid:shop._id,
         level:this.user.level,
-        title:"Promotion pour "+shop.name,
+        shopname:shop.name,
         tags:shop.tags,
         userid:this.user._id
       }}
