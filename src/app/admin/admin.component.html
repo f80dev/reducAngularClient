@@ -38,7 +38,7 @@
     <td mat-cell>{{coupon.public}}</td>
     <td mat-cell>{{coupon.closed}}</td>
     <td mat-cell>{{coupon.deleted}}</td>
-    <td mat-cell>{{coupon.dtCreate*1000 | date}}</td>
+    <td mat-cell>{{coupon.dtCreate*1000 | date:'short'}}</td>
   </tr>
 </table>
 
@@ -77,7 +77,7 @@
     <td mat-cell>{{money.coupon}}</td>
     <td mat-cell>{{money.user}}</td>
     <td mat-cell>{{money.value}}</td>
-    <td mat-cell>{{money.dtCreate*1000 | date}}</td>
+    <td mat-cell>{{money.dtCreate*1000 | date:'short'}}</td>
   </tr>
 </table>
 

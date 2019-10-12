@@ -52,8 +52,9 @@ export class LoginComponent implements OnInit {
       width:'90vw',data: {title:"Indiquer votre email"}})
       .afterClosed().subscribe((result:any) => {
        if(result){
-         this.api.askforemail(result,this.data.user._id).subscribe(()=>{
+         this.api.askforemail(result,this.data.user._id).subscribe((res:any)=>{
            var message="Un lien de connexion à votre nouveau profil vous a été envoyer sur votre boite. Utilisez le pour vous reconnecter";
+           if(res.status!=200)message="Problème technique. Essayer une autre méthode d'authentification"
            this.message=message;
            setTimeout(()=>{
              this.dialogRef.close({"message":message});
