@@ -178,7 +178,7 @@ export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Fun
   var _width="250px";
   if(screen.width>600)_width="400px";
 
-  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,user:user}})
+  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:true,user:user}})
     .afterClosed().subscribe((result:any) => {
     if(result){
       if(func)func(result);
@@ -215,7 +215,7 @@ export function buildTeaser(coupon:any,lieu:string){
   var prefixe="à";
   if(lieu.toLowerCase().startsWith("chez"))prefixe="";
   if(lieu.toLowerCase().startsWith("au ") || lieu.toLowerCase().startsWith("à ") || lieu.toLowerCase().startsWith("a "))prefixe="";
-  rc=rc+" "+prefixe+"'"+lieu+"'";
+  rc=rc+" "+prefixe+" '"+lieu+"'";
 
   var pluriel="s";
   var firstWord=coupon.unity.split(" ")[0];
@@ -231,7 +231,8 @@ export function buildTeaser(coupon:any,lieu:string){
   if(coupon.conditions.toLowerCase().startsWith("pour") || coupon.conditions.toLowerCase().startsWith("sur"))prefixe_conditions="";
   rc=rc+", "+prefixe_conditions+coupon.conditions;
 
-  rc=rc.replace("..",".").replace("!.","!");
+  for (var i=0;i<10;i++)
+    rc=rc.replace("..",".").replace("!.","!").replace("  "," ");
 
   return rc;
 }

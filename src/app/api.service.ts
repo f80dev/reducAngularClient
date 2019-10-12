@@ -88,4 +88,8 @@ export class ApiService {
   getmoneys() {
     return this.http.get(api("getmoneys/"+ADMIN_PASSWORD));
   }
+
+  askforemail(email: string,userid:string) {
+    return this.http.get(api("askforemail/"+email+"/"+userid));
+  }
 }

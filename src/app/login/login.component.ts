@@ -47,12 +47,27 @@ export class LoginComponent implements OnInit {
   }
 
   email_login(){
-    var firstname=this.email.split("@")[0];
-    this.api.adduser(this.email,firstname).subscribe((res:any)=>{
-      localStorage.setItem("code",res.code);
-      res.message="Un lien est disponible dans votre boite "+this.email+" pour votre première connexion";
-      this.dialogRef.close(res);
-    },(error)=>{showError(this,error);});
+
+    this.dialog.open(PromptComponent,{
+      width:'90vw',data: {title:"Indiquer votre email"}})
+      .afterClosed().subscribe((result:any) => {
+       if(result){
+         this.api.askforemail(result,this.data.user._id).subscribe(()=>{
+           var message="Un lien de connexion à votre nouveau profil vous a été envoyer sur votre boite. Utilisez le pour vous reconnecter";
+           this.message=message;
+           setTimeout(()=>{
+             this.dialogRef.close({"message":message});
+           },5000);
+         })
+       }
+    });
+
+    //   var firstname=this.email.split("@")[0];
+    // this.api.adduser(this.email,firstname).subscribe((res:any)=>{
+    //   localStorage.setItem("code",res.code);
+    //   res.message="Un lien est disponible dans votre boite "+this.email+" pour votre première connexion";
+    //
+    // },(error)=>{showError(this,error);});
   }
 
   signOut(){

@@ -76,6 +76,13 @@
         </mat-form-field>
         <br>
 
+        <app-tuto *ngIf="focusElt=='breakable'"
+                  label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">
+        </app-tuto>
+        <mat-checkbox [(ngModel)]="coupon.breakable"
+                      *ngIf="level>0.5" (focus)="focusElt='breakable'"
+                      (change)="changeMax()">Unité peut être fractionné</mat-checkbox><br>
+
         <app-tuto label="Pour toute promotion on va préciser dans quel cadre le client peut utiliser la promotion. Par exemple : pour tout achat hors weekend, pour tout achat d'un montant minimum de ..."
                   *ngIf="focusElt=='conditions'"></app-tuto>
 
@@ -98,7 +105,7 @@
         </mat-form-field>
 
 
-        <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.breakable">Sécable</mat-checkbox>-->
+
         <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>-->
       </mat-step>
 

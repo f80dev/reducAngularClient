@@ -127,9 +127,21 @@
         <!--Zone réserver au créateur-->
         <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
           <br>
-          {{coupon.share | number:'1.0-0'}}/{{coupon.max_coupon}} partages<br>
-          {{coupon.gain_total | number:'1.0-0'}} {{coupon.symbol}} proposé(es) via les partages<br><br>
-          Stock : {{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}
+          <table style="display:inline-block;text-align: left;">
+            <tr>
+              <td style="text-align: right;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
+              <td>partages (/{{coupon.max_coupon}})</td>
+            </tr>
+            <tr>
+              <td style="text-align: right;">{{coupon.gain_total | number:'1.0-1'}} {{coupon.symbol}}</td>
+              <td>proposé(es)</td>
+            </tr>
+            <tr>
+              <td style="text-align: right;">{{coupon.stock | number:'1.0-1'}}{{coupon.symbol}}</td>
+              <td>en stock</td>
+            </tr>
+          </table>
+
         </div>
 
       </td>

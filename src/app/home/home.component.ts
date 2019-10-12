@@ -114,6 +114,21 @@ export class HomeComponent implements OnInit {
       }
 
 
+      //http://localhost:4200/?pass=ZmRzZmRzQGdmZGprZ2QjIzVkYTFlNzI2YWQ3MDI0Y2FhMTRhNWQ3ZA==
+      if(pass!=null && pass.length>0 && this.user.email.indexOf("fictif.com")>-1){
+        var new_mail=atob(pass).split("##")[0];
+        var userid=atob(pass).split("##")[1];
+        if(new_mail.indexOf("@")>-1){
+          if(this.user._id==userid){
+            this.user.email=new_mail;
+            this.api.setuser(this.user).subscribe(()=>{
+              this.refresh("Email enregistré");
+            });
+          } else {
+            this.refresh("Impossible d'enregistrer le mail car le lien n'a pas été envoyé depuis ce compte.");
+          }
+        }
+      }
 
       if(pass!=null && coupon!=""){
         if(localStorage.getItem("code")==pass){
