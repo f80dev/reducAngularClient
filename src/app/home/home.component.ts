@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
         setTimeout(()=>{
           this.connect(p.coupon,p.pass);
           this.refresh(p.message);
-        },500);
+        },1500);
       });
     })
   }
@@ -104,9 +104,9 @@ export class HomeComponent implements OnInit {
     });
 
 
-
       if(coupon!=null && coupon!=""){
-        $$("Traitement du coupon",coupon);
+        $$("Traitement du coupon ",coupon);
+        $$("Le user est ",this.user);
         this.api.flash(this.user._id, coupon).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
           this.refresh(result.message);
@@ -152,6 +152,7 @@ export class HomeComponent implements OnInit {
       if(message!=null && message.indexOf("#submessage#")>-1){
         u["submessage"]=message.split("#submessage#")[1];
         message=message.split("#submessage#")[0];
+        u["message"]=message;
       }
       this.user=u;
 

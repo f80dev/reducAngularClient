@@ -152,23 +152,34 @@
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications_active</mat-icon>
     </button>
-    <button mat-raised-button mat-icon-button mat-button *ngIf="user.coupons?.length>0 || user.shops?.length>0"
+    <button mat-raised-button mat-icon-button mat-button *ngIf="user.coupons?.length>0 || user.shops?.length>0 || user.tags?.length>0"
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
 
-    <button mat-raised-button mat-button *ngIf="user.coupons?.length==0 && user.shops.length==0"
+    <button mat-raised-button mat-button *ngIf="user.coupons?.length==0 && user.shops.length==0 && user.tags?.length==0"
             id="btnMapRookie" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       Trouver des promos
     </button>
 
 
-    <button mat-button title="Créer une nouvelle enseigne"
+    <button mat-button
+            *ngIf="user.tags?.length==0"
+            title="Créer une nouvelle enseigne"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
       <mat-icon>account_balance</mat-icon>
+    </button>
+
+
+    <button mat-button
+            *ngIf="user.tags?.length>0"
+            title="Créer une nouvelle enseigne pour des promotions"
+            id="btnAddShopPlus2"
+            mat-raised-button (click)="addshop()">
+      Lancer une promotion
     </button>
 
   </mat-card-actions>

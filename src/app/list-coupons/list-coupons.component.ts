@@ -82,7 +82,6 @@ export class ListCouponsComponent implements OnChanges {
         console.log(response);
       })
         .catch( (error) => {
-          debugger;
           this._clipboardService.copyFromContent(coupon.message+". Pour en bénéficier, ouvrir "+coupon.url);
           this.snackBar.open("Invitation dans le presse-papier, prête à être envoyé via SMS, WhatsApp, etc ...");
         });
