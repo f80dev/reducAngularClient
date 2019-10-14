@@ -6,6 +6,7 @@
 
 <div [hidden]="showMessage && user.message?.length>0">
   <app-tuto title="Bienvenue dans ReducShare !"
+            *ngIf="user.level<0.5"
             background="./assets/img/network.jpg"
             button="Commencer"
             [duration]="5"

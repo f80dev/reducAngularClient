@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
   analyse_login(tags,func){
     $$("Analyse le device pour détecter les ancienes connexions");
     if(localStorage.getItem("user")==null || localStorage.getItem("user")=="undefined"){
+      localStorage.clear();
       $$("C'est la premier connexion sur ce device, on créé un compte fictif");
       this.api.adduser("user"+new Date().getTime()+"@fictif.com","",tags).subscribe((res)=>{
         func(res);

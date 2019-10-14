@@ -15,7 +15,7 @@
     </td>
   </tr></table>
 
-  <app-tuto [delay]="5"
+  <app-tuto [delay]="5" *ngIf="!showOldCoupon"
             label="Remplissez bien les 5 étapes pour décrire votre promotion. Les résumés au début de chaque section présentent l'information saisie sous un format lisible. Si vous ne voyez pas par oû commencer, consulter les modèles disponibles">
   </app-tuto>
 

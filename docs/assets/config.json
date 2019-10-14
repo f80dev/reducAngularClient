@@ -311,7 +311,7 @@
     },
     {
       "title":"Invitation événement",
-      "unity":"pourcentage prix d'entrée",
+      "unity":"% du prix d'entrée",
       "symbol":"%",
       "pluriel":true,
       "breakable":true,
