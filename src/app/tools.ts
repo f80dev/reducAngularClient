@@ -81,7 +81,7 @@ export function sendToPrint(section="print-section"){
 }
 
 export function $$(s: string, obj: any= null) {
-  if(s.startsWith("!")){
+  if(s!=null && s.startsWith("!")){
     debugger;
   }
   const lg = new Date().getHours() + ':' + new Date().getMinutes() + ' -> ' + s;
@@ -161,9 +161,10 @@ export function getMarkerLayer(map:any):any {
   return rc;
 }
 
-export function showMessage(vm:any,s:string,duration=20000){
+export function showMessage(vm:any,s:string="",duration=20000){
   if(s==null)return false;
 
+  s=s+"";
   $$("Affichage du message :",s)
   if(s.startsWith("#")){
     s=s.substr(1);
@@ -220,6 +221,8 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
 export function buildTeaser(coupon:any,lieu:string){
   var rc=coupon.label;
   var prefixe="à";
+
+  if(lieu==null)lieu="";
   if(lieu.toLowerCase().startsWith("chez"))prefixe="";
   if(lieu.toLowerCase().startsWith("au ") || lieu.toLowerCase().startsWith("à ") || lieu.toLowerCase().startsWith("a "))prefixe="";
   rc=rc+" "+prefixe+" '"+lieu+"'";

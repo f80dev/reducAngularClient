@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  refresh(message="") {
+  refresh(message:string="") {
 
     if(message==null)message="";
     var user_id=localStorage.getItem('user');

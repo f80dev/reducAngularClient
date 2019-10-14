@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.1.3-beta",
+  "version":"0.1.4-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -130,8 +130,8 @@
       "tags":"restaurant,hôtel"
     },
     {
-      "title":"Nuit offerte",
-      "unity":"nuit",
+      "title":"Nuit à moitée prix",
+      "unity":"nuit à 50%",
       "symbol":"🛌",
       "breakable":false,
       "pluriel":true,
@@ -144,7 +144,7 @@
       "duration_hours":480,
       "stock":30,
       "max_coupon":500,
-      "conditions":"Pour l'achat de 3 nuits hors haute saison",
+      "conditions":"Valable sur l'achat d'un séjour de minimum 7 nuits hors haute saison",
       "tags":"hôtel"
     },
     {
