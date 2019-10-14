@@ -143,18 +143,15 @@ export class HomeComponent implements OnInit {
 
     if(message==null)message="";
     var user_id=localStorage.getItem('user');
-    $$("Récupération du compte "+user_id);
+
+    $$("Appel de refresh avec message="+message+". Récupération du compte "+user_id);
     this.api.getuser(user_id).subscribe((u:any) => {
       if(u==null || u._id==null){
         this.raz();
       }
 
-      if(message!=null && message.indexOf("#submessage#")>-1){
-        u["submessage"]=message.split("#submessage#")[1];
-        message=message.split("#submessage#")[0];
-        u["message"]=message;
-      }
       this.user=u;
+      showMessage(this,message);
 
       if(this.user.email.indexOf("fictif.com")==-1){
         if(this.user.lastCGU<this.config.values.cgu.dtModif && this.config.values.cgu.online){
@@ -181,10 +178,6 @@ export class HomeComponent implements OnInit {
           });
         }
       }
-
-      showMessage(this,message);
-
-
       //this.coupons=traitement_coupon(this.user.coupons,localStorage.getItem("showCoupon"));
 
     },(error)=>{showError(this,error);});

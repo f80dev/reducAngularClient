@@ -1,11 +1,10 @@
 <app-flashscreen [message]="user.message"
-                 [submessage]="user.submessage"
-                 *ngIf="showMessage"
+                 *ngIf="showMessage && user.message?.length>0"
                  [duration]="15"
                  (close)="closeFlashScreen()">
 </app-flashscreen>
 
-<div [hidden]="showMessage">
+<div [hidden]="showMessage && user.message?.length>0">
   <app-tuto title="Bienvenue dans ReducShare !"
             [duration]="5" [force]="true"
             image="./assets/icons/icon-384x384.png"

@@ -104,7 +104,7 @@
       </td>
       <td style="text-align: center;vertical-align: top;width:auto;">
         <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
-          {{coupon.gain}}{{coupon.symbol}} offert(es)
+          {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}} offert(es)
           <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
 

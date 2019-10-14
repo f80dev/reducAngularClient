@@ -71,7 +71,9 @@
 
     </mat-card-title>
 
-    <mat-card-subtitle *ngIf="user.message?.length>0">{{user.message}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="user.message?.length>0">
+      {{user.message.split("#submessage#")[0]}}
+    </mat-card-subtitle>
 
   <mat-card-content class="app-card-content">
     <div style="width:100%;text-align: center;" *ngIf="showScanner">

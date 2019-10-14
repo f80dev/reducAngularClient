@@ -17,7 +17,7 @@ import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {sendToPrint, showError, traitement_coupon} from "../tools";
+import {isLocal, sendToPrint, showError, traitement_coupon} from "../tools";
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 
@@ -82,7 +82,11 @@ export class ListCouponsComponent implements OnChanges {
         console.log(response);
       })
         .catch( (error) => {
-          this._clipboardService.copyFromContent(coupon.message+". Pour en bénéficier, ouvrir "+coupon.url);
+          if(isLocal())
+            this._clipboardService.copyFromContent(coupon.url)
+          else
+            this._clipboardService.copyFromContent(coupon.message+". Pour en bénéficier, ouvrir "+coupon.url);
+
           this.snackBar.open("Invitation dans le presse-papier, prête à être envoyé via SMS, WhatsApp, etc ...");
         });
     }

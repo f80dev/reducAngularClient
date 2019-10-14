@@ -162,23 +162,30 @@ export function getMarkerLayer(map:any):any {
 }
 
 export function showMessage(vm:any,s:string,duration=20000){
+  if(s==null)return false;
+
+  $$("Affichage du message :",s)
   if(s.startsWith("#")){
     s=s.substr(1);
-    setTimeout(()=>{vm.showMessage=true;},500);
+    if(s.length>0)
+      setTimeout(()=>{vm.showMessage=true;},500);
   }
 
   vm.user.message=s;
   setTimeout(()=>{vm.user.message=""},duration);
 }
 
+export function isLocal(){
+  return location.href.indexOf("localhost") > -1;
 
+}
 
 export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Function=null) {
   if(!vm.dialog)$$("La fenetre ne dispose pas de 'dialog'");
   var _width="250px";
   if(screen.width>600)_width="400px";
 
-  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:true,user:user}})
+  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:false,user:user}})
     .afterClosed().subscribe((result:any) => {
     if(result){
       if(func)func(result);

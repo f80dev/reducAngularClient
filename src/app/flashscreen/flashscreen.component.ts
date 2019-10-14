@@ -13,12 +13,10 @@ export class FlashscreenComponent implements OnInit {
 
   @Input("duration") duration:number=5;
   @Input("message") message:string="";
-  @Input("submessage") submessage:string="";
+  submessage:string="";
   @Input("delay") delay:number=0.2;
   @Input("logo") logo:string="./assets/img/Gift.gif";
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
-
-  localMessage:string="";
 
   close(){
     clearTimeout(this.timer);
@@ -27,10 +25,12 @@ export class FlashscreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.localMessage=""+this.message;
     this.config.visibleTuto=true;
     if(this.message!=null){
       if(this.message.startsWith("#"))this.message=this.message.substr(1);
+      if(this.message.indexOf("#submessage#")>-1)this.submessage=this.message.split("#submessage#")[1];
+      this.message=this.message.split("#submessage#")[0];
+
       this.timer=setTimeout(()=>{
         this.close();
       },this.duration*1000)
