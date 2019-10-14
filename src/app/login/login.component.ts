@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
   }
 
   email_login(){
-
     this.dialog.open(PromptComponent,{
       width:'90vw',data: {title:"Indiquer votre email"}})
       .afterClosed().subscribe((result:any) => {

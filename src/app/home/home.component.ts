@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
       this._location.replaceState(this._location.path().split('?')[0],"");
       this._location.replaceState(this._location.path().split('/home')[0],"");
 
-
       func(this.config.params);
   }
 
@@ -115,17 +114,23 @@ export class HomeComponent implements OnInit {
 
 
       //http://localhost:4200/?pass=ZmRzZmRzQGdmZGprZ2QjIzVkYTFlNzI2YWQ3MDI0Y2FhMTRhNWQ3ZA==
+    /*
+      Analyse du lien de connexion avec email
+     */
       if(pass!=null && pass.length>0 && this.user.email.indexOf("fictif.com")>-1){
         var new_mail=atob(pass).split("##")[0];
         var userid=atob(pass).split("##")[1];
         if(new_mail.indexOf("@")>-1){
           if(this.user._id==userid){
             this.user.email=new_mail;
+            if(this.user.pseudo==null || this.user.pseudo.length==0) {
+              this.user.pseudo = this.user.email.split("@")[0].replace("."," ").split(" ")[0];
+            }
             this.api.setuser(this.user).subscribe(()=>{
-              this.refresh("Email enregistré");
-            });
+              this.refresh("L'email "+new_mail+" à bien été ajouté à votre compte.");
+            },(err)=>{showError(this,err);});
           } else {
-            this.refresh("Impossible d'enregistrer le mail car le lien n'a pas été envoyé depuis ce compte.");
+            this.refresh("Impossible d'enregistrer le mail. Utiliser la connexion via Google ou Facebook (seul votre email sera récupéré par ReducShare)");
           }
         }
       }

@@ -186,10 +186,11 @@ export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Fun
   if(screen.width>600){_width="400px";}
   vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:true,user:user}}).afterClosed().subscribe((result:any) => {
     if(result) {
+      $$("Récupération correct des coordonnées du compte ",result);
       if (func) func(result);
     }
      else {
-        $$("Probleme de récupération du user");
+       $$("Probleme de récupération du user");
       if(func_error)func_error();
     }
   });
