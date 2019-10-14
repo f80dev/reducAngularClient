@@ -36,7 +36,7 @@
       <img *ngIf="image?.length>0" [src]="image" style="max-width: 80%;max-height: 80%;margin-bottom:5vh;display: inline-block;">
       <div *ngIf="image?.length==0" style="height:40vh"></div>
       <div style="width:90%;margin-left:5%;margin-top:15vh;text-align:center;font-size: medium;margin-bottom: 5vh;">{{subtitle}}</div>
-      <button mat-button mat-raised-button>Commencer</button>
+      <button mat-button mat-raised-button>{{labelButton}}</button>
 
     </div>
   </div>

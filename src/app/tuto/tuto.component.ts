@@ -20,6 +20,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("background") background="";
   @Input('if') _if: boolean=true;
   @Input('image') image: string="";
+  @Input('button') labelButton: string="Continuez";
   @Input('icon') icon:string="";
   @Input('color') color:string="grey";
   @Input('force') force:boolean=false;
@@ -64,12 +65,11 @@ export class TutoComponent implements OnChanges,OnInit {
     if(this._button!=null && this._button.length>0)this.image="";
 
     if(this.text==null || this.text.length==0)this.text=this.label;
-    if(this.title!=null && this.title.length>0){
+    if(this.title!=null && this.title.length>0 || this.subtitle.length>0){
       this._type="title";
       this.text=this.title;
     }
 
-    if(this.subtitle.length>0)this._type="title";
 
     this.text=this.transPipe.transform(this.text);
 

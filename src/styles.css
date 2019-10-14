@@ -24,6 +24,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
 }
 
+.small-icon-button {
+  font-size: small;
+  width:20px;
+  height:20px;
+}
+
 .spacer {
   flex: 1 1 auto;
 }

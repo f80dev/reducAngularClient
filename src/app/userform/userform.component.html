@@ -47,11 +47,11 @@
 
       </div>
 
-      <button mat-icon-button
+      <button mat-icon-button style="margin-left:10px;"
               *ngIf="user.email?.indexOf('fictif.com')==-1"
               id="btnLogout"
-              mat-button mat-flat-button (click)="logout()">
-        <mat-icon>logout</mat-icon>
+              mat-button (click)="logout()">
+        <mat-icon style="font-size: medium;margin-bottom: 5px;">logout</mat-icon>
       </button>
 
 
@@ -102,7 +102,7 @@
               label="Voir les promotions autour de vous sur une carte">
     </app-tuto>
 
-    <app-tuto *ngIf="user.level>0" button="account_balance"
+    <app-tuto *ngIf="user.level>0 && user.shops?.length==0" button="account_balance"
               label="Vous avez quelque chose à vendre ? Créer votre première promotion !">
     </app-tuto>
 

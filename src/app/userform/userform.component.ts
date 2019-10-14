@@ -224,7 +224,7 @@ export class UserformComponent implements OnInit {
         this.user=result.user;
         this.onupdate.emit(this.user);
       } else {
-        showMessage(this,result["message"]);
+        this.user.message=result["message"];
       }
     },()=>{
       showMessage(this,"Authentification annulée, vous restez anonyme");
