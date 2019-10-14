@@ -18,14 +18,14 @@
     </table>
   </div>
 
-  <div style="background-color:black;cursor: none;pointer-events: none;position: absolute;top:0;left:0;height:100vh;width:100vw;z-index: 999;object-fit:cover;"
+  <div style="background-color:black;cursor: none;pointer-events: none;position: fixed;top:0;left:0;height:100vh;width:100vw;z-index: 999;object-fit:cover;"
        *ngIf="background?.length>0 && _type=='title'">
     <img [src]="background"
          style="min-width:100%;min-height:100%;">
   </div>
 
   <div *ngIf="background?.length==0 && _type=='title'"
-       style="background-color: white;cursor: none;pointer-events: none;position: absolute;left:0;top:0;width: 100%;height:100%;z-index: 999;">
+       style="background-color: white;cursor: none;pointer-events: none;position: fixed;left:0px;top:0px;width: 100%;height:100%;z-index: 999;">
   </div>
 
   <div [ngStyle]="{'color':color}">
