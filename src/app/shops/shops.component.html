@@ -69,6 +69,7 @@
 
     <button mat-button mat-flat-button mat-icon-button
             *ngIf="shop.coupons?.length==0"
+            title="Supprimez l'enseigne de votre compte"
             (click)="delShop(shop)">
       <mat-icon>delete</mat-icon>
     </button>
@@ -76,12 +77,14 @@
     <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
             *ngIf="user.level==1"
+            title="Nouvelle promotion attachée à cette enseigne"
             (click)="addCoupon(shop)">
       <mat-icon>note_add</mat-icon>
     </button>
 
     <button mat-button mat-flat-button
             name="btnNewPromo" class="large-button"
+            title="Nouvelle promotion attachée à cette enseigne"
             *ngIf="user.level<1"
             (click)="addCoupon(shop)">
       Nouvelle promotion

@@ -1,10 +1,9 @@
 <div *ngIf="coupon" style="text-align: center;width:100%;">
-  <br>
   <h2>
     Ici, {{coupon?.label}}
   </h2>
   <br><br>
-  <img [src]="coupon.picture" style="max-width: 60vw"><br>
+  <img [src]="coupon.picture" style="max-width: 40vw"><br>
   <br>
   <span style="font-size: 2em;">
           Gagner jusqu'a <strong>{{coupon.max}}</strong>&nbsp;{{coupon.unity}}(s) {{coupon.conditions}}
@@ -20,10 +19,9 @@
            style="max-width:400px;max-height: 400px;display:inline;"
            [size]="410" [padding]="3">
   </qr-code>
-  <br><br>
 
-  <br><br><br>
-  <h1>Votre réduction peut facilement augmenter !</h1>
+  <br><br>
+  <h2>Votre réduction peut facilement augmenter !</h2>
 
   <div style="font-size: xx-large">
     + <strong>1</strong> {{coupon.unity}} supplémentaire chaque fois que vous partagez {{1/coupon.share_bonus | number:'1.0-0'}} fois avec vos proches<br><br>

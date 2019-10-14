@@ -168,7 +168,7 @@
 
 
     <button mat-button
-            *ngIf="user.tags?.length==0"
+            *ngIf="user.tags?.length==0 || user.shops?.length>0"
             title="Créer une nouvelle enseigne"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
@@ -177,7 +177,7 @@
 
 
     <button mat-button
-            *ngIf="user.tags?.length>0"
+            *ngIf="user.tags?.length>0 && user.shops?.length==0"
             title="Créer une nouvelle enseigne pour des promotions"
             id="btnAddShopPlus2"
             mat-raised-button (click)="addshop()">

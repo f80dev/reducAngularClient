@@ -183,14 +183,13 @@ export function isLocal(){
 export function loginWithEmail(vm:any,user:any,func:Function=null,func_error:Function=null) {
   if(!vm.dialog)$$("La fenetre ne dispose pas de 'dialog'");
   var _width="250px";
-  if(screen.width>600)_width="400px";
-
-  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:false,user:user}})
-    .afterClosed().subscribe((result:any) => {
-    if(result){
-      if(func)func(result);
-    } else {
-      $$("Probleme de récupération du user");
+  if(screen.width>600){_width="400px";}
+  vm.dialog.open(LoginComponent,{width:_width,data: {facebook:true,google:true,email:true,user:user}}).afterClosed().subscribe((result:any) => {
+    if(result) {
+      if (func) func(result);
+    }
+     else {
+        $$("Probleme de récupération du user");
       if(func_error)func_error();
     }
   });

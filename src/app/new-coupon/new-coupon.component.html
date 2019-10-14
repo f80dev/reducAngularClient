@@ -64,7 +64,7 @@
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
-        <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
+        <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
 
         <mat-checkbox [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
@@ -154,15 +154,25 @@
 
       <mat-step>
         <ng-template matStepLabel>Détailler l'augmentation de la promotion</ng-template>
+
+        <app-tuto label="La force de reducShare est de pouvoir augmenter la valeur de la promotion du client lorsque celui ci la partage. Ainsi dans cette section vous préciser la façon dont la promotion se comporte">
+        </app-tuto>
+
         <div class="detail_promo">
           le client gagne immédiatement {{coupon.direct_bonus}}{{coupon.symbol}}
           lorsqu'il flash la promotion. Il gagne 1{{coupon.symbol}} supplémentaire chaque fois qu'il partage {{coupon.nb_partage}} fois la promotion, et {{coupon.pay_bonus}}{{coupon.symbol}} supplémentaire(s) chaque fois qu'un coupon qu'il a distribué est utilisé.
         </div>
+
         <br>
+
+        <app-tuto *ngIf="focusElt=='direct_bonus'"
+                  label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
+        </app-tuto>
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  id="txtDirectBonus"
+                 (focus)="focusElt='direct_bonus'"
                  title="Promotion directement récupéré à l'obtention de la promotion"
                  placeholder="Bonus immédiat (en {{coupon.symbol}})" [(ngModel)]="coupon.direct_bonus">
         </mat-form-field>

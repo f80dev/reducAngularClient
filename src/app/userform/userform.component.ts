@@ -220,8 +220,12 @@ export class UserformComponent implements OnInit {
   securise(){
     localStorage.setItem("old_user",localStorage.getItem("user"));
     loginWithEmail(this,this.user,(result:any)=>{
-      this.user=result.user;
-      this.onupdate.emit(this.user);
+      if(result.user!=null){
+        this.user=result.user;
+        this.onupdate.emit(this.user);
+      } else {
+        showMessage(this,result["message"]);
+      }
     },()=>{
       showMessage(this,"Authentification annulée, vous restez anonyme");
     });
