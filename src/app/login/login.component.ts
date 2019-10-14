@@ -56,8 +56,7 @@ export class LoginComponent implements OnInit {
 
   email_login(){
     this.dialog.open(PromptComponent,{
-      width:'90vw',data: {title:"Indiquer votre email"}})
-      .afterClosed().subscribe((email:any) => {
+      width:'90vw',data: {title:"Indiquer votre email"}}).afterClosed().subscribe((email:any) => {
        if(email){
          this.api.askforemail(email,this.data.user._id).subscribe((res:any)=>{
            if(res==null){
@@ -69,7 +68,8 @@ export class LoginComponent implements OnInit {
                if(code==res.code){
                  this.data.user.email=email;
                  this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
-                 this.initUser(email);
+                 this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
+                 this.initUser(email,true);
                } else {
                  this.dialogRef.close({"message":"Le code saisie est incorrect"});
                }
@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  initUser(email){
+  initUser(email,askForCode=false){
     this.api.getuser(email).subscribe((u:any)=>{
       if(u.code==500){
         $$("L'email "+email+" n'était pas encore enregistré. On l'affecte au compte existant");
@@ -116,8 +116,20 @@ export class LoginComponent implements OnInit {
             this.dialog.open(PromptComponent, {width: '250px',data: {title: "Compte déjà présent", question:"Cet email correspond à un autre compte, si vous souhaitez vous y connecté vous perder le compte actuel", onlyConfirm: true}
             }).afterClosed().subscribe((result) => {
               if(result=="yes"){
-                $$("On change l'attribution du compte")
-                localStorage.setItem("user",u._id);
+
+                if(!askForCode){
+                  $$("On change l'attribution du compte")
+                  localStorage.setItem("user",u._id);
+                } else {
+                  this.dialog.open(PromptComponent, {width: '250px',data: {title: "Donner le code de sécurité"}}).afterClosed().subscribe((code) => {
+                    if(code!=null && code==u["code"]){
+                      $$("On change l'attribution du compte, le code est exacte")
+                      localStorage.setItem("user",u._id);
+                    }
+                  });
+                }
+
+
               }
               this.dialogRef.close({user:u,message:"Vous êtes reconnecter sur votre compte "+u.email});
             });

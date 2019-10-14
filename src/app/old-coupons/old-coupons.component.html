@@ -24,8 +24,8 @@
   <mat-card-content>
     <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos nouvelles promotions" *ngIf="coupons.length>0"></app-tuto>
     <mat-list style="padding:0px;">
-      <mat-list-item *ngFor="let coupon of coupons" name="coupon" (click)="onselect.emit(coupon)">
-        <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture" style="cursor: pointer;">
+      <mat-list-item *ngFor="let coupon of coupons" name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
+        <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
         <h2 matLine (click)="onselect.emit(coupon)">
           <span *ngIf="coupon.title">{{coupon.title}} : Promo sur des {{coupon.unity}}(s)</span>
           <span *ngIf="!coupon.title">

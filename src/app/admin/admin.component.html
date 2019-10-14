@@ -6,6 +6,7 @@
     <th>Pseudo</th>
     <th>Level</th>
     <th>ip</th>
+    <th>code</th>
     <th>dtCreate</th>
   </tr>
   <tr *ngFor="let user of users">
@@ -14,6 +15,7 @@
     <td mat-cell>{{user.pseudo}}</td>
     <td mat-cell>{{user.level}}</td>
     <td mat-cell>{{user.ip}}</td>
+    <td mat-cell>{{user.code}}</td>
     <td mat-cell>{{user.dtCreate*1000 | date:'short'}}</td>
   </tr>
 </table>

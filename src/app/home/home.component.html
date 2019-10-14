@@ -22,7 +22,7 @@
   </app-userform>
 
   <app-tuto
-    *ngIf="user?.shops?.length>0"
+    *ngIf="user?.shops?.length>0 && user.level<1"
     type="title"
     color="white"
     background="./assets/img/openshop.jpg"
@@ -54,7 +54,7 @@
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
-  <app-about *ngIf="user.level>0.1 && user.level<2.0"></app-about>
+  <app-about *ngIf="user.level<2.0"></app-about>
 </div>
 
 <!--<br><br><br>-->

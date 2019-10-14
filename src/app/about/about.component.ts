@@ -10,7 +10,14 @@ export class AboutComponent implements OnInit {
 
   constructor(public config:ConfigService) { }
 
+  visible=false;
+
   ngOnInit() {
+    this.visible=(localStorage.getItem("about")=="true");
   }
 
+  switchVisible() {
+    this.visible=!this.visible;
+    localStorage.setItem("about",this.visible.toString());
+  }
 }

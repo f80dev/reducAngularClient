@@ -1,40 +1,41 @@
-<mat-card class="app-card" style="background-color: #d9d9d9;color:black;" >
-  <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
-    {{config.values.appname+" - "+config.values.version}}<br>
-    <br>
-    <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
-    <br>
-    <table style="display: inline-block;text-align: left;">
-      <tr><td>Réalisation</td><td>: <a [href]="config.values.editor?.link_author" target="_blank">{{config.values.editor?.author}}</a></td></tr>
-      <tr>
-        <td>Edition</td>
-        <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
-      </tr>
-      <tr><td><br></td></tr>
-
-    </table>
-    <br><br>
-    <div style="width: 100%;text-align: center;font-size: medium;color:darkgray;">
-      <a href="mailto:{{config.values.support?.email}}" style="display:inline-block;width: 65px;">
-        <mat-icon class="big-icon">mail</mat-icon>
-      </a>
-
-      <a href="{{config.values.support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
-        <mat-icon class="big-icon">persons</mat-icon>
-      </a>
-
-      <a href="{{config.values.support?.faq}}" target="_blank"  style="display:inline-block;width: 65px;margin-right: 10px;">
-        <mat-icon class="big-icon">help</mat-icon>
-      </a>
-
-      <a href="{{config.values.support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
-        <img style="width:40px;opacity: 0.5;" src="./assets/icons/facebook.png">
-      </a>
+<mat-card class="app-card" style="background-color: #b7b7b7;color:black;" >
+  <mat-card-header (click)="switchVisible()" style="cursor: pointer;">
+    <div style="text-align: center;width:100%;">
+      {{config.values.appname+" - "+config.values.version}}<br>
     </div>
-  </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="visible">
+    <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
+      <br>
+      <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
+      <br>
+      <table style="display: inline-block;text-align: left;">
+        <tr><td>Réalisation</td><td>: <a [href]="config.values.editor?.link_author" target="_blank">{{config.values.editor?.author}}</a></td></tr>
+        <tr>
+          <td>Edition</td>
+          <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
+        </tr>
+        <tr><td><br></td></tr>
 
+      </table>
+      <br><br>
+      <div style="width: 100%;text-align: center;font-size: medium;color:darkgray;">
+        <a href="mailto:{{config.values.support?.email}}" style="display:inline-block;width: 65px;">
+          <mat-icon class="big-icon">mail</mat-icon>
+        </a>
 
+        <a href="{{config.values.support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
+          <mat-icon class="big-icon">persons</mat-icon>
+        </a>
 
-  <br>
+        <a href="{{config.values.support?.faq}}" target="_blank"  style="display:inline-block;width: 65px;margin-right: 10px;">
+          <mat-icon class="big-icon">help</mat-icon>
+        </a>
 
+        <a href="{{config.values.support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
+          <img style="width:40px;opacity: 0.5;" src="./assets/icons/facebook.png">
+        </a>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>

@@ -32,10 +32,11 @@
     </app-list-coupons>
 
 
-    <app-tuto *ngIf="shop.coupons?.length>0"
+    <app-tuto *ngIf="shop.coupons?.length>0 && user.level<1"
+              color="white"
+              type="title"
               background="./assets/img/feudartifice2.jpg"
-              title="Votre première promotion est prête!"
-              image="./assets/img/bravo.gif"
+              title="Bravo, votre première promotion est prête!"
               subtitle="faites le savoir, Imprimez une première affiche ou partager la"
     >
     </app-tuto>
