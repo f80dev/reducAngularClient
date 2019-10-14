@@ -6,8 +6,11 @@
 
 <div [hidden]="showMessage && user.message?.length>0">
   <app-tuto title="Bienvenue dans ReducShare !"
-            [duration]="5" [force]="true"
-            image="./assets/icons/icon-384x384.png"
+            background="./assets/img/network.jpg"
+            [duration]="5"
+            color="white"
+            [force]="true"
+            image="./assets/icons/icon-144x144.png"
             subtitle="Une application pour gagner plein de réductions dont la valeur augmente quand vous les redistribuées !">
   </app-tuto>
 
@@ -20,8 +23,9 @@
   <app-tuto
     *ngIf="user?.shops?.length>0"
     type="title"
+    color="white"
+    background="./assets/img/feudartifice2.jpg"
     title="Bravo votre première enseigne est prête."
-    image="./assets/img/bravo.gif"
     subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
   </app-tuto>
 
@@ -49,7 +53,7 @@
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
-  <app-about *ngIf="user.level>0.3"></app-about>
+  <app-about *ngIf="user.level>0.1 && user.level<2.0"></app-about>
 </div>
 
 <!--<br><br><br>-->

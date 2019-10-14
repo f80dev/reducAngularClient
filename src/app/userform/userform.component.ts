@@ -105,7 +105,7 @@ export class UserformComponent implements OnInit {
       var l=getMarkerLayer(this.map);
       this.showCouponOnMap=[];
       var markers=[
-        createMarker(this.user.position.lng,this.user.position.lat,this.config.values.icon_person)
+        createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,0.2)
       ];
 
       coupons.forEach((c)=>{
@@ -236,7 +236,7 @@ export class UserformComponent implements OnInit {
       clearTimeout(this.handle);
       this.handle=setTimeout(()=>{
         this.user.position=pos;
-        this.map=createMap(pos,this.config.values.icon_person,zoom,0.1,()=>{
+        this.map=createMap(pos,this.user.photo,zoom,0.1,()=>{
           this.showPromoInSquare();
         },(coupon)=>{
           this.showCouponOnMap=[coupon];

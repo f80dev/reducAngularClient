@@ -39,7 +39,7 @@
         </div>
         <br>
 
-        <app-tuto *ngIf="level<1"
+        <app-tuto *ngIf="level<1 && focusElt=='symbol'"
                   label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
                   [delay]="5">
         </app-tuto>
@@ -126,7 +126,7 @@
 
           <button mat-flat-button mat-button
                   *ngIf="deviceService.isDesktop()"
-                  (click)="showIcons=!showIcons;addIcons();">Emojis</button>
+                  (click)="showIcons=!showIcons;addIcons()">Emojis</button>
           &nbsp;&nbsp;
 
           <button mat-flat-button mat-button
@@ -152,10 +152,11 @@
       </mat-step>
 
 
-      <mat-step>
+      <mat-step (click)="focusElt='stepIncrease'" >
         <ng-template matStepLabel>Détailler l'augmentation de la promotion</ng-template>
 
-        <app-tuto label="La force de reducShare est de pouvoir augmenter la valeur de la promotion du client lorsque celui ci la partage. Ainsi dans cette section vous préciser la façon dont la promotion se comporte">
+        <app-tuto *ngIf="focusElt=='stepIncrease'"
+                  label="La force de reducShare est de pouvoir augmenter la valeur de la promotion du client lorsque celui ci la partage. Ainsi dans cette section vous préciser la façon dont la promotion se comporte">
         </app-tuto>
 
         <div class="detail_promo">
@@ -165,25 +166,28 @@
 
         <br>
 
-        <app-tuto *ngIf="focusElt=='direct_bonus'"
-                  label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
-        </app-tuto>
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  id="txtDirectBonus"
                  (focus)="focusElt='direct_bonus'"
                  title="Promotion directement récupéré à l'obtention de la promotion"
-                 placeholder="Bonus immédiat (en {{coupon.symbol}})" [(ngModel)]="coupon.direct_bonus">
+                 placeholder="Bonus immédiat (en {{coupon.symbol}})"
+                 [(ngModel)]="coupon.direct_bonus">
         </mat-form-field>
+        <app-tuto *ngIf="focusElt=='direct_bonus'"
+                  label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
+        </app-tuto>
 
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
+                 (focus)="focusElt='share_bonus'"
                  id="txtShareBonus" title="Bonus récupérer à chaque ouverture du coupon partagé"
                  placeholder="Nombre de partages pour 1{{coupon.symbol}} supplémentaire" [(ngModel)]="coupon.nb_partage">
         </mat-form-field>
-        <app-tuto type="tips"
+
+        <app-tuto *ngIf="focusElt=='share_bonus'"
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
         </app-tuto>
 

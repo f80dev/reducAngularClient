@@ -17,9 +17,11 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("subtitle")subtitle: string="";
   @Input("delay") delay=0.2;
   @Input("duration") duration=0;
+  @Input("background") background="";
   @Input('if') _if: boolean=true;
-  @Input('image') image: string="./assets/img/tips.png";
+  @Input('image') image: string="";
   @Input('icon') icon:string="";
+  @Input('color') color:string="grey";
   @Input('force') force:boolean=false;
   @Input('button') _button:string="";
   @Input('height') height:string="auto";
@@ -30,7 +32,6 @@ export class TutoComponent implements OnChanges,OnInit {
   code:string="";
 
   refresh(){
-
     if(!this.config.visibleTuto || this._type=="title" || this.force){
       if(this._if){
           this.config.visibleTuto=true;
@@ -41,11 +42,9 @@ export class TutoComponent implements OnChanges,OnInit {
         this.hideTuto();
       }
     } else this.hideTuto();
-
   }
 
   ngOnChanges() {
-
   }
 
   hideTuto(addHisto=false) {
@@ -58,8 +57,9 @@ export class TutoComponent implements OnChanges,OnInit {
     clearTimeout(this.handle);
   }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    if(this._type=="tips" && this.image.length==0)this.image="./assets/img/tips.png";
     if(this.icon!=null && this.icon.length>0)this.image="";
     if(this._button!=null && this._button.length>0)this.image="";
 
@@ -68,10 +68,10 @@ export class TutoComponent implements OnChanges,OnInit {
       this._type="title";
       this.text=this.title;
     }
+
     if(this.subtitle.length>0)this._type="title";
 
     this.text=this.transPipe.transform(this.text);
-    //$$("Analyse de "+this.text);
 
     this.code="histo"+hashCode(this.text+this.subtitle);
     if(localStorage.hasOwnProperty(this.code)){

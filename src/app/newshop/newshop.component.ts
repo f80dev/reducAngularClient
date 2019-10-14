@@ -38,7 +38,7 @@ export class NewshopComponent implements OnInit {
   };
 
   show_address="";
-
+  focusElt="";
   anonymous=true;
   map: any;
   handle:any;

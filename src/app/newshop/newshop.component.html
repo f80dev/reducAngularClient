@@ -28,6 +28,7 @@
 
     <mat-form-field class="form-field-style" style="width:75%;margin-right:10px;">
       <input id="txtShopName" type="text"
+             (focus)="focusElt=='shopname'"
              (keyup)="canUpdateName=false"
              matInput placeholder="Nom de l'enseigne" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
@@ -39,7 +40,9 @@
     <br>
 
     <mat-form-field class="form-field-style">
-      <input id="txtShopAddress" type="text" matInput placeholder="Adresse de l'enseigne" [(ngModel)]="new_shop.address"
+      <input id="txtShopAddress" type="text"
+             (focus)="focusElt=='address'"
+             matInput placeholder="Adresse de l'enseigne" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
       <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
         <mat-icon>close</mat-icon>
@@ -58,7 +61,7 @@
          (touchend)="reverseGeocode=true">
     </div>
 
-    <app-tuto [delay]="5"
+    <app-tuto [delay]="5" *ngIf="focusElt=='address'"
               label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
     <br>
@@ -68,14 +71,14 @@
     </mat-checkbox>
 
     <br>
-    <mat-form-field class="form-field-style">
+    <mat-form-field class="form-field-style" (focus)="focusElt='tags'">
       <mat-label>Type d'établissement (plusieurs choix possible par #htag)</mat-label>
       <mat-select id="txtShopTags" [(ngModel)]="new_shop.tags"  multiple>
         <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <app-tuto [delay]="10"
+    <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
               label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
     <button mat-flat-button mat-button
@@ -88,7 +91,9 @@
     </button>
 
     <mat-form-field class="form-field-style">
-      <input id="txtWebsite" type="text" matInput placeholder="Site web" [(ngModel)]="new_shop.website">
+      <input id="txtWebsite" type="text"
+             (focus)="focusElt=='website'"
+             matInput placeholder="Site web" [(ngModel)]="new_shop.website">
     </mat-form-field>
     <br>
 
