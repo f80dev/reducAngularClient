@@ -1,11 +1,10 @@
 <mat-card class="app-card" style="margin:0px;padding:3px;background-color: #8f8f8f;">
-  <table style="width: 100%"><tr>
+  <table style="width: 100%" *ngIf="!showOldCoupon"><tr>
     <td>
       <button mat-button mat-flat-button
               class="large-button"
               id="btnShowModels"
               style="margin-left:10px;"
-              *ngIf="!showOldCoupon"
               (click)="showOldCoupon=true">
         Utiliser un modèle
       </button>
@@ -45,7 +44,7 @@
         </app-tuto>
 
 
-        <app-tuto label="Dans ce cas, il faut préciser ce que l'on gagne dans la promotion, si possible en 1 seul mot au singulier. Par exemple : minute, euro, café, repas"
+        <app-tuto label="Commencer par préciser ce que l'on gagne dans la promotion, au singulier et si possible en 1 seul mot. Par exemple : minute, euro, % de l'addition"
                   *ngIf="focusElt=='unity'"></app-tuto>
 
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
@@ -260,13 +259,15 @@
   </mat-card-content>
 
   <mat-card-actions class="app-card-action">
+    <mat-progress-spinner *ngIf="config.waiting"></mat-progress-spinner>
     <button mat-flat-button class="app-button"
             id="btnValide"
-            *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
+            *ngIf="coupon.label?.length>0 && coupon.title?.length>0 && !config.waiting" mat-button
             (click)="addcoupon(coupon)">Valider</button>
 
     <button mat-flat-button
             id="btnCancel"
+            *ngIf="!config.waiting"
             class="app-button"
             mat-button (click)="cancel()">Annuler</button>
     &nbsp;&nbsp;&nbsp;<br><br>

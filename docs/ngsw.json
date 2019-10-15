@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1571089117623,
+  "timestamp": 1571130933295,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -10,14 +10,14 @@
       "urls": [
         "https://reducshare.com/favicon.ico",
         "https://reducshare.com/index.html",
-        "https://reducshare.com/main-es2015.83f9ce2051f2f9571ea4.js",
-        "https://reducshare.com/main-es5.83f9ce2051f2f9571ea4.js",
+        "https://reducshare.com/main-es2015.e754a443f6d5afe91702.js",
+        "https://reducshare.com/main-es5.e754a443f6d5afe91702.js",
         "https://reducshare.com/manifest.webmanifest",
         "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js",
         "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js",
         "https://reducshare.com/runtime-es2015.24b02acc1f369d9b9f37.js",
         "https://reducshare.com/runtime-es5.24b02acc1f369d9b9f37.js",
-        "https://reducshare.com/styles.644abe88ad0021f91a5e.css"
+        "https://reducshare.com/styles.0b5f34417fcb62634caa.css"
       ],
       "patterns": []
     },
@@ -51,6 +51,7 @@
         "https://reducshare.com/assets/img/pin.png",
         "https://reducshare.com/assets/img/shop.png",
         "https://reducshare.com/assets/img/tips.png",
+        "https://reducshare.com/assets/load-image.all.min.js",
         "https://reducshare.com/assets/logo.svg",
         "https://reducshare.com/assets/visual.svg"
       ],
@@ -59,7 +60,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "c836afb01e88393fe64e4a21c3cc04b1420af905",
+    "https://reducshare.com/assets/config.json": "f7133c7cd086604fe7d6b5bc3e1bde7a625d288d",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -84,18 +85,19 @@
     "https://reducshare.com/assets/img/pin.png": "837dc76cdc0d9754c1de11777f1a1ac04710cb66",
     "https://reducshare.com/assets/img/shop.png": "4c80df3da81ddc4cbf78b8385a33b2c0d22930ca",
     "https://reducshare.com/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
+    "https://reducshare.com/assets/load-image.all.min.js": "95fd73530e6ad7240373f8b3ada77da27defdcf5",
     "https://reducshare.com/assets/logo.svg": "9543076a95bbb559660ac8c0087787fa01222a3b",
     "https://reducshare.com/assets/visual.svg": "dc38682c923c6279487c6d8c97bfc208519a3771",
     "https://reducshare.com/favicon.ico": "86190daba51557697be928f80bf987cc4242fdd8",
-    "https://reducshare.com/index.html": "04d22bf6898c14ecbea84b4bab6ac95fc9558210",
-    "https://reducshare.com/main-es2015.83f9ce2051f2f9571ea4.js": "4e283b96fef5d990b25f47101d54c006697ea68d",
-    "https://reducshare.com/main-es5.83f9ce2051f2f9571ea4.js": "1cf8273830f62e0018d23dadd14f0d290df284d2",
+    "https://reducshare.com/index.html": "547b7e409d31c649b68d62f195c6b12ac2ec4a66",
+    "https://reducshare.com/main-es2015.e754a443f6d5afe91702.js": "b75950f6dbc4f403559346830455a630713dba92",
+    "https://reducshare.com/main-es5.e754a443f6d5afe91702.js": "369bc05faac45d24eec2be635cee1e55018ee01a",
     "https://reducshare.com/manifest.webmanifest": "143ffc387b7e88aa36797f13a570c442281afbbb",
     "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js": "5b86bf2fc3a305573ac97b371bca6cb7b99b4b49",
     "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js": "2104c0d25888eafce9d175549237362823b71853",
     "https://reducshare.com/runtime-es2015.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://reducshare.com/runtime-es5.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://reducshare.com/styles.644abe88ad0021f91a5e.css": "6c9da035348b977a4d62cf79010056c713c0fdb5"
+    "https://reducshare.com/styles.0b5f34417fcb62634caa.css": "258e5e3b600a53c759b75c6b81266348f5572f18"
   },
   "navigationUrls": [
     {

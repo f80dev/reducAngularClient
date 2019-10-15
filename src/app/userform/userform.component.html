@@ -143,7 +143,7 @@
       <mat-icon>camera_alt</mat-icon>
     </button>
 
-    <button *ngIf="user.level<1 && user.level>0" mat-button
+    <button *ngIf="user.level>0.5" mat-button
             id="btnExpert" title="Accès aux fonctions avancées de ReducShare"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>
@@ -154,16 +154,19 @@
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications_active</mat-icon>
     </button>
-    <button mat-raised-button mat-icon-button mat-button *ngIf="user.coupons?.length>0 || user.shops?.length>0 || user.tags?.length>0"
+    <button mat-raised-button mat-icon-button mat-button
+            *ngIf="user.coupons?.length>0 || user.shops?.length>0 || user.tags?.length>0"
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
 
-    <button mat-raised-button mat-button *ngIf="user.coupons?.length==0 && user.shops.length==0 && user.tags?.length==0"
-            id="btnMapRookie" title="Voir les promos autour de soit (nécéssite de partager sa position)"
+    <button mat-raised-button mat-button
+            *ngIf="user.coupons?.length==0 && user.shops.length==0 && user.tags?.length==0"
+            id="btnMapRookie"
+            title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
-      Trouver des promos
+      Promos proches
     </button>
 
 
@@ -173,6 +176,14 @@
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
       <mat-icon>account_balance</mat-icon>
+    </button>
+
+    <button mat-button
+            *ngIf="user.coupons?.length>2"
+            title="Trier vos coupons"
+            id="btnSort" mat-icon-button
+            mat-raised-button (click)="sortCoupons()">
+      <mat-icon>sort</mat-icon>
     </button>
 
 

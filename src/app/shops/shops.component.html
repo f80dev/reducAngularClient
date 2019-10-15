@@ -85,11 +85,11 @@
     </button>
 
     <button mat-button mat-flat-button
-            name="btnNewPromo" class="large-button"
+            name="btnNewPromo"
             title="Nouvelle promotion attachée à cette enseigne"
             *ngIf="user.level<1"
             (click)="addCoupon(shop)">
-      Nouvelle promotion
+      <mat-icon>add</mat-icon>Promotion
     </button>
 
   </mat-card-actions>

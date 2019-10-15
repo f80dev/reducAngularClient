@@ -19,6 +19,7 @@
   <app-userform [user]="user"
                 [excludes]="user.coupons"
                 (update)="updateUser($event)"
+                (refresh)="refresh('',$event?.sort)"
                 (flash)="refresh($event?.message)">
   </app-userform>
 
@@ -52,6 +53,7 @@
                     title="Supprimer cette réduction"
                     (insert)="refresh($event?.message)"
                     (update)="refresh($event?.message)"
+                    [sort]="sort"
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 

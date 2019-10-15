@@ -52,6 +52,7 @@ import { CguComponent } from './cgu/cgu.component';
 import { SafePipe } from './safe.pipe';
 import { TransPipe } from './trans.pipe';
 import { AboutComponent } from './about/about.component';
+import { OrderByPipe } from './order-by.pipe';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -80,7 +81,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     CguComponent,
     SafePipe,
     TransPipe,
-    AboutComponent
+    AboutComponent,
+    OrderByPipe
   ],
   entryComponents: [
     NewCouponComponent,

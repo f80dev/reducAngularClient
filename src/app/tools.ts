@@ -458,48 +458,81 @@ export function clear(elt: any, xpath: string) {
   });
 }
 
-declare var EXIF: any;
+declare var loadImage: any;
+
 
 export function autoRotate(src: string, quality: number, func) {
-  var image = new Image();
-  image.onload = function () {
-    EXIF.getData(this, function () {
-      var tags = EXIF.getAllTags(this);
-      var angle = 0;
-      switch (tags.Orientation) {
-        case 8:
-          angle = -90;
-          break;
-        case 3:
-          angle = 180;
-          break;
-        case 6:
-          angle = 90;
-          break;
+  var blob=atob(src.split("base64,")[1]);
+  loadImage.parseMetaData(blob, function (data) {
+      if(data.exif!=null){
+        var orientation = data.exif.get('Orientation');
+        var angle = 0;
+        switch (orientation) {
+          case 8:
+            angle = -90;
+            break;
+          case 3:
+            angle = 180;
+            break;
+          case 6:
+            angle = 90;
+            break;
+        }
+        rotate(src, angle, quality, func);
+      }else{
+        rotate(src, 0, quality, func);
       }
-      rotate(src, angle, quality, func);
+
     });
-  };
-  image.src = src;
 }
 
+// export function autoRotate(src: string, quality: number, func) {
+//   var image = new Image();
+//   image.onload =  () => {
+//     EXIF.getData(image,  function() {
+//       var orientation= EXIF.getTag(this,"Orientation");
+//       var angle = 0;
+//       switch (orientation) {
+//         case 8:
+//           angle = -90;
+//           break;
+//         case 3:
+//           angle = 180;
+//           break;
+//         case 6:
+//           angle = 90;
+//           break;
+//       }
+//       rotate(src, angle, quality, func);
+//     });
+//   };
+//   image.src = src;
+// }
 
+/**
+ *
+ * @param src
+ * @param angle
+ * @param quality
+ * @param func
+ */
 export function rotate(src: string, angle: number, quality: number, func) {
   if (angle == 0)
     func(src);
   else {
     var img = new Image();
-    img.onload = function () {
+    img.onload = function() {
       var canvas:any = document.createElement('canvas');
       canvas.width = img.height;
       canvas.height = img.width;
       drawRotated(canvas, this, angle);
       var rc = canvas.toDataURL("image/jpeg", quality);
       func(rc);
-    }
+    };
     img.src = src;
   }
 }
+
 
 function drawRotated(canvas, image, degrees) {
   var ctx = canvas.getContext("2d");

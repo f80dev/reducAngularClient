@@ -4,7 +4,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card {
-  margin:2px;
+  margin:1px;
+  padding:0px;
   margin-bottom: 5px;
   background-color: #6e6e6e;
   max-width:700px;
@@ -63,8 +64,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .medium-button {
-  text-align: center;
-  width:75px;
+  text-align: left;
+  margin:0;
+  padding:0;
+  width:80px;
 }
 
 .small-button {
@@ -77,8 +80,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-toolbar {
   font-size: medium;
-  margin:0;
-  padding: 0;
+  margin:0px;
+  padding: 0px;
   background: None;
 }
 

@@ -1,4 +1,4 @@
-<mat-card *ngFor="let coupon of coupons" class="app-card" style="background-color: #8f8f8f;">
+<mat-card *ngFor="let coupon of coupons | orderBy:sort" class="app-card" style="background-color: #8f8f8f;">
   <mat-card-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
     <mat-card-title style="font-size: medium;">
@@ -44,6 +44,10 @@
     <!-- La partie sous-titre -->
     <mat-card-subtitle>
 
+      <app-tuto [delay]="20" *ngIf="!isVisible(coupon)"
+                label="Cliquer sur le titre pour ouvrir la promotion">
+      </app-tuto>
+
       <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
       <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
       <span *ngIf="coupon.canbedeal">
@@ -64,11 +68,6 @@
 
       </div>
     </mat-card-subtitle>
-
-    <app-tuto [delay]="20" *ngIf="!isVisible(coupon)"
-              label="Cliquer sur le titre pour ouvrir la promotion">
-    </app-tuto>
-
 
   </mat-card-header>
 
@@ -168,7 +167,7 @@
               label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
     </app-tuto>
 
-    <app-tuto *ngIf="coupon.origin==coupon._id" [delay]="10" button="printer"
+    <app-tuto *ngIf="coupon.owner==user?._id" [delay]="10" button="printer"
               label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promotion">
     </app-tuto>
 

@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
 import {
+  $$,
   createMap,
   createMarker,
   getMarkerLayer,
@@ -27,6 +28,7 @@ export class UserformComponent implements OnInit {
   @Input("excludes") excludes:any[]=[];
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
+  @Output('refresh') onrefresh: EventEmitter<any>=new EventEmitter();
 
   showScanner: boolean = false;
   showMap: boolean=false;
@@ -34,6 +36,7 @@ export class UserformComponent implements OnInit {
   private map: any;
   handle:any;
 
+  sort="dtCreate";
   showCouponOnMap:any[]=[];
   showPersonalCode: boolean=false;
 
@@ -245,5 +248,11 @@ export class UserformComponent implements OnInit {
     } else {
       this.showPromoInSquare();
     }
+  }
+
+  sortCoupons() {
+    if(this.sort="dtCreate")this.sort="gain"; else this.sort="dtCreate"
+    $$("Reclassement de la liste suivant "+this.sort);
+    this.onrefresh.emit({sort:this.sort});
   }
 }

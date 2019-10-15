@@ -1,8 +1,9 @@
+
 <mat-card class="app-card">
-  <mat-card-title>
+
   <mat-toolbar class="app-toolbar">
-    <div mat-card-avatar style="margin-right: 50px">
-      <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
+    <div mat-card-avatar style="margin-left:0px;margin-right: 50px">
+      <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
       <app-visual *ngIf="new_shop.picture?.length>0" size="75" [picture]="new_shop.picture"></app-visual>
     </div>
 
@@ -19,8 +20,6 @@
 
     </button>
   </mat-toolbar>
-  </mat-card-title>
-
 
   <mat-card-content class="app-card-content">
     <br><br>

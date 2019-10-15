@@ -32,6 +32,7 @@ export class ListCouponsComponent implements OnChanges {
   @Input('coupons') coupons: any[] = [];
   @Input('user') user: any;
   @Input('title') title="";
+  @Input('sort') sort="dtCreate";
 
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
@@ -45,7 +46,6 @@ export class ListCouponsComponent implements OnChanges {
               public router: Router,private socialAuthService: SocialService,
               public config:ConfigService,
               public ngNavigatorShareService: NgNavigatorShareService) {
-
   }
 
   ngOnChanges() {
