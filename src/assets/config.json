@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.1.6-beta",
+  "version":"0.1.7-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -17,7 +17,8 @@
     "forum":"http://reducshare.les-forums.com/",
     "email":"contact@reducshare.com",
     "facebook":"https://www.facebook.com/reducshare/",
-    "faq":"https://web.reducshare.com/faq.html"
+    "faq":"https://web.reducshare.com/faq.html?from=appli",
+    "website":"https://web.reducshare.com/index.html?from=appli"
   },
 
   "cgu":{
@@ -132,7 +133,7 @@
       "max_coupon":5000,
       "score":12,
       "conditions":"Valable pour tout dejeuné du Lundi au Vendredi",
-      "tags":"restaurant,hôtel"
+      "tags":"restaurant"
     },
     {
       "title":"Nuit à moitée prix",
@@ -158,7 +159,7 @@
       "symbol":"🍽️",
       "breakable":true,
       "pluriel":true,
-      "score":8,
+      "score":12,
       "label":"On vous offre le petit déjeuné !",
       "share_bonus":0.05,
       "pay_bonus":1,
@@ -339,7 +340,7 @@
       "max_coupon":5000,
       "conditions":"sur l'achat d'une entrée",
       "picture":"https://cdn.dribbble.com/users/1526121/screenshots/3322609/circus.gif",
-      "tags":"événementiel,exposition,hôtel"
+      "tags":"événementiel,exposition"
     }
   ]
 }
