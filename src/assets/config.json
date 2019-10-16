@@ -117,13 +117,13 @@
       "tags":"restaurant,bar"
     },
     {
-      "title":"Menu enfant",
+      "title":"Menu enfant offert",
       "unity":"menu enfant",
       "symbol":"🍽",
       "breakable":false,
       "pluriel":true,
       "label":"Les enfants mangent gratuitement !",
-      "share_bonus":0.05,
+      "share_bonus":0.1,
       "pay_bonus":1,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/family_1f46a.png",
       "direct_bonus":0.5,
@@ -173,7 +173,7 @@
       "tags":"hôtel"
     },
     {
-      "title":"Les invendus",
+      "title":"Les invendus de nourriture",
       "unity":"baguette",
       "symbol":"🥖",
       "breakable":false,
@@ -190,6 +190,25 @@
       "max_coupon":5000,
       "conditions":"pour tout achat quelque soit le montant",
       "tags":"alimentaire"
+    },
+    {
+      "title":"Les invendus en chambre",
+      "unity":"nuit",
+      "symbol":"🛌",
+      "breakable":false,
+      "pluriel":true,
+      "label":"Chambre gratuite en dernière minute",
+      "share_bonus":0.1,
+      "pay_bonus":1,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/baguette-bread_1f956.png",
+      "direct_bonus":1,
+      "max":2,
+      "duration_hours":12,
+      "stock":50,
+      "score":15,
+      "max_coupon":5000,
+      "conditions":"pour toute réservation d'au moins une nuit",
+      "tags":"hôtel"
     },
     {
       "title":"Des boissons offertes à l'entracte",
