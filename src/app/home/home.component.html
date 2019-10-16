@@ -27,7 +27,7 @@
     *ngIf="user?.shops?.length>0 && user.level<1"
     type="title"
     color="white"
-    background="./assets/img/openshop.jpg"
+    background="./assets/img/openshop2.jpg"
     title="Bravo votre première enseigne est prête."
     subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
   </app-tuto>
@@ -57,7 +57,9 @@
                     [coupons]="user.coupons" [user]="user">
   </app-list-coupons>
 
-  <app-about *ngIf="user.level<2.0"></app-about>
+  <app-about *ngIf="user.level<2.0"
+             [user]="user">
+  </app-about>
 </div>
 
 <!--<br><br><br>-->

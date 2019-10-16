@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ConfigService} from "../config.service";
 
 @Component({
@@ -11,6 +11,7 @@ export class AboutComponent implements OnInit {
   constructor(public config:ConfigService) { }
 
   visible=false;
+  @Input("user") user:any;
 
   ngOnInit() {
     this.visible=(localStorage.getItem("about")=="true");

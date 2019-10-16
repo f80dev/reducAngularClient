@@ -15,6 +15,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input("type") _type: string="tips";
   @Input("label") label: string="";
   @Input("subtitle")subtitle: string="";
+  @Input("position") position: string="center";
   @Input("delay") delay=0.2;
   @Input("duration") duration=0;
   @Input("background") background="";

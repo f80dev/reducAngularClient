@@ -479,7 +479,7 @@ export function autoRotate(src: string, quality: number, func) {
         }
         rotate(src, angle, quality, func);
       }else{
-        rotate(src, 0, quality, func);
+        rotate(src, 90, quality, func);
       }
 
     });

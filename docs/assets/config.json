@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.1.7-beta",
+  "version":"0.1.8-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -178,17 +178,17 @@
       "symbol":"🥖",
       "breakable":false,
       "pluriel":true,
-      "label":"Aidez nous à ne pas gâcher !",
+      "label":"Des baguettes gratuites !",
       "share_bonus":0.2,
       "pay_bonus":3,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/baguette-bread_1f956.png",
       "direct_bonus":2,
-      "max":15,
-      "duration_hours":480,
-      "stock":50,
+      "max":10,
+      "duration_hours":6,
+      "stock":20,
       "score":15,
       "max_coupon":5000,
-      "conditions":"pour tout achat quelque soit le montant",
+      "conditions":"pour tout achat quelque soit le montant à partir de 19h",
       "tags":"alimentaire"
     },
     {
@@ -343,12 +343,12 @@
       "tags":"fidélisation"
     },
     {
-      "title":"Invitation événement",
-      "unity":"% du prix d'entrée",
-      "symbol":"%",
+      "title":"Des places / entrée gratuites",
+      "unity":"billet",
+      "symbol":"🎟️",
       "pluriel":true,
-      "breakable":true,
-      "label":"Exposition Picasso - Réduction sur le prix d'entrée",
+      "breakable":false,
+      "label":"Des entrées gratuites",
       "share_bonus":0.5,
       "pay_bonus":5,
       "direct_bonus":2,
@@ -357,7 +357,7 @@
       "duration_hours":480,
       "stock":500,
       "max_coupon":5000,
-      "conditions":"sur l'achat d'une entrée",
+      "conditions":"pour l'achat d'une entrée payante du Lundi au Vendredi avant 17h",
       "picture":"https://cdn.dribbble.com/users/1526121/screenshots/3322609/circus.gif",
       "tags":"événementiel,exposition"
     }

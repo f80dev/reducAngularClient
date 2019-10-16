@@ -188,7 +188,7 @@ export class UserformComponent implements OnInit {
   startScanner() {
     this.showScanner=! this.showScanner;
     if(this.showScanner){
-      this.user.message="Ouverture du scanner";
+      this.user.message="Pointer le QRCode d'une promotion pour la récupérer";
 
     } else {
 
