@@ -162,8 +162,7 @@ export function getMarkerLayer(map:any):any {
 }
 
 export function showMessage(vm:any,s:string="",duration=20000){
-  if(s==null)return false;
-
+  if(s==null || s.length==0)return false;
   s=s+"";
   $$("Affichage du message :",s)
   if(s.startsWith("#")){
