@@ -49,6 +49,7 @@ export class TutoComponent implements OnChanges,OnInit {
   ngOnChanges() {
   }
 
+
   hideTuto(addHisto=false) {
     if(addHisto)localStorage.setItem(this.code,"read"+new Date().getTime()); //Marque l'affichage
     this.text="";

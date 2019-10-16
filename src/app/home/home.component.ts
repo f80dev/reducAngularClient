@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
       localStorage.clear();
       $$("C'est la premier connexion sur ce device, on créé un compte fictif");
       this.api.adduser("user"+new Date().getTime()+"@fictif.com","",tags).subscribe((res)=>{
-        func(res);
+        func(res,true);
       },(error)=>{showError(this,error);})
     } else {
       this.api.getuser(localStorage.getItem('user')).subscribe((u:any) => {
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
           $$("Le compte stocker sur le device a été effacé de la base. On l'efface sur le device")
           this.raz();
         } else {
-          func(u);
+          func(u,false);
         }
       },(error)=>{showError(this,error);});
     }
@@ -81,7 +81,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.analyse_params((p)=>{
-      this.analyse_login(p.tags,(u:any)=>{
+      this.analyse_login(p.tags,(u:any,isnew:boolean)=>{
+        if(isnew)p.message="Vous êtes vendeur ? créer votre première promotion. Vous êtes acheteur ? visualisez les promotions autour de vous !";
         localStorage.setItem("user",u._id);
         this.user = u;
         setTimeout(()=>{
