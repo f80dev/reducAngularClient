@@ -1,13 +1,12 @@
 import {environment} from '../environments/environment';
-import {Router, Routes} from '@angular/router';
+import {Router} from '@angular/router';
 import {
-  NgxSocialButtonModule,
   SocialServiceConfig
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
 import {LoginComponent} from "./login/login.component";
 
-export const ADMIN_PASSWORD="hh4271"
+export const ADMIN_PASSWORD="hh4271";
 
 export function showError(vm:any,err:any){
   $$("!Error ",err);
@@ -457,32 +456,56 @@ export function clear(elt: any, xpath: string) {
   });
 }
 
-declare var loadImage: any;
+declare var EXIF: any;
 
+export function extractEXIF(src:string,func){
+  var image = new Image();
+  image.onload =  function() {
+    EXIF.getData(this, function () {
+      var model = EXIF.getTag(this, 'Model');
+      var tags = EXIF.getAllTags(this);
+      if (Object.keys(tags).length == 0) {
+        tags["width"] = image.width;
+        tags["height"] = image.height;
+      }
+      func(tags);
+    });
+  };
+  image.src=src;
+}
 
 export function autoRotate(src: string, quality: number, func) {
-  var blob=atob(src.split("base64,")[1]);
-  loadImage.parseMetaData(blob, function (data) {
-      if(data.exif!=null){
-        var orientation = data.exif.get('Orientation');
-        var angle = 0;
-        switch (orientation) {
-          case 8:
-            angle = -90;
-            break;
-          case 3:
-            angle = 180;
-            break;
-          case 6:
-            angle = 90;
-            break;
-        }
-        rotate(src, angle, quality, func);
-      }else{
-        rotate(src, 90, quality, func);
+  //var blob=atob(src.split("base64,")[1]);
+  extractEXIF(src,(data)=> {
+    if (data.exif != null) {
+      var orientation = data.exif.get('Orientation');
+      var angle = 0;
+      switch (orientation) {
+        case 8:
+          angle = -90;
+          break;
+        case 3:
+          angle = 180;
+          break;
+        case 6:
+          angle = 90;
+          break;
       }
+      rotate(src, angle, quality, func);
+    } else{
+      var angle=-90;
+      if(data.width>data.height)angle=0;
+      rotate(src, angle, quality, func);
+    }
 
-    });
+  });
+
+    //   }else{
+    //     debugger;
+    //     rotate(src, -90, quality, func);
+    //   }
+    //
+    // });
 }
 
 // export function autoRotate(src: string, quality: number, func) {

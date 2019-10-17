@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild,ElementRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
 import {
@@ -16,6 +16,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfigService} from "../config.service";
 
 declare var ol: any;
+declare var EXIF: any;
 
 @Component({
   selector: 'app-userform',
@@ -43,7 +44,6 @@ export class UserformComponent implements OnInit {
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
               public config:ConfigService) { }
-
 
 
   ngOnInit() {

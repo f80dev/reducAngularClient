@@ -4,7 +4,7 @@
       <div *ngIf="!showPersonalCode"
            style="display:inline-block;width:90px;vertical-align: middle;">
         <label for="file_profil">
-          <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
+          <img #myphoto mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
         </label>
         <input style="display:none;width:50px;" type="file" id="file_profil"
                (change)="onSelectFile($event)"
