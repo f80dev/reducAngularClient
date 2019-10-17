@@ -493,9 +493,9 @@ export function autoRotate(src: string, quality: number, func) {
       }
       rotate(src, angle, quality, func);
     } else{
-      var angle=180;
-      if(data.width>data.height)angle=0;
-      if(data.width==data.height)angle=90;
+      var angle=0;
+      // if(data.width>data.height)angle=0;
+      // if(data.width==data.height)angle=90;
       rotate(src, angle, quality, func);
     }
 
