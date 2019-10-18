@@ -13,16 +13,28 @@
       </div>
       <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"
                *ngIf="showPersonalCode"
+               title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
                ngxClipboard
                [cbContent]="user._id"
                [value]="user._id"></qr-code>
+
+      <button *ngIf="user.level<0.5 && !showPersonalCode"
+              title="Permet de faire tourner la photo de 90 degrés"
+              id="cmdTurn" class="medium-button" style="margin-right: 10px;"
+              mat-button mat-flat-button mat-icon-button
+              (click)="rotatePhoto()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+
 
       <div style="display: inline-block;">
         <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo()">{{user.pseudo}}</span>
       </div>
 
+
       <button *ngIf="user.pseudo?.length==0"
               id="cmdPseudo" class="medium-button"
+              title="Il est possible de modifier son pseudo tout en restant anonyme"
               mat-button mat-flat-button
               (click)="promptForPseudo()">
         Pseudo

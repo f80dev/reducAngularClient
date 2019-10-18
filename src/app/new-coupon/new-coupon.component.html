@@ -28,7 +28,7 @@
                      (select)="selectOldAsModel($event)"></app-old-coupons>
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
-      <mat-step>
+      <mat-step title="La nature de la promotion permet de décrire les éléments principaux : ce que l'on gagne, une phrase d'accroche, le gain maximum">
         <ng-template matStepLabel>Décrire votre promotion</ng-template>
 
 
@@ -50,6 +50,7 @@
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
           <input type="text" matInput
                  id="txtUnity" (change)="refresh()"
+                 title="On détermine l'unité de la promotion. Dit autrement : Ce que le client gagne."
                  (focus)="focusElt='unity'"
                  placeholder="Unitée offerte"
                  [(ngModel)]="coupon.unity">
@@ -58,6 +59,7 @@
         <mat-form-field class="form-field-style" style="width: 30%;">
           <input type="text" matInput max="3"
                  (focus)="focusElt='symbol'"
+                 title="Le symbole est utilisé pour abrégé l'unité dans les descriptions. Il est pertinant d'utiliser un emoji si c'est possible"
                  id="txtSymbol" (change)="refresh()"
                  placeholder="Symbole de l'unité"
                  [(ngModel)]="coupon.symbol">
@@ -66,7 +68,7 @@
         <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
 
-        <mat-checkbox [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
+        <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
         <mat-form-field class="form-field-style" *ngIf="hasMax">
           <input matInput type="number" (change)="refresh()" (update)="refresh()"
                  (focus)="focusElt='max'"
@@ -75,7 +77,7 @@
         </mat-form-field>
         <br>
 
-        <app-tuto *ngIf="focusElt=='breakable'"
+        <app-tuto *ngIf="focusElt=='breakable'" id="tutoBreakable"
                   label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">
         </app-tuto>
         <mat-checkbox [(ngModel)]="coupon.breakable"
@@ -109,7 +111,7 @@
       </mat-step>
 
 
-      <mat-step>
+      <mat-step title="L'ajout d'un visuel est important pour l'impact de la promotion">
         <ng-template matStepLabel>Ajouter un visuel</ng-template>
 
         <!--Gestion du visuel-->
@@ -151,10 +153,11 @@
       </mat-step>
 
 
-      <mat-step (click)="focusElt='stepIncrease'" >
+      <mat-step (click)="focusElt='stepIncrease'" title="Il est important de définir les gains de la promotion en fonction de ce que fait le client du coupon" >
         <ng-template matStepLabel>Détailler l'augmentation de la promotion</ng-template>
 
         <app-tuto *ngIf="focusElt=='stepIncrease'"
+                  id="tutoStepIncrease"
                   label="La force de reducShare est de pouvoir augmenter la valeur de la promotion du client lorsque celui ci la partage. Ainsi dans cette section vous préciser la façon dont la promotion se comporte">
         </app-tuto>
 
@@ -174,7 +177,7 @@
                  placeholder="Bonus immédiat (en {{coupon.symbol}})"
                  [(ngModel)]="coupon.direct_bonus">
         </mat-form-field>
-        <app-tuto *ngIf="focusElt=='direct_bonus'"
+        <app-tuto *ngIf="focusElt=='direct_bonus'" id="tutoDirectBonus"
                   label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
         </app-tuto>
 
@@ -187,6 +190,7 @@
         </mat-form-field>
 
         <app-tuto *ngIf="focusElt=='share_bonus'"
+                  id="tutoShareBonus"
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
         </app-tuto>
 
@@ -200,10 +204,10 @@
       </mat-step>
 
 
-      <mat-step  name="step5">
+      <mat-step name="step5" title="La maitrise du budget de la promotion est important. On l'obtient en limitant la promo dans le temps et en volume">
         <ng-template matStepLabel>Maitriser le budget</ng-template>
 
-        <app-tuto label="Plusieurs limites vous permette de maitriser la promotion en terme de coût, de stock, de durée de validité">
+        <app-tuto id="tutoStep5" label="Plusieurs limites vous permette de maitriser la promotion en terme de coût, de stock, de durée de validité">
         </app-tuto>
 
 
@@ -216,24 +220,27 @@
         </div>
 
         <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
-          <input matInput id="txtDays"
+          <input matInput id="txtDays" title="On détermine le nombre de jours de validité de la promotion"
                  type="number" min="0" step="any"  placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
         </mat-form-field>
 
         <mat-form-field class="form-field-style" style="width: 40%;">
-          <input matInput id="txtHours" type="number" min="0" step="any" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
+          <input matInput id="txtHours"
+                 title="On détermine le nombre d'heure de validité de la promotion. 0.5 désignera une demi heure"
+                 type="number" min="0" step="any" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
         </mat-form-field>
         <br>
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  id="txtStock"
+                 title="Le stock permet d'interrompre automatiquement la promotion lorsque le stock qui lui est réservée tombe a zéro"
                  placeholder="Stock (en {{coupon.symbol}}) destiné à la promotion" [(ngModel)]="coupon.stock">
         </mat-form-field>
 
         <mat-form-field class="form-field-style">
           <input matInput type="number"
-                 id="txtMaxShare"
+                 id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
 
@@ -247,7 +254,7 @@
         <ng-template matStepLabel>Références de la promo</ng-template>
         <mat-form-field class="form-field-style">
           <input type="text" matInput
-                 id="txtTitle"
+                 id="txtTitle" title="Le titre est utilise par l'enseigne pour s'y retrouver dans la liste des promos"
                  (focus)="focusElt='title'"
                  placeholder="{{'Titre de la promotion (non visible du client)' | trans}}"
                  [(ngModel)]="coupon.title">

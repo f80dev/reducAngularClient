@@ -4,7 +4,7 @@ import {
   checkLogin,
   createMap,
   createMarker,
-  getMarkerLayer,
+  getMarkerLayer, isLocal,
   loginWithEmail,
   normeString,
   selectFile,
@@ -158,7 +158,7 @@ export class NewshopComponent implements OnInit {
 
 
   checkLogin() {
-    if(this.anonymous){
+    if(this.anonymous && !isLocal()){
       this.toast.open("Vous devez vous enregistrer pour pouvoir rendre vos promotions visibles sur la carte des promotions localisées","Se connecter",{duration:6000})
         .onAction().subscribe(()=>{
           this._location.back();

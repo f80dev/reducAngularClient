@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
 import {showError} from "../tools";
+import { Location } from '@angular/common';
+import { Router} from '@angular/router';
+import {ADMIN_PASSWORD} from "../tools";
+
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +18,10 @@ export class AdminComponent implements OnInit {
   shops=[];
   moneys=[];
 
-  constructor(public api:ApiService) { }
+  constructor(public api:ApiService,public _location:Location,public router:Router) {
+    if(_location.path().indexOf(ADMIN_PASSWORD)==-1)
+      router.navigate(["home"]);
+  }
 
   ngOnInit() {
     this.api.getusers().subscribe((r:any)=>{this.users=r;},(error)=>{showError(this,error);})

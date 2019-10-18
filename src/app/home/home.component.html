@@ -50,7 +50,8 @@
 
   <!--Affiche la liste des coupons en possession de l'utilisateur -->
   <app-list-coupons (delete)="refresh($event?.message)"
-                    title="Supprimer cette réduction"
+                    id="zoneMyPromos"
+                    title="Retrouvez ici la liste de tous vos coupons"
                     (insert)="refresh($event?.message)"
                     (update)="refresh($event?.message)"
                     [sort]="sort"

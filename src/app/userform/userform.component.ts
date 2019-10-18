@@ -6,7 +6,7 @@ import {
   createMap,
   createMarker,
   getMarkerLayer,
-  loginWithEmail,
+  loginWithEmail, rotate,
   selectFile,
   showError, showMessage
 } from "../tools";
@@ -83,6 +83,13 @@ export class UserformComponent implements OnInit {
     });
   }
 
+  rotatePhoto() {
+    rotate(this.user.photo,90,0.5,(res)=>{
+      this.user.photo=res;
+      this.api.setuser(this.user).subscribe(()=>{});
+    })
+  }
+
   addshop() {
     this.showMap=false;
     this.router.navigate(
@@ -119,6 +126,7 @@ export class UserformComponent implements OnInit {
         this.excludes.forEach((exclude_c)=>{
           if(c._id==exclude_c.origin)bContinue=false;
         });
+
 
         if(bContinue){
           var icon=this.config.values.icon_coupon;
@@ -255,4 +263,6 @@ export class UserformComponent implements OnInit {
     $$("Reclassement de la liste suivant "+this.sort);
     this.onrefresh.emit({sort:this.sort});
   }
+
+
 }

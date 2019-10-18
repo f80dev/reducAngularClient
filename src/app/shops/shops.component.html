@@ -1,12 +1,12 @@
 <mat-card *ngFor="let shop of user.shops" class="app-card">
-  <mat-card-header>
-    <div mat-card-avatar (click)="shop.visible=!shop.visible" style="margin-right: 30px;margin-bottom: 30px;">
+  <mat-card-header name="shopCard" (click)="shop.visible=!shop.visible" style="cursor: pointer;">
+    <div mat-card-avatar style="margin-right: 30px;margin-bottom: 30px;">
       <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
       <app-visual *ngIf="shop.picture?.length>0" [picture]="shop.picture" size="75px"></app-visual>
     </div>
-    <mat-card-title (click)="shop.visible=!shop.visible">{{shop.name}}</mat-card-title>
+    <mat-card-title>{{shop.name}}</mat-card-title>
     <span class="spacer"></span>
-    <div style="display: inline-block;cursor: pointer;" (click)="shop.visible=!shop.visible">
+    <div style="display: inline-block;">
       <mat-icon *ngIf="!shop.visible">arrow_drop_down</mat-icon>
       <mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>
     </div>
@@ -19,7 +19,7 @@
   </mat-card-header>
 
 
-  <mat-card-content class="app-card-content" *ngIf="shop.visible">
+  <mat-card-content class="app-card-content" *ngIf="shop.visible" name="shopContent">
     <div id="print-section-{{shop._id}}" style="display: none;">
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
