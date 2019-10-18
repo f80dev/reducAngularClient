@@ -30,17 +30,25 @@
     <th mat-sort-header="public">public</th>
     <th>closed</th>
     <th>deleted</th>
+    <th>Direct</th>
+    <th>Share</th>
+    <th>Pay</th>
+    <th>Final</th>
   </tr>
   <tr *ngFor="let coupon of coupons">
     <td mat-cell>{{coupon._id}}</td>
     <td mat-cell>{{coupon.owner}}</td>
     <td mat-cell>{{coupon.old_coupon}}</td>
-    <td mat-cell>{{coupon.lng}}</td>
-    <td mat-cell>{{coupon.lat}}</td>
+    <td mat-cell>{{coupon.lng | number:'1.0-3'}}</td>
+    <td mat-cell>{{coupon.lat | number:'1.0-3'}}</td>
     <td mat-cell>{{coupon.public}}</td>
     <td mat-cell>{{coupon.closed}}</td>
     <td mat-cell>{{coupon.deleted}}</td>
     <td mat-cell>{{coupon.dtCreate*1000 | date:'short'}}</td>
+    <td mat-cell>{{coupon.direct_bonus | number:'1.0-1'}}</td>
+    <td mat-cell>{{coupon.share_bonus | number:'1.0-1'}}</td>
+    <td mat-cell>{{coupon.pay_bonus | number:'1.0-1'}}</td>
+    <td mat-cell>{{coupon.final_bonus | number:'1.0-1'}}</td>
   </tr>
 </table>
 
@@ -53,14 +61,18 @@
     <th mat-sort-header="owner">owner</th>
     <th>lng</th>
     <th>lat</th>
+    <th>public</th>
+    <th>website</th>
   </tr>
   <tr *ngFor="let shop of shops">
     <td mat-cell>{{shop._id}}</td>
     <td mat-cell>{{shop.name}}</td>
     <td mat-cell>{{shop.tags}}</td>
     <td mat-cell>{{shop.owner}}</td>
-    <td mat-cell>{{shop.lng}}</td>
-    <td mat-cell>{{shop.lat}}</td>
+    <td mat-cell>{{shop.lng | number:'1.0-3'}}</td>
+    <td mat-cell>{{shop.lat | number:'1.0-3'}}</td>
+    <td mat-cell>{{shop.public}}</td>
+    <td mat-cell>{{shop.website}}</td>
   </tr>
 </table>
 <br>

@@ -194,6 +194,19 @@
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
         </app-tuto>
 
+        <mat-form-field class="form-field-style">
+          <input matInput type="number"
+                 (focus)="focusElt='final_bonus'"
+                 id="txtFinalBonus" title="Bonus récupérer a l'utilisation du coupon"
+                 placeholder="Bonus récupérer à l'utilisation du coupon"
+                 [(ngModel)]="coupon.final_bonus">
+        </mat-form-field>
+
+        <app-tuto *ngIf="focusElt=='final_bonus'"
+                  id="tutoFinalBonus"
+                  label="Dans le cas ou la promotion est utilisable plusieurs fois (dans ce cas il s'agirat plutôt d'un programme de fidélité) on pourra indiquer un bonus à l'utilisation de la promotion">
+        </app-tuto>
+
 
         <br>
         <mat-form-field class="form-field-style">

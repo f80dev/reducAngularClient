@@ -31,6 +31,7 @@ export class NewCouponComponent implements OnInit {
     unity: 'minute',
     delay:0,
     nb_partage:100,
+    final_bonus:0,
     pluriel:true,
     min_price:0,  //prix minimum pour la promotion
     conditions:"pour un achat d'un montant supérieur à 15€",
@@ -183,7 +184,8 @@ export class NewCouponComponent implements OnInit {
 
   refresh(){
     this.hasMax=(this.coupon.max>0);
-    this.coupon.title=this.coupon.label+" jusqu'a "+this.coupon.max+this.coupon.symbol;
+    this.coupon.title=this.coupon.label;
+    if(this.coupon.max>0)this.coupon.title=this.coupon.title+" jusqu'a "+this.coupon.max+this.coupon.symbol;
   }
 
   changeMax() {

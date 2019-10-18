@@ -1,16 +1,18 @@
 <mat-card *ngFor="let coupon of coupons | orderBy:sort" class="app-card" style="background-color: #8f8f8f;">
   <mat-card-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title style="font-size: medium;">
 
+
+    <!-- Titre principal du coupon-->
+    <mat-card-title style="font-size: medium;">
       <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
       <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.shopname}} - {{coupon.label}}
+        {{coupon.shopname}}: {{coupon.label}}
       </span>
 
       <!--Affichage des coupons copiés pour leur propriétaire-->
       <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-        {{coupon.shopname}}
+        {{coupon.shopname}}: {{coupon.label}}
         <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
       </span>
 
@@ -33,7 +35,6 @@
     </mat-card-title>
 
 
-
     <span class="spacer"></span>
     <div style="display: inline-block;cursor: pointer;">
       <mat-icon *ngIf="!isVisible(coupon)">arrow_drop_down</mat-icon>
@@ -50,19 +51,21 @@
 
       <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
       <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
-      <span *ngIf="coupon.canbedeal">
-        jusqu'a {{coupon.max}}{{coupon.symbol}} offert pour {{coupon.conditions}}
-      </span>
-      <span *ngIf="!coupon.canbedeal">
-        Récupérer {{coupon.gain}}{{coupon.symbol}} offert
-      </span>
+        <span *ngIf="coupon.canbedeal && coupon.max>0">
+          jusqu'a {{coupon.max}}{{coupon.symbol}} offert {{coupon.conditions}}
+        </span>
+
+        <!--Si le coupon ne peut plus être distribué-->
+        <span *ngIf="!coupon.canbedeal">
+          Récupérer {{coupon.gain}}{{coupon.symbol}} offert
+        </span>
       </div>
 
 
       <!--Affichage des coupons origines pour leur propriétaire-->
       <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id">
              {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
-        <span *ngIf="(coupon.gain/coupon.max)>0.8">
+        <span *ngIf="coupon.max>0 && (coupon.gain/coupon.max)>0.8">
           (max:{{coupon.max}})
         </span>
 
@@ -103,17 +106,18 @@
       </td>
       <td style="text-align: center;vertical-align: top;width:auto;">
         <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
-          {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}} offert(es)
-          <span *ngIf="coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
+          {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}} gagné(es)
+          <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
         </div>
 
         <div *ngIf="coupon.canbedeal && coupon.showCode">
           <br><br>
           <table style="text-align: left;display: inline-block;font-size:small;"
                  cellpadding="2" name="zoneInfo">
-            <tr><td>Partage</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
-            <tr><td>Achat</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
             <tr><td>Immédiat</td><td>+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
+            <tr><td>Partagé</td><td>+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
+            <tr><td>Transformé</td><td>+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
+            <tr><td>Utilisé</td><td>+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
           </table><br>
         </div>
         <!--La table des gains-->
@@ -131,7 +135,7 @@
               <td style="text-align: right;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
               <td>partages (/{{coupon.max_coupon}})</td>
             </tr>
-            <tr>
+            <tr *ngIf="user.level>1">
               <td style="text-align: right;">{{coupon.gain_total | number:'1.0-1'}} {{coupon.symbol}}</td>
               <td>proposé(es)</td>
             </tr>
@@ -167,11 +171,11 @@
               label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
     </app-tuto>
 
-    <app-tuto *ngIf="coupon.owner==user?._id" [delay]="10" button="printer"
+    <app-tuto *ngIf="coupon.owner==user?._id && coupon.origin==coupon._id" [delay]="10" button="printer"
               label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promotion">
     </app-tuto>
 
-    <app-tuto *ngIf="coupon.origin==coupon._id && coupon.share>0"
+    <app-tuto *ngIf="coupon.origin==coupon._id && coupon.share>0 && coupon.canbedeal"
               [delay]="5" button="not_interested"
               label="Vous pouvez interrompre la distribution d'une promotion à tout instant">
     </app-tuto>
@@ -232,7 +236,7 @@
 
         <button mat-button mat-flat-button
                 name="btnShare"
-                *ngIf="(coupon.canbedeal || coupon.origin!=coupon._id) && user.level==0"
+                *ngIf="!coupon.canbedeal || (coupon.origin!=coupon._id && user.level==0)"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
                 (click)="showCode(coupon)">
           <span *ngIf="coupon.canbedeal">
@@ -243,12 +247,11 @@
           <span *ngIf="!coupon.canbedeal && coupon.gain>0">
             Utiliser
           </span>
-
         </button>
 
         <button mat-button mat-flat-button mat-icon-button
                 name="btnShareAdvanced"
-                *ngIf="(coupon.canbedeal || coupon.origin!=coupon._id) && user.level>0"
+                *ngIf="coupon.canbedeal && user.level>0"
                 title="Partager le coupon pour augmenter votre promotion / réduction"
                 (click)="showCode(coupon)">
           <mat-icon>share</mat-icon>

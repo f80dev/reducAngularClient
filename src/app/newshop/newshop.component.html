@@ -65,7 +65,9 @@
 
     <br>
 
-    <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic" (change)="checkLogin()">
+    <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
+                  title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
+                  (change)="checkLogin()">
       Rendre la promotion public (visible sur la carte)
     </mat-checkbox>
     <br>
@@ -73,7 +75,9 @@
     <br>
     <mat-form-field class="form-field-style" (focus)="focusElt='tags'">
       <mat-label>Type d'établissement (plusieurs choix possible par #htag)</mat-label>
-      <mat-select id="txtShopTags" [(ngModel)]="new_shop.tags"  multiple>
+      <mat-select id="txtShopTags"
+                  title="Ici on peut qualifier le type d'établissement. Cela permettra une préselection des modèles de promotions"
+                  [(ngModel)]="new_shop.tags"  multiple>
         <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -93,7 +97,8 @@
     <mat-form-field class="form-field-style">
       <input id="txtWebsite" type="text"
              (focus)="focusElt=='website'"
-             matInput placeholder="Site web" [(ngModel)]="new_shop.website">
+             title="Indiquer le site web ou un lien pour en savoir plus"
+             matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
     </mat-form-field>
     <br>
 

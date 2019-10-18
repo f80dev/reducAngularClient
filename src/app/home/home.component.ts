@@ -85,10 +85,8 @@ export class HomeComponent implements OnInit {
         if(isnew)p.message="Vous êtes vendeur ? créer votre première promotion. Vous êtes acheteur ? visualisez les promotions autour de vous !";
         localStorage.setItem("user",u._id);
         this.user = u;
-        setTimeout(()=>{
-          this.connect(p.coupon,p.pass);
-          this.refresh(p.message);
-        },1500);
+        this.connect(p.coupon,p.pass);
+        this.refresh(p.message);
       });
     })
   }
