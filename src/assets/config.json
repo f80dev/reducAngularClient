@@ -57,6 +57,7 @@
       "stock":400,
       "max_coupon":500,
       "conditions":"pour tout achat d'un montant supérieur a 20€",
+      "description":"Une réduction jusqu'a 25% du prix de vente du prochain article",
       "score":15,
       "tags":""
     },
@@ -155,6 +156,7 @@
       "max":3,
       "duration_hours":480,
       "stock":30,
+      "score":15,
       "max_coupon":500,
       "conditions":"Valable sur l'achat d'un séjour de minimum 7 nuits hors haute saison",
       "tags":"hôtel"
@@ -195,6 +197,7 @@
       "stock":20,
       "score":15,
       "max_coupon":5000,
+      "description":"Liquider les invendus. Par exemple, on distribue des baguettes",
       "conditions":"pour tout achat quelque soit le montant à partir de 19h",
       "tags":"alimentaire"
     },
