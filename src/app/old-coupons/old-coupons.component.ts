@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
 import {showError} from "../tools";
+import {PromptComponent} from "../prompt/prompt.component";
+import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 
 @Component({
   selector: 'app-old-coupons',
@@ -10,7 +12,7 @@ import {showError} from "../tools";
 })
 export class OldCouponsComponent implements OnInit {
 
-  constructor(public api:ApiService,public config:ConfigService) { }
+  constructor(public dialog: MatDialog,public api:ApiService,public config:ConfigService) { }
 
   coupons:any[]=[];
   withFilter=false;
@@ -46,7 +48,6 @@ export class OldCouponsComponent implements OnInit {
     }
   }
 
-
   deleteCoupon(coupon: any) {
     this.api.removeCoupon(coupon._id,true).subscribe(()=>{
       this.ondelete.emit();
@@ -74,5 +75,13 @@ export class OldCouponsComponent implements OnInit {
       }
     });
     if(this.coupons.length==0)this.coupons=lst_coupons;
+  }
+
+  changeFilter() {
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.values.tags,onlyConfirm:false}})
+      .afterClosed().subscribe((result) => {
+        this.filter=result;
+        this.refresh();
+    });
   }
 }

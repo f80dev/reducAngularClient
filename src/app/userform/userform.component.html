@@ -1,15 +1,21 @@
 <mat-card class="app-card">
 
     <mat-card-title>
-      <div *ngIf="!showPersonalCode"
-           style="display:inline-block;width:90px;vertical-align: middle;">
+      <div *ngIf="!showPersonalCode" style="display:inline-block;width:90px;vertical-align: middle;position:relative;">
         <label for="file_profil">
-          <img #myphoto mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
+          <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
         </label>
         <input style="display:none;width:50px;" type="file" id="file_profil"
                (change)="onSelectFile($event)"
                accept="image/gif,image/jpeg,image/png" />
+        <mat-icon style="position:absolute;left:-5px;top:0px;cursor: pointer;"
+                  (click)="rotatePhoto()"
+                  *ngIf="user.level<0.5 && !showPersonalCode"
+                  title="Permet de faire tourner la photo de 90 degrés"
+                  id="cmdTurn"
+        >
 
+          refresh</mat-icon>
       </div>
       <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"
                *ngIf="showPersonalCode"
@@ -17,14 +23,6 @@
                ngxClipboard
                [cbContent]="user._id"
                [value]="user._id"></qr-code>
-
-      <button *ngIf="user.level<0.5 && !showPersonalCode"
-              title="Permet de faire tourner la photo de 90 degrés"
-              id="cmdTurn" class="medium-button" style="margin-right: 10px;"
-              mat-button mat-flat-button mat-icon-button
-              (click)="rotatePhoto()">
-        <mat-icon>refresh</mat-icon>
-      </button>
 
 
       <div style="display: inline-block;">
@@ -40,19 +38,11 @@
         Pseudo
       </button>
       <div style="display: inline-block;margin-left:15px;" *ngIf="user.email?.indexOf('fictif.com')>-1">
-        <button
-                *ngIf="user.level<0.5"
-                class="medium-button"
-                title="S'authentifier permet de se connecter depuis plusieurs appareils"
-                id="btnEmailLogin"
-                mat-button mat-flat-button (click)="securise()">
-          Login
-        </button>
+
 
         <button mat-icon-button
                 title="S'authentifier permet de se connecter depuis plusieurs appareils"
-                *ngIf="user.level>=0.5"
-                id="btnEmailLogin2"
+                id="btnEmailLogin"
                 mat-button mat-flat-button (click)="securise()">
           <mat-icon>verified_user</mat-icon>
         </button>

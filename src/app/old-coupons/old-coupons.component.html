@@ -4,9 +4,15 @@
     <span class="spacer">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </span>
-    <button class="small-button" mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
+    <button mat-button mat-icon-button
+            *ngIf="filter?.length==0 && withFilter"
+            (click)="changeFilter()" >
+      <mat-icon>recycle</mat-icon>
+    </button>
+    <button mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
       <mat-icon>filter_list</mat-icon>
     </button>
+
     &nbsp;
 
     &nbsp;
@@ -22,18 +28,20 @@
   </span>
 
   <mat-card-content>
-    <app-tuto label="Retrouvez ici vos anciennes promotions et des modèles pour simplifier la création de vos nouvelles promotions" *ngIf="coupons.length>0"></app-tuto>
+    <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiable pour s'adapter à votre promotion" *ngIf="coupons.length>0"></app-tuto>
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons | orderBy:'score':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
         <h2 matLine (click)="onselect.emit(coupon)">
-          <span *ngIf="coupon.title">{{coupon.title}} : Promo sur des {{coupon.unity}}(s)</span>
+          <span *ngIf="coupon.title">{{coupon.title}}</span>
           <span *ngIf="!coupon.title">
         {{coupon.label}} sur {{coupon.unity}}
       </span>
         </h2>
         <p matLine style="margin-top: 0px;">
-          <span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span> {{coupon.conditions}}
+          <span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span>
+          <span *ngIf="coupon.max==0">Gagner {{coupon.final_bonus}}{{coupon.symbol}}</span>
+          {{coupon.conditions}}
         </p>
         <p matLine style="margin-top: 10px;"  *ngIf="coupon.share">
           <span> Distribution:{{coupon.share}} </span>

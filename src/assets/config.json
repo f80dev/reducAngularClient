@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.0-beta",
+  "version":"0.2.1-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -37,7 +37,7 @@
   "domain_server":"server.f80.fr",
   "domain_appli":"https://reducshare.com",
 
-  "tags":"boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hôtel",
+  "tags":"boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hôtel,vin",
 
   "modeles":[
     {
@@ -97,9 +97,9 @@
       "duration_hours":48,
       "stock":400,
       "max_coupon":500,
-      "score":8,
+      "score":6,
       "conditions":"Remise applicable sur un deuxième article dans la limite de 40€",
-      "tags":"boutique"
+      "tags":"boutique,vin"
     },
     {
       "title":"Les cafés offerts",
@@ -138,7 +138,7 @@
       "stock":2000,
       "max_coupon":5000,
       "score":12,
-      "conditions":"Valable pour tout dejeuné du Lundi au Vendredi",
+      "conditions":"pour tout dejeuné du Lundi au Vendredi",
       "tags":"restaurant"
     },
     {
@@ -158,7 +158,7 @@
       "stock":30,
       "score":15,
       "max_coupon":500,
-      "conditions":"Valable sur l'achat d'un séjour de minimum 7 nuits hors haute saison",
+      "conditions":"pour l'achat d'un séjour de minimum 7 nuits hors haute saison",
       "tags":"hôtel"
     },
     {
@@ -202,7 +202,7 @@
       "tags":"alimentaire"
     },
     {
-      "title":"Les invendus en chambre",
+      "title":"Chambres en dernières minutes",
       "unity":"nuit",
       "symbol":"🛌",
       "breakable":false,
@@ -243,11 +243,11 @@
     },
     {
       "title":"Happy Hour",
-      "unity":"bière",
-      "symbol":"🍺",
+      "unity":"verre",
+      "symbol":"🍷",
       "breakable":false,
       "pluriel":true,
-      "label":"L'happy hour - Des bières gratuites !",
+      "label":"L'happy hour - Des verres gratuites !",
       "share_bonus":0.05,
       "pay_bonus":2,
       "final_bonus":0.5,
@@ -258,8 +258,8 @@
       "stock":200,
       "max_coupon":500,
       "score":15,
-      "conditions":"pour tout achat d'une bière entre 17h et 19 du lundi au vendredi",
-      "tags":"bar,restaurant,hôtel"
+      "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
+      "tags":"bar,restaurant,hôtel,vin"
     },
     {
       "title":"Un petit apéro",
@@ -301,7 +301,7 @@
       "tags":"restaurant"
     },
     {
-      "title":"Recycler vos bouteilles",
+      "title":"Challenge Recyclage",
       "unity":"ecopoint",
       "symbol":"♻️",
       "breakable":true,
@@ -338,6 +338,27 @@
       "max_coupon":5000,
       "conditions":"pour tout achat d'un montant supérieur a 20€",
       "tags":"alimentaire"
+    },
+    {
+      "title":"Dégustration gratuite pour nos fidèles clients",
+      "unity":"point",
+      "symbol":"pts",
+      "pluriel":true,
+      "breakable":true,
+      "label":"Déguster nos nouveautés !",
+      "share_bonus":0.1,
+      "pay_bonus":10,
+      "final_bonus":20,
+      "direct_bonus":10,
+      "max":0,
+      "score":14,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/wine-glass_1f377.png",
+      "duration_jours":2,
+      "stock":20000,
+      "max_coupon":5000,
+      "description":"Annonce d'une dégustation de vin avec un nombre de points minimum à obtenir pour y accéder",
+      "conditions":"pour un achat supérieur à 20€ et si vous avez plus de 200 points",
+      "tags":"vin"
     },
     {
       "title":"Cours particulier",

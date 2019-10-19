@@ -29,6 +29,7 @@
     <th>lat</th>
     <th mat-sort-header="public">public</th>
     <th>closed</th>
+    <th>canbedeal</th>
     <th>deleted</th>
     <th>Direct</th>
     <th>Share</th>
@@ -43,6 +44,7 @@
     <td mat-cell>{{coupon.lat | number:'1.0-3'}}</td>
     <td mat-cell>{{coupon.public}}</td>
     <td mat-cell>{{coupon.closed}}</td>
+    <td mat-cell>{{coupon.canbedeal}}</td>
     <td mat-cell>{{coupon.deleted}}</td>
     <td mat-cell>{{coupon.dtCreate*1000 | date:'short'}}</td>
     <td mat-cell>{{coupon.direct_bonus | number:'1.0-1'}}</td>
