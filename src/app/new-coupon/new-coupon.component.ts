@@ -40,6 +40,7 @@ export class NewCouponComponent implements OnInit {
     pay_bonus: 10,
     max: 60,
     stock:60,
+    website:"https://reducshare.com/faq.html#coupon",
     max_coupon:1000,
     duration_jours: 2.0,
     duration_hours: 0.0,
@@ -112,6 +113,7 @@ export class NewCouponComponent implements OnInit {
     coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
     coupon.delay=0;
     coupon.owner=this.userid;
+    if(!coupon.website)coupon.website="https://reducshare.com/faq.html#coupon";
 
     if(coupon.nb_partage==0)
       coupon.share_bonus=0;

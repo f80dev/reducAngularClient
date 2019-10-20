@@ -24,6 +24,7 @@
                      title="Selectionnez un modèle"
                      [shop]="{'_id':coupon.shop,'owner':userid}"
                      [filter]="tags"
+                     [level]="level"
                      (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)"></app-old-coupons>
 
@@ -68,7 +69,14 @@
         <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
 
-        <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax" (change)="changeMax()">Plafonner le gain</mat-checkbox><br>
+        <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax"
+                      *ngIf="level>0.5"
+                      (change)="changeMax()">
+          Plafonner le gain
+        </mat-checkbox>
+        <br>
+
+
         <mat-form-field class="form-field-style" *ngIf="hasMax">
           <input matInput type="number" (change)="refresh()" (update)="refresh()"
                  (focus)="focusElt='max'"
@@ -97,7 +105,6 @@
                     (change)="normalize_conditions(coupon)"></textarea>
         </mat-form-field>
 
-
         <mat-form-field class="form-field-style">
           <input type="text" matInput
                  id="txtLabel"
@@ -105,6 +112,14 @@
                  placeholder="Introduction (teaser) de la promotion" [(ngModel)]="coupon.label">
         </mat-form-field>
 
+
+        <mat-form-field *ngIf="level>0.6" class="form-field-style">
+          <input type="text" matInput
+                 id="txtWebSite"
+                 (focus)="focusElt='website'"
+                 placeholder="{{'Adresse d une page donnant des infos supplémentaires' | trans}}"
+                 [(ngModel)]="coupon.website">
+        </mat-form-field>
 
 
         <!--<mat-checkbox style="width: 20%;margin-right: 5%;" [(ngModel)]="coupon.pluriel">avec une 's' au pluriel</mat-checkbox>-->
@@ -248,11 +263,14 @@
           <input matInput type="number"
                  id="txtStock"
                  title="Le stock permet d'interrompre automatiquement la promotion lorsque le stock qui lui est réservée tombe a zéro"
-                 placeholder="Stock (en {{coupon.symbol}}) destiné à la promotion" [(ngModel)]="coupon.stock">
+                 placeholder="Stock (en {{coupon.symbol}}) destiné à la promotion"
+                 [(ngModel)]="coupon.stock">
         </mat-form-field>
 
-        <mat-form-field class="form-field-style">
-          <input matInput type="number"
+        <mat-form-field *ngIf="level>0.5" class="form-field-style">
+          <input matInput
+
+                 type="number"
                  id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
@@ -277,13 +295,7 @@
                  [(ngModel)]="coupon.title">
         </mat-form-field>
 
-        <mat-form-field class="form-field-style">
-          <input type="text" matInput
-                 id="txtWebSite"
-                 (focus)="focusElt='website'"
-                 placeholder="{{'Adresse d une page donnant des infos supplémentaires' | trans}}"
-                 [(ngModel)]="coupon.website">
-        </mat-form-field>
+
       </mat-step>
 
 

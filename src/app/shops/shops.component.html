@@ -55,6 +55,7 @@
 
     <button mat-button name="btnDelegate"
             (click)="setDelegate(shop)"
+            *ngIf="user.level>0.5"
             title="Déléguer l'encaissement"
             mat-flat-button mat-icon-button>
       <mat-icon>person_add</mat-icon>
@@ -63,6 +64,7 @@
 
     <button mat-button name="btnPrint"
             (click)="openPrinter(shop)"
+            *ngIf="user.level>0.7"
             ngxClipboard [cbContent]="shop.url"
             title="Imprimer le QRCode de l'enseigne"
             mat-flat-button mat-icon-button>
@@ -87,9 +89,8 @@
     <button mat-button mat-flat-button
             name="btnNewPromo"
             title="Nouvelle promotion attachée à cette enseigne"
-            *ngIf="user.level<1"
             (click)="addCoupon(shop)">
-      <mat-icon>add</mat-icon>Promotion
+      <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
     </button>
 
   </mat-card-actions>

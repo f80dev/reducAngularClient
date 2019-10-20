@@ -190,10 +190,18 @@ export class ListCouponsComponent implements OnChanges {
   }
 
   edit(coupon: any) {
+
   }
 
   openHelp(url:string){
     if(url!=null)
       window.open(url,"_blank");
+  }
+
+  updateStock(coupon) {
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Stock ?"}
+    }).afterClosed().subscribe((result) => {
+      this.api.updateCoupon(coupon["origin"],"stock",result).subscribe(()=>{});
+    });
   }
 }

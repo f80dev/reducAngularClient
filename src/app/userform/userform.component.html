@@ -41,6 +41,7 @@
 
 
         <button mat-icon-button
+                *ngIf="user.level>0.5"
                 title="S'authentifier permet de se connecter depuis plusieurs appareils"
                 id="btnEmailLogin"
                 mat-button mat-flat-button (click)="securise()">
@@ -96,9 +97,9 @@
       </app-list-coupons>
     </div>
 
-    <app-old-coupons [user]="user"
-                     *ngIf="showOldPromos">
-    </app-old-coupons>
+    <!--<app-old-coupons [user]="user"-->
+                     <!--*ngIf="showOldPromos">-->
+    <!--</app-old-coupons>-->
 
     <app-tuto button="map" *ngIf="user.coupons?.length==0 && user.level>0.3"
               label="Voir les promotions autour de vous sur une carte">
@@ -134,8 +135,10 @@
     </button>
 
     <button mat-button
+            *ngIf="user.level>0.8"
             id="btnShowCode" title="Afficher son qrcode personnel"
-            mat-raised-button mat-icon-button (click)="showPersonalCode=!showPersonalCode">
+            mat-raised-button mat-icon-button
+            (click)="showPersonalCode=!showPersonalCode">
       <mat-icon>tap_and_play</mat-icon>
     </button>
 
@@ -145,7 +148,8 @@
       <mat-icon>camera_alt</mat-icon>
     </button>
 
-    <button *ngIf="user.level>0.5" mat-button
+    <button mat-button
+            *ngIf="user.level<1"
             id="btnExpert" title="Accès aux fonctions avancées de ReducShare"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>

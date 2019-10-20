@@ -92,4 +92,8 @@ export class ApiService {
   askforemail(email: string,userid:string) {
     return this.http.get(api("askforemail/"+email+"/"+userid));
   }
+
+  updateCoupon(coupon_id: string, field: string, value: string) {
+    return this.http.get(api("updatecoupon/"+coupon_id+"/"+field+"/"+value));
+  }
 }
