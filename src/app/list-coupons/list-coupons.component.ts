@@ -191,4 +191,9 @@ export class ListCouponsComponent implements OnChanges {
 
   edit(coupon: any) {
   }
+
+  openHelp(url:string){
+    if(url!=null)
+      window.open(url,"_blank");
+  }
 }

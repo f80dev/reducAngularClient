@@ -263,6 +263,10 @@
       <app-tuto *ngIf="focusElt=='title'"
                 label="Ce titre ne sera pas visible du client. Il est fait pour vous aidez à retrouver votre promotion pour la réutiliser depuis la liste des modèles">
       </app-tuto>
+
+
+
+
       <mat-step>
         <ng-template matStepLabel>Références de la promo</ng-template>
         <mat-form-field class="form-field-style">
@@ -271,6 +275,14 @@
                  (focus)="focusElt='title'"
                  placeholder="{{'Titre de la promotion (non visible du client)' | trans}}"
                  [(ngModel)]="coupon.title">
+        </mat-form-field>
+
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput
+                 id="txtWebSite"
+                 (focus)="focusElt='website'"
+                 placeholder="{{'Adresse d une page donnant des infos supplémentaires' | trans}}"
+                 [(ngModel)]="coupon.website">
         </mat-form-field>
       </mat-step>
 
