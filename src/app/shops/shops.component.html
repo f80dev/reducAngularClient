@@ -26,8 +26,10 @@
 
 
     <br>
-    <app-list-coupons [coupons]="shop.coupons" [user]="user"
+    <app-list-coupons [coupons]="shop.coupons"
+                      [user]="user"
                       (delete)="onupdate.emit($event)"
+                      (update)="onupdate.emit($event)"
                       (edit)="edit(shop,$event)">
     </app-list-coupons>
 

@@ -31,10 +31,12 @@
     <th>closed</th>
     <th>canbedeal</th>
     <th>deleted</th>
+    <th>dtCreate</th>
     <th>Direct</th>
     <th>Share</th>
     <th>Pay</th>
     <th>Final</th>
+    <th>Stock</th>
   </tr>
   <tr *ngFor="let coupon of coupons">
     <td mat-cell>{{coupon._id}}</td>
@@ -51,6 +53,7 @@
     <td mat-cell>{{coupon.share_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.pay_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.final_bonus | number:'1.0-1'}}</td>
+    <td mat-cell>{{coupon.stock | number:'1.0-1'}}</td>
   </tr>
 </table>
 

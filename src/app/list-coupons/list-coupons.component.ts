@@ -201,7 +201,12 @@ export class ListCouponsComponent implements OnChanges {
   updateStock(coupon) {
     this.dialog.open(PromptComponent,{width: '250px',data: {title: "Stock ?"}
     }).afterClosed().subscribe((result) => {
-      this.api.updateCoupon(coupon["origin"],"stock",result).subscribe(()=>{});
+      if(result){
+        if(result.indexOf(".")==-1)result=result+".0";
+        this.api.updateCoupon(coupon["origin"],"stock",result).subscribe((res)=>{
+          this.onupdate.emit({"message":"stock mise a jour"});
+        });
+      }
     });
   }
 }
