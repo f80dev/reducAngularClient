@@ -290,15 +290,11 @@
                  id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
-
       </mat-step>
-
 
       <app-tuto *ngIf="focusElt=='title'"
                 label="Ce titre ne sera pas visible du client. Il est fait pour vous aidez à retrouver votre promotion pour la réutiliser depuis la liste des modèles">
       </app-tuto>
-
-
 
 
       <mat-step>
@@ -311,9 +307,7 @@
                  [(ngModel)]="coupon.title">
         </mat-form-field>
 
-
       </mat-step>
-
 
     </mat-vertical-stepper>
   </mat-card-content>
