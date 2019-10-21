@@ -262,6 +262,7 @@
       "picture":"https://images.pexels.com/photos/1269025/pexels-photo-1269025.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100",
       "direct_bonus":1,
       "max":5,
+      "level":0,
       "stock":200,
       "max_coupon":500,
       "score":15,

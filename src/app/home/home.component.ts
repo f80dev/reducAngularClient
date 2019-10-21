@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
 
   analyse_params(func){
     var params=this.route.snapshot.queryParamMap;
+    localStorage.setItem("firsturl",this._location.path());
     $$("Récupération des paramètres",params);
       this.config.params={
         coupon:params.get("coupon") || "",
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
     $$("Analyse le device pour détecter les ancienes connexions");
     if(localStorage.getItem("user")==null || localStorage.getItem("user")=="undefined"){
       localStorage.clear();
-      $$("C'est la premier connexion sur ce device, on créé un compte fictif");
+      $$("C'est la premier connexion sur ce device, on créé un compte fictif avec les tags="+tags);
       this.api.adduser("user"+new Date().getTime()+"@fictif.com","",tags).subscribe((res)=>{
         func(res,true);
       },(error)=>{showError(this,error);})
@@ -204,7 +205,8 @@ export class HomeComponent implements OnInit {
   }
 
   private raz() {
+    var url=localStorage.getItem("firsturl");
     localStorage.clear();
-    this.ngOnInit();
+    window.location.href=url;
   }
 }
