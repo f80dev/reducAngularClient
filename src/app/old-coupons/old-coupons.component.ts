@@ -36,7 +36,7 @@ export class OldCouponsComponent implements OnInit {
     this.withFilter=false;
     this.coupons=[];
     JSON.parse(JSON.stringify(this.config.values.modeles)).forEach((c)=>{
-      if(c.level>=this.level)
+      if(c.level<=this.level)
         this.coupons.push(c);
     });
     if(this.shop){
@@ -47,7 +47,6 @@ export class OldCouponsComponent implements OnInit {
         if(func!=null)func();
       },(error)=>{showError(this,error);});
     } else {
-      debugger
       // this.coupons=JSON.parse(JSON.stringify(this.user.old_coupons));
       // this.coupons.push(this.config.values.modeles);
     }
