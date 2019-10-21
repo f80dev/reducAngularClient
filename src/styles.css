@@ -19,13 +19,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-width:730px;
   margin:3px;
   width:100%;
-  font-size: xx-large;
+  font-size: 6vw;
   height:280px;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  filter: brightness(100%) blur(0.8px);
+  filter: brightness(100%) blur(0.3px);
 }
 
 .app-card-content {
