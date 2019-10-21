@@ -121,6 +121,7 @@
       "stock":2000,
       "max_coupon":5000,
       "score":15,
+      "description":"Un restaurant offre le café",
       "conditions":"pour toute addition d'un montant supérieur a 20€",
       "tags":"restaurant,bar"
     },
@@ -162,6 +163,7 @@
       "stock":30,
       "score":15,
       "max_coupon":500,
+      "description":"Un hôtel fait des promotions de dernière minutes en offrant des nuits",
       "conditions":"pour l'achat d'un séjour de minimum 7 nuits hors haute saison",
       "tags":"hôtel"
     },
@@ -203,8 +205,8 @@
       "stock":20,
       "score":15,
       "max_coupon":5000,
-      "description":"Liquider les invendus. Par exemple, on distribue des baguettes",
-      "conditions":"pour tout achat quelque soit le montant à partir de 19h",
+      "description":"Liquider les invendus. Une boulangerie, on distribue des baguettes",
+      "conditions":"pour tout achat quelque soit le montant à partir de 20h",
       "tags":"alimentaire"
     },
     {
@@ -390,7 +392,7 @@
       "conditions":"pour toute inscription à au minimum 5 heures de cours",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/musical-keyboard_1f3b9.png",
       "tags":"services",
-      "description":"Un professeur particulier fait gagner des cours gratuits en échange d'un parainage par ses éléves"
+      "description":"Un professeur particulier fait gagner des minutes de cours en échange d'un parainage par ses éléves"
     },
     {
       "title":"Meilleurs influenceurs",
