@@ -165,6 +165,15 @@
           <app-visual [picture]="preview"></app-visual>
         </div>
 
+        <mat-form-field class="form-field-style">
+          <input matInput type="text"
+                 id="txtLargeVisual"
+                 (focus)="focusElt='large_visual'"
+                 placeholder="Adresse internet d'un visuel large"
+                 [(ngModel)]="coupon.visual">
+        </mat-form-field>
+
+
       </mat-step>
 
 
@@ -226,10 +235,18 @@
         <br>
         <mat-form-field class="form-field-style">
           <input matInput type="number"
-                 id="txtPayBonus" title="Bonus obtenu lorsqu'un coupon partagé est utilisé chez le commercant"
+                 id="txtPayBonus"
+                 (focus)="focusElt='pay_bonus'"
+                 title="Bonus obtenu lorsqu'un coupon partagé est utilisé chez le commercant"
                  placeholder="Bonus (en {{coupon.symbol}}) par achat obtenu par vos partages" [(ngModel)]="coupon.pay_bonus">
         </mat-form-field>
       </mat-step>
+
+      <app-tuto *ngIf="focusElt=='pay_bonus'"
+                id="tutoPayBonus"
+                label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé à été utilisé par celui qui l'a reçu (donc à générer un achat)">
+      </app-tuto>
+
 
 
       <mat-step name="step5" title="La maitrise du budget de la promotion est important. On l'obtient en limitant la promo dans le temps et en volume">
@@ -269,7 +286,6 @@
 
         <mat-form-field *ngIf="level>0.5" class="form-field-style">
           <input matInput
-
                  type="number"
                  id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">

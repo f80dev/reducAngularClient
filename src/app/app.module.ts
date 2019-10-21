@@ -53,6 +53,7 @@ import { SafePipe } from './safe.pipe';
 import { TransPipe } from './trans.pipe';
 import { AboutComponent } from './about/about.component';
 import { OrderByPipe } from './order-by.pipe';
+import { FlipModule } from 'ngx-flip';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -92,6 +93,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   imports: [
     SocketIoModule.forRoot(config),
     MatDialogModule,
+    FlipModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
     QRCodeModule,

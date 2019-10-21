@@ -39,6 +39,8 @@ export class ListCouponsComponent implements OnChanges {
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
+  flipDiv=true;
+
   constructor(public meta: Meta,
               public snackBar: MatSnackBar,
               private _clipboardService: ClipboardService,
