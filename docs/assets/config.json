@@ -63,6 +63,29 @@
       "tags":""
     },
     {
+      "title":"Promotion sur un produit",
+      "unity":"% du prix",
+      "symbol":"%",
+      "breakable":true,
+      "pluriel":false,
+      "label":"Le savon bidule a moitié prix !",
+      "share_bonus":0.1,
+      "pay_bonus":2,
+      "direct_bonus":1,
+      "final_bonus":1,
+      "max":50,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/bar-of-soap_1f9fc.png",
+      "visual":"https://reducshare.com/assets/img/soap.jpg",
+      "duration_hours":48,
+      "stock":400,
+      "level":0,
+      "max_coupon":500,
+      "conditions":"pour tout achat d'un montant supérieur a 20€",
+      "description":"Une réduction jusqu'a 25% du prix de vente du prochain article",
+      "score":15,
+      "tags":"boutique"
+    },
+    {
       "title":"Programme de fidélité",
       "unity":"point",
       "symbol":"🥇",
@@ -189,7 +212,7 @@
       "tags":"hôtel"
     },
     {
-      "title":"Les invendus de nourriture",
+      "title":"Les invendus / liquidation",
       "unity":"baguette",
       "symbol":"🥖",
       "breakable":false,
@@ -209,7 +232,7 @@
       "visual":"https://cdn.pixabay.com/photo/2016/03/26/18/23/bread-1281053_960_720.jpg",
       "description":"Liquider les invendus. Une boulangerie, on distribue des baguettes",
       "conditions":"pour tout achat quelque soit le montant à partir de 20h",
-      "tags":"alimentaire"
+      "tags":"alimentaire,boutique"
     },
     {
       "title":"Chambres en dernières minutes",

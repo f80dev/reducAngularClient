@@ -28,7 +28,7 @@
   </span>
 
   <mat-card-content>
-    <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiable pour s'adapter à votre promotion" *ngIf="coupons.length>0"></app-tuto>
+    <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion" *ngIf="coupons.length>0"></app-tuto>
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons | orderBy:'score':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
