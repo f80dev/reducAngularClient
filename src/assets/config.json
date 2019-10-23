@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.5-beta",
+  "version":"0.2.6-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -29,13 +29,13 @@
     },
     {
       "id":"profil",
-      "title": "Doit on s'authentifier ?",
-      "content": "ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, le profil anonyme n'est pas recommandé si l'on est vendeur."
+      "title": "Doit on s'authentifier pour utiliser ReducShare ?",
+      "content": "Absolument pas. ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
     },
     {
       "id":"getReduc",
       "title": "Comment récupérer des réductions ?",
-      "content": "Il existe plusieurs façons de récupérer des réductions :<ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
+      "content": "Il existe plusieurs façons de récupérer des réductions :<br><ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
     },
     {
       "id":"shareReduc",

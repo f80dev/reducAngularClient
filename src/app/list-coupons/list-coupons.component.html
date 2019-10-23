@@ -114,10 +114,15 @@
 
             </td>
             <td style="text-align: center;vertical-align: top;width:auto;">
+
+              <!--Zone réservé au client de base-->
               <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
-                {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}} gagné(es)
+                <span style="font-size: 2em">
+                  {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
+                </span> gagné(es)
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
               </div>
+
 
               <div *ngIf="coupon.canbedeal && coupon.showCode">
                 <br><br>
@@ -131,7 +136,7 @@
               <!--La table des gains-->
 
               <span style="font-size: medium">
-          <br>
+          <br><br>
             Reste <app-timer [end]="coupon.dtEnd"></app-timer>
           </span>
 
@@ -304,7 +309,7 @@
   </mat-card>
 
   <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="coupon['flip']=!coupon['flip'] || false">
-    <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;;width:100%;object-fit: cover;object-position: 50% 50%;">
+    <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
     <div style="z-index: 100;position: absolute;left:0;top:10%;width:100%;">
       {{coupon.label}}<br><br>
       <small *ngIf="coupon.max>0">gagnez jusqu'à {{coupon.max}}{{coupon.symbol}}</small>

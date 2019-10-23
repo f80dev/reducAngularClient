@@ -59,10 +59,12 @@ export class UserformComponent implements OnInit {
     }
 
     if(this.config.params.command=="add_promo"){
-      this.config.params.command="";
-      setTimeout(()=>{
-        this.addshop();
-      },1500);
+      if(this.user.shops==null || this.user.shops.length==0){
+        setTimeout(()=>{
+          this.addshop();
+        },1500);
+      }
+
     }
   }
 
