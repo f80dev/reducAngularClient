@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.2-beta",
+  "version":"0.2.3-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -20,6 +20,20 @@
     "faq":"https://web.reducshare.com/faq.html?from=appli",
     "website":"https://web.reducshare.com/index.html?from=appli"
   },
+
+  "faqs": [
+    {
+      "id":"buildFaq",
+      "title": "Comment faire une promotion ?",
+      "content": "Pour lancer une promotion il faut avoir créer au moins un établissement avant (car la promotion est, rattaché à l'établissement). Depuis l'établissement on ajoute la promotion. On peut soit partir des valeurs par défaut, soit choisir un modèle.Les valeurs à saisir sont regroupées en 5 sections.Une fois la promotion validée, celle-ci apparait dans la section de l'établissement"
+    },
+    {
+      "id":"profil",
+      "title": "Doit on s'authentifier",
+      "content": "ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, le profil anonyme n'est pas recommandé si l'on est vendeur."
+    }
+  ],
+
 
   "cgu":{
     "dtModif":1570395953,
