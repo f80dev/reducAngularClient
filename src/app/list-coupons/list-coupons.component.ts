@@ -211,4 +211,15 @@ export class ListCouponsComponent implements OnChanges {
       }
     });
   }
+
+  _flip(coupon) {
+    coupon['flip']=!coupon['flip'];
+    if(coupon['flip'])
+      this.config.flips.push(coupon._id);
+    else {
+      var i=this.config.flips.indexOf(coupon._id)
+      if(i>-1)this.config.flips.splice(i,1);
+    }
+
+  }
 }

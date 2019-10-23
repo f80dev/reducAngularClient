@@ -104,7 +104,7 @@
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"pour tout achat d'un ou plusieurs tube de la marque Thermoseal",
+      "conditions":"pour tout achat d'un ou plusieurs tubes de la marque Thermoseal",
       "description":"Une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
       "score":15,
       "tags":"boutique"

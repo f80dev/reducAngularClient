@@ -17,6 +17,7 @@ export class ConfigService {
   webcamsAvailable:number=0;
   width_screen=300;
   params:any={pass:"",tags:"",coupon:{},user:""};
+  flips=[];
 
   constructor(private location: Location, private http: HttpClient,public platform:Platform){}
 

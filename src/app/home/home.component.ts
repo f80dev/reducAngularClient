@@ -163,6 +163,13 @@ export class HomeComponent implements OnInit {
         this.raz();
       }
 
+      for(var k=0;k<u.coupons.length;k++){
+        if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
+          u.coupons[k].flip=true;
+        else
+          u.coupons[k].flip=false;
+      }
+
       this.user=u;
       showMessage(this,message);
 

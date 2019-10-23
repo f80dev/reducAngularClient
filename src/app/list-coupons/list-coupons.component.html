@@ -3,7 +3,7 @@
   <mat-card class="app-card" style="background-color: #8f8f8f;" *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
     <mat-card-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
       <div mat-card-avatar
-           (click)="coupon['flip']=!coupon['flip'] || false"
+           (click)="_flip(coupon)"
            class="header-image">
       </div>
 
@@ -308,7 +308,7 @@
     </mat-card-actions>
   </mat-card>
 
-  <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="coupon['flip']=!coupon['flip'] || false">
+  <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="_flip(coupon)">
     <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
     <div style="z-index: 100;position: absolute;left:0;top:10%;width:100%;">
       {{coupon.label}}<br><br>
