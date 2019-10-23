@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1571836402330,
+  "timestamp": 1571837605720,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -44,6 +44,8 @@
         "https://reducshare.com/assets/img/bedroom.jpg",
         "https://reducshare.com/assets/img/bravo.gif",
         "https://reducshare.com/assets/img/cafe.jpg",
+        "https://reducshare.com/assets/img/dentfrice_icon.png",
+        "https://reducshare.com/assets/img/dentifrice.jpg",
         "https://reducshare.com/assets/img/dessert.jpg",
         "https://reducshare.com/assets/img/feudartifice.jpg",
         "https://reducshare.com/assets/img/feudartifice2.jpg",
@@ -72,7 +74,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "7c6ce1570956e90f52b10ebfde50f5ad987ccc93",
+    "https://reducshare.com/assets/config.json": "919be541b3fa453214f70f38bc1a76d94bfa5ba3",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -90,6 +92,8 @@
     "https://reducshare.com/assets/img/bedroom.jpg": "f467d3b89e2e0f06972ef3719ce47e75de60bd6c",
     "https://reducshare.com/assets/img/bravo.gif": "cf2be1f17bb49b424f751a1ba58de18362da2bd7",
     "https://reducshare.com/assets/img/cafe.jpg": "aa0e51eb4fff752d0651087d74027a2c55d9650f",
+    "https://reducshare.com/assets/img/dentfrice_icon.png": "d18689df2849461840ee0a759dd4a084a1e0c86e",
+    "https://reducshare.com/assets/img/dentifrice.jpg": "0e9201c7bb28abab9a7f4763275a98d96982c363",
     "https://reducshare.com/assets/img/dessert.jpg": "c4e10c1078c37edc0faf96cebfeac2d85e8abfb6",
     "https://reducshare.com/assets/img/feudartifice.jpg": "afbf8942c5bb025ced3d359e66d52110695e3b69",
     "https://reducshare.com/assets/img/feudartifice2.jpg": "c218e5871abf7d802ee4f3ae2b58a067568ee893",

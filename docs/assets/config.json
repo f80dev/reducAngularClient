@@ -35,12 +35,12 @@
     {
       "id":"getReduc",
       "title": "Comment récupérer des réductions ?",
-      "content": "Il existe plusieurs façons de récupérer des réductions :<ul><li>Flasher les réductions affiché dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
+      "content": "Il existe plusieurs façons de récupérer des réductions :<ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
     },
     {
       "id":"shareReduc",
       "title": "Comment partager ses réductions ?",
-      "content": "Pour partager une réduction il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer",
+      "content": "Pour partager une réduction, il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer"
     }
   ],
 
@@ -92,20 +92,20 @@
       "symbol":"%",
       "breakable":true,
       "pluriel":false,
-      "label":"Le savon bidule a moitié prix !",
+      "label":"Le dentifrice a moitié prix !",
       "share_bonus":0.1,
       "pay_bonus":2,
       "direct_bonus":1,
       "final_bonus":1,
       "max":50,
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/bar-of-soap_1f9fc.png",
-      "visual":"https://reducshare.com/assets/img/soap.jpg",
+      "picture":"https://reducshare.com/assets/img/dentifrice_icon.png",
+      "visual":"https://reducshare.com/assets/img/dentifrice.jpg",
       "duration_hours":48,
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"pour tout achat d'un montant supérieur a 20€",
-      "description":"Une réduction jusqu'a 25% du prix de vente du prochain article",
+      "conditions":"pour tout achat d'un ou plusieurs tube de la marque Thermoseal",
+      "description":"Une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
       "score":15,
       "tags":"boutique"
     },
