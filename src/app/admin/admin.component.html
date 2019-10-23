@@ -37,6 +37,7 @@
     <th>Pay</th>
     <th>Final</th>
     <th>Stock</th>
+    <th>Gain</th>
   </tr>
   <tr *ngFor="let coupon of coupons">
     <td mat-cell>{{coupon._id}}</td>
@@ -54,6 +55,7 @@
     <td mat-cell>{{coupon.pay_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.final_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.stock | number:'1.0-1'}}</td>
+    <td mat-cell>{{coupon.gain | number:'1.0-1'}}</td>
   </tr>
 </table>
 
@@ -68,6 +70,7 @@
     <th>lat</th>
     <th>public</th>
     <th>website</th>
+    <th>Graph</th>
   </tr>
   <tr *ngFor="let shop of shops">
     <td mat-cell>{{shop._id}}</td>
@@ -78,6 +81,7 @@
     <td mat-cell>{{shop.lat | number:'1.0-3'}}</td>
     <td mat-cell>{{shop.public}}</td>
     <td mat-cell>{{shop.website}}</td>
+    <td mat-cell><a href="https://server.f80.fr:5500/api/getgraphml/{{shop._id}}/hh4271/gml">Graphe</a></td>
   </tr>
 </table>
 <br>
