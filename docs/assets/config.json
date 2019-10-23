@@ -169,7 +169,7 @@
       "max_coupon":5000,
       "score":15,
       "visual":"https://reducshare.com/assets/img/cafe.jpg",
-      "description":"Un restaurant offre le café",
+      "description":"Un restaurant offre les cafés en échange de la diffusion de la promotion",
       "conditions":"pour toute addition d'un montant supérieur a 20€",
       "tags":"restaurant,bar"
     },
@@ -207,7 +207,7 @@
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/sleeping-accommodation_emoji-modifier-fitzpatrick-type-6_1f6cc-1f3ff_1f3ff.png",
       "direct_bonus":0.2,
       "max":3,
-      "duration_hours":480,
+      "duration_hours":24,
       "stock":30,
       "score":15,
       "max_coupon":500,
@@ -254,7 +254,7 @@
       "score":15,
       "max_coupon":5000,
       "visual":"https://cdn.pixabay.com/photo/2016/03/26/18/23/bread-1281053_960_720.jpg",
-      "description":"Liquider les invendus. Une boulangerie, on distribue des baguettes",
+      "description":"Liquider les invendus. Une boulangerie distribue des baguettes",
       "conditions":"pour tout achat quelque soit le montant à partir de 20h",
       "tags":"alimentaire,boutique"
     },

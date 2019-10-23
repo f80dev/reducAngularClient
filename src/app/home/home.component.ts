@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
         pass:params.get("pass") || "",
         tags:params.get("tags") || "",
         tuto:true,
+        command:params.get("command") || "",
         user:params.get("user") || "",
         map:params.get("map") || "",
         message:params.get("message") || "",

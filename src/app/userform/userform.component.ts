@@ -57,6 +57,11 @@ export class UserformComponent implements OnInit {
         },500)
       }
     }
+
+    if(this.config.params.command=="add_promo"){
+      this.config.params.command="";
+      this.addshop();
+    }
   }
 
 
