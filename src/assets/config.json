@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.3-beta",
+  "version":"0.2.4-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -29,8 +29,18 @@
     },
     {
       "id":"profil",
-      "title": "Doit on s'authentifier",
+      "title": "Doit on s'authentifier ?",
       "content": "ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, le profil anonyme n'est pas recommandé si l'on est vendeur."
+    },
+    {
+      "id":"getReduc",
+      "title": "Comment récupérer des réductions ?",
+      "content": "Il existe plusieurs façons de récupérer des réductions :<ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
+    },
+    {
+      "id":"shareReduc",
+      "title": "Comment partager ses réductions ?",
+      "content": "Pour partager une réduction, il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer",
     }
   ],
 

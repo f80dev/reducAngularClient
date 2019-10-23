@@ -186,7 +186,7 @@
                     label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promotion">
           </app-tuto>
 
-          <app-tuto *ngIf="coupon.origin==coupon._id && coupon.share>0 && coupon.canbedeal"
+          <app-tuto *ngIf="coupon.origin==coupon._id && coupon.share>0 && coupon.canbedeal && coupon['flip']"
                     [delay]="5" button="not_interested"
                     label="Vous pouvez interrompre la distribution d'une promotion à tout instant">
           </app-tuto>

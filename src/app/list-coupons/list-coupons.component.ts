@@ -179,7 +179,7 @@ export class ListCouponsComponent implements OnChanges {
 
   isVisible(coupon:any){
     var couponToShow=localStorage.getItem("showCoupon");
-    if(couponToShow==coupon._id)return true;
+    if(couponToShow==coupon._id && coupon["flip"])return true;
     return false;
   }
 

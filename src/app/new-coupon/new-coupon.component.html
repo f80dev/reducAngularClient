@@ -80,7 +80,8 @@
         <mat-form-field class="form-field-style" *ngIf="hasMax">
           <input matInput type="number" (change)="refresh()" (update)="refresh()"
                  (focus)="focusElt='max'"
-                 id="txtMaxGainByUser" title="Gain maximum cumulable par réduction"
+                 id="txtMaxGainByUser"
+                 title="Plafonner les gains permet d'éviter qu'un client ne 'vide' le stock réservé à la promotion"
                  placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
         </mat-form-field>
         <br>
@@ -108,7 +109,7 @@
         <mat-form-field class="form-field-style">
           <input type="text" matInput
                  id="txtLabel"
-                 title="{{'Préciser une description de la promotion' | trans}}"
+                 title="{{'On détermine une phrase d\'accroche pour inciter les clients à prendre le coupon' | trans}}"
                  placeholder="Introduction (teaser) de la promotion" [(ngModel)]="coupon.label">
         </mat-form-field>
 

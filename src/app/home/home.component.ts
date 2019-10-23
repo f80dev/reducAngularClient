@@ -38,10 +38,13 @@ export class HomeComponent implements OnInit {
         coupon:params.get("coupon") || "",
         pass:params.get("pass") || "",
         tags:params.get("tags") || "",
+        tuto:true,
         user:params.get("user") || "",
         map:params.get("map") || "",
         message:params.get("message") || "",
       };
+
+      if(params.has("notuto"))this.config.params["tuto"]=false;
 
       if(this.config.params.coupon==""){
         var params2=this._location.path();

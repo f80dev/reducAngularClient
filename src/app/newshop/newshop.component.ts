@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
 import {
+  $$,
   checkLogin,
   createMap,
   createMarker,
@@ -123,6 +124,7 @@ export class NewshopComponent implements OnInit {
 
 
   showOnMap(zoom=15) {
+    $$("Refresh map pour address="+this.new_shop.address);
     this.loc.getAddress(this.new_shop.address,(res)=> {
       this.new_shop.lng=Number(res[0].lon);
       this.new_shop.lat= Number(res[0].lat);

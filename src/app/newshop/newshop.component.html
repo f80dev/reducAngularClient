@@ -29,7 +29,7 @@
       <input id="txtShopName" type="text"
              (focus)="focusElt=='shopname'"
              (keyup)="canUpdateName=false"
-             tac="Commencer par indique le nom de l'enseigne qui va faire la promotion"
+             data-tac="On Commence par indiquer le nom de l'enseigne qui va faire la promotion"
              title="Ce nom est utilisé dans la description de la promotion"
              matInput placeholder="Nom de votre enseigne / établissement" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
@@ -43,6 +43,7 @@
     <mat-form-field class="form-field-style">
       <input id="txtShopAddress" type="text"
              (focus)="focusElt=='address'"
+             data-tac="Puis on indique l'adresse de l'enseigne"
              matInput placeholder="Adresse de l'enseigne" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
       <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
@@ -110,6 +111,7 @@
   <mat-card-actions class="app-card-action">
 
     <button mat-button mat-flat-button
+            title="La validation entraine l'ajout de l'enseigne dans la liste de vos établissements"
             id="btnValide2" *ngIf="new_shop.name?.length>0"
             class="app-button" (click)="add()">Valider</button>
 
