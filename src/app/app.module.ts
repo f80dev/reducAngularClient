@@ -106,7 +106,10 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     MatCheckboxModule,
     MatStepperModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    }),
     AppRoutingModule,
     FormsModule,
     MatIconModule,
