@@ -119,7 +119,9 @@
               <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
                 <span style="font-size: 2em">
                   {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
-                </span> gagné(es)
+                </span>
+                <br>
+                <span style="font-size: x-small;margin:0;padding: 0;">gagné(es)</span>
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
               </div>
 
