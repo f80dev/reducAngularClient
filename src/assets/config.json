@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.6-beta",
+  "version":"0.2.71-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -31,6 +31,11 @@
       "id":"profil",
       "title": "Doit on s'authentifier pour utiliser ReducShare ?",
       "content": "Absolument pas. ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
+    },
+    {
+      "id":"delegate",
+      "title": "Peut on déléguer à ses employer la validation des réductions ?",
+      "content": "Oui, rien de plus simple. Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
     },
     {
       "id":"getReduc",
@@ -81,8 +86,7 @@
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"pour tout achat d'un montant supérieur a 20€",
-      "description":"Une réduction jusqu'a 25% du prix de vente du prochain article",
+      "conditions":"pour tout achat après validation de la réduction",
       "score":15,
       "tags":""
     },
@@ -104,7 +108,7 @@
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"pour tout achat d'un ou plusieurs tubes de la marque Thermoseal",
+      "conditions":"sur tout achat d'un ou plusieurs tubes de la marque Thermoseal",
       "description":"Une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
       "score":15,
       "tags":"boutique"
@@ -147,7 +151,7 @@
       "stock":400,
       "max_coupon":500,
       "score":6,
-      "conditions":"Remise applicable sur un deuxième article dans la limite de 40€",
+      "conditions":"Remise applicable après validation de la réduction par notre vendeur",
       "tags":"boutique,vin"
     },
     {
