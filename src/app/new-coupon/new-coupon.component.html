@@ -1,3 +1,5 @@
+
+
 <mat-card class="app-card" style="margin:0px;padding:3px;background-color: #8f8f8f;">
   <table style="width: 100%" *ngIf="!showOldCoupon"><tr>
     <td>
@@ -28,7 +30,7 @@
                      (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)"></app-old-coupons>
 
-    <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
+    <mat-vertical-stepper style="background: none;margin:0px;padding:0px" *ngIf="!showOldCoupon">
       <mat-step title="La nature de la promotion permet de décrire les éléments principaux : ce que l'on gagne, une phrase d'accroche, le gain maximum">
         <ng-template matStepLabel>Décrire votre promotion</ng-template>
 
@@ -219,7 +221,7 @@
                   label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
         </app-tuto>
 
-        <mat-form-field class="form-field-style">
+        <mat-form-field class="form-field-style" *ngIf="coupon.final_bonus>0 || level>1">
           <input matInput type="number"
                  (focus)="focusElt='final_bonus'"
                  id="txtFinalBonus" title="Bonus récupérer a l'utilisation du coupon"

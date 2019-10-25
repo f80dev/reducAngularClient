@@ -89,6 +89,10 @@ export class NewCouponComponent implements OnInit {
     this.level=Number(params.get("level") || "0");
     this.shopname=params.get("shopname") || "";
     this.tags=params.get("tags") || "";
+
+    if(this.level<1){
+      this.showOldCoupon=true;
+    }
   }
 
   addIcons(){
