@@ -81,6 +81,13 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
+            *ngIf="user.level>0.8"
+            title="Graph de diffusion d'une promo"
+            (click)="openGraph(shop._id)">
+      <mat-icon>link</mat-icon>
+    </button>
+
+    <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
             *ngIf="user.level==1"
             title="Nouvelle promotion attachée à cette enseigne"
