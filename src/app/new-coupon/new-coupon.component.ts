@@ -75,7 +75,9 @@ export class NewCouponComponent implements OnInit {
               public location: Location) { }
 
   ngOnInit() {
+
     checkLogin(this.router);
+
     var params:ParamMap=this.route.snapshot.queryParamMap;
     if(params.has("shopid"))this.coupon.shop = params.get("shopid");
     if(params.has("couponid")){

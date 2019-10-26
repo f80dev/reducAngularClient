@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../api.service";
-import {showError} from "../tools";
+import {$$, showError} from "../tools";
 import { Location } from '@angular/common';
 import { Router} from '@angular/router';
 import {ADMIN_PASSWORD} from "../tools";
@@ -48,5 +48,15 @@ export class AdminComponent implements OnInit {
 
   openAppli() {
 
+  }
+
+  openGraph(idshop:string){
+    var domain_server="https://server.f80.fr";
+    domain_server="http://localhost";
+
+    var graph_url=domain_server+":5500/api/getgraph/"+idshop+"/hh4271/gpickle";
+    var url=domain_server+":5000/graph/b64="+btoa(graph_url)+"/fr?algo_comm=NOTREATMENT&dir=public&notext=True&nometrics=True&add_property=False&autorotate=True&limit=5000&pca=1&processors=2"
+    $$("url=",url);
+    window.open(url,"_blank");
   }
 }

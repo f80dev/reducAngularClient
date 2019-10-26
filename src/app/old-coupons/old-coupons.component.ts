@@ -4,6 +4,7 @@ import {ConfigService} from "../config.service";
 import {showError} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-old-coupons',
@@ -12,7 +13,7 @@ import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 })
 export class OldCouponsComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,public api:ApiService,public config:ConfigService) { }
+  constructor(public router:Router,public dialog: MatDialog,public api:ApiService,public config:ConfigService) { }
 
   coupons:any[]=[];
   withFilter=false;
@@ -20,6 +21,7 @@ export class OldCouponsComponent implements OnInit {
   @Input("shop") shop:any;
   @Input("level") level=0;
   @Input("title") title:string="";
+  @Input("subtitle") subtitle:string="";
   @Output("select") onselect:EventEmitter<any>=new EventEmitter();
   @Output("delete") ondelete:EventEmitter<any>=new EventEmitter();
   @Output("cancel") oncancel:EventEmitter<any>=new EventEmitter();
@@ -35,7 +37,14 @@ export class OldCouponsComponent implements OnInit {
   refresh(func=null){
     this.withFilter=false;
     this.coupons=[];
-    JSON.parse(JSON.stringify(this.config.values.modeles)).forEach((c)=>{
+
+    if(this.config.values==null){
+      this.router.navigate(['login']);
+      return;
+    }
+
+    var modeles=JSON.stringify(this.config.values.modeles);
+    JSON.parse(modeles).forEach((c)=>{
       if(c.level<=this.level)
         this.coupons.push(c);
     });
