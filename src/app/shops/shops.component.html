@@ -91,7 +91,7 @@
             name="btnNewPromoAdvanced"
             *ngIf="user.level==1"
             title="Nouvelle promotion attachée à cette enseigne"
-            (click)="addCoupon(shop)">
+            (click)="addCoupon(shop,'')">
       <mat-icon>note_add</mat-icon>
     </button>
 
@@ -99,7 +99,7 @@
             name="btnNewPromo"
             data-tac="La création d'une enseigne se fait depuis la zone de profil"
             title="Nouvelle promotion attachée à cette enseigne"
-            (click)="addCoupon(shop)">
+            (click)="addCoupon(shop,'')">
       <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
     </button>
 

@@ -92,9 +92,17 @@ export class NewCouponComponent implements OnInit {
     this.shopname=params.get("shopname") || "";
     this.tags=params.get("tags") || "";
 
-    if(this.level<1){
-      this.showOldCoupon=true;
+
+    var modele=params.get("modele") || "";
+    if(modele.length>0){
+      //TODO: ici mettre en place la selection d'un modele
+    } else {
+      if(this.level<1){
+        this.showOldCoupon=true;
+      }
     }
+
+
   }
 
   addIcons(){

@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.72-beta",
+  "version":"0.2.73-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -80,6 +80,7 @@
 
   "modeles":[
     {
+      "id":"reducvente",
       "title":"Réduction sur le prix de vente",
       "unity":"% du prix",
       "symbol":"%",
@@ -101,6 +102,7 @@
       "tags":""
     },
     {
+      "id":"reducproduit",
       "title":"Promotion sur un produit",
       "unity":"% du prix",
       "symbol":"%",
@@ -124,6 +126,7 @@
       "tags":"boutique"
     },
     {
+      "id":"fide",
       "title":"Programme de fidélité",
       "unity":"point",
       "symbol":"🥇",
@@ -145,6 +148,7 @@
       "tags":"boutique"
     },
     {
+      "id":"reducarticle",
       "title":"Remise sur un article",
       "unity":"% du prix",
       "symbol":"%",
@@ -165,6 +169,7 @@
       "tags":"boutique,vin"
     },
     {
+      "id":"cafe",
       "title":"Les cafés offerts",
       "unity":"café",
       "symbol":"☕",

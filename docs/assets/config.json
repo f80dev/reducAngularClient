@@ -38,6 +38,16 @@
       "content": "Oui, rien de plus simple. Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
     },
     {
+      "id":"benefices_vendeur",
+      "title": "Quels intérêt pour un vendeur",
+      "content": "https://reducshare.com/faq/benef_vendeur.html"
+    },
+    {
+      "id":"benefices_client",
+      "title": "Quels intérêt pour un acheteur",
+      "content": "https://reducshare.com/faq/benef_acheteur.html"
+    },
+    {
       "id":"getReduc",
       "title": "Comment récupérer des réductions ?",
       "content": "Il existe plusieurs façons de récupérer des réductions :<br><ul><li>Flasher les réductions affichés dans les enseignes</li><li>Recevoir les réductions de ses relations (ouvrir le lien)</li><li>Trouvez des réduction autour de soi via la carte</li><li>Suivre une enseigne pour recevoir automatiquement ses réductions</li></ul>"
@@ -70,6 +80,7 @@
 
   "modeles":[
     {
+      "id":"reducvente",
       "title":"Réduction sur le prix de vente",
       "unity":"% du prix",
       "symbol":"%",
@@ -91,6 +102,7 @@
       "tags":""
     },
     {
+      "id":"reducproduit",
       "title":"Promotion sur un produit",
       "unity":"% du prix",
       "symbol":"%",
@@ -114,6 +126,7 @@
       "tags":"boutique"
     },
     {
+      "id":"fide",
       "title":"Programme de fidélité",
       "unity":"point",
       "symbol":"🥇",
@@ -135,6 +148,7 @@
       "tags":"boutique"
     },
     {
+      "id":"reducarticle",
       "title":"Remise sur un article",
       "unity":"% du prix",
       "symbol":"%",
@@ -155,6 +169,7 @@
       "tags":"boutique,vin"
     },
     {
+      "id":"cafe",
       "title":"Les cafés offerts",
       "unity":"café",
       "symbol":"☕",
