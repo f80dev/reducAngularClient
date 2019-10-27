@@ -1,25 +1,37 @@
-<mat-card *ngFor="let shop of user.shops" class="app-card">
-  <mat-card-header name="shopCard" (click)="shop.visible=!shop.visible" style="cursor: pointer;">
-    <div mat-card-avatar style="margin-right: 30px;margin-bottom: 30px;">
-      <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
-      <app-visual *ngIf="shop.picture?.length>0" [picture]="shop.picture" size="75px"></app-visual>
-    </div>
-    <mat-card-title>{{shop.name}}</mat-card-title>
-    <span class="spacer"></span>
-    <div style="display: inline-block;">
-      <mat-icon *ngIf="!shop.visible">arrow_drop_down</mat-icon>
-      <mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>
-    </div>
+<mat-expansion-panel *ngFor="let shop of user.shops" class="app-card" [expanded]="shop.visible">
+  <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px" name="shopCard" (click)="shop.visible=!shop.visible" style="cursor: pointer;">
 
-    <mat-card-subtitle>
+    <!--<table>-->
+      <!--<tr>-->
+        <!--<td>-->
+          <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;">
+          <app-visual *ngIf="shop.picture?.length>0" [picture]="shop.picture" size="75px"></app-visual>
+        <!--</td>-->
+        <!--<td>-->
+          <!---->
+        <!--</td>-->
+      <!--</tr>-->
+    <!--</table>-->
+
+
+    <span class="app-card-title">{{shop.name}}</span>
+
+    <span class="spacer"></span>
+    <!--<div style="display: inline-block;">-->
+      <!--<mat-icon *ngIf="!shop.visible">arrow_drop_down</mat-icon>-->
+      <!--<mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>-->
+    <!--</div>-->
+
+    <div class="app-card-subtitle">
       <span *ngIf="shop.followers?.length>0">
         Vous avez {{shop.followers?.length}} followers
       </span>
-    </mat-card-subtitle>
-  </mat-card-header>
+    </div>
+
+  </mat-expansion-panel-header>
 
 
-  <mat-card-content class="app-card-content" *ngIf="shop.visible" name="shopContent">
+  <div class="app-card-content" name="shopContent">
     <div id="print-section-{{shop._id}}" style="display: none;">
       <app-print-coupon [shop]="shop"></app-print-coupon>
     </div>
@@ -44,7 +56,7 @@
     </app-tuto>
 
 
-  </mat-card-content>
+  </div>
 
   <app-scanner [size]="300"
                *ngIf="showWebCam && shop.visible"
@@ -53,7 +65,7 @@
   </app-scanner>
 
 
-  <mat-card-actions class="app-card-action" *ngIf="shop.visible">
+  <mat-action-row class="app-card-action">
 
     <button mat-button name="btnDelegate"
             (click)="setDelegate(shop)"
@@ -103,7 +115,7 @@
       <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
     </button>
 
-  </mat-card-actions>
+  </mat-action-row>
 
-</mat-card>
+</mat-expansion-panel>
 

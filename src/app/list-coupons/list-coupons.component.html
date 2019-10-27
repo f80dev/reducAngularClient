@@ -1,53 +1,45 @@
 <div *ngFor="let coupon of coupons | orderBy:sort" style="width:100%;">
 
-  <mat-card class="app-card" style="background-color: #8f8f8f;" *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
-    <mat-card-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
-      <div mat-card-avatar
+  <mat-expansion-panel [expanded]="isVisible(coupon)" class="app-card" style="background-color: #8f8f8f;" *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
+    <mat-expansion-panel-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
+      <div style="width: 40px;height:40px;"
            (click)="_flip(coupon)"
            class="header-image">
       </div>
 
       <!-- Titre principal du coupon-->
-      <mat-card-title style="font-size: medium;">
-        <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
-        <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-        {{coupon.shopname}}: {{coupon.label}}
-      </span>
-
-        <!--Affichage des coupons copiés pour leur propriétaire-->
-        <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-        {{coupon.shopname}}: {{coupon.label}}
-        <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
-      </span>
-
-        <!--Affichage des coupons origines pour leur propriétaire-->
-        <span *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
-        {{coupon.title}}
-
-        <mat-icon style="font-size: small;margin:0;padding:0;display: inline;cursor: pointer;" id="btnEdit"
-                  (click)="onedit.emit(coupon)"
-                  *ngIf="coupon.share==0 && coupon.origin==coupon._id">
-          create
-        </mat-icon>
-
-        <span *ngIf="!isVisible(coupon)">
-          - <app-timer [end]="coupon.dtEnd"></app-timer>
+      <div class="app-card-title">
+          <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
+          <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
+          {{coupon.shopname}}: {{coupon.label}}
         </span>
 
-      </span>
+          <!--Affichage des coupons copiés pour leur propriétaire-->
+          <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
+          {{coupon.shopname}}: {{coupon.label}}
+          <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
+        </span>
 
-      </mat-card-title>
+          <!--Affichage des coupons origines pour leur propriétaire-->
+          <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
+            {{coupon.title}}
 
+            <mat-icon style="font-size: small;margin:0;padding:0;display: inline;cursor: pointer;" id="btnEdit"
+                      (click)="onedit.emit(coupon)"
+                      *ngIf="coupon.share==0 && coupon.origin==coupon._id">
+              create
+            </mat-icon>
 
-      <span class="spacer"></span>
-      <div style="display: inline-block;cursor: pointer;">
-        <mat-icon *ngIf="!isVisible(coupon)">arrow_drop_down</mat-icon>
-        <mat-icon *ngIf="isVisible(coupon)">arrow_drop_up</mat-icon>
+            <span *ngIf="!isVisible(coupon)">
+              &nbsp;&nbsp;<app-timer [end]="coupon.dtEnd"></app-timer>
+            </span>
+
+          </div>
+
       </div>
 
-
       <!-- La partie sous-titre -->
-      <mat-card-subtitle>
+      <div class="app-card-subtitle">
 
         <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
         <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
@@ -75,14 +67,12 @@
                   label="Cliquer sur le titre pour ouvrir la promotion">
         </app-tuto>
 
-      </mat-card-subtitle>
+      </div>
 
-    </mat-card-header>
-
-
+    </mat-expansion-panel-header>
 
 
-        <mat-card-content class="app-card-content" *ngIf="isVisible(coupon)">
+        <div class="app-card-content">
 
 
           <!-- Section destinée à l'imprression -->
@@ -198,12 +188,12 @@
                     label="Vous pouvez interrompre la distribution d'une promotion à tout instant">
           </app-tuto>
 
-        </mat-card-content>
+        </div>
 
 
     <!--Info sur le coupon-->
 
-    <mat-card-actions class="app-card-action" style="text-align: right;" *ngIf="isVisible(coupon)">
+    <mat-action-row class="app-card-action" style="text-align: right;">
 
       <div *ngIf="coupon.owner==user?._id">
 
@@ -307,8 +297,8 @@
           Récupérer
         </button>
       </div>
-    </mat-card-actions>
-  </mat-card>
+    </mat-action-row>
+  </mat-expansion-panel>
 
   <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="_flip(coupon)">
     <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">

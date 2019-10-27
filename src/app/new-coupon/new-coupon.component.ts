@@ -95,7 +95,9 @@ export class NewCouponComponent implements OnInit {
 
     var modele=params.get("modele") || "";
     if(modele.length>0){
-      //TODO: ici mettre en place la selection d'un modele
+      this.config.values.modeles.forEach((m)=>{
+        if(m.id==modele)this.coupon=m;
+      })
     } else {
       if(this.level<1){
         this.showOldCoupon=true;
