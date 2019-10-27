@@ -213,6 +213,7 @@
       "tags":"restaurant"
     },
     {
+      "id":"nuitmotierprix",
       "title":"Nuit à moitée prix",
       "unity":"nuit à 50%",
       "symbol":"🛌",
@@ -235,6 +236,7 @@
       "tags":"hôtel"
     },
     {
+      "id":"petitdej",
       "title":"Petit déj offert",
       "unity":"déjeuné",
       "symbol":"🍽️",
@@ -255,6 +257,7 @@
       "tags":"hôtel"
     },
     {
+      "id":"invendus",
       "title":"Les invendus / liquidation",
       "unity":"baguette",
       "symbol":"🥖",
@@ -278,6 +281,7 @@
       "tags":"alimentaire,boutique"
     },
     {
+      "id":"lastminute",
       "title":"Chambres en dernières minutes",
       "unity":"nuit",
       "symbol":"🛌",
@@ -298,6 +302,7 @@
       "tags":"hôtel"
     },
     {
+      "id":"entract",
       "title":"Des boissons offertes à l'entracte",
       "unity":"boisson",
       "symbol":"🥂",
@@ -319,6 +324,7 @@
       "tags":"concert,événement"
     },
     {
+      "id":"happyhour",
       "title":"Happy Hour",
       "unity":"verre",
       "symbol":"🍷",
@@ -341,6 +347,7 @@
       "tags":"bar,restaurant,hôtel,vin"
     },
     {
+      "id":"apero",
       "title":"Un petit apéro",
       "unity":"apéro",
       "symbol":"🍺",
@@ -362,6 +369,7 @@
       "tags":"restaurant,hôtel"
     },
     {
+      "id":"dessertgratuit",
       "title":"Le dessert gratuit",
       "unity":"dessert",
       "symbol":"🍨",
@@ -383,6 +391,7 @@
       "tags":"restaurant"
     },
     {
+      "id":"recyclage",
       "title":"Challenge Recyclage",
       "unity":"ecopoint",
       "symbol":"♻️",
@@ -405,6 +414,7 @@
       "tags":"service"
     },
     {
+      "id":"promolegume",
       "title":"Promo chez le marchand de légumes",
       "unity":"banane",
       "symbol":"🍌",
@@ -425,6 +435,7 @@
       "tags":"alimentaire"
     },
     {
+      "id":"degustationgratuite",
       "title":"Dégustration gratuite pour nos fidèles clients",
       "unity":"point",
       "symbol":"pts",
@@ -447,6 +458,7 @@
       "tags":"vin"
     },
     {
+      "id":"coursparticulier",
       "title":"Cours particulier",
       "unity":"minute",
       "symbol":"min",
@@ -468,6 +480,7 @@
       "description":"Un professeur particulier fait gagner des minutes de cours en échange d'un parainage par ses éléves"
     },
     {
+      "id":"influenceur",
       "title":"Meilleurs influenceurs",
       "unity":"points",
       "level":1,
@@ -488,6 +501,7 @@
       "tags":"fidélisation"
     },
     {
+      "id":"placesgratuites",
       "title":"Des places / entrée gratuites",
       "unity":"billet",
       "symbol":"🎟️",

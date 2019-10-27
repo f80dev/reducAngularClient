@@ -2,23 +2,25 @@
 
   <mat-expansion-panel [expanded]="isVisible(coupon)" class="app-card" style="background-color: #8f8f8f;" *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
     <mat-expansion-panel-header class="app-card-header" name="promoTitle" (click)="showCoupon(coupon)">
-      <div style="width: 40px;height:40px;"
-           (click)="_flip(coupon)"
-           class="header-image">
-      </div>
 
       <!-- Titre principal du coupon-->
       <div class="app-card-title">
-          <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
-          <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
+        <!--<div style="width: 40px;height:40px;display: inline"-->
+             <!--(click)="_flip(coupon)"-->
+             <!--class="header-image">-->
+        <!--</div>-->
+
+
+        <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
+        <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
           {{coupon.shopname}}: {{coupon.label}}
         </span>
 
           <!--Affichage des coupons copiés pour leur propriétaire-->
           <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-          {{coupon.shopname}}: {{coupon.label}}
-          <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
-        </span>
+            {{coupon.shopname}}: {{coupon.label}}
+            <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
+          </span>
 
           <!--Affichage des coupons origines pour leur propriétaire-->
           <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
@@ -36,21 +38,21 @@
 
           </div>
 
-      </div>
+      <!--</mat-panel-title>-->
 
       <!-- La partie sous-titre -->
-      <div class="app-card-subtitle">
+      <!--<mat-panel-description class="app-card-subtitle">-->
 
         <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
         <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
-        <span *ngIf="coupon.canbedeal && coupon.max>0">
-          jusqu'a {{coupon.max}}{{coupon.symbol}} offert {{coupon.conditions}}
-        </span>
+          <span *ngIf="coupon.canbedeal && coupon.max>0">
+            jusqu'a {{coupon.max}}{{coupon.symbol}} offert {{coupon.conditions}}
+          </span>
 
-          <!--Si le coupon ne peut plus être distribué-->
-          <span *ngIf="!coupon.canbedeal">
-          Récupérer {{coupon.gain}}{{coupon.symbol}} offert
-        </span>
+            <!--Si le coupon ne peut plus être distribué-->
+            <span *ngIf="!coupon.canbedeal">
+            Récupérer {{coupon.gain}}{{coupon.symbol}} offert
+          </span>
         </div>
 
 
@@ -58,9 +60,8 @@
         <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id">
           {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
           <span *ngIf="coupon.max>0 && (coupon.gain/coupon.max)>0.8">
-          (max:{{coupon.max}})
-        </span>
-
+            (max:{{coupon.max}})
+          </span>
         </div>
 
         <app-tuto [delay]="20" *ngIf="!isVisible(coupon)"

@@ -72,6 +72,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-title {
+  display:inline-block;
   font-size: large;
   margin-top:10px;
   margin-left:10px;
@@ -89,7 +90,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-header {
-  margin-bottom: 5px;
+  margin:0px;
+  padding:0px;
 }
 
 .app-toolbar {
