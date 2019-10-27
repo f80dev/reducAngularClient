@@ -68,13 +68,15 @@ export class ShopsComponent implements OnInit {
     });
   }
 
-  addCoupon(shop: any) {
+  addCoupon(shop: any,modele:string) {
     this.api.shop=shop;
+    debugger
     this.api.user=this.user;
     this.router.navigate(["new_coupon"],{queryParams:{
         shopid:shop._id,
         level:this.user.level,
         shopname:shop.name,
+        modele:modele,
         tags:shop.tags,
         userid:this.user._id
       }}
@@ -108,12 +110,16 @@ export class ShopsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.user.shops!=null && this.user.shops.length>0 && this.config.params.command=="add_promo"){
-      setTimeout(()=>{
+    setTimeout(()=> {
+      if(this.user.shops!=null && this.user.shops.length>0 && this.config.params.command.indexOf("add_promo")>-1){
+
+        var modele="";
+        if(this.config.params.command.indexOf("(")>-1)modele=this.config.params.command.split("add_promo(")[1].split(")")[0];
+
         this.config.params.command="";
-        this.addCoupon(this.user.shops[0]);
-      },1500);
-    }
+        this.addCoupon(this.user.shops[0],modele);
+      }
+    },1500);
   }
 
   openGraph(shoid){

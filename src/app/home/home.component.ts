@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
     var params=this.route.snapshot.queryParamMap;
     localStorage.setItem("firsturl",this._location.path());
     $$("Récupération des paramètres",params);
+    if(this.config.params==null){
       this.config.params={
         coupon:params.get("coupon") || "",
         pass:params.get("pass") || "",
@@ -55,6 +56,9 @@ export class HomeComponent implements OnInit {
       $$("Netoyage de l'url de lancement:"+this._location.path());
       this._location.replaceState(this._location.path().split('?')[0],"");
       this._location.replaceState(this._location.path().split('/home')[0],"");
+
+    }
+
 
       func(this.config.params);
   }

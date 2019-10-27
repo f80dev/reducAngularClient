@@ -189,7 +189,7 @@
                     label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
           </app-tuto>
 
-          <app-tuto *ngIf="coupon.owner==user?._id && coupon.origin==coupon._id" [delay]="10" button="printer"
+          <app-tuto *ngIf="user.level>0.8 && coupon.owner==user?._id && coupon.origin==coupon._id" [delay]="10" button="printer"
                     label="A tout instant, vous pouvez imprimer une affiche pré-fabriquée pour votre promotion">
           </app-tuto>
 
