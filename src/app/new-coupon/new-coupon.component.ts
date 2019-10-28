@@ -83,6 +83,7 @@ export class NewCouponComponent implements OnInit {
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
       this.preview=this.api.coupon.picture;
+      this.coupon.nb_partage=Math.round(1/this.coupon.share_bonus);
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
@@ -101,7 +102,7 @@ export class NewCouponComponent implements OnInit {
         }
       })
     } else {
-      if(this.level<1){
+      if(params.get("edit")!="true"){
         this.showOldCoupon=true;
       }
     }
@@ -140,7 +141,6 @@ export class NewCouponComponent implements OnInit {
 
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
-    debugger
     this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.config.waiting=false;

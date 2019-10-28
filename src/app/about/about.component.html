@@ -1,10 +1,10 @@
-<mat-card class="app-card" style="background-color: #b7b7b7;color:black;" >
-  <mat-card-header (click)="switchVisible()" style="cursor: pointer;">
+<mat-expansion-panel class="app-card" style="background-color: #b7b7b7;color:black;" >
+  <mat-expansion-panel-header (click)="switchVisible()" style="cursor: pointer;">
     <div style="text-align: center;width:100%;">
       {{config.values.appname+" - "+config.values.version}}<br>
     </div>
-  </mat-card-header>
-  <mat-card-content *ngIf="visible">
+  </mat-expansion-panel-header>
+
     <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
       <br>
       <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
@@ -41,5 +41,4 @@
         </a>
       </div>
     </div>
-  </mat-card-content>
-</mat-card>
+</mat-expansion-panel>

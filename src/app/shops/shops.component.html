@@ -1,5 +1,8 @@
 <mat-expansion-panel *ngFor="let shop of user.shops" class="app-card" [expanded]="shop.visible">
-  <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px" name="shopCard" (click)="shop.visible=!shop.visible" style="cursor: pointer;">
+  <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
+                              name="shopCard"
+                              (click)="shop.visible=!shop.visible"
+                              style="cursor: pointer;padding:3px;margin:0px;">
 
     <!--<table>-->
       <!--<tr>-->
@@ -101,7 +104,7 @@
 
     <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
-            *ngIf="user.level==1"
+            *ngIf="user.level>=1"
             title="Nouvelle promotion attachée à cette enseigne"
             (click)="addCoupon(shop,'')">
       <mat-icon>note_add</mat-icon>
@@ -109,6 +112,7 @@
 
     <button mat-button mat-flat-button
             name="btnNewPromo"
+            *ngIf="user.level<1"
             data-tac="La création d'une enseigne se fait depuis la zone de profil"
             title="Nouvelle promotion attachée à cette enseigne"
             (click)="addCoupon(shop,'')">

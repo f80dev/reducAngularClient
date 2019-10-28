@@ -169,8 +169,8 @@ export class ListCouponsComponent implements OnChanges {
     });
   }
 
-  showCoupon(coupon: any) {
-    coupon.visible=!coupon.visible
+  showCoupon(coupon: any,forceValue=null) {
+    if(forceValue!=null)coupon.visible=forceValue;
     if(coupon.visible)
       localStorage.setItem("showCoupon",coupon._id);
     else

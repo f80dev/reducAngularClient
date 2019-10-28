@@ -63,6 +63,7 @@ export class ShopsComponent implements OnInit {
         {
           couponid:coupon._id,
           title:"Editer "+coupon.title,
+          edit:true,
           userid:this.user._id
         }
     });
@@ -76,6 +77,7 @@ export class ShopsComponent implements OnInit {
         shopid:shop._id,
         level:this.user.level,
         shopname:shop.name,
+        edit:false,
         modele:modele,
         tags:shop.tags,
         userid:this.user._id

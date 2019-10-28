@@ -4,66 +4,67 @@
                  (close)="closeFlashScreen()">
 </app-flashscreen>
 
-<div [hidden]="showMessage && user.message?.length>0">
-  <app-tuto title="Bienvenue dans ReducShare !"
-            *ngIf="user.level<0.5"
-            background="./assets/img/network.jpg"
-            button="Commencer"
-            [duration]="5"
-            color="white"
-            [force]="true"
-            image="./assets/icons/icon-144x144.png"
-            subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
-  </app-tuto>
+<div style="margin:3px;">
+  <mat-accordion [multi]="true" [hidden]="showMessage && user.message?.length>0">
+    <app-tuto title="Bienvenue dans ReducShare !"
+              *ngIf="user.level<0.5"
+              background="./assets/img/network.jpg"
+              button="Commencer"
+              [duration]="5"
+              color="white"
+              [force]="true"
+              image="./assets/icons/icon-144x144.png"
+              subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
+    </app-tuto>
 
-  <app-userform [user]="user"
-                [excludes]="user.coupons"
-                (update)="updateUser($event)"
-                (refresh)="refresh('',$event?.sort)"
-                (flash)="refresh($event?.message)">
-  </app-userform>
+    <app-userform [user]="user"
+                  [excludes]="user.coupons"
+                  (update)="updateUser($event)"
+                  (refresh)="refresh('',$event?.sort)"
+                  (flash)="refresh($event?.message)">
+    </app-userform>
 
-  <app-tuto
-    *ngIf="user?.shops?.length>0 && user.level<1"
-    type="title"
-    color="white"
-    background="./assets/img/openshop2.jpg"
-    title="Bravo votre première enseigne est prête."
-    subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
-  </app-tuto>
+    <app-tuto
+      *ngIf="user?.shops?.length>0 && user.level<1"
+      type="title"
+      color="white"
+      background="./assets/img/openshop2.jpg"
+      title="Bravo votre première enseigne est prête."
+      subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
+    </app-tuto>
 
 
-  <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
-            label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
-  </app-tuto>
+    <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
+              label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
+    </app-tuto>
 
-  <app-shops
-             [user]="user"
-             (update)="refresh($event?.message)"
-             (delete)="refresh($event?.message)"
-             (insert)="refresh($event?.message)">
-  </app-shops>
+    <app-shops
+      [user]="user"
+      (update)="refresh($event?.message)"
+      (delete)="refresh($event?.message)"
+      (insert)="refresh($event?.message)">
+    </app-shops>
 
-  <app-tuto *ngIf="coupons.length>0"
-            label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
-  </app-tuto>
+    <app-tuto *ngIf="coupons.length>0"
+              label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
+    </app-tuto>
 
-  <!--Affiche la liste des coupons en possession de l'utilisateur -->
-  <app-list-coupons (delete)="refresh($event?.message)"
-                    id="zoneMyPromos"
-                    title="Retrouvez ici la liste de tous vos coupons"
-                    (insert)="refresh($event?.message)"
-                    (update)="refresh($event?.message)"
-                    [sort]="sort"
-                    [coupons]="user.coupons" [user]="user">
-  </app-list-coupons>
+    <!--Affiche la liste des coupons en possession de l'utilisateur -->
+    <app-list-coupons (delete)="refresh($event?.message)"
+                      id="zoneMyPromos"
+                      title="Retrouvez ici la liste de tous vos coupons"
+                      (insert)="refresh($event?.message)"
+                      (update)="refresh($event?.message)"
+                      [sort]="sort"
+                      [coupons]="user.coupons" [user]="user">
+    </app-list-coupons>
 
-  <app-about *ngIf="user.level<2.0"
-             [user]="user">
-  </app-about>
+    <app-about *ngIf="user.level<2.0"
+               [user]="user">
+    </app-about>
+  </mat-accordion>
+
 </div>
 
-<!--<br><br><br>-->
-<!--<button mat-button mat-raised-button (click)="api.raz();refresh();">RAZ</button>-->
 
 

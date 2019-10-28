@@ -4,13 +4,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card {
-  margin:1px;
-  padding:0px;
-  margin-bottom: 5px;
+  padding:5px;
   background-color: #6e6e6e;
   max-width:900px;
   vertical-align: text-top;
-  display: inline-block;
 }
 
 .visual-coupon {
@@ -29,7 +26,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-content {
-  margin:2px;
+  padding:0px;
+  margin:0px;
   width: 100%;
   max-width: 900px;
   vertical-align: text-top;
@@ -41,9 +39,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .small-icon-button {
-  font-size: small;
-  width:20px;
-  height:20px;
+  font-size: x-small;
+  margin:1px;
+  width:10px;
+  height:10px;
 }
 
 .spacer {
@@ -64,7 +63,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card-action {
   text-align: right;
-  margin-right:5px;
+  padding:0px;
+  margin: 0px;
 }
 
 .large-button {
@@ -72,8 +72,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-title {
-  display:inline-block;
-  font-size: large;
+  font-size: medium;
   margin-top:10px;
   margin-left:10px;
 }
@@ -91,7 +90,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card-header {
   margin:0px;
+  margin-top:3px;
   padding:0px;
+  vertical-align: middle;
 }
 
 .app-toolbar {
