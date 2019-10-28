@@ -96,7 +96,9 @@ export class NewCouponComponent implements OnInit {
     var modele=params.get("modele") || "";
     if(modele.length>0){
       this.config.values.modeles.forEach((m)=>{
-        if(m.id==modele)this.coupon=m;
+        if(m.id==modele){
+          this.selectOldAsModel(m);
+        }
       })
     } else {
       if(this.level<1){
@@ -138,7 +140,7 @@ export class NewCouponComponent implements OnInit {
 
     if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
     coupon.unity=coupon.unity.toLowerCase();
-
+    debugger
     this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       this.config.waiting=false;

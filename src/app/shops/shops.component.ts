@@ -112,10 +112,8 @@ export class ShopsComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(()=> {
       if(this.user.shops!=null && this.user.shops.length>0 && this.config.params.command.indexOf("add_promo")>-1){
-
         var modele="";
         if(this.config.params.command.indexOf("(")>-1)modele=this.config.params.command.split("add_promo(")[1].split(")")[0];
-
         this.config.params.command="";
         this.addCoupon(this.user.shops[0],modele);
       }

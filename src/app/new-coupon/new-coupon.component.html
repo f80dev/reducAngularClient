@@ -140,35 +140,56 @@
 
         <div style="width: 100%;text-align: center;">
 
-          <button mat-flat-button
-                  *ngIf="!deviceService.isDesktop()"
-                  mat-button (click)="addEmoji()">Emojis</button>
-
-          <button mat-flat-button mat-button
-                  *ngIf="deviceService.isDesktop()"
-                  (click)="showIcons=!showIcons;addIcons()">Emojis</button>
-          &nbsp;&nbsp;
-
-          <button mat-flat-button mat-button
-                  id="cmdFile"
-                  style="width:70px;text-align: center;">
-            <label for="file">Photos</label>
-            <input type="file" id="file" style="opacity: 0;"
-                   (change)="onSelectFile($event)"
-                   accept="image/gif,image/jpeg,image/png" />
-          </button>
-
-          <br><br>
-
           <div *ngIf="showIcons" style="width:100%;">
             <img *ngFor="let icon of icons" [src]="icon.photo"
                  style="width:30px;display: inline-block;"
                  (click)="selIcon(icon)">
           </div>
 
-          <app-visual [picture]="preview"></app-visual>
+
+          <!-- Présentation du mini visuel -->
+          <table style="display: inline-block;width:100%;"><tr>
+            <td style="text-align: center;">
+              <span *ngIf="preview?.length>0">Mini visuel associé à votre promotion</span><br><br>
+              <app-visual [picture]="preview"></app-visual>
+            </td>
+            <td style="text-align: center;">
+              <button mat-flat-button
+                      *ngIf="!deviceService.isDesktop()"
+                      mat-button (click)="addEmoji()">Emojis</button>
+
+              <button mat-flat-button mat-button
+                      *ngIf="deviceService.isDesktop()"
+                      (click)="showIcons=!showIcons;addIcons()">Emojis</button>
+              &nbsp;&nbsp;
+
+              <button mat-flat-button mat-button
+                      id="cmdFile"
+                      style="width:70px;text-align: center;">
+                <label for="file">Photos</label>
+                <input type="file" id="file" style="opacity: 0;"
+                       (change)="onSelectFile($event)"
+                       accept="image/gif,image/jpeg,image/png" />
+              </button>
+            </td>
+          </tr></table>
+          <!-- Mini visuel -->
+
+
+          <br><br>
+
+
+
         </div>
 
+        <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
+          Visuel large pour présentation élégante du coupon<br><br>
+          <img
+               style="width:80%;max-width:550px;max-height:250px;display: inline-block;"
+               [src]="coupon.visual"
+          >
+        </div>
+        <br>
         <mat-form-field class="form-field-style">
           <input matInput type="text"
                  id="txtLargeVisual"

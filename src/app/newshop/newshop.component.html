@@ -33,7 +33,7 @@
              title="Ce nom est utilisé dans la description de la promotion"
              matInput placeholder="Nom de votre enseigne / établissement" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
-    <button mat-button mat-flat-button mat-icon-button (click)="localize()">
+    <button *ngIf="map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
       <mat-icon>gps_fixed</mat-icon>
     </button>
 

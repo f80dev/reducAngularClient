@@ -148,8 +148,8 @@ export class NewshopComponent implements OnInit {
 
   localize() {
     this.loc.getPosition().then((pos:any)=>{
-      this.new_shop.lng=pos.lng;
-      this.new_shop.lat=pos.lat;
+      this.new_shop["lng"]=pos.lng;
+      this.new_shop["lat"]=pos.lat;
       this.reverseGeocode=true;
       this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
       this.refresh_map();
