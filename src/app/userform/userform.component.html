@@ -2,14 +2,6 @@
     <mat-expansion-panel-header class="app-card-header" collapsedHeight="80px" expandedHeight="80px">
       <div *ngIf="!showPersonalCode" style="display:inline-block;width:90px;vertical-align: middle;position:relative;">
         <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo" (click)="addImage()">
-        <mat-icon style="position:absolute;left:-5px;top:0px;cursor: pointer;"
-                  (click)="rotatePhoto()"
-                  *ngIf="user.level<0.5 && !showPersonalCode"
-                  title="Permet de faire tourner la photo de 90 degrés"
-                  id="cmdTurn"
-        >
-
-          refresh</mat-icon>
       </div>
 
       <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"

@@ -1,7 +1,7 @@
 <img
   *ngIf="picture?.startsWith('http') || picture?.startsWith('data')"
   [src]="picture"
-  [ngStyle]="{'width': size,'height':size,'display': 'inline-block'}">
+  [ngStyle]="{'display': 'inline-block','width':'95%','object-fit':'contain','max-width': w,'max-height':h}">
 
 <span style="font-size: 5em" *ngIf="!picture?.startsWith('http') && !picture?.startsWith('data')">
   {{picture}}

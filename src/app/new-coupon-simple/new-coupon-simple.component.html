@@ -6,7 +6,7 @@
                  (select)="selectOldAsModel($event)">
 </app-old-coupons>
 
-<mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;">
+<mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;color:black;">
   <mat-card-title>
     Nouvelle la promotion
   </mat-card-title>
@@ -16,6 +16,17 @@
   <mat-card-content class="app-card-content">
     <h4>Présentation de la promotion:</h4>
     <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
+    <br>
+    <div style="position:relative;width: 100%;text-align: center;color:white;">
+      Visuel Large<br>
+      <div style="position:absolute;z-index:100;width:100%;top:20%;font-size: x-large;">{{coupon.label}}</div>
+      <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:40%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
+      <img class="visual-coupon" style="object-fit: cover;" [src]="coupon.visual" (click)="addImage('visual',800,220)"><br>
+
+      <!--Petit visuel<br>-->
+      <!--<img [src]="coupon.picture" style="width: 200px" (click)="addImage('picture',300,300)"><br>-->
+    </div>
+    <br>
 
     <h4>Augmentation de la promotion:</h4>
     <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
@@ -25,6 +36,8 @@
 
     <h4>Référence:</h4>
     <div class="zone_text" [innerHTML]="reference_text | safe:'html'"></div>
+
+
 
   </mat-card-content>
   <mat-card-actions class="app-card-action">

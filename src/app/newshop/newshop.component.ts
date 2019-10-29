@@ -16,6 +16,7 @@ import { Location } from '@angular/common';
 import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
+import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 
 declare var ol: any;
 
@@ -171,9 +172,10 @@ export class NewshopComponent implements OnInit {
     }
   }
 
-  onSelectFile(event:any) {
-    selectFile(event,150,(res)=>{
-      this.new_shop.picture=res;
+  addImage() {
+    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.new_shop.picture,width: 300,height:300,emoji:true}}).afterClosed().subscribe((result) => {
+      if(result)
+        this.new_shop.picture=result;
     });
   }
 }

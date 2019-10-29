@@ -4,16 +4,12 @@ import {
   buildTeaser,
   checkLogin,
   compute,
-  cropToSquare,
-  resizeBase64Img,
-  selectFile,
   showError,
   unique_id
 } from "../tools";
 import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
-
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 
 import { Router} from '@angular/router';
@@ -67,7 +63,6 @@ export class NewCouponComponent implements OnInit {
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
-  preview: string="";
   tags:string="";
   userid:string="";
   hasMax: boolean = true;
@@ -88,7 +83,6 @@ export class NewCouponComponent implements OnInit {
     if(params.has("shopid"))this.coupon.shop = params.get("shopid");
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
-      this.preview=this.api.coupon.picture;
 
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
@@ -137,11 +131,6 @@ export class NewCouponComponent implements OnInit {
     },(error)=>{showError(this,error);});
   }
 
-  refreshPicture() {
-    this.preview=this.coupon.picture;
-  }
-
-
   selectOldAsModel(coupon: any) {
     coupon.shop=this.coupon.shop;
 
@@ -156,7 +145,6 @@ export class NewCouponComponent implements OnInit {
 
     this.coupon=compute(coupon);
 
-    this.preview=coupon.picture;
     this.showOldCoupon=false;
 
     this.refresh();
@@ -187,9 +175,11 @@ export class NewCouponComponent implements OnInit {
     return buildTeaser(coupon,shopname);
   }
 
-  addImage() {
-    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {maxsize: 200}}).afterClosed().subscribe((result) => {
-      this.preview=result;
+  addImage(field,width,height,emoji=false) {
+    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.coupon[field],width: width,height:height}}).afterClosed().subscribe((result) => {
+      if(result){
+        this.coupon[field]=result;
+      }
     });
   }
 }

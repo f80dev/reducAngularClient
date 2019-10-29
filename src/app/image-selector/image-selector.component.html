@@ -2,14 +2,19 @@
 
 <mat-dialog-content>
 
-
   <button mat-flat-button
-          *ngIf="!deviceService.isDesktop()"
+          *ngIf="!deviceService.isDesktop() && data.emoji"
           mat-button (click)="addEmoji()">Emojis</button>
 
   <button mat-flat-button mat-button
-          *ngIf="deviceService.isDesktop()"
-          (click)="showIcons=!showIcons;addIcons()">Emojis</button>
+          (click)="addUrl()">
+    Internet
+  </button>
+
+
+  <button mat-flat-button mat-button
+          *ngIf="deviceService.isDesktop() && data.emoji"
+          (click)="addIcons()">Emojis</button>
   &nbsp;&nbsp;
 
   <button mat-flat-button mat-button
@@ -21,12 +26,32 @@
            accept="image/gif,image/jpeg,image/png" />
   </button>
 
-  <br><br>
+  <br>
+  <br>
 
-  <app-visual [picture]="preview"></app-visual>
+  <div *ngIf="showIcons" style="width:100%;">
+    <img *ngFor="let icon of icons" [src]="icon.photo"
+         style="width:30px;display: inline-block;"
+         (click)="selIcon(icon)">
+  </div>
+
+  <div style="width: 100%;text-align: center">
+    <app-visual [picture]="data.result"
+                [width]="data.width"
+                [height]="data.height">
+    </app-visual>
+  </div>
+
 </mat-dialog-content>
 
   <mat-dialog-actions>
+    <button id="cmdTurn" mat-button mat-raised-button mat-icon-button
+            title="Permet de faire tourner la photo de 90 degrés"
+            *ngIf="data.square"
+            (click)="rotatePhoto()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
     <button id="cmdCancel" mat-button mat-raised-button (click)="onNoClick()">Annuler</button>
     <button id="cmdValide" mat-button mat-raised-button [mat-dialog-close]="data.result" >Ok</button>
   </mat-dialog-actions>

@@ -13,11 +13,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .visual-coupon {
   color: white;
   position:relative;
-  max-width:930px;
+  max-width:895px;
   margin:3px;
   width:100%;
-  font-size: 4vw;
-  height:280px;
+  height:220px;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;
@@ -89,9 +88,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-header {
-  padding-top:5px !important;
-  padding-left:5px !important;
-  vertical-align: top;
+  padding-top:10px !important;
+  padding-left:8px !important;
+  vertical-align: text-top;
 }
 
 .app-toolbar {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild,ElementRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {LocService} from "../loc.service";
 import {
@@ -6,8 +6,7 @@ import {
   createMap,
   createMarker,
   getMarkerLayer,
-  loginWithEmail, rotate,
-  selectFile,
+  loginWithEmail,
   showError, showMessage
 } from "../tools";
 import {ApiService} from "../api.service";
@@ -88,19 +87,6 @@ export class UserformComponent implements OnInit {
       },(error)=>{showError(this,error);});
   }
 
-  onSelectFile(event:any) {
-    selectFile(event,200,(res)=>{
-      this.user.photo=res;
-      this.saveUser();
-    });
-  }
-
-  rotatePhoto() {
-    rotate(this.user.photo,90,0.5,(res)=>{
-      this.user.photo=res;
-      this.api.setuser(this.user).subscribe(()=>{});
-    })
-  }
 
   addshop() {
     this.showMap=false;
@@ -278,8 +264,11 @@ export class UserformComponent implements OnInit {
   }
 
   addImage() {
-    this.dialog.open(ImageSelectorComponent, {width: '50%', data: {maxsize: 60}}).afterClosed().subscribe((result) => {
-      this.user.photo=result;
+    this.dialog.open(ImageSelectorComponent, {width: '400px', data: {result:this.user.photo,width: 250,height:250}}).afterClosed().subscribe((result) => {
+      if(result){
+        this.user.photo=result;
+        this.api.setuser(this.user).subscribe(()=>{});
+      }
     });
   }
 

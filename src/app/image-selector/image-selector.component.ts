@@ -1,16 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
-import {DialogData, PromptComponent} from "../prompt/prompt.component";
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {selectFile} from "../tools";
+import {rotate, selectFile} from "../tools";
+import {PromptComponent} from "../prompt/prompt.component";
 
 export interface ImageSelectorData {
   quality:number;
   title:string;
+  square:boolean;
   maxsize: number;
   filter:string;
   result:string;
+  emoji:boolean;
+  width:number;
+  height:number;
 }
 
 @Component({
@@ -20,16 +24,24 @@ export interface ImageSelectorData {
 })
 export class ImageSelectorComponent implements OnInit {
 
-  preview:string;
   icons=[];
   showIcons=false;
 
   constructor(
     public dialog:MatDialog,
     public deviceService: DeviceDetectorService,
-    public dialogRef: MatDialogRef<PromptComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ImageSelectorData) {
+    public dialogRef: MatDialogRef<ImageSelectorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    if(data.emoji==null)data.emoji=false;
+    if(data.width!=null && data.width==data.height)data.square=true;
     data.title=data.title || "Sélectionner une image";
+    if(data.square==null)data.square=true;
+    data.maxsize=data.maxsize || 500;
+    data.width=data.width || data.maxsize;
+    if(data.square)data.height=data.width;
+    if(data.width>data.maxsize)data.width=data.maxsize;
+    if(data.height>data.maxsize)data.height=data.maxsize;
   }
 
   addIcons(){
@@ -38,11 +50,12 @@ export class ImageSelectorComponent implements OnInit {
       for(var i=1;i<300;i++)
         this.icons.push({photo:root+"file_emojis"+i+".png"});
     }
+    this.showIcons=true;
   }
 
   onSelectFile(event:any) {
-    selectFile(event,this.data.maxsize,(res)=>{
-      this.preview=res;
+    selectFile(event,this.data.maxsize,this.data.quality,this.data.square,(res)=>{
+      this.data.result=res;
     })
   }
 
@@ -51,26 +64,38 @@ export class ImageSelectorComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  rotatePhoto() {
+    rotate(this.data.result,90,this.data.quality,(res)=>{
+      this.data.result=res;
+    });
+  }
+
+
   selIcon(icon: any) {
     this.showIcons=false;
-    this.preview=icon.photo;
+    this.data.result=icon.photo;
   }
 
   addEmoji() {
     this.dialog.open(PromptComponent,{width: '250px',data: {title: "Utiliser un emoji", question: ""}
     }).afterClosed().subscribe((result) => {
       if(result){
-        this.preview=result;
+        this.data.result=result;
       }
     });
-  }
-
-  onEnter(evt:any) {
-    if(evt.keyCode==13)
-      this.dialogRef.close(this.data.result);
   }
 
   ngOnInit() {
   }
 
+  addUrl() {
+    this.dialog.open(PromptComponent, {
+      width: '250px', data: {title: "Adresse internet de votre image", question: ""}
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        if(!result.startsWith("http"))result="https://"+result;
+        this.data.result=result;
+      }
+    });
+  }
 }

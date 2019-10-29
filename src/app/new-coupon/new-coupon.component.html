@@ -138,31 +138,22 @@
 
         <app-tuto *ngIf="focusElt=='symbol'"
           label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
-
         <div style="width: 100%;text-align: center;">
-
-          <div *ngIf="showIcons" style="width:100%;">
-            <img *ngFor="let icon of icons" [src]="icon.photo"
-                 style="width:30px;display: inline-block;"
-                 (click)="selIcon(icon)">
-          </div>
 
 
           <!-- Présentation du mini visuel -->
-          <table style="display: inline-block;width:100%;"><tr>
-            <td style="text-align: center;">
-              <span *ngIf="preview?.length>0">Mini visuel associé à votre promotion</span><br><br>
-              <app-visual [picture]="preview"></app-visual>
-            </td>
-            <td style="text-align: center;">
-              <button mat-button mat-flat-button
-                      (click)="addImage()">
-                Images
-              </button>
-            </td>
-          </tr></table>
-          <!-- Mini visuel -->
-
+          <!--<table style="display: inline-block;width:100%;"><tr>-->
+            <!--<td style="text-align: center;">-->
+              <!--<span *ngIf="coupon.picture?.length>0">Mini visuel associé à votre promotion</span><br><br>-->
+              <!--<app-visual [picture]="coupon.picture"></app-visual>-->
+            <!--</td>-->
+            <!--<td style="text-align: center;">-->
+              <!--<button mat-button mat-flat-button-->
+                      <!--(click)="addImage('picture',300,300,true)">-->
+                <!--Images-->
+              <!--</button>-->
+            <!--</td>-->
+          <!--</tr></table>-->
 
           <br><br>
 
@@ -173,20 +164,11 @@
         <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
           Visuel large pour présentation élégante du coupon<br><br>
           <img
-               style="width:80%;max-width:550px;max-height:250px;display: inline-block;"
                [src]="coupon.visual"
+               class="visual-coupon"
+               (click)="addImage('visual',800,220,false)"
           >
         </div>
-        <br>
-        <mat-form-field class="form-field-style">
-          <input matInput type="text"
-                 id="txtLargeVisual"
-                 (focus)="focusElt='large_visual'"
-                 placeholder="Adresse internet d'un visuel large"
-                 [(ngModel)]="coupon.visual">
-        </mat-form-field>
-
-
       </mat-step>
 
 
