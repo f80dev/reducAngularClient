@@ -202,7 +202,7 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
   coupons.forEach((coupon:any)=>{
     if(coupon._id==showCoupon)coupon.visible=true;
     coupon["visible"]=false;
-    coupon["message"]="Je recommande cette promotion. "+buildTeaser(coupon,coupon.shop_complete.name);
+    coupon["message"]="Je recommande cette promotion. "+buildTeaser(coupon,coupon.shopname);
     rc.push(coupon);
   });
   return rc;
@@ -371,6 +371,53 @@ export function cropToSquare(base64,quality=1,func) {
   img.src=base64;
 }
 
+export function compute(coupon:any){
+  coupon["conditions"]=coupon["conditions"] || "";
+
+  if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;
+  coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
+
+  coupon.dtStart=new Date().getTime();
+  coupon.nb_partage=Math.round(1/coupon.share_bonus);
+  
+  if(coupon.duration_jours==null)coupon.duration_jours=0;
+  if(coupon.duration_hours==null)coupon.duration_hours=0;
+  
+  coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
+  coupon.delay=0;
+
+  coupon.share_bonus=Number(coupon.share_bonus);
+  coupon.pay_bonus=Number(coupon.pay_bonus);
+  coupon.direct_bonus=Number(coupon.direct_bonus);
+  coupon.final_bonus=Number(coupon.final_bonus);
+
+  if(coupon.nb_partage==0)
+    coupon.share_bonus=0;
+  else
+    coupon.share_bonus=1/coupon.nb_partage;
+
+  if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
+  coupon.unity=coupon.unity.toLowerCase();
+  return coupon;
+}
+
+export function exportToHTML(src:string,coupon:any,func:Function,color="darkred"){
+  var code="";
+  var fields=[];
+  for (let word of src.split(" ")){
+    var field=word.replace("#","").replace("@","");
+
+    if(word.startsWith("#")){
+      fields.push(field);
+      code=code+"<span id='id_"+field+"' style='color:"+color+";cursor: pointer;'>"+coupon[field]+"</span> ";
+    }
+
+    if(word.startsWith("@"))code=code+coupon[field]+" ";
+    if(!word.startsWith("@") && !word.startsWith("#"))code=code+word+" ";
+  }
+  setTimeout(()=>{func(fields)},10);
+  return code;
+}
 
 export function checkLogin(router: Router, params: any = null) {
   if (!localStorage.getItem('user')) {

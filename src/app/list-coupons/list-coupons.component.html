@@ -3,29 +3,24 @@
                        class="app-card"
                        (closed)="showCoupon(coupon,false)"
                        (opened)="showCoupon(coupon,true)"
-                       style="background-color: #8f8f8f;margin-bottom: 5px;"
+                       style="background-color: #8f8f8f;padding:0px"
                        *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
-    <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
+    <mat-expansion-panel-header collapsedHeight="50px" expandedHeight="50px"
                                 class="app-card-header"
                                 name="promoTitle">
 
       <!-- Titre principal du coupon-->
-      <div>
-        <!--<div style="width: 40px;height:40px;display: inline"-->
+      <div style="width: 100%;margin-left:5px;margin-top:0px;">
+        <!--<div style="width: 40px;height:40px;display: inline-block;"-->
              <!--(click)="_flip(coupon)"-->
              <!--class="header-image">-->
         <!--</div>-->
 
-        <!--Affichage des coupons origine pour les non propriétaire - destiné à la carte -->
+        <!--Affichage des coupon pour la carte-->
         <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-          {{coupon.shopname}}: {{coupon.label}}
+          {{coupon.shopname}}: {{coupon.label}}<br>
+          Gagnez jusqu'à {{coupon.max}}{{coupon.symbol}}
         </span>
-
-          <!--Affichage des coupons copiés pour leur propriétaire-->
-          <span *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
-            {{coupon.shopname}}: {{coupon.label}}
-            <span *ngIf="!isVisible(coupon)">- <app-timer [end]="coupon.dtEnd"></app-timer></span>
-          </span>
 
           <!--Affichage des coupons origines pour leur propriétaire-->
           <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
@@ -34,25 +29,28 @@
             <span *ngIf="!isVisible(coupon)">
               &nbsp;&nbsp;- <app-timer [end]="coupon.dtEnd"></app-timer>
             </span>
-
           </div>
 
-      <!--</mat-panel-title>-->
 
-      <!-- La partie sous-titre -->
-      <!--<mat-panel-description class="app-card-subtitle">-->
+        <!--Affichage des coupons copiés pour les non propriétaire pour la carte-->
+          <div *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
+            {{coupon.label}}<br>
+            <span *ngIf="coupon.visible">
+              <span style="font-size: x-small;" *ngIf="coupon.canbedeal && coupon.max>0">
+                jusqu'à {{coupon.max}}{{coupon.symbol}} offert {{coupon.conditions}}
+              </span>
 
-        <!--Affichage des coupons origine pour les non propriétaire pour la carte-->
-        <div *ngIf="(coupon.owner!=user._id || coupon.origin!=coupon._id)">
-          <span *ngIf="coupon.canbedeal && coupon.max>0">
-            jusqu'à {{coupon.max}}{{coupon.symbol}} offert {{coupon.conditions}}
-          </span>
+                <!--Si le coupon ne peut plus être distribué-->
+              <span *ngIf="!coupon.canbedeal">
+                Récupérer {{coupon.gain}}{{coupon.symbol}} offert
+              </span>
+            </span>
 
-            <!--Si le coupon ne peut plus être distribué-->
-            <span *ngIf="!coupon.canbedeal">
-            Récupérer {{coupon.gain}}{{coupon.symbol}} offert
-          </span>
-        </div>
+            <span *ngIf="!coupon.visible">
+              {{coupon.gain}}{{coupon.symbol}} déjà gagné(es).
+              Reste <app-timer [end]="coupon.dtEnd"></app-timer>
+            </span>
+          </div>
 
 
         <!--Affichage des coupons origines pour leur propriétaire-->
@@ -72,8 +70,7 @@
     </mat-expansion-panel-header>
 
 
-        <div class="app-card-content">
-
+        <div style="margin:0px !important;" class="app-card-content">
 
           <!-- Section destinée à l'imprression -->
           <div id="print-section-{{coupon._id}}" style="display: none;">
@@ -98,7 +95,7 @@
                          *ngIf="coupon.showCode"
                          style="width:150px;height: 150px"
                          ngxClipboard [cbContent]="coupon.url"
-                         [size]="90">
+                         [size]="120">
                 </qr-code>
               </a>
 
@@ -106,7 +103,7 @@
             <td style="text-align: center;vertical-align: top;width:auto;">
 
               <!--Zone réservé au client de base-->
-              <div style="display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
+              <div style="margin-top:15px;display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin">
                 <span style="font-size: 2em">
                   {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
                 </span>
@@ -321,7 +318,7 @@
     <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
     <div style="z-index: 100;position: absolute;left:0;top:10%;width:100%;">
       {{coupon.label}}<br><br>
-      <small *ngIf="coupon.max>0">gagnez jusqu'à {{coupon.max}}{{coupon.symbol}}</small>
+      <small *ngIf="coupon.max>0">Vous avez {{coupon.gain}}{{coupon.symbol}} (sur {{coupon.gain}} possible)</small>
 
     </div>
     <div style="z-index: 110;position: absolute;left:0;top:75%;width:100%;text-align: right;max-width:720px;">

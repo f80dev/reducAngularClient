@@ -4,7 +4,7 @@
                  (close)="closeFlashScreen()">
 </app-flashscreen>
 
-<div style="margin:3px;">
+<div style="padding:3px;">
   <mat-accordion [multi]="true" [hidden]="showMessage && user.message?.length>0">
     <app-tuto title="Bienvenue dans ReducShare !"
               *ngIf="user.level<0.5"

@@ -1,0 +1,43 @@
+<app-old-coupons *ngIf="showOldCoupon"
+                 title="Utilisez un modèle"
+                 subtitle="puis modifier ses paramétres pour votre correspondre à votre promotion"
+                 [shop]="{'_id':coupon.shop,'owner':userid}"
+                 (cancel)="showOldCoupon=false"
+                 (select)="selectOldAsModel($event)">
+</app-old-coupons>
+
+<mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;">
+  <mat-card-title>
+    Nouvelle la promotion
+  </mat-card-title>
+  <mat-card-subtitle>
+    Sélectionner simplement les zones rouges pour personnaliser cette promotion
+  </mat-card-subtitle>
+  <mat-card-content class="app-card-content">
+    <h4>Présentation de la promotion:</h4>
+    <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
+
+    <h4>Augmentation de la promotion:</h4>
+    <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
+
+    <h4>Maitrise du budget:</h4>
+    <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
+
+    <h4>Référence:</h4>
+    <div class="zone_text" [innerHTML]="reference_text | safe:'html'"></div>
+
+  </mat-card-content>
+  <mat-card-actions class="app-card-action">
+    <button mat-flat-button class="app-button"
+            id="btnValide"
+            *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
+            (click)="addcoupon(coupon)">Valider</button>
+
+    <button mat-flat-button
+            id="btnCancel"
+            class="app-button"
+            mat-button (click)="cancel()">Annuler</button>
+  </mat-card-actions>
+</mat-card>
+
+

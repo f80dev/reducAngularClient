@@ -54,6 +54,8 @@ import { TransPipe } from './trans.pipe';
 import { AboutComponent } from './about/about.component';
 import { OrderByPipe } from './order-by.pipe';
 import { FlipModule } from 'ngx-flip';
+import { NewCouponSimpleComponent } from './new-coupon-simple/new-coupon-simple.component';
+import { ImageSelectorComponent } from './image-selector/image-selector.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -83,11 +85,14 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     SafePipe,
     TransPipe,
     AboutComponent,
-    OrderByPipe
+    OrderByPipe,
+    NewCouponSimpleComponent,
+    ImageSelectorComponent
   ],
   entryComponents: [
     NewCouponComponent,
-    PromptComponent
+    PromptComponent,
+    ImageSelectorComponent
   ],
 
   imports: [

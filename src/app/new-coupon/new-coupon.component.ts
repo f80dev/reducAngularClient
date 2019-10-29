@@ -1,13 +1,23 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from '../api.service';
-import {buildTeaser, checkLogin, cropToSquare, resizeBase64Img, selectFile, showError, unique_id} from "../tools";
+import {
+  buildTeaser,
+  checkLogin,
+  compute,
+  cropToSquare,
+  resizeBase64Img,
+  selectFile,
+  showError,
+  unique_id
+} from "../tools";
 import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
-import {DialogData, PromptComponent} from "../prompt/prompt.component";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
-import { DeviceDetectorService } from 'ngx-device-detector';
+
+import {MatDialog} from "../../../node_modules/@angular/material/dialog";
+
 import { Router} from '@angular/router';
+import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 
 export interface DialogDataCoupon {
   coupon: any;
@@ -49,11 +59,8 @@ export class NewCouponComponent implements OnInit {
 
   saveMax=0;
 
-  showIcons=false;
   shopname="";
   showOldCoupon=false;
-  icons=[];
-
   level=0;
 
   //mode="add";
@@ -69,7 +76,6 @@ export class NewCouponComponent implements OnInit {
   constructor(public dialog:MatDialog,
               public config:ConfigService,
               public api: ApiService,
-              public deviceService: DeviceDetectorService,
               public route: ActivatedRoute,
               public router:Router,
               public location: Location) { }
@@ -83,16 +89,18 @@ export class NewCouponComponent implements OnInit {
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
       this.preview=this.api.coupon.picture;
-      this.coupon.nb_partage=Math.round(1/this.coupon.share_bonus);
+
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
+
+      this.coupon=compute(this.api.coupon);
     }
     this.userid=params.get("userid") || "";
     this.level=Number(params.get("level") || "0");
-    this.shopname=params.get("shopname") || "";
     this.tags=params.get("tags") || "";
 
+    this.shopname=params.get("shopname") || "";
 
     var modele=params.get("modele") || "";
     if(modele.length>0){
@@ -110,40 +118,19 @@ export class NewCouponComponent implements OnInit {
 
   }
 
-  addIcons(){
-    var root="https://shifumix.com/avatars/";
-    if(this.icons.length==0){
-      for(var i=1;i<300;i++)
-        this.icons.push({photo:root+"file_emojis"+i+".png"});
-    }
-  }
 
   normalize_conditions(coupon){
     //Traitement des conditions pour coller au texte
-    if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;
-    coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
+    coupon=compute(coupon);
     this.refresh();
   }
 
   addcoupon(coupon: any) {
     //Mise en conformité du coupon
-    if(coupon.duration_jours==null)coupon.duration_jours=0;
-    if(coupon.duration_hours==null)coupon.duration_hours=0;
-    coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
-    coupon.delay=0;
-    coupon.owner=this.userid;
-    if(!coupon.website)coupon.website="https://reducshare.com/faq.html#coupon";
 
-    if(coupon.nb_partage==0)
-      coupon.share_bonus=0;
-    else
-      coupon.share_bonus=1/coupon.nb_partage;
+    coupon=compute(coupon);
 
-    if(coupon.pluriel && coupon.unity.endsWith("s"))coupon.unity=coupon.unity.substr(0,coupon.unity.length-1);
-    coupon.unity=coupon.unity.toLowerCase();
-    this.config.waiting=true;
     this.api.addCoupon(coupon).subscribe((result: any) => {
-      this.config.waiting=false;
       localStorage.setItem("showCoupon",result._id);
       this.oninsert.emit({message:result.message});
       this.router.navigate(['home'],{queryParams:{message:result.message}});
@@ -154,18 +141,6 @@ export class NewCouponComponent implements OnInit {
     this.preview=this.coupon.picture;
   }
 
-  onSelectFile(event:any) {
-    selectFile(event,600,(res)=>{
-      this.coupon.picture=res;
-      this.preview=res;
-    })
-  }
-
-  selIcon(icon: any) {
-    this.showIcons=false;
-    this.coupon.picture=icon.photo;
-    this.preview=icon.photo;
-  }
 
   selectOldAsModel(coupon: any) {
     coupon.shop=this.coupon.shop;
@@ -179,9 +154,8 @@ export class NewCouponComponent implements OnInit {
     coupon.duration_jours=Math.trunc(coupon.duration/(24*3600));
     if(coupon.duration_jours>0)coupon.duration_hours=coupon.duration-coupon.duration_jours*(24*3600);
 
-    this.coupon=coupon;
-    this.coupon.nb_partage=Math.round(1/coupon.share_bonus);
-    this.coupon.dtStart=new Date().getTime();
+    this.coupon=compute(coupon);
+
     this.preview=coupon.picture;
     this.showOldCoupon=false;
 
@@ -192,15 +166,7 @@ export class NewCouponComponent implements OnInit {
     this.router.navigate(['home'],{queryParams:{message:"création de coupon annulée"}});
   }
 
-  addEmoji() {
-    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Utiliser un emoji", question: ""}
-    }).afterClosed().subscribe((result) => {
-      if(result){
-        this.coupon.picture=result;
-        this.preview=result;
-      }
-    });
-  }
+
 
   refresh(){
     this.hasMax=(this.coupon.max>0);
@@ -219,5 +185,11 @@ export class NewCouponComponent implements OnInit {
 
   buildCouponTeaser(coupon: any, shopname: string) {
     return buildTeaser(coupon,shopname);
+  }
+
+  addImage() {
+    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {maxsize: 200}}).afterClosed().subscribe((result) => {
+      this.preview=result;
+    });
   }
 }

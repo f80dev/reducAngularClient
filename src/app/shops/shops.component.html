@@ -1,8 +1,8 @@
 <mat-expansion-panel *ngFor="let shop of user.shops" class="app-card" [expanded]="shop.visible">
   <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
                               name="shopCard"
-                              (click)="shop.visible=!shop.visible"
-                              style="cursor: pointer;padding:3px;margin:0px;">
+                              class="app-card-header"
+                              (click)="shop.visible=!shop.visible">
 
     <!--<table>-->
       <!--<tr>-->
@@ -18,12 +18,6 @@
 
 
     <span class="app-card-title">{{shop.name}}</span>
-
-    <span class="spacer"></span>
-    <!--<div style="display: inline-block;">-->
-      <!--<mat-icon *ngIf="!shop.visible">arrow_drop_down</mat-icon>-->
-      <!--<mat-icon *ngIf="shop.visible">arrow_drop_up</mat-icon>-->
-    <!--</div>-->
 
     <div class="app-card-subtitle">
       <span *ngIf="shop.followers?.length>0">

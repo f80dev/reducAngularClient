@@ -71,9 +71,12 @@ export class ShopsComponent implements OnInit {
 
   addCoupon(shop: any,modele:string) {
     this.api.shop=shop;
-    debugger
     this.api.user=this.user;
-    this.router.navigate(["new_coupon"],{queryParams:{
+
+    var command="new_coupon";
+    if(this.user.level<1)command="new_coupon_simple";
+
+    this.router.navigate([command],{queryParams:{
         shopid:shop._id,
         level:this.user.level,
         shopname:shop.name,

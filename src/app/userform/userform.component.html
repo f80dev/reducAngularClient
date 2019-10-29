@@ -1,12 +1,7 @@
 <mat-expansion-panel class="app-card" [expanded]="true">
     <mat-expansion-panel-header class="app-card-header" collapsedHeight="80px" expandedHeight="80px">
       <div *ngIf="!showPersonalCode" style="display:inline-block;width:90px;vertical-align: middle;position:relative;">
-        <label for="file_profil">
-          <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo">
-        </label>
-        <input style="display:none;width:50px;" type="file" id="file_profil"
-               (change)="onSelectFile($event)"
-               accept="image/gif,image/jpeg,image/png" />
+        <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo" (click)="addImage()">
         <mat-icon style="position:absolute;left:-5px;top:0px;cursor: pointer;"
                   (click)="rotatePhoto()"
                   *ngIf="user.level<0.5 && !showPersonalCode"
@@ -37,26 +32,6 @@
               <!--(click)="promptForPseudo()">-->
         <!--Pseudo-->
       <!--</button>-->
-
-      <div style="display: inline-block;margin-left:15px;" *ngIf="user.email?.indexOf('fictif.com')>-1">
-        <button mat-icon-button
-                style="margin-top:10px"
-                title="S'authentifier permet de se connecter depuis plusieurs appareils"
-                id="btnEmailLogin"
-                mat-button mat-flat-button (click)="securise()">
-          <mat-icon>verified_user</mat-icon>
-        </button>
-
-      </div>
-
-      <button mat-icon-button style="margin-left:10px;"
-              *ngIf="user.email?.indexOf('fictif.com')==-1"
-              id="btnLogout"
-              mat-button (click)="logout()">
-        <mat-icon style="font-size: medium;margin-bottom: 5px;">logout</mat-icon>
-      </button>
-
-
 
       <!--<button mat-button *ngIf="user.level==0"-->
               <!--id="btnAddShop" class="mediyum-button" style="display: inline-block;margin-left:5px;"-->
@@ -125,6 +100,24 @@
   </div>
   <mat-action-row class="app-card-action">
     <!--<button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>-->
+
+    <button mat-icon-button
+            *ngIf="user.email?.indexOf('fictif.com')>-1"
+            title="S'authentifier permet de se connecter depuis plusieurs appareils"
+            id="btnEmailLogin"
+            mat-button mat-flat-button (click)="securise()">
+      <mat-icon>verified_user</mat-icon>
+    </button>
+
+
+    <button mat-icon-button mat-raised-button
+            style="margin-left:10px;"
+            *ngIf="user.email?.indexOf('fictif.com')==-1"
+            id="btnLogout"
+            mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+
 
     <button mat-icon-button mat-button mat-raised-button
             *ngIf="(user.shops==null || user.shops.length==0) && user.level>0.5"

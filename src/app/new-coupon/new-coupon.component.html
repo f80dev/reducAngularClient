@@ -29,7 +29,8 @@
                      [filter]="tags"
                      [level]="level"
                      (cancel)="showOldCoupon=false"
-                     (select)="selectOldAsModel($event)"></app-old-coupons>
+                     (select)="selectOldAsModel($event)">
+    </app-old-coupons>
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px" *ngIf="!showOldCoupon">
       <mat-step title="La nature de la promotion permet de décrire les éléments principaux : ce que l'on gagne, une phrase d'accroche, le gain maximum">
@@ -154,22 +155,9 @@
               <app-visual [picture]="preview"></app-visual>
             </td>
             <td style="text-align: center;">
-              <button mat-flat-button
-                      *ngIf="!deviceService.isDesktop()"
-                      mat-button (click)="addEmoji()">Emojis</button>
-
-              <button mat-flat-button mat-button
-                      *ngIf="deviceService.isDesktop()"
-                      (click)="showIcons=!showIcons;addIcons()">Emojis</button>
-              &nbsp;&nbsp;
-
-              <button mat-flat-button mat-button
-                      id="cmdFile"
-                      style="width:70px;text-align: center;">
-                <label for="file">Photos</label>
-                <input type="file" id="file" style="opacity: 0;"
-                       (change)="onSelectFile($event)"
-                       accept="image/gif,image/jpeg,image/png" />
+              <button mat-button mat-flat-button
+                      (click)="addImage()">
+                Images
               </button>
             </td>
           </tr></table>

@@ -14,6 +14,7 @@ import {ApiService} from "../api.service";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
 import {ConfigService} from "../config.service";
+import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 
 declare var ol: any;
 declare var EXIF: any;
@@ -276,5 +277,10 @@ export class UserformComponent implements OnInit {
     this.onrefresh.emit({sort:this.sort});
   }
 
+  addImage() {
+    this.dialog.open(ImageSelectorComponent, {width: '50%', data: {maxsize: 60}}).afterClosed().subscribe((result) => {
+      this.user.photo=result;
+    });
+  }
 
 }
