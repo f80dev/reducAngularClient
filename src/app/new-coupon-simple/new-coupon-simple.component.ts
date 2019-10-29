@@ -5,6 +5,7 @@ import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ApiService} from "../api.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-new-coupon-simple',
@@ -24,14 +25,24 @@ export class NewCouponSimpleComponent implements OnInit {
   shopname="";
   userid="";
 
-  constructor(   public router:Router, public api: ApiService,public dialog: MatDialog,public route: ActivatedRoute) { }
+  constructor(public router:Router, public api: ApiService,
+              public config:ConfigService,
+              public dialog: MatDialog,public route: ActivatedRoute) { }
 
   ngOnInit() {
-
+    var params: ParamMap = this.route.snapshot.queryParamMap;
+    var modele = params.get("modele") || "";
+    if (modele.length > 0) {
+      this.showOldCoupon=false;
+      this.config.values.modeles.forEach((m) => {
+        if (m.id == modele) {
+          this.selectOldAsModel(m);
+        }
+      });
+    }
   }
 
   add_event(fields:any){
-    setTimeout(()=>{
       for(let elt of fields){
         document.getElementById("id_"+elt).addEventListener("click",(event:any)=>{
           if(event.target.id!=null){
@@ -46,16 +57,16 @@ export class NewCouponSimpleComponent implements OnInit {
           }
         });
       }
-    },100);
   }
 
   refresh(){
+    this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="white";
-    this.master_text=exportToHTML("Le client gagne un/une #unity représenter par le symbole #symbol <br>L'annonce est #label à #shopname #conditions <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.master_text=exportToHTML("#label à @shopname <br><br>Le client gagne un/une #unity représenter par le symbole #symbol <br><br> #conditions <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
     this.augment_text=exportToHTML("Le client gagne #direct_bonus @symbol à la récupération du coupon, puis 1 @symbol de plus pour #nb_partage partages.<br>Enfin #pay_bonus @symbol suplémentaire lorsqu'un coupon qu'il a distribué est utilisé",this.coupon,(fields)=>{this.add_event(fields);},color);
-    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max @symbol <br>La promotion se termine au bout de #duration_jours jour(s) et #duration_hours heure(s) ou si #stock @symbol ont été offerts dans le cadre de cette promotion",this.coupon,(fields)=>{this.add_event(fields);},color);
-    this.reference_text=exportToHTML("La référence de votre promotion est sous le titre #title",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max @symbol par client.<br><br>La promotion se termine au bout de #duration_jours jour(s) et #duration_hours heure(s) ou si #stock @symbol ont été offerts.",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.reference_text=exportToHTML("Votre promotion sera classée sous le titre #title",this.coupon,(fields)=>{this.add_event(fields);},color);
   }
 
   selectOldAsModel(coupon: any) {

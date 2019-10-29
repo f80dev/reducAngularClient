@@ -390,10 +390,12 @@ export function compute(coupon:any){
   coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
   coupon.delay=0;
 
-  // coupon.share_bonus=Number(coupon.share_bonus);
-  // coupon.pay_bonus=Number(coupon.pay_bonus);
-  // coupon.direct_bonus=Number(coupon.direct_bonus);
-  // coupon.final_bonus=Number(coupon.final_bonus);
+  coupon.share_bonus=Number(coupon.share_bonus);
+  coupon.pay_bonus=Number(coupon.pay_bonus);
+  coupon.direct_bonus=Number(coupon.direct_bonus);
+  coupon.final_bonus=Number(coupon.final_bonus);
+  coupon.max=Number(coupon.max);
+  coupon.stock=Number(coupon.stock);
 
   if(coupon.nb_partage>0)
     coupon.share_bonus=1/coupon.nb_partage;

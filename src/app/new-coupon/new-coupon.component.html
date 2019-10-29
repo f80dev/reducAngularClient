@@ -23,8 +23,7 @@
   <mat-card-content class="app-card-content" style="text-align: left;margin:0;padding:0;">
 
     <app-old-coupons *ngIf="showOldCoupon"
-                     title="Utilisez un modèle"
-                     subtitle="puis modifier ses paramétres pour votre correspondre à votre promotion"
+                     title="Utilisez un modèle pour votre nouvelle promotion"
                      [shop]="{'_id':coupon.shop,'owner':userid}"
                      [filter]="tags"
                      [level]="level"
@@ -70,6 +69,12 @@
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
+        <mat-checkbox [(ngModel)]="coupon.breakable"
+                      *ngIf="level>0.5" (focus)="focusElt='breakable'"
+                      (change)="changeMax()">unité fractionnable (Exemple: 3.4 {{coupon.symbol}})
+        </mat-checkbox>
+        <br><br>
+
         <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
 
@@ -93,9 +98,6 @@
         <app-tuto *ngIf="focusElt=='breakable'" id="tutoBreakable"
                   label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">
         </app-tuto>
-        <mat-checkbox [(ngModel)]="coupon.breakable"
-                      *ngIf="level>0.5" (focus)="focusElt='breakable'"
-                      (change)="changeMax()">Unité peut être fractionné</mat-checkbox><br>
 
         <app-tuto label="Pour toute promotion on va préciser dans quel cadre le client peut utiliser la promotion. Par exemple : pour tout achat hors weekend, pour tout achat d'un montant minimum de ..."
                   *ngIf="focusElt=='conditions'"></app-tuto>
@@ -122,7 +124,7 @@
           <input type="text" matInput
                  id="txtWebSite"
                  (focus)="focusElt='website'"
-                 placeholder="{{'Adresse d une page donnant des infos supplémentaires' | trans}}"
+                 placeholder="{{'Site web pour infos complémentaires' | trans}}"
                  [(ngModel)]="coupon.website">
         </mat-form-field>
 
@@ -138,7 +140,7 @@
 
         <app-tuto *ngIf="focusElt=='symbol'"
           label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
-        <div style="width: 100%;text-align: center;">
+        <!--<div style="width: 100%;text-align: center;">-->
 
 
           <!-- Présentation du mini visuel -->
@@ -155,14 +157,10 @@
             <!--</td>-->
           <!--</tr></table>-->
 
-          <br><br>
-
-
-
-        </div>
+        <!--</div>-->
 
         <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
-          Visuel large pour présentation élégante du coupon<br><br>
+          Visuel du coupon<br><br>
           <img
                [src]="coupon.visual"
                class="visual-coupon"

@@ -1,6 +1,5 @@
 <app-old-coupons *ngIf="showOldCoupon"
-                 title="Utilisez un modèle"
-                 subtitle="puis modifier ses paramétres pour votre correspondre à votre promotion"
+                 title="Utilisez un modèle pour votre nouvelle promotion"
                  [shop]="{'_id':coupon.shop,'owner':userid}"
                  (cancel)="showOldCoupon=false"
                  (select)="selectOldAsModel($event)">
@@ -10,21 +9,18 @@
   <mat-card-title>
     Nouvelle la promotion
   </mat-card-title>
-  <mat-card-subtitle>
-    Sélectionner simplement les zones rouges pour personnaliser cette promotion
+  <mat-card-subtitle style="color: black;">
+    Les contenus des zones blanches peuvent être personnalisé
   </mat-card-subtitle>
   <mat-card-content class="app-card-content">
     <h4>Présentation de la promotion:</h4>
     <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
     <br>
     <div style="position:relative;width: 100%;text-align: center;color:white;">
-      Visuel Large<br>
+      <span style="color:black">Visuel Large</span><br>
       <div style="position:absolute;z-index:100;width:100%;top:20%;font-size: x-large;">{{coupon.label}}</div>
-      <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:40%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
+      <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
       <img class="visual-coupon" style="object-fit: cover;" [src]="coupon.visual" (click)="addImage('visual',800,220)"><br>
-
-      <!--Petit visuel<br>-->
-      <!--<img [src]="coupon.picture" style="width: 200px" (click)="addImage('picture',300,300)"><br>-->
     </div>
     <br>
 

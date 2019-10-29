@@ -132,6 +132,7 @@ export class NewCouponComponent implements OnInit {
   }
 
   selectOldAsModel(coupon: any) {
+    if(coupon.share_bonus>0)coupon.nb_partage=1/coupon.share_bonus;
     coupon.shop=this.coupon.shop;
 
     if(coupon.duration!=null)coupon["duration_hours"]=Math.trunc(coupon.duration/3600);
