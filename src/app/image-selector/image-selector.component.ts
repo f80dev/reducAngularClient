@@ -5,6 +5,7 @@ import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {rotate, selectFile} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ApiService} from "../api.service";
+import {MatSnackBar} from "@angular/material";
 
 export interface ImageSelectorData {
   quality:number;
@@ -31,6 +32,7 @@ export class ImageSelectorComponent implements OnInit {
 
   constructor(
     public dialog:MatDialog,
+    public snackBar:MatSnackBar,
     public api:ApiService,
     public deviceService: DeviceDetectorService,
     public dialogRef: MatDialogRef<ImageSelectorComponent>,
@@ -100,7 +102,10 @@ export class ImageSelectorComponent implements OnInit {
           this.data.result=result;
         } else {
           this.api.searchImage(result,15).subscribe((r:any)=>{
-            this.pictures=r;
+            if(r==null || r.length==0)
+              this.snackBar.open("Désolé nous n'avons pas trouvé d'images pour le mot "+result,"",{duration:2000});
+            else
+              this.pictures=r;
           })
         }
 
