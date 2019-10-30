@@ -257,13 +257,14 @@
 
           <button mat-button mat-flat-button
                   name="btnShare"
-                  *ngIf="!coupon.canbedeal || (coupon.origin!=coupon._id && user.level==0)"
+                  *ngIf="!coupon.canbedeal || user.level<1"
                   title="Partager le coupon pour augmenter votre promotion / réduction"
                   (click)="showCode(coupon)">
-          <span *ngIf="coupon.canbedeal">
-            Partager
-            <span *ngIf="coupon.origin!=coupon._id">/ Utiliser</span>
-          </span>
+            <mat-icon>share</mat-icon>&nbsp;
+            <span *ngIf="coupon.canbedeal">
+              Partager
+            <span *ngIf="coupon.origin!=coupon._id"> / Utiliser</span>
+            </span>
             <!--Lorsque le coupon ne peut plus être distribué on ne peut plus que l'utiliser-->
             <span *ngIf="!coupon.canbedeal && coupon.gain>0">
             Utiliser
@@ -273,7 +274,7 @@
           <button mat-button mat-flat-button mat-icon-button
                   name="btnShareAdvanced"
                   class="small-icon-button"
-                  *ngIf="coupon.canbedeal && user.level>0"
+                  *ngIf="coupon.canbedeal && user.level>=1"
                   title="Partager le coupon pour augmenter votre promotion / réduction"
                   (click)="showCode(coupon)">
             <mat-icon>share</mat-icon>
