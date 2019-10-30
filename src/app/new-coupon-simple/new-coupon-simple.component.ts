@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {compute, exportToHTML, showError} from "../tools";
+import {$$, checkLogin, compute, exportToHTML, showError} from "../tools";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {PromptComponent} from "../prompt/prompt.component";
@@ -14,7 +14,7 @@ import {ConfigService} from "../config.service";
 })
 export class NewCouponSimpleComponent implements OnInit {
 
-  showOldCoupon=true;
+  showOldCoupon=false;
   master_text="";
   augment_text="";
   budget_text="";
@@ -30,15 +30,21 @@ export class NewCouponSimpleComponent implements OnInit {
               public dialog: MatDialog,public route: ActivatedRoute) { }
 
   ngOnInit() {
+    checkLogin(this.router);
     var params: ParamMap = this.route.snapshot.queryParamMap;
+    this.tags=params.get("tags") || "";
     var modele = params.get("modele") || "";
     if (modele.length > 0) {
-      this.showOldCoupon=false;
+      $$("Demande d'ouverture avec le modele "+modele);
       this.config.values.modeles.forEach((m) => {
         if (m.id == modele) {
+          $$("Modèle identifié");
           this.selectOldAsModel(m);
         }
       });
+    } else {
+      $$("Affichage de la liste des modèles avec filter="+this.tags)
+      this.showOldCoupon=true;
     }
   }
 
@@ -96,7 +102,6 @@ export class NewCouponSimpleComponent implements OnInit {
     var params:ParamMap=this.route.snapshot.queryParamMap;
     this.userid=params.get("userid") || "";
     this.coupon.shop = params.get("shopid") || "";
-    this.tags=params.get("tags") || "";
 
     if(Number(this.coupon.share_bonus)>0)
       coupon["nb_partage"]=1/coupon.share_bonus;
