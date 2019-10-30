@@ -96,4 +96,8 @@ export class ApiService {
   updateCoupon(coupon_id: string, field: string, value: string) {
     return this.http.get(api("updatecoupon/"+coupon_id+"/"+field+"/"+value));
   }
+
+  searchImage(query:string,limit:number){
+    return this.http.get("https://server.f80.fr:5600/"+query+"/"+limit+"/true");
+  }
 }

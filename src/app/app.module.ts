@@ -21,7 +21,7 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
-  MatDialogModule, MatExpansionModule,
+  MatDialogModule, MatExpansionModule, MatGridListModule,
   MatIconModule,
   MatInputModule, MatListModule, MatSelectModule,
   MatSnackBarModule, MatStepperModule, MatToolbarModule
@@ -105,6 +105,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     ClipboardModule,
     NgxSocialButtonModule,
     BrowserModule,
+    MatGridListModule,
     MatExpansionModule,
     MatSelectModule,
     HttpClientModule,

@@ -4,6 +4,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {rotate, selectFile} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
+import {ApiService} from "../api.service";
 
 export interface ImageSelectorData {
   quality:number;
@@ -26,9 +27,11 @@ export class ImageSelectorComponent implements OnInit {
 
   icons=[];
   showIcons=false;
+  pictures=[];
 
   constructor(
     public dialog:MatDialog,
+    public api:ApiService,
     public deviceService: DeviceDetectorService,
     public dialogRef: MatDialogRef<ImageSelectorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -90,12 +93,23 @@ export class ImageSelectorComponent implements OnInit {
 
   addUrl() {
     this.dialog.open(PromptComponent, {
-      width: '250px', data: {title: "Adresse internet de votre image", question: ""}
+      width: '250px', data: {title: "Un mot clé ou directement une adresse internet de votre image", question: ""}
     }).afterClosed().subscribe((result) => {
       if (result) {
-        if(!result.startsWith("http"))result="https://"+result;
-        this.data.result=result;
+        if(result.startsWith("http")){
+          this.data.result=result;
+        } else {
+          this.api.searchImage(result,15).subscribe((r:any)=>{
+            this.pictures=r;
+          })
+        }
+
       }
     });
+  }
+
+  selPicture(tile: any) {
+    this.data.result=tile;
+    this.pictures=[];
   }
 }
