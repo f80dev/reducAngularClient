@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1572437267948,
+  "timestamp": 1572442752727,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -62,11 +62,13 @@
         "https://reducshare.com/assets/img/pain.jpg",
         "https://reducshare.com/assets/img/pharmacie.jpg",
         "https://reducshare.com/assets/img/piano.jpg",
+        "https://reducshare.com/assets/img/piano2.jpg",
         "https://reducshare.com/assets/img/pin.png",
         "https://reducshare.com/assets/img/recyclage.jpg",
         "https://reducshare.com/assets/img/shop.png",
         "https://reducshare.com/assets/img/soap.jpg",
         "https://reducshare.com/assets/img/tips.png",
+        "https://reducshare.com/assets/img/vin.jpg",
         "https://reducshare.com/assets/load-image.all.min.js",
         "https://reducshare.com/assets/logo.svg",
         "https://reducshare.com/assets/visual.svg"
@@ -76,7 +78,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "44ef46e235bd9ba81e65333b743b4434b818f162",
+    "https://reducshare.com/assets/config.json": "8b91a5b962e0a1ffb6252fd90bbf52fcda2d3197",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -111,11 +113,13 @@
     "https://reducshare.com/assets/img/pain.jpg": "7851976db2f1f1f7233ebf0d1b275b090e073d5c",
     "https://reducshare.com/assets/img/pharmacie.jpg": "294dac8e5833e560c2e1a1262850ba569b3fb6be",
     "https://reducshare.com/assets/img/piano.jpg": "201a1ab40dfba80ee71f9ce6f56b28f75c4751b8",
+    "https://reducshare.com/assets/img/piano2.jpg": "7632f36c48d8ddbc4288e38a175ecdd8970137ac",
     "https://reducshare.com/assets/img/pin.png": "837dc76cdc0d9754c1de11777f1a1ac04710cb66",
     "https://reducshare.com/assets/img/recyclage.jpg": "5d9a49a2356d30cd2ab0ccb456d44642d7f7004f",
     "https://reducshare.com/assets/img/shop.png": "4c80df3da81ddc4cbf78b8385a33b2c0d22930ca",
     "https://reducshare.com/assets/img/soap.jpg": "741aa0b6666d608f110c019c64b2b60489b2287d",
     "https://reducshare.com/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
+    "https://reducshare.com/assets/img/vin.jpg": "f89a85f8e4f3e098da3af034c042801a0f835d1b",
     "https://reducshare.com/assets/load-image.all.min.js": "95fd73530e6ad7240373f8b3ada77da27defdcf5",
     "https://reducshare.com/assets/logo.svg": "9543076a95bbb559660ac8c0087787fa01222a3b",
     "https://reducshare.com/assets/visual.svg": "dc38682c923c6279487c6d8c97bfc208519a3771",
