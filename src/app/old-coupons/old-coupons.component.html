@@ -1,6 +1,10 @@
 <mat-card class="app-card" style="background: none;">
   <mat-toolbar class="app-toolbar">
-    {{title}}
+    <div style="display: inline-block;padding:0px;vertical-align: text-top;">
+      {{title}}<br>
+      <span style="font-size: small;color: lightgray;">{{subtitle}}</span>
+    </div>
+
     <span class="spacer">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </span>
@@ -18,7 +22,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar>
-  <span style="font-size: small">{{subtitle}}</span>
+
 
   <span *ngIf="withFilter" style="font-size: small">
     Filtre actif : {{filter}}

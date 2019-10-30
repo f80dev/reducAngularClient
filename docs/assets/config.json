@@ -1,7 +1,7 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.2.76-beta",
+  "version":"0.2.77-beta",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
@@ -25,28 +25,19 @@
     {
       "id":"buildFaq",
       "title": "Comment faire une promotion ?",
-      "content": "Pour lancer une promotion il faut avoir créer au moins un établissement avant (car la promotion est, rattaché à l'établissement). Depuis l'établissement on ajoute la promotion. On peut soit partir des valeurs par défaut, soit choisir un modèle.Les valeurs à saisir sont regroupées en 5 sections.Une fois la promotion validée, celle-ci apparait dans la section de l'établissement"
+      "content": "./faqs/build_promo.html"
     },
     {
       "id":"profil",
       "title": "Doit on s'authentifier pour utiliser ReducShare ?",
-      "content": "Absolument pas. ReducShare fonctionne parfaitement avec un profil anonyme. L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
+      "content": "Absolument pas !<br> ReducShare fonctionne parfaitement avec un profil anonyme. <br>L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
     },
     {
       "id":"delegate",
-      "title": "Peut on déléguer à ses employer la validation des réductions ?",
-      "content": "Oui, rien de plus simple. Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
+      "title": "Peut on déléguer la validation des réductions à ses employés ?",
+      "content": "Oui, rien de plus simple.<br>Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
     },
-    {
-      "id":"benefices_vendeur",
-      "title": "Quels intérêt pour un vendeur",
-      "content": "https://reducshare.com/faq/benef_vendeur.html"
-    },
-    {
-      "id":"benefices_client",
-      "title": "Quels intérêt pour un acheteur",
-      "content": "https://reducshare.com/faq/benef_acheteur.html"
-    },
+
     {
       "id":"getReduc",
       "title": "Comment récupérer des réductions ?",

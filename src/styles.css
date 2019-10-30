@@ -95,6 +95,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-toolbar {
   width: 100%;
+  line-height: 100%;
   font-size: medium;
   margin:0px;
   padding: 0px;

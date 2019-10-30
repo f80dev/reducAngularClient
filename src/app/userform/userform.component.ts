@@ -233,6 +233,7 @@ export class UserformComponent implements OnInit {
       if(result.user!=null){
         this.user=result.user;
         this.onupdate.emit(this.user);
+        showMessage(this,"Authentification validée");
       } else {
         this.user.message=result["message"];
       }
