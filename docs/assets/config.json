@@ -37,7 +37,6 @@
       "title": "Peut on déléguer la validation des réductions à ses employés ?",
       "content": "Oui, rien de plus simple.<br>Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
     },
-
     {
       "id":"getReduc",
       "title": "Comment récupérer des réductions ?",
@@ -50,13 +49,11 @@
     }
   ],
 
-
   "cgu":{
     "dtModif":1570395953,
     "online":false,
     "content":"https://reducshare.com/cgu.html"
   },
-
 
   "socket":true,
   "icon_coupon":"./assets/img/pin.png",

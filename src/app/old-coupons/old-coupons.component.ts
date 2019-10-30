@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ApiService} from "../api.service";
 import {ConfigService} from "../config.service";
-import {showError} from "../tools";
+import {$$, showError} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import { Router} from '@angular/router';
@@ -30,7 +30,7 @@ export class OldCouponsComponent implements OnInit {
 
   ngOnInit() {
     this.refresh(()=>{
-      if(this.filter!="")this.opereFilter();
+      if(this.filter.length>0)this.opereFilter();
     });
   }
 
@@ -74,6 +74,7 @@ export class OldCouponsComponent implements OnInit {
   }
 
   opereFilter() {
+    $$("Application du filtre="+this.filter);
     this.withFilter=true;
     var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
     this.coupons=[];

@@ -3,6 +3,7 @@
                  subtitle="pour votre nouvelle promotion"
                  [shop]="{'_id':coupon.shop,'owner':userid}"
                  (cancel)="cancel()"
+                 [filter]="tags"
                  (select)="selectOldAsModel($event)">
 </app-old-coupons>
 

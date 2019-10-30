@@ -71,7 +71,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-title {
-  font-size: medium;
+  font-size: large;
+  line-height: 90%;
   margin-top:10px;
   margin-left:10px;
 }
@@ -110,7 +111,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-subtitle {
-  font-size: medium;
+  font-size: small;
+  color:lightgrey;
 }
 
 h3 {
