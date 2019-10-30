@@ -44,7 +44,14 @@ export class NewCouponSimpleComponent implements OnInit {
 
   add_event(fields:any){
       for(let elt of fields){
-        document.getElementById("id_"+elt).addEventListener("click",(event:any)=>{
+        var field=elt.split("=")[0];
+        var desc="";
+        if(elt.indexOf("=")>-1){
+          for(let k=0;k<15;k++)
+            desc=elt.split("=")[1].replace("_"," ");
+        }
+
+        document.getElementById("id_"+field).addEventListener("click",(event:any)=>{
           if(event.target.id!=null){
             var field=event.target.id.replace("id_","");
             this.dialog.open(PromptComponent,{width: '80%',data: {title: field+" ?", result: this.coupon[field],onlyConfirm:false}})
@@ -63,13 +70,23 @@ export class NewCouponSimpleComponent implements OnInit {
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="white";
-    this.master_text=exportToHTML("#label à @shopname <br><br>Le client gagne un/une #unity représenter par le symbole #symbol <br><br> #conditions <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
-    this.augment_text=exportToHTML("Le client gagne #direct_bonus @symbol à la récupération du coupon, puis 1 @symbol de plus pour #nb_partage partages.<br>Enfin #pay_bonus @symbol suplémentaire lorsqu'un coupon qu'il a distribué est utilisé",this.coupon,(fields)=>{this.add_event(fields);},color);
-    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max @symbol par client.<br><br>La promotion se termine au bout de #duration_jours jour(s) et #duration_hours heure(s) ou si #stock @symbol ont été offerts.",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.master_text=exportToHTML("#label=teaser_de_votre_promotion à @shopname <br>Le client gagne un/une #unity=unité_désignant_ce_que_gagne_le_client représenté par le symbole " +
+      "#symbol=Symbole_utilisé_pour_représenter_l'unité " +
+      "<br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
+
+    this.augment_text=exportToHTML("Le client gagne #direct_bonus @symbol à la récupération du coupon, " +
+      "puis 1 @symbol de plus chaque fois qu'il le partage #nb_partage=Gain_à_chaque_partage fois.<br>Enfin #pay_bonus @symbol suplémentaire " +
+      "lorsqu'un coupon qu'il a distribué est utilisé",this.coupon,(fields)=>{this.add_event(fields);},color);
+
+    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par client." +
+      "<br>La promotion se termine au bout de #duration_jours jour(s) " +
+      "et #duration_hours heure(s) ou si #stock @symbol ont été offerts.",this.coupon,(fields)=>{this.add_event(fields);},color);
+
     this.reference_text=exportToHTML("Votre promotion sera classée sous le titre #title",this.coupon,(fields)=>{this.add_event(fields);},color);
   }
 
   selectOldAsModel(coupon: any) {
+    if(coupon==null)this.cancel();
     if(coupon.share_bonus>0)coupon.nb_partage=1/coupon.share_bonus;
     this.coupon=compute(coupon);
 
@@ -88,6 +105,7 @@ export class NewCouponSimpleComponent implements OnInit {
   }
 
   cancel(){
+    this.showOldCoupon=false;
     this.router.navigate(['home'],{queryParams:{message:"création de coupon annulée"}});
   }
 

@@ -94,7 +94,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-toolbar {
-  max-width: 900px;
+  width: 100%;
   font-size: medium;
   margin:0px;
   padding: 0px;

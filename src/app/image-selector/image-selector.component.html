@@ -47,7 +47,7 @@
   <mat-dialog-actions>
     <button id="cmdTurn" mat-button mat-raised-button mat-icon-button
             title="Permet de faire tourner la photo de 90 degrés"
-            *ngIf="data.square"
+            *ngIf="data.square && !data.result.startsWith('http')"
             (click)="rotatePhoto()">
       <mat-icon>refresh</mat-icon>
     </button>

@@ -12,15 +12,14 @@
     <button mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
       <mat-icon>filter_list</mat-icon>
     </button>
-
     &nbsp;
-
     &nbsp;
     <button class="small-button" mat-icon-button mat-button mat-flat-button (click)="oncancel.emit()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar>
   <span style="font-size: small">{{subtitle}}</span>
+
   <span *ngIf="withFilter" style="font-size: small">
     Filtre actif : {{filter}}
     <button mat-button

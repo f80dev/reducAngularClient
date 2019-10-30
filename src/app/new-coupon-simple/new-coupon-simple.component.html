@@ -1,7 +1,8 @@
 <app-old-coupons *ngIf="showOldCoupon"
-                 title="Utilisez un modèle pour votre nouvelle promotion"
+                 title="Utilisez un modèle"
+                 subtitle="pour votre nouvelle promotion"
                  [shop]="{'_id':coupon.shop,'owner':userid}"
-                 (cancel)="showOldCoupon=false"
+                 (cancel)="cancel()"
                  (select)="selectOldAsModel($event)">
 </app-old-coupons>
 
@@ -13,7 +14,7 @@
     Les contenus des zones blanches peuvent être personnalisé
   </mat-card-subtitle>
   <mat-card-content class="app-card-content">
-    <h4>Présentation de la promotion:</h4>
+    <h4>Présentation de votre promotion</h4>
     <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
     <br>
     <div style="position:relative;width: 100%;text-align: center;color:white;">
@@ -24,13 +25,13 @@
     </div>
     <br>
 
-    <h4>Augmentation de la promotion:</h4>
+    <h4>Augmentation de la promotion</h4>
     <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
 
-    <h4>Maitrise du budget:</h4>
+    <h4>Maitriser votre budget</h4>
     <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
 
-    <h4>Référence:</h4>
+    <h4>Référencer</h4>
     <div class="zone_text" [innerHTML]="reference_text | safe:'html'"></div>
 
 
