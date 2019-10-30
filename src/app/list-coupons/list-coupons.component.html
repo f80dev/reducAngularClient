@@ -108,7 +108,7 @@
               <div *ngIf="coupon.canbedeal && coupon.showCode">
                 <table style="text-align: left;display: inline-block;font-size:small;" cellpadding="2" name="zoneInfo">
                   <tr><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
-                  <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-1'}}{{coupon.symbol}}</td></tr>
                   <tr><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
                   <tr><td>Utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
                 </table><br>
