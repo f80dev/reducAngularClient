@@ -79,7 +79,7 @@ export class NewCouponSimpleComponent implements OnInit {
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="white";
-    this.master_text=exportToHTML("#label=teaser_de_votre_promotion à @shopname <br>Le client gagne un/une #unity=unité_désignant_ce_que_gagne_le_client représenté dans ReducShare par le symbole " +
+    this.master_text=exportToHTML("#label=teaser_de_votre_promotion à @shopname <br>Le client gagne un/une #unity=unité_désignant_ce_que_gagne_le_client représenté(e) dans ReducShare par le symbole " +
       "#symbol=Symbole_utilisé_pour_représenter_l'unité " +
       "<br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
 

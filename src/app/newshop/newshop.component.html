@@ -43,8 +43,8 @@
     <mat-form-field class="form-field-style">
       <input id="txtShopAddress" type="text"
              (focus)="focusElt=='address'"
-             data-tac="Puis on indique l'adresse de l'enseigne"
-             matInput placeholder="Adresse de l'enseigne" [(ngModel)]="new_shop.address"
+             data-tac="Puis on indique l'adresse de l'enseigne ou l'on pourra récupérer la promotion et l'utiliser"
+             matInput placeholder="Adresse de l'enseigne ou l'on peut récupérer la promotion" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
       <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
         <mat-icon>close</mat-icon>
@@ -95,14 +95,14 @@
       Image
     </button>
 
+    <br>
     <mat-form-field class="form-field-style">
       <input id="txtWebsite" type="text"
              (focus)="focusElt=='website'"
-             title="Indiquer le site web ou un lien pour en savoir plus"
+             title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
              matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
     </mat-form-field>
     <br>
-
 
   </mat-card-content>
 

@@ -423,7 +423,8 @@ export function exportToHTML(src:string,coupon:any,func:Function,color="darkred"
     if(!word.startsWith("@") && !word.startsWith("#"))code=code+word+" ";
   }
   setTimeout(()=>{func(fields)},10);
-  return code;
+
+  return normeString(code);
 }
 
 export function checkLogin(router: Router, params: any = null) {
@@ -509,6 +510,9 @@ export function getDelay(dtStart, lang= 'en', label_day= 'jours', serverNow= nul
 
 export function normeString(s){
   if(s==null)return "";
+  s=s.replace("à chez","chez");
+  s=s.replace("pour sur","sur");
+  s=s.replace("pour pour","pour");
   return s;
 }
 
