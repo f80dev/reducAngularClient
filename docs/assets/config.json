@@ -299,12 +299,12 @@
     },
     {
       "id":"entract",
-      "title":"Des boissons offertes à l'entracte",
+      "title":"Des boissons offertes pendant votre événement",
       "unity":"boisson",
       "symbol":"🥂",
       "breakable":false,
       "pluriel":true,
-      "label":"Un verre gratuit à l'entracte ?",
+      "label":"Gagnez des consos gratuites !",
       "share_bonus":0.1,
       "level":0.6,
       "pay_bonus":1,
@@ -317,7 +317,7 @@
       "stock":200,
       "max_coupon":500,
       "score":13,
-      "conditions":"sur simple présentation du coupon au bar pendant l'entracte",
+      "conditions":"sur simple présentation du coupon au bar pendant le spectacle",
       "tags":"concert,événementiel"
     },
     {
