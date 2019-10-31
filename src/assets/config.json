@@ -1,11 +1,12 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.3-beta",
+  "version":"0.31-beta",
   "news":"Recherche d'images sur internet",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
+
   "editor":{
     "name":"F80",
     "website":"https://f80.fr",
@@ -65,7 +66,7 @@
   "domain_server":"server.f80.fr",
   "domain_appli":"https://reducshare.com",
 
-  "tags":"boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hôtel,vin",
+  "tags":"corporate,boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin",
 
   "modeles":[
     {
@@ -227,7 +228,7 @@
       "max_coupon":500,
       "description":"Un hôtel fait des promotions de dernière minutes en offrant des nuits",
       "conditions":"pour l'achat d'un séjour de minimum 7 nuits hors haute saison",
-      "tags":"hôtel"
+      "tags":"hotel"
     },
     {
       "id":"petitdej",
@@ -249,7 +250,7 @@
       "stock":200,
       "max_coupon":5000,
       "conditions":"pour tout séjour de minimum 3 nuits",
-      "tags":"hôtel"
+      "tags":"hotel"
     },
     {
       "id":"invendus",
@@ -295,7 +296,7 @@
       "score":15,
       "max_coupon":5000,
       "conditions":"pour toute réservation d'au moins une nuit",
-      "tags":"hôtel"
+      "tags":"hotel"
     },
     {
       "id":"entract",
@@ -341,7 +342,7 @@
       "score":15,
       "visual":"https://reducshare.com/assets/img/happyhour.jpg",
       "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
-      "tags":"bar,restaurant,hôtel,vin"
+      "tags":"bar,restaurant,hotel,vin"
     },
     {
       "id":"apero",
@@ -363,7 +364,7 @@
       "visual":"https://reducshare.com/assets/img/apero.jpg",
       "max_coupon":500,
       "conditions":"pour tout repas sauf samedi",
-      "tags":"restaurant,hôtel"
+      "tags":"restaurant,hotel"
     },
     {
       "id":"dessertgratuit",
@@ -522,6 +523,54 @@
       "visual":"https://reducshare.com/assets/img/piano.jpg",
       "description":"Un musée affiche en fin d'exposition la promotion pour offrir des places sur les prochaines exposition en échange d'un parainage pour celle vue",
       "tags":"événementiel,exposition"
+    },
+    {
+      "id":"expositionoeuvregratuite",
+      "title":"Des réductions sur les oeuvres",
+      "unity":"% de réduction",
+      "symbol":"🎟️",
+      "pluriel":true,
+      "breakable":true,
+      "label":"Des entrées gratuites",
+      "share_bonus":0.05,
+      "level":0.5,
+      "pay_bonus":1,
+      "direct_bonus":0.5,
+      "max":2,
+      "final_bonus":0,
+      "score":15,
+      "duration_hours":480,
+      "stock":500,
+      "max_coupon":5000,
+      "conditions":"pour l'achat des oeuvres marquées d'un point rouge",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/frame-with-picture_1f5bc.png",
+      "visual":"https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_960_720.jpg",
+      "description":"Une gallerie offre une réduction sur l'achat de certaines oeuvres à l'occasion d'un vernissage",
+      "tags":"exposition"
+    },
+    {
+      "id":"recrutement",
+      "title":"Recrutement par cooptation",
+      "unity":"bouteille de champagne",
+      "symbol":"🍾",
+      "pluriel":true,
+      "breakable":true,
+      "label":"Trouver des profils et gagner des bouteilles de champagne",
+      "level":0.5,
+      "pay_bonus":4,
+      "share_bonus":0.05,
+      "direct_bonus":0.25,
+      "final_bonus":0,
+      "max":6,
+      "score":15,
+      "duration_hours":480,
+      "stock":18,
+      "max_coupon":5000,
+      "conditions":"sur présentation du coupon",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/bottle-with-popping-cork_1f37e.png",
+      "visual":"https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_960_720.jpg",
+      "description":"La RH d'une entreprise offre des bouteilles de champagne en échange de la cooptation de candidats.",
+      "tags":"corporate"
     }
   ]
 }
