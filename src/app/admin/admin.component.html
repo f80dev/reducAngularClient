@@ -31,6 +31,7 @@
     <th>closed</th>
     <th>canbedeal</th>
     <th>deleted</th>
+    <th>score</th>
     <th>dtCreate</th>
     <th>Direct</th>
     <th>Share</th>
@@ -49,6 +50,7 @@
     <td mat-cell>{{coupon.closed}}</td>
     <td mat-cell>{{coupon.canbedeal}}</td>
     <td mat-cell>{{coupon.deleted}}</td>
+    <td mat-cell>{{coupon.score}}</td>
     <td mat-cell>{{coupon.dtCreate*1000 | date:'short'}}</td>
     <td mat-cell>{{coupon.direct_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.share_bonus | number:'1.0-1'}}</td>
@@ -70,6 +72,7 @@
     <th>lat</th>
     <th>public</th>
     <th>website</th>
+    <th>score</th>
     <th>Graph</th>
   </tr>
   <tr *ngFor="let shop of shops">
@@ -81,6 +84,7 @@
     <td mat-cell>{{shop.lat | number:'1.0-3'}}</td>
     <td mat-cell>{{shop.public}}</td>
     <td mat-cell>{{shop.website}}</td>
+    <td mat-cell>{{shop.score}}</td>
     <td mat-cell><span (click)="openGraph(shop._id)">Graphe</span></td>
   </tr>
 </table>
