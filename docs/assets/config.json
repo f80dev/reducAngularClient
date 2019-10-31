@@ -318,7 +318,7 @@
       "max_coupon":500,
       "score":13,
       "conditions":"sur simple présentation du coupon au bar pendant l'entracte",
-      "tags":"concert,événement"
+      "tags":"concert,événementiel"
     },
     {
       "id":"happyhour",
@@ -513,13 +513,14 @@
       "direct_bonus":0.2,
       "max":2,
       "final_bonus":0.3,
-      "score":12,
+      "score":15,
       "duration_hours":480,
       "stock":500,
       "max_coupon":5000,
       "conditions":"pour l'achat d'une entrée payante du Lundi au Vendredi avant 17h",
       "picture":"https://cdn.dribbble.com/users/1526121/screenshots/3322609/circus.gif",
-      "description":"Le musée affiche en fin d'exposition la promotion pour offrir des places sur les prochaines exposition en échange d'un parainage pour celle vue",
+      "visual":"https://reducshare.com/assets/img/piano.jpg",
+      "description":"Un musée affiche en fin d'exposition la promotion pour offrir des places sur les prochaines exposition en échange d'un parainage pour celle vue",
       "tags":"événementiel,exposition"
     }
   ]

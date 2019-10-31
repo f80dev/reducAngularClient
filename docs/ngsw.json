@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1572503531759,
+  "timestamp": 1572519644128,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -56,6 +56,7 @@
         "https://reducshare.com/assets/img/legumes.jpg",
         "https://reducshare.com/assets/img/logo.png",
         "https://reducshare.com/assets/img/loyalty.png",
+        "https://reducshare.com/assets/img/musee.jpg",
         "https://reducshare.com/assets/img/network.jpg",
         "https://reducshare.com/assets/img/openshop.jpg",
         "https://reducshare.com/assets/img/openshop2.jpg",
@@ -78,7 +79,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "0a7aa66b1cc794472b762df8de6b92d68b8a4db4",
+    "https://reducshare.com/assets/config.json": "191d6fd45f9b0ef754387c375029d5cdd9ab9c66",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -107,6 +108,7 @@
     "https://reducshare.com/assets/img/legumes.jpg": "c48b9863696f10a993d0128bd3ff7fe0659d17aa",
     "https://reducshare.com/assets/img/logo.png": "0b3665f36e42e77a1451b1a9f683e9ac5b2847f4",
     "https://reducshare.com/assets/img/loyalty.png": "3e8f0517be7dbcacd7c61613da9773e2d749457c",
+    "https://reducshare.com/assets/img/musee.jpg": "b49f25ed6afb8dc187cdcf187b41e7f3c38ec325",
     "https://reducshare.com/assets/img/network.jpg": "1975dcc3e7839884ea5ab266789bec8fca28524d",
     "https://reducshare.com/assets/img/openshop.jpg": "3829d08016d9cc74b5b606f638bded67096349c7",
     "https://reducshare.com/assets/img/openshop2.jpg": "dc76f1140d5ed0d2867c31d236a5c30fff315375",
