@@ -88,7 +88,7 @@ export class NewCouponSimpleComponent implements OnInit {
       "puis 1 @symbol de plus chaque fois qu'il le partage #nb_partage=Gain_à_chaque_partage fois.<br>Enfin #pay_bonus=Bonus_supplémentaire_à_l'usage_d'un_coupon_distribué @symbol suplémentaire " +
       "lorsqu'un coupon qu'il a distribué est utilisé",this.coupon,(fields)=>{this.add_event(fields);},color);
 
-    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @client. <br>" +
+    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @beneficiaire <br>" +
       "<br>La promotion se termine au bout de #duration_jours=Durée_de_la_promotion_en_jours jour(s) " +
       "et #duration_hours=Durée_de_la_promotion_en_heures heure(s) ou si #stock @symbol ont été offerts.",this.coupon,(fields)=>{this.add_event(fields);},color);
 
