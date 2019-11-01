@@ -35,7 +35,7 @@
     </button>
   </span>
 
-  <mat-card-content>
+  <mat-card-content class="app-card-content">
     <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion"
               *ngIf="coupons.length>0">
     </app-tuto>
@@ -48,9 +48,9 @@
         {{coupon.label}} sur {{coupon.unity}}
       </span>
         </h2>
-        <p matLine style="margin-top: 0px;">
-          <span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span>
-          <span *ngIf="coupon.max==0">Gagner {{coupon.final_bonus}}{{coupon.symbol}}</span>
+        <p matLine style="margin-top: 0px; font-size: small;">
+          <!--<span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span>-->
+          <!--<span *ngIf="coupon.max==0">Gagner {{coupon.final_bonus}}{{coupon.symbol}}</span>-->
           {{coupon.conditions}}
         </p>
         <p matLine style="margin-top: 10px;"  *ngIf="coupon.share">
@@ -60,7 +60,7 @@
           <!--<span> Partage: {{coupon.share_bonus}}{{coupon.symbol}} / Immédiat: {{coupon.direct_bonus}}{{coupon.symbol}} / Utilisé: {{coupon.pay_bonus}}{{coupon.symbol}}</span>-->
         <!--</p>-->
         <p matLine style="font-size: x-small;margin-top:3px;" *ngIf="coupon.tags.length>0">
-          <span>Utile pour {{coupon.tags.replace(',',' / ')}}</span>
+          <span>#{{coupon.tags.replace(',',' #').replace(',',' #').replace(',',' #')}}</span>
         </p>
         <button style="display: inline-block;"
                 *ngIf="canDelete"

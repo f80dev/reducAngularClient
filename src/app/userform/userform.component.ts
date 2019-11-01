@@ -95,6 +95,7 @@ export class UserformComponent implements OnInit {
       {queryParams:
           {
             userid:this.user._id,
+            pseudo:this.user.pseudo,
             tags:this.user.tags,
             anonymous:this.user.email.indexOf("fictif.com")>-1
           }

@@ -4,7 +4,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card {
-  margin:2px;
+  margin:2px !important;
+  padding:6px !important;
   background-color: #6e6e6e;
   max-width:900px;
   vertical-align: text-top;
@@ -62,8 +63,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-card-action {
   text-align: right;
-  padding:0px;
-  margin: 0px;
+  padding:8px !important;
 }
 
 .large-button {
@@ -95,11 +95,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-toolbar {
-  width: 100%;
+  max-width: 900px;
   line-height: 100%;
   font-size: medium;
-  margin:0px;
-  padding: 0px;
+  margin:0;
+  padding: 0;
   background: None;
 }
 

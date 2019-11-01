@@ -1,16 +1,21 @@
 
 <mat-card class="app-card">
 
-  <mat-toolbar class="app-toolbar">
-    <div mat-card-avatar style="margin-left:0px;margin-right: 50px" (click)="addImage()">
+  <mat-toolbar class="app-toolbar" style="padding: 0 !important;">
+    <div mat-card-avatar style="margin:0px;margin-right: 50px" (click)="addImage()">
       <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
       <app-visual *ngIf="new_shop.picture?.length>0" size="75" [picture]="new_shop.picture" ></app-visual>
     </div>
 
-    <h2>
-      <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
-      <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
-    </h2>
+    <div style="display:inline-block;margin-top:20px;">
+      <h2>
+        <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
+        <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
+      </h2>
+      <small style="color:lightgrey;">
+        Les promotions sont liées à l'établissement.
+        <br>Le nom peut être le vôtre (indépendant, artisant) </small>
+    </div>
 
     <span class="spacer"></span>
     <button mat-button mat-flat-button mat-icon-button
@@ -51,12 +56,8 @@
     </mat-form-field>
     <br>
 
-    <mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">
-      Adresse interprétée: {{show_address}}
-    </mat-label>
-    <br>
+    <!--<mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">Adresse interprétée: {{show_address}}</mat-label>-->
 
-    <br>
     <div id="map" class="map form-field-style"
          (mouseup)="reverseGeocode=true"
          (touchend)="reverseGeocode=true">
@@ -75,8 +76,8 @@
     <br>
 
     <br>
-    <mat-form-field class="form-field-style" (focus)="focusElt='tags'">
-      <mat-label>Type d'établissement (plusieurs choix possible par #htag)</mat-label>
+    <mat-form-field class="form-field-style" style="width:70%;" (focus)="focusElt='tags'">
+      <mat-label>Type d'établissement</mat-label>
       <mat-select id="txtShopTags"
                   title="Ici on peut qualifier le type d'établissement. Cela permettra une préselection des modèles de promotions"
                   [(ngModel)]="new_shop.tags"  multiple>
@@ -87,11 +88,13 @@
     <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
               label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
+    &nbsp;&nbsp;
+
     <button mat-flat-button mat-button
             id="cmdFile"
             (click)="addImage()"
             >
-      Image
+      Visuel
     </button>
 
     <br>

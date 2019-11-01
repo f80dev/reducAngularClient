@@ -83,7 +83,7 @@
       "direct_bonus":0.25,
       "final_bonus":0,
       "max":6,
-      "score":15,
+      "score":13,
       "duration_hours":480,
       "stock":18,
       "max_coupon":5000,
@@ -115,7 +115,7 @@
       "level":0,
       "max_coupon":500,
       "conditions":"pour tout achat après validation de la réduction",
-      "score":15,
+      "score":18,
       "tags":""
     },
     {
@@ -583,7 +583,7 @@
       "direct_bonus":0.5,
       "max":2,
       "final_bonus":0,
-      "score":15,
+      "score":9,
       "duration_hours":480,
       "stock":500,
       "max_coupon":5000,

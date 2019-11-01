@@ -68,10 +68,11 @@ export class NewshopComponent implements OnInit {
     var t:any=this.route.snapshot.queryParamMap.get("tags");
     if(t!=null)this.new_shop.tags=t.split(",");
 
-    this.anonymous=(this.route.snapshot.queryParamMap.get("anonymous")!="false");
-    this.new_shop.owner=(this.route.snapshot.queryParamMap.get("userid"));
+    var params=this.route.snapshot.queryParamMap;
+    this.anonymous=(params.get("anonymous")!="false");
+    this.new_shop.owner=(params.get("userid"));
+    if(params.get("pseudo"))this.new_shop.name="Chez "+params.get("pseudo");
     if(!this.anonymous)this.new_shop.public=true;
-
 
     this.showOnMap();
   }
@@ -104,7 +105,6 @@ export class NewshopComponent implements OnInit {
         this.loc.getAddressFromCoord(this.new_shop.lat,this.new_shop.lng,(res)=>{
           this.reverseGeocode=false;
           if(res.display_name){
-            if(this.canUpdateName)this.new_shop.name="";
             "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
               if(res.address[type]!=null && this.canUpdateName)this.new_shop.name=res.address[type];
             });
