@@ -1,8 +1,8 @@
 {
   "appname":"ReducShare",
   "title":"ReducShare",
-  "version":"0.31-beta",
-  "news":"Recherche d'images sur internet",
+  "version":"0.32-beta",
+  "news":"Mise en forme",
   "logo":"./assets/img/logo.png",
 
   "website":"https://reducshare.com/web",
