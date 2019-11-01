@@ -30,8 +30,7 @@
              (focus)="focusElt=='shopname'"
              (keyup)="canUpdateName=false"
              data-tac="On Commence par indiquer le nom de l'enseigne qui va faire la promotion"
-             title="Ce nom est utilisé dans la description de la promotion"
-             matInput placeholder="Nom de votre enseigne / établissement" [(ngModel)]="new_shop.name" autofocus>
+             matInput placeholder="Nom de votre établissement ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
     <button *ngIf="map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
       <mat-icon>gps_fixed</mat-icon>
