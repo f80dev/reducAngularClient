@@ -173,7 +173,7 @@ export class NewshopComponent implements OnInit {
   }
 
   addImage() {
-    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.new_shop.picture,width: 300,height:300,emoji:true}}).afterClosed().subscribe((result) => {
+    this.dialog.open(ImageSelectorComponent, {width: '90%', height:'80%',data: {result:this.new_shop.picture,width: 300,height:300}}).afterClosed().subscribe((result) => {
       if(result)
         this.new_shop.picture=result;
     });
