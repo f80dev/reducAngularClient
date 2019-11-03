@@ -146,14 +146,14 @@
       <mat-icon>notifications_active</mat-icon>
     </button>
     <button mat-raised-button mat-icon-button mat-button
-            *ngIf="user.level>=0.8"
+            *ngIf="user.level>=0.8 || user.shops?.length>0"
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <mat-icon>map</mat-icon>
     </button>
 
     <button mat-raised-button mat-button
-            *ngIf="user.level<0.8"
+            *ngIf="user.level<0.8 && user.shops?.length==0"
             id="btnMapRookie"
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
@@ -163,7 +163,7 @@
 
     <button mat-button
             *ngIf="user.tags?.length==0 || user.shops?.length>0"
-            title="Créer une nouvelle enseigne"
+            title="Créer un nouveau point de vente"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
       <mat-icon>account_balance</mat-icon>

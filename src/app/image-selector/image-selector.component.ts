@@ -75,7 +75,6 @@ export class ImageSelectorComponent implements OnInit {
     });
   }
 
-
   selIcon(icon: any) {
     this.showIcons=false;
     this.data.result=icon.photo;

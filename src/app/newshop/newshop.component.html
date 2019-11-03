@@ -28,13 +28,13 @@
 
   <mat-card-content class="app-card-content">
     <br><br>
-    <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer l'enseigne qui va faire l'offre"></app-tuto>
+    <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre"></app-tuto>
 
     <mat-form-field class="form-field-style" style="width:75%;margin-right:10px;">
       <input id="txtShopName" type="text"
              (focus)="focusElt=='shopname'"
              (keyup)="canUpdateName=false"
-             data-tac="On Commence par indiquer le nom de l'enseigne qui va faire la promotion"
+             data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
              matInput placeholder="Nom de votre établissement ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
     <button *ngIf="map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
@@ -46,8 +46,8 @@
     <mat-form-field class="form-field-style">
       <input id="txtShopAddress" type="text"
              (focus)="focusElt=='address'"
-             data-tac="Puis on indique l'adresse de l'enseigne ou l'on pourra récupérer la promotion et l'utiliser"
-             matInput placeholder="Adresse de l'enseigne ou l'on peut récupérer la promotion" [(ngModel)]="new_shop.address"
+             data-tac="Puis on indique l'adresse du point de vente ou l'on pourra récupérer la promotion et l'utiliser"
+             matInput placeholder="Adresse du point de vente ou l'on peut récupérer la promotion" [(ngModel)]="new_shop.address"
              (change)="showOnMap()">
       <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
         <mat-icon>close</mat-icon>
@@ -110,7 +110,7 @@
   <mat-card-actions class="app-card-action">
 
     <button mat-button mat-flat-button
-            title="La validation entraine l'ajout de l'enseigne dans la liste de vos établissements"
+            title="La validation entraine l'ajout du point de vente dans la liste de vos établissements"
             id="btnValide2" *ngIf="new_shop.name?.length>0"
             class="app-button" (click)="add()">Valider</button>
 
