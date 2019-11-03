@@ -126,7 +126,6 @@ export class UserformComponent implements OnInit {
           if(c._id==exclude_c.origin)bContinue=false;
         });
 
-
         if(bContinue){
           var icon=this.config.values.icon_coupon;
 
@@ -157,10 +156,11 @@ export class UserformComponent implements OnInit {
     } else {
       this.map=null;
     }
-
   }
 
-  promptForPseudo() {
+
+  promptForPseudo(event) {
+    event.stopPropagation();
     this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?",onlyConfirm:false}})
         .afterClosed().subscribe((result) => {
           if(result!=null && result.length>0){
@@ -265,7 +265,8 @@ export class UserformComponent implements OnInit {
     this.onrefresh.emit({sort:this.sort});
   }
 
-  addImage() {
+  addImage(event) {
+    event.stopPropagation();
     this.dialog.open(ImageSelectorComponent, {width: '400px', data: {result:this.user.photo,width: 250,height:250}}).afterClosed().subscribe((result) => {
       if(result){
         this.user.photo=result;

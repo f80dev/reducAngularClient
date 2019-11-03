@@ -33,7 +33,7 @@
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px" *ngIf="!showOldCoupon">
       <mat-step title="La nature de la promotion permet de décrire les éléments principaux : ce que l'on gagne, une phrase d'accroche, le gain maximum">
-        <ng-template matStepLabel>Décrire votre promotion</ng-template>
+        <ng-template matStepLabel>Décrire votre offre / promotion</ng-template>
 
 
         <div class="detail_promo">
@@ -71,7 +71,7 @@
 
         <mat-checkbox [(ngModel)]="coupon.breakable"
                       *ngIf="level>0.5" (focus)="focusElt='breakable'"
-                      (change)="changeMax()">unité fractionnable (Exemple: 3.4 {{coupon.symbol}})
+                      (change)="changeMax()">unité fractionnable (Exemple: 3.4 {{coupon.symbol}} / {{coupon.unity}})
         </mat-checkbox>
         <br><br>
 
@@ -106,7 +106,7 @@
           <textarea matInput rows="3"
                     id="txtConditions"
                     (focus)="focusElt='conditions'"
-                    title="Condition d'application de l'offre / de la promo"
+                    title="Condition d'application de l'offre"
                     placeholder="Offre valable ..."
                     [(ngModel)]="coupon.conditions"
                     (change)="normalize_conditions(coupon)"></textarea>
@@ -116,7 +116,7 @@
           <input type="text" matInput
                  id="txtLabel"
                  title="{{'On détermine une phrase d\'accroche pour inciter les clients à prendre le coupon' | trans}}"
-                 placeholder="Introduction (teaser) de la promotion" [(ngModel)]="coupon.label">
+                 placeholder="Introduction / Teaser " [(ngModel)]="coupon.label">
         </mat-form-field>
 
 

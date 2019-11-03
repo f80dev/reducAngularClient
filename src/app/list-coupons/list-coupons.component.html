@@ -285,7 +285,7 @@
                   *ngIf="coupon.origin!=coupon._id && user.level>0.8"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon)">
-            <mat-icon>done</mat-icon>&nbsp;
+            <mat-icon>done</mat-icon>
           </button>
 
           <button mat-button mat-flat-button
@@ -293,6 +293,7 @@
                   *ngIf="coupon.origin!=coupon._id && user.level<=0.8"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon)">
+            <mat-icon>done</mat-icon>&nbsp;
             Utiliser
           </button>
 
