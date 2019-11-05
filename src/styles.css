@@ -89,7 +89,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .app-card-header {
-  padding-top:10px !important;
+  padding-top:5px !important;
+  padding-bottom:5px !important;
   padding-left:8px !important;
   vertical-align: text-top;
 }
@@ -101,6 +102,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin:0;
   padding: 0;
   background: None;
+}
+
+
+.image-photo {
+  box-shadow: 6px 6px 5px #7c7c7c;
+  margin: 5px;
+  border: 1px #bfbec4 solid;
 }
 
 .big-icon {

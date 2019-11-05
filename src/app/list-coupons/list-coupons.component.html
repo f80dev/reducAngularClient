@@ -3,7 +3,7 @@
                        class="app-card"
                        (closed)="showCoupon(coupon,false)"
                        (opened)="showCoupon(coupon,true)"
-                       style="background-color: #8f8f8f;padding:0px"
+                       style="background-color: #8f8f8f;padding:0px !important;"
                        *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
     <mat-expansion-panel-header collapsedHeight="50px" expandedHeight="50px"
                                 class="app-card-header"
@@ -37,7 +37,7 @@
 
             <span *ngIf="coupon.visible!=2">{{coupon.label}}</span>
             <span *ngIf="coupon.visible==2">
-              Rendez vous "{{coupon.shopname}}" - Reste <app-timer [end]="coupon.dtEnd"></app-timer>
+              Rendez vous "{{coupon.shopname}}" - Avant le {{(coupon.dtEnd*1000) | date:'dd/MM HH:mm'}} (<app-timer [end]="coupon.dtEnd"></app-timer>)
             </span>
             <br>
 
@@ -65,7 +65,7 @@
 
         <!--Affichage des coupons origines pour leur propriétaire-->
         <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id" style="font-size: small;">
-          {{coupon.share}}/{{coupon.max_coupon}} coupons distribués
+          <small>{{coupon.share}}/{{coupon.max_coupon}} coupons distribués</small>
           <span *ngIf="coupon.max>0 && (coupon.gain/coupon.max)>0.8">
             (max:{{coupon.max}})
           </span>
@@ -87,25 +87,28 @@
               <!--Visuel du coupon-->
 
               <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>350)">
-                <app-visual [picture]="coupon.visual" (click)="coupon.visible>0" [width]="180" [height]="180"></app-visual>
+                <app-visual [picture]="coupon.visual"
+                            (click)="coupon.visible>0"
+                            width="33vw" max-width="300px" max-height="160px">
+                </app-visual>
               </div>
 
               <!--QRCode du coupon-->
 
               <span *ngIf="coupon.visible==2"><small>Montrez le QR-code</small></span><br>
 
-              <a [href]="coupon.url" target="_blank">
+              <a [href]="coupon.url" target="_blank" *ngIf="coupon.visible>0">
                 <qr-code [value]="coupon.url" name="qrcode"
-                         *ngIf="coupon.visible>0"
                          style="width:150px;height: 140px;margin:0px;"
                          ngxClipboard [cbContent]="coupon.url"
                          [size]="120">
                 </qr-code>
-              </a><br>
-              <span *ngIf="coupon.visible==2"><small>au vendeur</small></span><br>
+                <br>
+              </a>
+              <span *ngIf="coupon.visible==2"><small>au vendeur</small><br></span>
 
             </td>
-            <td style="text-align: center;vertical-align: top;width:auto;">
+            <td style="text-align: center;vertical-align: top;">
 
               <!--Zone réservé au client de base-->
               <div style="margin-top:15px;display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
@@ -120,7 +123,7 @@
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <table style="text-align: left;display: inline-block;font-size:small;" cellpadding="2" name="zoneInfo">
+                <table style="text-align: left;display: inline-block;font-size:small;line-height: 85%;" cellpadding="1" name="zoneInfo">
                   <tr><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
                   <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-1'}}{{coupon.symbol}}</td></tr>
                   <tr><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
@@ -155,7 +158,7 @@
               <!--Zone réserver au créateur-->
               <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
                 <br>
-                <table style="display:inline-block;text-align: left;">
+                <table style="display:inline-block;text-align: left;line-height: 80%;">
                   <tr>
                     <td style="text-align: right;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
                     <td>partages (/{{coupon.max_coupon}})</td>
@@ -179,12 +182,12 @@
           </tr></table>
 
 
-          <app-tuto *ngIf="isVisible(coupon)" [delay]="1" [duration]="30"
+          <app-tuto *ngIf="isVisible(coupon) && coupon.visible==1" [delay]="1" [duration]="30"
                     label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
           </app-tuto>
 
-          <app-tuto [duration]="15" *ngIf="coupon.canbedeal && coupon.origin!=coupon._id"
-                    label="Augmenter votre réduction en partageant cette réduction avec votre réseau">
+          <app-tuto [duration]="15" *ngIf="coupon.canbedeal && coupon.origin==coupon._id && coupon.visible==1 && coupon.share==0"
+                    label="Commencez la distribution de votre coupon en l'imprimant ou en l'envoyant a votre réseau par SMS, facebook, whatsapp">
           </app-tuto>
 
           <div style="width: 100%;text-align: center;font-size: medium;color:lightgrey;"
@@ -231,7 +234,7 @@
           <mat-icon>printer</mat-icon>
         </button>
 
-        <button *ngIf="user && coupon.shop_complete?.owner!=user._id"
+        <button *ngIf="user && coupon.shop_complete?.owner!=user._id && user.level>0.5"
                 mat-button
                 mat-flat-button mat-icon-button
                 class="small-icon-button"
@@ -339,7 +342,9 @@
   </mat-expansion-panel>
 
   <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="_flip(coupon)">
-    <img [src]="coupon.visual" style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
+    <img [src]="coupon.visual"
+         style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
+
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
       {{coupon.label}}<br><br>
       <span style="font-size:large;" *ngIf="coupon.max>0">
