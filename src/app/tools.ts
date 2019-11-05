@@ -342,6 +342,14 @@ export function getAuthServiceConfigs() {
   return config;
 }
 
+export function getSize(base64,func){
+  var img=new Image();
+  img.src=base64;
+  img.onload=function(){
+    func(img.width,img.height);
+  }
+}
+
 export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error) {
   try{
     var canvas:any = document.createElement("canvas");

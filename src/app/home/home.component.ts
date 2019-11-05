@@ -30,6 +30,10 @@ export class HomeComponent implements OnInit {
   coupons=[];
   sort="dtCreate";
 
+  /**
+   * Analyse des parametre de l'url
+   * @param func
+   */
   analyse_params(func){
     var params=this.route.snapshot.queryParamMap;
     localStorage.setItem("firsturl",this._location.path());
@@ -107,6 +111,8 @@ export class HomeComponent implements OnInit {
     $$("Mise en place de la socket");
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
+        if(data.coupon!=null)localStorage.setItem("showCoupon",data.coupon);
+        if(data.shop!=null)localStorage.setItem("showShop",data.shop);
         $$("Refresh depuis la socket avec "+data.message);
         setTimeout(()=>{this.refresh(data.message);},1500);
       }
@@ -175,9 +181,13 @@ export class HomeComponent implements OnInit {
       }
 
       this.user=u;
+      for(var k=0;k<this.user.shops.length;k++)
+        if(this.user.shops[k]._id==localStorage.getItem("showShop"))this.user.shops[k].visible=true;
+
       showMessage(this,message);
 
       if(this.user.email.indexOf("fictif.com")==-1){
+        //Validation des CGUs
         if(this.user.lastCGU<this.config.values.cgu.dtModif && this.config.values.cgu.online){
           this.dialog.open(PromptComponent,{
             width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",

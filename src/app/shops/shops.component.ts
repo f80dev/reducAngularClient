@@ -11,7 +11,6 @@ import {
 import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {NewCouponComponent} from "../new-coupon/new-coupon.component";
 import {openGraphForShop, sendToPrint, showError, traitement_coupon} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
@@ -127,5 +126,15 @@ export class ShopsComponent implements OnInit {
 
   openGraph(shoid){
     openGraphForShop(shoid);
+  }
+
+  showShop(shop,value=null) {
+    if(value==null)
+      shop.visible=!shop.visible;
+    else {
+      shop.visible=value;
+    }
+    if(shop.visible)localStorage.setItem("showShop",shop._id);
+
   }
 }

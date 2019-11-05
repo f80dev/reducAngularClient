@@ -54,10 +54,7 @@ export class ListCouponsComponent implements OnChanges {
     this.coupons=traitement_coupon(this.coupons,localStorage.getItem("showCoupon"));
   }
 
-  showCode(coupon: any) {
-    coupon.visible=true;
-    coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
-
+  fixTagPage(coupon:any){
     this.meta.removeTag('name = "og:url"');
     this.meta.removeTag('name = "og:type"');
     this.meta.removeTag('name = "og:title"');
@@ -69,13 +66,17 @@ export class ListCouponsComponent implements OnChanges {
       {name:"og:title",content:coupon.label},
       {name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"},
       {name:"og:image",content:coupon.qrcode}
-      ],true);
+    ],true);
+  }
 
+  showCode(coupon: any,mode=1) {
+    if(coupon.visible==mode)mode=0;
+    coupon.visible=mode;
+    coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
 
-    if(coupon.showCode==null)coupon.showCode=false;
-    coupon.showCode = !coupon.showCode;
+    if(mode==1){
 
-    if(coupon.showCode){
+      this.fixTagPage(coupon);
       this.ngNavigatorShareService.share({
         title: coupon.label,
         text: coupon.message+". Ouvrir le lien pour en bénéficier",
@@ -169,9 +170,8 @@ export class ListCouponsComponent implements OnChanges {
     });
   }
 
-  showCoupon(coupon: any,forceValue=null) {
-    if(forceValue!=null)coupon.visible=forceValue;
-    if(coupon.visible)
+  showCoupon(coupon: any,mode=false) {
+    if(mode)
       localStorage.setItem("showCoupon",coupon._id);
     else
       localStorage.setItem("showCoupon",null);
@@ -216,7 +216,8 @@ export class ListCouponsComponent implements OnChanges {
     coupon['flip']=!coupon['flip'];
     if(coupon['flip']){
       this.config.flips.push(coupon._id);
-      coupon.visible=true;
+      coupon.visible=0; //share mode
+      localStorage.setItem("showCoupon",coupon._id);
     }
     else {
       var i=this.config.flips.indexOf(coupon._id)

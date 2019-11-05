@@ -5,7 +5,7 @@ import {
   $$,
   createMap,
   createMarker,
-  getMarkerLayer,
+  getMarkerLayer, getSize,
   loginWithEmail,
   showError, showMessage
 } from "../tools";
@@ -113,8 +113,10 @@ export class UserformComponent implements OnInit {
     this.api.getcouponinsquare({x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1]}).subscribe((coupons:any)=>{
       var l=getMarkerLayer(this.map);
       this.showCouponOnMap=[];
+      var scale=0.1;
+      if(this.user.photosize!=null)scale=25/this.user.photosize;
       var markers=[
-        createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,0.2)
+        createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,scale)
       ];
 
       coupons.forEach((c)=>{
@@ -148,6 +150,12 @@ export class UserformComponent implements OnInit {
   openLoc() {
     this.showMap=!this.showMap;
     if(this.showMap){
+
+      if(this.user.photosize==null)
+        getSize(this.user.photo,(w,h)=>{
+          this.user.photosize=Math.max(w,h);
+        });
+
       this.loc.getPosition().then((pos:any)=>{
         this.initMap(pos,15);
       },()=>{

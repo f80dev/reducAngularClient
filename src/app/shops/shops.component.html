@@ -5,7 +5,7 @@
   <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
                               name="shopCard"
                               class="app-card-header"
-                              (click)="shop.visible=!shop.visible">
+                              (click)="showShop(shop)">
 
     <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;height:75px;">
     <app-visual *ngIf="shop.picture?.length>0" [picture]="shop.picture" width="75px" height="75px"></app-visual>

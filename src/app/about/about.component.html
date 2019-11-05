@@ -1,42 +1,41 @@
 <mat-expansion-panel class="app-card" style="background-color: #b7b7b7;color:black;" >
   <mat-expansion-panel-header (click)="switchVisible()" style="cursor: pointer;">
     <div style="text-align: center;width:100%;">
-      {{config.values.appname+" - "+config.values.version}}<br>
+      {{config.values.brands[0].appname+" - "+config.values.brands[0].version}}<br>
     </div>
   </mat-expansion-panel-header>
 
     <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
-      <br>
-      <img [src]="config.values.logo" style="width:30%;max-width:120px;margin:15px;">
+      <img [src]="config.values.brands[0].logo" style="width:30%;max-width:120px;margin:15px;">
       <br>
       <table style="display: inline-block;text-align: left;">
         <tr><td>Réalisation</td><td>: <a [href]="config.values.editor?.link_author" target="_blank">{{config.values.editor?.author}}</a></td></tr>
         <tr>
           <td>Edition</td>
-          <td>: <a [href]="config.values.editor?.website" target="_blank"><strong>{{config.values.editor?.name}}</strong></a></td>
+          <td>: <a [href]="config.values.brands[0].editor?.website" target="_blank"><strong>{{config.values.brands[0].editor?.name}}</strong></a></td>
         </tr>
         <tr><td><br></td></tr>
 
       </table>
       <br><br>
       <div style="width: 100%;text-align: center;font-size: medium;color:darkgray;">
-        <a href="mailto:{{config.values.support?.email}}" style="display:inline-block;width: 65px;">
+        <a href="mailto:{{config.values.brands[0].support?.email}}" style="display:inline-block;width: 65px;">
           <mat-icon class="big-icon">mail</mat-icon>
         </a>
 
-        <a href="{{config.values.support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
+        <a href="{{config.values.brands[0].support?.forum}}" target="_blank"  style="display:inline-block;width: 65px;">
           <mat-icon class="big-icon">persons</mat-icon>
         </a>
 
-        <a href="{{config.values.support?.faq}}" target="_blank"  style="display:inline-block;width: 65px;margin-right: 10px;">
+        <a href="{{config.values.brands[0].support?.faq}}" target="_blank"  style="display:inline-block;width: 65px;margin-right: 10px;">
           <mat-icon class="big-icon">help</mat-icon>
         </a>
 
-        <a href="{{config.values.support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
+        <a href="{{config.values.brands[0].support?.facebook}}" target="_blank"  style="display:inline-block;width: 60px;">
           <img style="width:40px;opacity: 0.5;" src="./assets/icons/facebook.png">
         </a>
 
-        <a href="{{config.values.support?.website}}&tags={{user.tags}}" target="_blank"  style="display:inline-block;width: 60px;">
+        <a href="{{config.values.brands[0].support?.website}}&tags={{user.tags}}" target="_blank"  style="display:inline-block;width: 60px;">
           <mat-icon class="big-icon">home</mat-icon>
         </a>
       </div>

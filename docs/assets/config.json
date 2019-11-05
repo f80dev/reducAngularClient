@@ -1,26 +1,45 @@
-{
-  "appname":"ReducShare",
-  "title":"ReducShare",
-  "version":"0.33-beta",
-  "news":"bug",
-  "logo":"./assets/img/logo.png",
-
-  "website":"https://reducshare.com/web",
-
-  "editor":{
-    "name":"F80",
-    "website":"https://f80.fr",
-    "author":"Hervé HOAREAU",
-    "link_author":"https://www.linkedin.com/in/hhoareau/",
-    "contact":"herve.hoareau@f80.fr"
+{"brands":[
+  {
+    "appname": "ReducShare",
+    "title": "ReducShare",
+    "version": "0.4-beta",
+    "news": "bug",
+    "logo": "./assets/img/logo.png",
+    "website": "https://reducshare.com/web",
+    "support": {
+      "forum": "http://reducshare.les-forums.com/",
+      "email": "contact@reducshare.com",
+      "facebook": "https://www.facebook.com/reducshare/",
+      "faq": "https://web.reducshare.com/faq.html?from=appli",
+      "website": "https://web.reducshare.com/index.html?from=appli"
+    }
   },
 
-  "support":{
-    "forum":"http://reducshare.les-forums.com/",
-    "email":"contact@reducshare.com",
-    "facebook":"https://www.facebook.com/reducshare/",
-    "faq":"https://web.reducshare.com/faq.html?from=appli",
-    "website":"https://web.reducshare.com/index.html?from=appli"
+  {
+    "appname": "foodingPromo",
+    "title": "Le Fooding promotion",
+    "version": "0.33-beta",
+    "news": "bug",
+    "logo": "./assets/img/lefooding.png",
+    "website": "https://lefooding.com/fr",
+    "support": {
+      "forum": "http://reducshare.les-forums.com/",
+      "email": "contact@reducshare.com",
+      "facebook": "https://www.facebook.com/reducshare/",
+      "faq": "https://web.reducshare.com/faq.html?from=appli",
+      "website": "https://web.reducshare.com/index.html?from=appli"
+    }
+  }
+
+
+  ],
+
+  "editor": {
+    "name": "F80",
+    "website": "https://f80.fr",
+    "author": "Hervé HOAREAU",
+    "link_author": "https://www.linkedin.com/in/hhoareau/",
+    "contact": "herve.hoareau@f80.fr"
   },
 
   "faqs": [
