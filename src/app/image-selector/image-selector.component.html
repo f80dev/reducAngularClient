@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 
-<mat-dialog-content>
+<mat-dialog-content style="overflow: hidden;">
 
   <button mat-flat-button
           *ngIf="!deviceService.isDesktop() && data.emoji"
@@ -42,9 +42,10 @@
          (click)="selIcon(icon)">
   </div>
 
-  <div style="width: 100%;text-align: center" *ngIf="pictures?.length==0">
+  <div style="width: 95%;text-align: center;overflow: hidden;" *ngIf="pictures?.length==0">
     <app-visual [picture]="data.result"
                 [width]="data.width"
+                max-width="95%"
                 [height]="data.height">
     </app-visual>
   </div>

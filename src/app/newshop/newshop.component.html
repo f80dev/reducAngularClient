@@ -15,10 +15,10 @@
         <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
         <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
       </h2>
-      <span style="color:lightgrey;font-size: small;">
-        Les promotions sont liées à l'établissement.
+      <div style="line-height:90%;color:lightgrey;font-size: x-small;">
+        Les promotions sont liées au point de vente
         <br>Le nom peut être le vôtre (freelance,artisant)
-        </span>
+      </div>
     </div>
 
     <span class="spacer"></span>
@@ -31,15 +31,15 @@
   </mat-toolbar>
 
   <mat-card-content class="app-card-content">
-    <br><br>
+    <br><br><br>
     <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre"></app-tuto>
 
-    <mat-form-field class="form-field-style" style="width:75%;margin-right:10px;">
+    <mat-form-field class="form-field-style" style="width:85%;margin-right:10px;">
       <input id="txtShopName" type="text"
              (focus)="focusElt=='shopname'"
              (keyup)="canUpdateName=false"
              data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
-             matInput placeholder="Nom de votre établissement ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
+             matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
     <button *ngIf="map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
       <mat-icon>gps_fixed</mat-icon>
@@ -80,9 +80,9 @@
 
     <br>
     <mat-form-field class="form-field-style" style="width:70%;" (focus)="focusElt='tags'">
-      <mat-label>Type d'établissement</mat-label>
+      <mat-label>Type de point de vente / prestations</mat-label>
       <mat-select id="txtShopTags"
-                  title="Ici on peut qualifier le type d'établissement. Cela permettra une préselection des modèles de promotions"
+                  title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
                   [(ngModel)]="new_shop.tags"  multiple>
         <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
       </mat-select>

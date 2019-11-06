@@ -1,8 +1,15 @@
-<img
-  *ngIf="picture?.startsWith('http') || picture?.startsWith('data')"
-  [src]="picture"
-  class="image-photo"
-  [ngStyle]="{'display':'inline-block','width': w,'height':h,'max-width': mw,'max-height':mh}">
+<div *ngIf="picture?.startsWith('http') || picture?.startsWith('data')">
+  <img
+    *ngIf="!picture?.endsWith('png')"
+    [src]="picture"
+    class="image-photo"
+    [ngStyle]="{'display':'inline-block','width': w,'height':h,'max-width': mw,'max-height':mh}">
+
+  <img
+    *ngIf="picture?.endsWith('png')"
+    [src]="picture"
+    [ngStyle]="{'display':'inline-block','width': w,'height':h,'max-width': mw,'max-height':mh}">
+</div>
 
 <span style="font-size: 5em"
       *ngIf="!picture?.startsWith('http') && !picture?.startsWith('data')">

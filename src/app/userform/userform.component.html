@@ -1,7 +1,7 @@
 <mat-expansion-panel class="app-card" [expanded]="true" style="margin-bottom: 3px;margin-top: 2px;">
     <mat-expansion-panel-header class="app-card-header" collapsedHeight="80px" expandedHeight="80px">
       <div *ngIf="!showPersonalCode" style="display:inline-block;width:90px;vertical-align: middle;position:relative;">
-        <img mat-card-avatar style="width:70px;height:70px;" [src]="user.photo" (click)="addImage($event)">
+        <app-visual width="70px" height="70px" [picture]="user.photo" (click)="addImage($event)"></app-visual>
       </div>
 
       <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"
@@ -30,7 +30,7 @@
               <!--mat-raised-button (click)="addshop()">-->
       <!--<span *ngIf="user.shops==null || user.shops.length==0">-->
         <!--Nvlle promotion-->
-      <!--</span>-->
+      <!--</span>--
         <!--<span *ngIf="user.shops?.length>0">-->
         <!--Nvlle enseigne-->
       <!--</span>-->

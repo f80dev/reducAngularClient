@@ -127,7 +127,7 @@
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
                 <br>
-                <table style="text-align: left;display: inline-block;font-size:small;line-height: 90%;" cellpadding="1" name="zoneInfo">
+                <table style="text-align: left;display: inline-block;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
                   <tr><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
                   <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-1'}}{{coupon.symbol}}</td></tr>
                   <tr><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
@@ -145,7 +145,7 @@
                   {{coupon.gain}}{{coupon.symbol}}<br>
                 </div>
                 <br>
-                <div style="width:80%;display:inline-block;line-height: 80%;margin-top:5px;">{{coupon.conditions}}</div>
+                <div style="width:80%;display:inline-block;line-height: 90%;margin-top:5px;">{{coupon.conditions}}</div>
                 <br><br>
                 Localiser le point de vente :
                 <button mat-button mat-flat-button
@@ -350,10 +350,10 @@
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
       {{coupon.label}}<br><br>
-      <span style="font-size:large;" *ngIf="coupon.max>0">
+      <div style="font-size:large;" *ngIf="coupon.max>0">
         Vous avez {{coupon.gain}}{{coupon.symbol}}<br>
         <small>(vous pouvez avoir jusqu'à {{coupon.max}}{{coupon.symbol}})</small>
-      </span>
+      </div>
     </div>
     <div style="z-index: 110;position: absolute;left:0;top:75%;width:100%;text-align: right;max-width:720px;">
       <button *ngIf="user.level<1 && coupon._id!=coupon.origin"

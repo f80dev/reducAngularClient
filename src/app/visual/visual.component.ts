@@ -8,8 +8,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class VisualComponent implements OnInit {
 
   @Input("picture") picture="";
+  @Input("src") src="";
   @Input("width") w:string="";
   @Input("height") h:string="";
+
+  @Input("crop") crop:string="";
 
   @Input("max-width") mw:string="";
   @Input("max-height") mh:string="";
@@ -18,7 +21,7 @@ export class VisualComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    if(this.picture=="")this.picture=this.src;
   }
 
 }
