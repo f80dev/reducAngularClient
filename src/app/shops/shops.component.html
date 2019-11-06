@@ -13,18 +13,17 @@
                 width="75px" height="75px">
     </app-visual>
 
-    <div class="app-card-title">
+    <div class="app-card-title" style="line-height: 85%;">
       {{shop.name}}
-      <mat-icon style="cursor:pointer;font-size: small;" (click)="editShop(shop,$event)">create</mat-icon>
-      <br>
-      <span class="app-card-subtitle">
-      <span *ngIf="shop.tags?.length>0 && shop.followers?.length==0">
-        tags: {{shop.tags}}
-      </span>
-      <span *ngIf="shop.followers?.length>0">
-        Vous avez {{shop.followers?.length}} followers
-      </span>
-    </span>
+      <mat-icon style="cursor:pointer;font-size: medium;height:20px;" (click)="editShop(shop,$event)">create</mat-icon>
+      <div class="app-card-subtitle">
+        <span *ngIf="shop.tags?.length>0 && shop.followers?.length==0">
+          <span *ngFor="let tag of shop.tags.split(',')">#{{tag}} </span>
+        </span>
+        <span *ngIf="shop.followers?.length>0">
+          Vous avez {{shop.followers?.length}} followers
+        </span>
+      </div>
 
 
     </div>

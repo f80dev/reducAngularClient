@@ -128,10 +128,10 @@
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
                 <br>
                 <table style="text-align: left;display: inline-block;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
-                  <tr><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
-                  <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-1'}}{{coupon.symbol}}</td></tr>
-                  <tr><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
-                  <tr><td>Utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.direct_bonus>0"><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.share_bonus>0"><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.pay_bonus>0"><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.final_bonus>0"><td>Utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
                 </table><br>
                 <span style="font-size: medium" *ngIf="coupon.visible==1">
                 <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>

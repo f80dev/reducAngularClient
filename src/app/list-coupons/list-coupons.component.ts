@@ -61,12 +61,14 @@ export class ListCouponsComponent implements OnChanges {
     this.meta.removeTag('name = "og:title"');
     this.meta.removeTag('name = "og:description"');
     this.meta.removeTag('name = "og:image"');
+
     this.meta.addTags([
       {name:"og:url",content:coupon.url},
-      {name:"og:type",content:"shopping"},
+      {name:"og:type",content:"website"},
+      {name:"og:locale",content:"fr_FR"},
       {name:"og:title",content:coupon.label},
       {name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"},
-      {name:"og:image",content:coupon.qrcode}
+      {name:"og:image",content:coupon.picture}
     ],true);
   }
 

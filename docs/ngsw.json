@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1573059698356,
+  "timestamp": 1573075785845,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -11,14 +11,14 @@
         "https://reducshare.com/exif.js",
         "https://reducshare.com/favicon.ico",
         "https://reducshare.com/index.html",
-        "https://reducshare.com/main-es2015.5271f5ad4e2af6b88629.js",
-        "https://reducshare.com/main-es5.5271f5ad4e2af6b88629.js",
+        "https://reducshare.com/main-es2015.37855da1626d066f7202.js",
+        "https://reducshare.com/main-es5.37855da1626d066f7202.js",
         "https://reducshare.com/manifest.webmanifest",
         "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js",
         "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js",
         "https://reducshare.com/runtime-es2015.24b02acc1f369d9b9f37.js",
         "https://reducshare.com/runtime-es5.24b02acc1f369d9b9f37.js",
-        "https://reducshare.com/styles.7c4a47d8dc6ba27d5c2a.css"
+        "https://reducshare.com/styles.d138e2f3949a221bd681.css"
       ],
       "patterns": []
     },
@@ -80,7 +80,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "3be7764f84f0bc8f94dc1af708c6f2045e3e59d3",
+    "https://reducshare.com/assets/config.json": "38b98b601b594f45a0c492ba35a2311c70b5f99f",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -129,15 +129,15 @@
     "https://reducshare.com/assets/visual.svg": "dc38682c923c6279487c6d8c97bfc208519a3771",
     "https://reducshare.com/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/favicon.ico": "86190daba51557697be928f80bf987cc4242fdd8",
-    "https://reducshare.com/index.html": "1f34a105364326a53597c7a36966248dabb356db",
-    "https://reducshare.com/main-es2015.5271f5ad4e2af6b88629.js": "9192aba887a2f71095e3cee1de436103fb4de01d",
-    "https://reducshare.com/main-es5.5271f5ad4e2af6b88629.js": "f9d05254c9c9e1093bd2102b1f5c88fd2240198f",
+    "https://reducshare.com/index.html": "54f65e1d766fe050aaf31dd50fc5c758980a3617",
+    "https://reducshare.com/main-es2015.37855da1626d066f7202.js": "8a64cbcb05258c75f5b1de8a4227f7e37b37a963",
+    "https://reducshare.com/main-es5.37855da1626d066f7202.js": "afc1b2bc840f29e39d95b8928aea43b9b4bf0c78",
     "https://reducshare.com/manifest.webmanifest": "143ffc387b7e88aa36797f13a570c442281afbbb",
     "https://reducshare.com/polyfills-es2015.50abed8b022b0c775c73.js": "5b86bf2fc3a305573ac97b371bca6cb7b99b4b49",
     "https://reducshare.com/polyfills-es5.c57b1b22db0382419e1d.js": "2104c0d25888eafce9d175549237362823b71853",
     "https://reducshare.com/runtime-es2015.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://reducshare.com/runtime-es5.24b02acc1f369d9b9f37.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://reducshare.com/styles.7c4a47d8dc6ba27d5c2a.css": "bec90c0f0478f126b0bdd798ec62a5c184120816"
+    "https://reducshare.com/styles.d138e2f3949a221bd681.css": "2c4e48e063c6bc85ee622d714d9e2319d288989e"
   },
   "navigationUrls": [
     {
