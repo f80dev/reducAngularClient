@@ -19,6 +19,7 @@ export class ConfigService {
   params:any=null;
   flips=[];
 
+
   constructor(private location: Location, private http: HttpClient,public platform:Platform){}
 
   async logo(): Promise<string> {

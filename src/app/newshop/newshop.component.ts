@@ -70,8 +70,8 @@ export class NewshopComponent implements OnInit {
     var params=this.route.snapshot.queryParamMap;
     this.anonymous=(params.get("anonymous")!="false");
     this.new_shop.owner=(params.get("userid"));
-    if(params.get("shop")!=null){
-      this.new_shop=JSON.parse(params.get("shop"));
+    if(params.get("edit")!=null){
+      this.new_shop=this.api.shop;
     }
     else {
       var t:any=this.route.snapshot.queryParamMap.get("tags");

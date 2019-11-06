@@ -126,6 +126,7 @@
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
+                <span style="margin-bottom: 6px;" *ngIf="user.level<0.8">Bonus par action du client</span>
                 <br>
                 <table style="text-align: left;display: inline-block;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
                   <tr *ngIf="coupon.direct_bonus>0"><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
