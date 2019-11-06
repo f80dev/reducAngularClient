@@ -66,6 +66,7 @@
   <tr>
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="name">name</th>
+    <th mat-sort-header="address">address</th>
     <th mat-sort-header="tags">tags</th>
     <th mat-sort-header="owner">owner</th>
     <th>lng</th>
@@ -78,6 +79,7 @@
   <tr *ngFor="let shop of shops">
     <td mat-cell>{{shop._id}}</td>
     <td mat-cell>{{shop.name}}</td>
+    <td mat-cell>{{shop.address}}</td>
     <td mat-cell>{{shop.tags}}</td>
     <td mat-cell>{{shop.owner}}</td>
     <td mat-cell>{{shop.lng | number:'1.0-3'}}</td>

@@ -140,5 +140,15 @@ export class ShopsComponent implements OnInit {
 
   editShop(shop: any,event) {
     event.stopPropagation();
+    this.router.navigate(['shop'],
+      {queryParams:
+          {
+            shop:JSON.stringify(shop),
+            userid:this.user._id,
+            pseudo:this.user.pseudo,
+            tags:this.user.tags,
+            anonymous:this.user.email.indexOf("fictif.com")>-1
+          }
+      });
   }
 }

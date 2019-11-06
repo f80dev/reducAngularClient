@@ -35,13 +35,15 @@
         <!--Affichage des coupons copiés pour les non propriétaire pour la carte-->
           <div *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
 
+            <!--sur titre-->
             <span *ngIf="coupon.visible!=2">{{coupon.label}}</span>
-            <span *ngIf="coupon.visible==2">
-              Rendez vous "{{coupon.shopname}}" - Avant le {{(coupon.dtEnd*1000) | date:'dd/MM HH:mm'}} (<app-timer [end]="coupon.dtEnd"></app-timer>)
-            </span>
             <br>
 
+            <span *ngIf="coupon.visible==2">
+              Rendez vous "{{coupon.shopname}}"
+            </span>
 
+            <!-- Sous-titre-->
             <span *ngIf="coupon.visible==1">
               <span style="font-size: x-small;" *ngIf="coupon.canbedeal && coupon.max>0">
                 Partagez la promo pour gagner jusqu'à {{coupon.max}}{{coupon.symbol}}
@@ -58,7 +60,8 @@
             </span>
 
             <span *ngIf="coupon.visible==2" style="font-size: x-small;">
-              {{coupon.shop_complete.address}}
+              <br>
+              Avant le {{(coupon.dtEnd*1000) | date:formatDate}} (il reste <app-timer [end]="coupon.dtEnd"></app-timer>)
             </span>
           </div>
 
@@ -111,26 +114,27 @@
             <td style="text-align: center;vertical-align: top;">
 
               <!--Zone réservé au client de base-->
-              <div style="margin-top:15px;display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
+              <div style="margin-top:10px;line-height:80%;display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
                 <span style="font-size: 2em">
                   {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
                 </span>
                 <br>
                 <span style="font-size: x-small;margin:0;padding: 0;">gagné(es)</span>
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
-                <br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer>
+                <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer>
               </div>
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <table style="text-align: left;display: inline-block;font-size:small;line-height: 85%;" cellpadding="1" name="zoneInfo">
+                <br>
+                <table style="text-align: left;display: inline-block;font-size:small;line-height: 90%;" cellpadding="1" name="zoneInfo">
                   <tr><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr>
                   <tr><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-1'}}{{coupon.symbol}}</td></tr>
                   <tr><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
                   <tr><td>Utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
                 </table><br>
                 <span style="font-size: medium" *ngIf="coupon.visible==1">
-                Reste <app-timer [end]="coupon.dtEnd"></app-timer>
+                <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>
               </span>
 
               </div>
@@ -258,7 +262,6 @@
                 mat-icon-button
                 class="small-icon-button"
                 name="btnRemove"
-                *ngIf="user.level>0.6"
                 (click)="remove(coupon)">
           <mat-icon>delete</mat-icon>
         </button>

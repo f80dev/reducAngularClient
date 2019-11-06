@@ -90,10 +90,10 @@ export class UserformComponent implements OnInit {
 
   addshop() {
     this.showMap=false;
-    this.router.navigate(
-      ['shop'],
+    this.router.navigate(['shop'],
       {queryParams:
           {
+            shop:null,
             userid:this.user._id,
             pseudo:this.user.pseudo,
             tags:this.user.tags,

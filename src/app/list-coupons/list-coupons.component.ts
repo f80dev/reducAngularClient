@@ -40,6 +40,7 @@ export class ListCouponsComponent implements OnChanges {
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
   flipDiv=true;
+  formatDate='dd/MM HH:mm';
 
   constructor(public meta: Meta,
               public snackBar: MatSnackBar,
@@ -75,7 +76,6 @@ export class ListCouponsComponent implements OnChanges {
     coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
 
     if(mode==1){
-
       this.fixTagPage(coupon);
       this.ngNavigatorShareService.share({
         title: coupon.label,
@@ -92,6 +92,21 @@ export class ListCouponsComponent implements OnChanges {
 
           this.snackBar.open("Invitation dans le presse-papier, prête à être envoyé via SMS, WhatsApp, etc ...","",{duration:2000});
         });
+    }
+
+    if(mode==2){//Mode utilisation
+      var dtEnd=new Date(Number(coupon.dtEnd)*1000);
+      var dtNow=new Date();
+      if(dtEnd.getDay()==dtNow.getDay() && dtEnd.getMonth()==dtNow.getMonth())
+        this.formatDate="HH:mm";
+      else{
+        if(dtEnd.getMonth()==dtNow.getMonth())
+          this.formatDate="dd";
+        else
+          this.formatDate="dd/MM";
+      }
+
+
     }
   }
 
