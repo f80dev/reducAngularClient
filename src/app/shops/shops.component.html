@@ -15,6 +15,7 @@
 
     <div class="app-card-title">
       {{shop.name}}
+      <mat-icon style="cursor:pointer;font-size: small;" (click)="editShop(shop,$event)">create</mat-icon>
       <br>
       <span class="app-card-subtitle">
       <span *ngIf="shop.tags?.length>0 && shop.followers?.length==0">
@@ -24,6 +25,7 @@
         Vous avez {{shop.followers?.length}} followers
       </span>
     </span>
+
 
     </div>
 

@@ -137,4 +137,8 @@ export class ShopsComponent implements OnInit {
     if(shop.visible)localStorage.setItem("showShop",shop._id);
 
   }
+
+  editShop(shop: any,event) {
+    event.stopPropagation();
+  }
 }
