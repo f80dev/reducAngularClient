@@ -13,6 +13,7 @@
 
 
   <button mat-flat-button mat-button
+          id="cmdInternet"
           *ngIf="deviceService.isDesktop() && data.emoji"
           (click)="addIcons()">Emojis</button>
   &nbsp;&nbsp;

@@ -32,7 +32,11 @@
       <span style="color:black">Couverture de votre coupon (avec Exemple de texte)</span><br>
       <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">{{coupon.label}}</div>
       <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
-      <img class="visual-coupon" style="object-fit: cover;" [src]="coupon.visual" (click)="addImage('visual',800,220)"><br>
+      <img class="visual-coupon"
+           style="object-fit: cover;"
+           id="id_visual"
+           [src]="coupon.visual"
+           (click)="addImage('visual',800,220)"><br>
     </div>
     <br>
 
@@ -44,8 +48,6 @@
 
     <h4>Référencer</h4>
     <div class="zone_text" [innerHTML]="reference_text | safe:'html'"></div>
-
-
 
   </mat-card-content>
   <mat-card-actions class="app-card-action">
