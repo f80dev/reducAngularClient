@@ -44,9 +44,14 @@
 
   "faqs": [
     {
-      "id":"buildFaq",
+      "id":"buildPromo",
       "title": "Comment faire une promotion ?",
       "content": "./faqs/build_promo.html"
+    },
+    {
+      "id":"buildPdV",
+      "title": "Qu'est qu'un point de vente ?",
+      "content": "Dans reducShare, un point de vente n'est pas nécéssairement une boutique. Cela peut être le domicile d'un indépendant par exemple. Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
     },
     {
       "id":"profil",
@@ -56,7 +61,7 @@
     {
       "id":"delegate",
       "title": "Peut on déléguer la validation des réductions à ses employés ?",
-      "content": "Oui, rien de plus simple.<br>Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
+      "content": "Oui, rien de plus simple.<br>En effet, celui qui fait fabrique la promotion ne peut pas forcément être toujours présent sur le point de vente pour valider les promotions<br>Il suffit que vos employé ouvre l'application sur leur mobile, passe en mode avancé, affiche leur QRCode associé puis vous flasher le qrcode. A partir de ce moment, s'il flash un coupon avec l'application, c'est comme si vous le faisiez donc il valide les réductions"
     },
     {
       "id":"getReduc",
