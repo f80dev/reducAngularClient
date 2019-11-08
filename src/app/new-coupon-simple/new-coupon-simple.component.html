@@ -1,6 +1,7 @@
 <app-old-coupons *ngIf="showOldCoupon"
                  title="Utilisez un modèle"
                  subtitle="pour votre nouvelle promotion"
+                 [askFilter]="true"
                  [shop]="{'_id':coupon.shop,'owner':userid}"
                  (cancel)="cancel()"
                  [filter]="tags"
@@ -17,7 +18,7 @@
           subtitle="ReducShare propose de partir d'un modèle que vous pouvez totalement personnaliser pour s'adapter à votre promotion. Vous pouvez également valider le modèle juste pour voir puisqu'il est toujours possible de modifier ou supprimer une promotion surtout si elle n'a pas été diffusée">
 </app-tuto>
 
-<mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;color:black;">
+<mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;color:black;background-color: #8f8f8f;">
   <mat-card-title>
     Personnaliser le modèle
   </mat-card-title>
@@ -25,29 +26,45 @@
     Tous les contenus blancs sont modifiables
   </mat-card-subtitle>
   <mat-card-content class="app-card-content">
-    <h4><small>Adaptez ce modèle a votre promotion</small></h4>
-    <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
-    <br>
-    <div style="position:relative;width: 100%;text-align: center;color:white;">
-      <span style="color:black">Couverture de votre coupon (avec Exemple de texte)</span><br>
-      <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">{{coupon.label}}</div>
-      <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
-      <img class="visual-coupon"
-           style="object-fit: cover;"
-           id="id_visual"
-           [src]="coupon.visual"
-           (click)="addImage('visual',800,220)"><br>
+
+    <div *ngIf="coupon.description?.length>0" style="width: 90%;margin-left:5%;">
+      <span style="color: white">Description du modèle:</span><br>
+      {{coupon.description}}
     </div>
-    <br>
 
-    <h4>L'avantage client</h4>
-    <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
 
-    <h4>Maitriser votre budget</h4>
-    <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
+    <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
 
-    <h4>Référencer</h4>
-    <div class="zone_text" [innerHTML]="reference_text | safe:'html'"></div>
+      <mat-step title="Adaptez ce modèle a votre promotion">
+        <ng-template matStepLabel class="step-title">Adaptez ce modèle a votre promotion</ng-template>
+        <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
+      </mat-step>
+
+      <mat-step title="Votre visuel">
+        <ng-template matStepLabel class="step-title">Votre visuel</ng-template>
+        <div style="position:relative;width: 100%;text-align: center;color:white;">
+          <span style="color:black" >Couverture de votre coupon (avec Exemple de texte)</span><br>
+          <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">{{coupon.label}}</div>
+          <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
+          <img class="visual-coupon"
+               style="object-fit: cover;"
+               id="id_visual"
+               [src]="coupon.visual"
+               (click)="addImage('visual',800,220)"><br>
+        </div>
+      </mat-step>
+
+      <mat-step title="L'avantage client">
+        <ng-template matStepLabel class="step-title">L'avantage client</ng-template>
+        <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
+      </mat-step>
+
+      <mat-step title="Maitrisez votre budget">
+        <ng-template matStepLabel class="step-title">Maitrisez votre budget</ng-template>
+        <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
+      </mat-step>
+
+    </mat-vertical-stepper>
 
   </mat-card-content>
   <mat-card-actions class="app-card-action">

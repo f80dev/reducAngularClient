@@ -141,3 +141,7 @@ h2 {
   padding: 8px !important;
 }
 
+.step-title {
+  color:black !important;
+  font-weight: lighter;
+}

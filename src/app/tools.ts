@@ -424,7 +424,7 @@ export function exportToHTML(src:string,coupon:any,func:Function,color="darkred"
     if(word.startsWith("#")){
       fields.push(field);
       field=field.split("=")[0]
-      code=code+"<span id='id_"+field+"' style='color:"+color+";cursor: pointer;'>"+coupon[field]+"</span> ";
+      code=code+"<span id='id_"+field+"' style='color:"+color+";cursor: pointer;font-weight: bold;'>"+coupon[field]+"</span> ";
     }
 
     if(word.startsWith("@"))code=code+coupon[field]+" ";

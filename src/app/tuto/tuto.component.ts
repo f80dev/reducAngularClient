@@ -34,6 +34,7 @@ export class TutoComponent implements OnChanges,OnInit {
   code:string="";
 
   refresh(){
+    if(this.config.params==null)return;
     if(!this.config.params.tuto)this.hideTuto(false);
 
     if(!this.config.visibleTuto || this._type=="title" || this.force ){

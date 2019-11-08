@@ -1,8 +1,12 @@
 <mat-card class="app-card" style="background: none;">
   <mat-toolbar class="app-toolbar">
-    <div style="display: inline-block;padding:0px;vertical-align: text-top;">
+    <div style="display: inline-block;padding:0px;vertical-align: text-top;" *ngIf="!askFilter">
       {{title}}<br>
       <span style="font-size: small;color: lightgray;">{{subtitle}}</span>
+    </div>
+
+    <div style="width:80%;display: inline-block;" *ngIf="askFilter">
+      Pour quelle type de points de vente<br> souhaitez-vous voir des modèles ?
     </div>
 
     <span class="spacer">
@@ -18,8 +22,27 @@
     </button>
     &nbsp;
     &nbsp;
-    <button class="small-button" mat-icon-button mat-button mat-flat-button (click)="oncancel.emit()">
+    <button class="small-button"
+            *ngIf="!askFilter"
+            mat-icon-button mat-button mat-flat-button
+            (click)="oncancel.emit()">
       <mat-icon>close</mat-icon>
+    </button>
+
+    <button mat-button mat-icon-button mat-raised-button
+            title="Valide"
+            id="btnValideFilter"
+            *ngIf="askFilter && selTags?.length>0"
+            (click)="selFilter()">
+      <mat-icon>checkmark</mat-icon>
+    </button>
+
+    <button mat-button mat-raised-button
+            title="Valide"
+            id="btnValideFilterAll"
+            *ngIf="askFilter && selTags?.length==0"
+            (click)="selFilter()">
+      Tout voir
     </button>
   </mat-toolbar>
 
@@ -35,7 +58,20 @@
     </button>
   </span>
 
-  <mat-card-content class="app-card-content">
+
+  <!--Sélection d'un filtre-->
+  <mat-card-content class="app-card-content" *ngIf="askFilter">
+
+    <mat-selection-list #tags (selectionChange)="selTags=tags?.selectedOptions.selected">
+      <mat-list-option *ngFor="let tag of config.values.tags?.split(',')">
+        {{tag}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+
+
+
+  <mat-card-content class="app-card-content" *ngIf="!askFilter">
     <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion"
               *ngIf="coupons.length>0">
     </app-tuto>
@@ -64,9 +100,9 @@
         </p>
         <button style="display: inline-block;"
                 *ngIf="canDelete"
-                mat-flat-button mat-icon-button (click)="deleteCoupon(coupon)"><mat-icon>delete</mat-icon></button>
+                mat-flat-button mat-icon-button (click)="deleteCoupon(coupon)">
+          <mat-icon>delete</mat-icon></button>
         &nbsp;
-
       </mat-list-item>
     </mat-list>
   </mat-card-content>

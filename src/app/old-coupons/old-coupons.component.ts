@@ -20,6 +20,7 @@ export class OldCouponsComponent implements OnInit {
 
   @Input("shop") shop:any;
   @Input("level") level=0;
+  @Input("askFilter") askFilter=false;
   @Input("title") title:string="";
   @Input("subtitle") subtitle:string="";
   @Output("select") onselect:EventEmitter<any>=new EventEmitter();
@@ -27,6 +28,7 @@ export class OldCouponsComponent implements OnInit {
   @Output("cancel") oncancel:EventEmitter<any>=new EventEmitter();
   @Input("canDelete") canDelete: boolean=false;
   @Input("filter") filter: string="";
+  selTags: any=[];
 
   ngOnInit() {
     this.refresh(()=>{
@@ -34,6 +36,10 @@ export class OldCouponsComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param func
+   */
   refresh(func=null){
     this.withFilter=false;
     this.coupons=[];
@@ -44,10 +50,13 @@ export class OldCouponsComponent implements OnInit {
     }
 
     var modeles=JSON.stringify(this.config.values.modeles);
-    JSON.parse(modeles).forEach((c)=>{
-      if(c.level<=this.level)
-        this.coupons.push(c);
-    });
+    if(modeles!=null){
+      JSON.parse(modeles).forEach((c)=>{
+        if(c.level<=this.level)
+          this.coupons.push(c);
+      });
+    }
+
     if(this.shop){
       this.api.getoldcoupons(this.shop._id).subscribe((r:any)=>{
         r.forEach((it)=>{
@@ -61,6 +70,11 @@ export class OldCouponsComponent implements OnInit {
     }
   }
 
+
+  /**
+   *
+   * @param coupon
+   */
   deleteCoupon(coupon: any) {
     this.api.removeCoupon(coupon._id,true).subscribe(()=>{
       this.ondelete.emit();
@@ -76,6 +90,10 @@ export class OldCouponsComponent implements OnInit {
   opereFilter() {
     $$("Application du filtre="+this.filter);
     this.withFilter=true;
+    if(this.filter==this.config.values.tags){
+      this.withFilter=false;
+      return;
+    }
     var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
     this.coupons=[];
     var index=0;
@@ -92,10 +110,28 @@ export class OldCouponsComponent implements OnInit {
   }
 
   changeFilter() {
-    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.values.tags,onlyConfirm:false}})
-      .afterClosed().subscribe((result) => {
-        this.filter=result;
-        this.refresh();
+    this.askFilter=true;
+    // this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.values.tags,onlyConfirm:false}})
+    //   .afterClosed().subscribe((result) => {
+    //     this.filter=result;
+    //     this.refresh();
+    // });
+  }
+
+  selFilter(){
+    var rc="";
+    if(this.selTags.length==0)
+      rc=this.config.values.tags;
+    else {
+      this.selTags.forEach((f:any)=> {
+        rc=rc+","+f.getLabel().trim();
+      });
+    }
+
+    this.filter=rc.substr(1);
+    this.askFilter=false;
+    this.refresh(()=>{
+      if(this.selTags.length>0)this.opereFilter();
     });
   }
 }
