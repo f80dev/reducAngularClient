@@ -1,23 +1,15 @@
-<div style="width:100vw;height:100vh;position:absolute;top:0;left:0;text-align: center;background-color: white;"
-     (click)="close()">
+<div style="width:100vw;height:100vh;position:absolute;top:0;left:0;text-align: center;background-color: white;" (click)="close()">
   <br>
   <br>
-  <h3 style="padding:5vw;">
-    {{message}}
-  </h3>
+    <div style="padding:5vw;font-size: large;" [innerHTML]="message | safe:'html'"></div>
   <br>
-  <img [src]="logo"
-       style="width: 60%;max-width: 300px;"
-  >
+  <img [src]="logo" style="width: 60%;max-width: 300px;">
   <br>
-  <h4 style="padding:5vw;">
-    {{submessage}}
-  </h4>
+  <div style="padding:5vw;font-size: medium" [innerHTML]="submessage"></div>
   <br>
   <br>
   <button mat-flat-button mat-button>
     Commencer
   </button>
-
 </div>
 

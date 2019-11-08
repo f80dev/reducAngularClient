@@ -229,7 +229,7 @@
       "label":"Offrez le café à vos amis.",
       "share_bonus":0.1,
       "pay_bonus":2,
-      "level":0.3,
+      "level":0,
       "final_bonus":0,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/hot-beverage_2615.png",
       "direct_bonus":1,
@@ -242,7 +242,7 @@
       "visual":"https://reducshare.com/assets/img/cafe.jpg",
       "description":"Un restaurant offre les cafés en échange de la diffusion de la promotion",
       "conditions":"pour toute addition d'un montant supérieur a 20€",
-      "tags":"restaurant,bar,corporate"
+      "tags":"restaurant,bar,corporate,hotel"
     },
     {
       "title":"Menu enfant offert",
@@ -264,7 +264,7 @@
       "max_coupon":5000,
       "score":12,
       "conditions":"pour tout dejeuné du Lundi au Vendredi",
-      "tags":"restaurant"
+      "tags":"restaurant,hotel"
     },
     {
       "id":"nuitmotierprix",
