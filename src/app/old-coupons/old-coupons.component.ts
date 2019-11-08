@@ -110,7 +110,8 @@ export class OldCouponsComponent implements OnInit {
   }
 
   changeFilter() {
-    this.askFilter=true;
+    this.askFilter=(this.filter.length==0);
+
     // this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.values.tags,onlyConfirm:false}})
     //   .afterClosed().subscribe((result) => {
     //     this.filter=result;
