@@ -157,8 +157,8 @@
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"sur tout achat d'un montant supérieur à 30€",
-      "description":"Une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
+      "conditions":"pour tout achat d'un montant supérieur à 30€",
+      "description":"Un commerçant offre une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
       "score":15,
       "tags":"boutique"
     },
@@ -232,7 +232,7 @@
       "visual":"https://reducshare.com/assets/img/cafe.jpg",
       "description":"Un restaurant offre les cafés en échange de la diffusion de la promotion",
       "conditions":"pour toute addition d'un montant supérieur a 20€",
-      "tags":"restaurant,bar"
+      "tags":"restaurant,bar,corporate"
     },
     {
       "title":"Menu enfant offert",
@@ -325,7 +325,7 @@
       "beneficiaire":"client",
       "max_coupon":5000,
       "visual":"https://cdn.pixabay.com/photo/2016/03/26/18/23/bread-1281053_960_720.jpg",
-      "description":"Liquider les invendus. Une boulangerie distribue des baguettes",
+      "description":"Liquider les invendus. Une boulangerie distribue des croissants ",
       "conditions":"pour tout achat quelque soit le montant à partir de 20h",
       "tags":"alimentaire,boutique"
     },
@@ -394,11 +394,37 @@
       "level":0,
       "stock":200,
       "max_coupon":500,
-      "score":15,
+      "score":17,
       "beneficiaire":"client",
       "visual":"https://reducshare.com/assets/img/happyhour.jpg",
+      "description":"un bar propose de gagner des verres en fin de journée en échange de la distribution des coupons",
       "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
       "tags":"bar,restaurant,hotel,vin"
+    },
+    {
+      "id":"coworking",
+      "title":"L'accès aux ressources",
+      "unity":"heure de location de salle",
+      "symbol":"hrs",
+      "breakable":false,
+      "pluriel":true,
+      "label":"Coworking Space, l'accès gratuit aux salles",
+      "share_bonus":0.05,
+      "pay_bonus":2,
+      "final_bonus":0,
+      "duration_jours":5,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/clinking-beer-mugs_1f37b.png",
+      "direct_bonus":0.5,
+      "max":10,
+      "level":0.2,
+      "stock":200,
+      "max_coupon":500,
+      "score":17,
+      "beneficiaire":"client",
+      "visual":"https://reducshare.com/assets/img/happyhour.jpg",
+      "description":"Un espace de coworking space propose de gagner du temps de location des espaces privatifs",
+      "conditions":"pour toute réservation d'un minimum d'une journée",
+      "tags":"corporate"
     },
     {
       "id":"apero",
