@@ -51,11 +51,16 @@
     {
       "id":"buildPdV",
       "title": "Qu'est qu'un point de vente ?",
-      "content": "Dans reducShare, un point de vente n'est pas nécéssairement une boutique. Cela peut être le domicile d'un indépendant par exemple. Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
+      "content": "Dans reducShare, un point de vente n'est pas nécéssairement une boutique. Cela peut être le domicile d'un indépendant par exemple.<br>Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
+    },
+    {
+      "id":"tarif",
+      "title": "Combien coûte ReducShare ?",
+      "content": "Pour un client le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le ReducShare, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), la plupart des fonctions seront gratuites et certaines fonctions 'premium' seront payantes. Pour les associations et établissements publics le service restera intégralement gratuit"
     },
     {
       "id":"profil",
-      "title": "Doit on s'authentifier pour utiliser ReducShare ?",
+      "title": "Doit-on s'authentifier pour utiliser ReducShare ?",
       "content": "Absolument pas !<br> ReducShare fonctionne parfaitement avec un profil anonyme. <br>L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
     },
     {
