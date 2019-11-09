@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.analyse_params((p)=>{
       this.analyse_login(p.tags,(u:any,isnew:boolean)=>{
-        if(isnew)p.message="Vous êtes vendeur ? créer votre première promotion. Vous êtes acheteur ? visualisez les promotions autour de vous !";
+        //if(isnew)p.message="Vous êtes vendeur ? créer votre première promotion. Vous êtes acheteur ? visualisez les promotions autour de vous !";
         localStorage.setItem("user",u._id);
         this.user = u;
         this.connect(p.coupon,p.pass);
