@@ -78,7 +78,7 @@ export class NewCouponSimpleComponent implements OnInit {
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="#c7006e";
-    this.master_text=exportToHTML("Votre intro: #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne un/une #unity=unité_désignant_ce_que_gagne_le_client représenté(e) " +
+    this.master_text=exportToHTML("L'intro de votre promotion, la phrase choc qui donne envie de la récupérer:<br> #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e) " +
       "dans ReducShare par le symbole " +
       "#symbol=Symbole_utilisé_pour_représenter_l'unité " +
       "<br><br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);

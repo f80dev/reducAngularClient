@@ -101,55 +101,59 @@ export class NewshopComponent implements OnInit {
 
   refresh_map(){
     clearTimeout(this.handle);
-    this.handle=setTimeout(()=>{
-      var l=getMarkerLayer(this.map);
-      //var features=l.getSource().getFeatures();
-      var center_pos=ol.proj.toLonLat(this.map.getView().getCenter());
-      this.new_shop.lng=center_pos[0];
-      this.new_shop.lat=center_pos[1];
-      if(this.reverseGeocode){
-        this.loc.getAddressFromCoord(this.new_shop.lat,this.new_shop.lng,(res)=>{
-          this.reverseGeocode=false;
-          if(res.display_name){
-            "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
-              if(res.address[type]!=null && this.canUpdateName)this.new_shop.name=res.address[type];
-            });
-            var house_number=res.address.house_number;
-            if(house_number==null && this.new_shop.name!=null)house_number=this.new_shop.name;
+    if(!this.new_shop.address.startsWith("http")){
+      this.handle=setTimeout(()=>{
+        var l=getMarkerLayer(this.map);
+        //var features=l.getSource().getFeatures();
+        var center_pos=ol.proj.toLonLat(this.map.getView().getCenter());
+        this.new_shop.lng=center_pos[0];
+        this.new_shop.lat=center_pos[1];
+        if(this.reverseGeocode){
+          this.loc.getAddressFromCoord(this.new_shop.lat,this.new_shop.lng,(res)=>{
+            this.reverseGeocode=false;
+            if(res.display_name){
+              "kindergarten,building,pub,hairdresser,supermarket,bar".split(",").forEach((type)=>{
+                if(res.address[type]!=null && this.canUpdateName)this.new_shop.name=res.address[type];
+              });
+              var house_number=res.address.house_number;
+              if(house_number==null && this.new_shop.name!=null)house_number=this.new_shop.name;
 
-            if(res.address.road==null)
-              this.new_shop.address=res.display_name;
-            else
-              this.new_shop.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
-          }
-        },null);
-      }
-      l.getSource().clear();
-      l.getSource().addFeature(createMarker(center_pos[0], center_pos[1],this.config.values.icon_shop,null,0.2));
-    },500);
+              if(res.address.road==null)
+                this.new_shop.address=res.display_name;
+              else
+                this.new_shop.address=(normeString(house_number)+", "+res.address.road+", "+res.address.postcode+" "+res.address.city).trim();
+            }
+          },null);
+        }
+        l.getSource().clear();
+        l.getSource().addFeature(createMarker(center_pos[0], center_pos[1],this.config.values.icon_shop,null,0.2));
+      },500);
+    }
   }
 
 
   showOnMap(zoom=15) {
     $$("Refresh map pour address="+this.new_shop.address);
-    this.loc.getAddress(this.new_shop.address,(res)=> {
-      this.new_shop.lng=Number(res[0].lon);
-      this.new_shop.lat= Number(res[0].lat);
-      this.show_address=res[0].display_name;
-      if(this.map==null){
-        this.map =createMap({lng:this.new_shop.lng,lat:this.new_shop.lat},this.config.values.icon_shop,zoom,0.2,
-          (event)=>{
-          this.refresh_map();
-          },
-          null,
-          (event)=>{
-            this.map.getView().setCenter(event.coordinate);
-          });
-      }else{
-        this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
-        getMarkerLayer(this.map).addFeature(createMarker(this.new_shop.lng, this.new_shop.lat,this.config.values.icon_shop,null,0.2));
-      }
-    });
+    if(!this.new_shop.address.startsWith('http')){
+      this.loc.getAddress(this.new_shop.address,(res)=> {
+        this.new_shop.lng=Number(res[0].lon);
+        this.new_shop.lat= Number(res[0].lat);
+        this.show_address=res[0].display_name;
+        if(this.map==null){
+          this.map =createMap({lng:this.new_shop.lng,lat:this.new_shop.lat},this.config.values.icon_shop,zoom,0.2,
+            (event)=>{
+              this.refresh_map();
+            },
+            null,
+            (event)=>{
+              this.map.getView().setCenter(event.coordinate);
+            });
+        }else{
+          this.map.getView().setCenter(ol.proj.fromLonLat([this.new_shop.lng, this.new_shop.lat]));
+          getMarkerLayer(this.map).addFeature(createMarker(this.new_shop.lng, this.new_shop.lat,this.config.values.icon_shop,null,0.2));
+        }
+      });
+    }
   }
 
 

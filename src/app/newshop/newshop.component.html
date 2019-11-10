@@ -32,7 +32,16 @@
 
   <mat-card-content class="app-card-content">
     <br><br><br>
-    <app-tuto label="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre"></app-tuto>
+    <app-tuto
+      button="Commencer"
+      [duration]="15"
+      color="white"
+      background="black"
+      image="./assets/img/shop.png"
+      [force]="true"
+      subtitle="Il doit avoir un nom: celui de votre boutique, votre marque ou simplement votre nom.<br>Et une adresse physique ou virtuel (lien internet)"
+      title="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre.">
+    </app-tuto>
 
     <mat-form-field class="form-field-style" style="width:85%;margin-right:10px;">
       <input id="txtShopName" type="text"
@@ -62,16 +71,18 @@
     <!--<mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">Adresse interprétée: {{show_address}}</mat-label>-->
 
     <div id="map" class="map form-field-style"
+         *ngIf="!new_shop.address.startsWith('http')"
          (mouseup)="reverseGeocode=true"
          (touchend)="reverseGeocode=true">
     </div>
 
-    <app-tuto [delay]="5" *ngIf="focusElt=='address'"
+    <app-tuto [delay]="5" *ngIf="focusElt=='address' && !new_shop.address.startsWith('http')"
               label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
     <br>
 
     <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
+                  *ngIf="!new_shop.address.startsWith('http')"
                   title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
                   (change)="checkLogin()">
       Point de vente visible sur la carte des promotions
@@ -101,7 +112,7 @@
     </button>
 
     <br>
-    <mat-form-field class="form-field-style">
+    <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http')">
       <input id="txtWebsite" type="text"
              (focus)="focusElt=='website'"
              title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."

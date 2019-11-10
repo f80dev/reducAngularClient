@@ -101,7 +101,7 @@
     {
       "id":"recrutement",
       "title":"Recrutement par cooptation",
-      "unity":"bouteille de champagne",
+      "unity":"bouteilles de champagne",
       "symbol":"🍾",
       "pluriel":true,
       "breakable":true,
@@ -175,7 +175,7 @@
     {
       "id":"fide",
       "title":"Programme de fidélité",
-      "unity":"point",
+      "unity":"points",
       "symbol":"🥇",
       "breakable":true,
       "pluriel":false,
@@ -222,7 +222,7 @@
     {
       "id":"cafe",
       "title":"Les cafés offerts",
-      "unity":"café",
+      "unity":"cafés",
       "symbol":"☕",
       "breakable":false,
       "pluriel":true,
@@ -246,7 +246,7 @@
     },
     {
       "title":"Menu enfant offert",
-      "unity":"menu enfant",
+      "unity":"menus enfant",
       "symbol":"🍽",
       "breakable":false,
       "pluriel":true,
@@ -269,7 +269,7 @@
     {
       "id":"nuitmotierprix",
       "title":"Nuit à moitée prix",
-      "unity":"nuit à 50%",
+      "unity":"nuits à 50%",
       "symbol":"🛌",
       "breakable":false,
       "level":0.2,
@@ -294,7 +294,7 @@
     {
       "id":"petitdej",
       "title":"Petit déj offert",
-      "unity":"déjeuné",
+      "unity":"déjeunés",
       "symbol":"🍽️",
       "breakable":true,
       "pluriel":true,
@@ -317,7 +317,7 @@
     {
       "id":"invendus",
       "title":"Les invendus / liquidation",
-      "unity":"croissant",
+      "unity":"croissants",
       "symbol":"🥐",
       "breakable":false,
       "pluriel":true,
@@ -342,7 +342,7 @@
     {
       "id":"lastminute",
       "title":"Chambres en dernières minutes",
-      "unity":"pourcentage sur le prix de la chambre",
+      "unity":"pourcentages sur le prix de la chambre",
       "symbol":"%",
       "breakable":true,
       "pluriel":true,
@@ -367,7 +367,7 @@
     {
       "id":"entract",
       "title":"Des boissons offertes pendant votre événement",
-      "unity":"boisson",
+      "unity":"boissons",
       "symbol":"🥂",
       "breakable":false,
       "pluriel":true,
@@ -391,7 +391,7 @@
     {
       "id":"happyhour",
       "title":"Happy Hour",
-      "unity":"verre",
+      "unity":"verres",
       "symbol":"🍷",
       "breakable":false,
       "pluriel":true,
@@ -416,7 +416,7 @@
     {
       "id":"coworking",
       "title":"L'accès aux ressources",
-      "unity":"heure de location de salle",
+      "unity":"heures de location de salle",
       "symbol":"hrs",
       "breakable":false,
       "pluriel":true,
@@ -441,7 +441,7 @@
     {
       "id":"apero",
       "title":"Un petit apéro",
-      "unity":"apéro",
+      "unity":"apéros",
       "symbol":"🍺",
       "breakable":false,
       "pluriel":true,
@@ -464,7 +464,7 @@
     {
       "id":"dessertgratuit",
       "title":"Le dessert gratuit",
-      "unity":"dessert",
+      "unity":"desserts",
       "symbol":"🍨",
       "breakable":false,
       "pluriel":true,
@@ -487,7 +487,7 @@
     {
       "id":"recyclage",
       "title":"Challenge Recyclage",
-      "unity":"ecopoint",
+      "unity":"ecopoints",
       "symbol":"♻️",
       "breakable":true,
       "pluriel":true,
@@ -511,7 +511,7 @@
     {
       "id":"promolegume",
       "title":"Promo chez le marchand de légumes",
-      "unity":"banane",
+      "unity":"bananes",
       "symbol":"🍌",
       "pluriel":true,
       "breakable":false,
@@ -532,7 +532,7 @@
     {
       "id":"degustationgratuite",
       "title":"Dégustration gratuite pour nos fidèles clients",
-      "unity":"point",
+      "unity":"points",
       "beneficiaire":"client",
       "symbol":"pts",
       "pluriel":true,
@@ -557,7 +557,7 @@
     {
       "id":"coursparticulier",
       "title":"Cours particulier",
-      "unity":"minute",
+      "unity":"minutes",
       "symbol":"min",
       "beneficiaire":"client",
       "pluriel":true,
@@ -604,7 +604,7 @@
     {
       "id":"placesgratuites",
       "title":"Des places / entrée gratuites",
-      "unity":"billet",
+      "unity":"billets",
       "symbol":"🎟️",
       "pluriel":true,
       "breakable":false,
