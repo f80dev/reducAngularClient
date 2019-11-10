@@ -62,6 +62,8 @@ export class ShopsComponent implements OnInit {
         {
           couponid:coupon._id,
           title:"Editer "+coupon.title,
+          level:this.user.level,
+          shopname:shop.name,
           edit:true,
           userid:this.user._id
         }

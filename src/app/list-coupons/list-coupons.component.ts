@@ -208,10 +208,6 @@ export class ListCouponsComponent implements OnChanges {
     },(error)=>{showError(this,error);});
   }
 
-  edit(coupon: any) {
-
-  }
-
   openHelp(url:string){
     if(url!=null)
       window.open(url,"_blank");

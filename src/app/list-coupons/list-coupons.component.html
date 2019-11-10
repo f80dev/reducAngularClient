@@ -98,9 +98,10 @@
 
               <!--QRCode du coupon-->
 
-              <span *ngIf="coupon.visible==2"><small>Montrez le QR-code</small></span><br>
+              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=1)"><small>Montrez le QR-code</small></span><br>
 
-              <a [href]="coupon.url" target="_blank" *ngIf="coupon.visible>0">
+              <a [href]="coupon.url" target="_blank"
+                 *ngIf="coupon.visible==1 || (coupon.visible==2 && (coupon.breakable || coupon.gain>=1))">
                 <qr-code [value]="coupon.url" name="qrcode"
                          style="width:150px;height: 140px;margin:0px;"
                          ngxClipboard [cbContent]="coupon.url"
@@ -108,13 +109,14 @@
                 </qr-code>
                 <br>
               </a>
-              <span *ngIf="coupon.visible==2"><small>au vendeur</small><br></span>
+              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=1)"><small>au vendeur</small><br></span>
 
             </td>
             <td style="text-align: center;vertical-align: top;">
 
               <!--Zone réservé au client de base-->
-              <div style="margin-top:10px;line-height:80%;display:inline-block;font-size: larger;" *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
+              <div style="margin-top:10px;line-height:80%;display:inline-block;font-size: larger;"
+                   *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
                 <span style="font-size: 2em">
                   {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
                 </span>
@@ -142,33 +144,43 @@
               </div>
 
               <div style="min-width:200px;" *ngIf="coupon.visible==2">
-                <small>et bénéficiez de</small> <br><br>
-                <div style="font-size: xx-large;display: inline-block;">
-                  {{coupon.gain}}{{coupon.symbol}}<br>
+                <div style="display: inline-block;" *ngIf="coupon.breakable || coupon.gain>=1">
+                  <small>et bénéficiez de</small> <br><br>
+                  <span style="font-size: xx-large;">{{coupon.gain}}{{coupon.symbol}}</span><br>
                 </div>
+
+                <div style="font-size: medium;max-width:200px;display: inline-block;"
+                     *ngIf="!coupon.breakable && coupon.gain<1">
+                  Vous n'avez pas encore assez pour utiliser le coupon
+                </div>
+
                 <br>
-                <div style="width:80%;display:inline-block;line-height: 90%;margin-top:5px;">{{coupon.conditions}}</div>
-                <br><br>
-                Localiser le point de vente :
-                <button mat-button mat-flat-button
-                        name="btnMap"
-                        class="small-icon-button"
-                        *ngIf="coupon._id!=coupon.origin"
-                        title="Localiser l'enseigne proposant la réduction"
-                        mat-icon-button  (click)="showAddress(coupon.shop_complete)">
-                  <mat-icon>my_location</mat-icon>
-                </button>
+                <div *ngIf="coupon.breakable || coupon.gain>=1">
+                  <div style="width:80%;display:inline-block;line-height: 90%;margin-top:5px;">{{coupon.conditions}}</div>
+                  <br><br>
+                  Localiser le point de vente :
+                  <button mat-button mat-flat-button
+                          name="btnMap"
+                          class="small-icon-button"
+                          *ngIf="coupon._id!=coupon.origin"
+                          title="Localiser l'enseigne proposant la réduction"
+                          mat-icon-button  (click)="showAddress(coupon.shop_complete)">
+                    <mat-icon>my_location</mat-icon>
+                  </button>
+                </div>
+
               </div>
               <!--La table des gains-->
 
               <!--Zone réserver au créateur-->
               <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
                 <br>
-                <table style="display:inline-block;text-align: left;line-height: 80%;">
-                  <tr>
-                    <td style="text-align: right;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
-                    <td>partages (/{{coupon.max_coupon}})</td>
+                <table style="display:inline-block;text-align: left;line-height: 90%;" cellpadding="3px">
+                  <tr *ngIf="coupon.share>0">
+                    <td style="text-align: right;font-size: large;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
+                    <td>partages (/{{coupon.max_coupon}})<br></td>
                   </tr>
+                  <tr *ngIf="coupon.share>0"><td><br></td><td></td></tr>
                   <tr *ngIf="user.level>1">
                     <td style="text-align: right;">{{coupon.gain_total | number:'1.0-1'}} {{coupon.symbol}}</td>
                     <td>proposé(es)</td>

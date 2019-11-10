@@ -134,7 +134,7 @@
     </button>
 
     <button mat-button
-            *ngIf="user.level<1"
+            *ngIf="user.level<3"
             id="btnExpert" title="Accès aux fonctions avancées de ReducShare"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>

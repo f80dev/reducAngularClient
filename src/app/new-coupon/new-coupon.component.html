@@ -16,8 +16,12 @@
     </td>
   </tr></table>
 
-  <app-tuto [delay]="5" *ngIf="!showOldCoupon" [force]="true"
-            label="Remplissez bien les 5 étapes pour décrire votre promotion. Les résumés au début de chaque section présentent l'information saisie sous un format lisible. Si vous ne voyez pas par oû commencer, consulter les modèles disponibles">
+  <app-tuto [duration]="30" *ngIf="!showOldCoupon" [force]="true"
+            title="Création de promotion<br>modèle avancé"
+            color="white"
+            background="black"
+            image="./assets/img/settings.png"
+            subtitle="Remplissez bien les 5 étapes pour décrire votre promotion.<br>Les résumés au début de chaque section présentent l'information saisie sous un format lisible. Si vous ne voyez pas par oû commencer, consulter les modèles disponibles">
   </app-tuto>
 
   <mat-card-content class="app-card-content" style="text-align: left;margin:0;padding:0;">
@@ -70,8 +74,8 @@
         </mat-form-field>
 
         <mat-checkbox [(ngModel)]="coupon.breakable"
-                      *ngIf="level>0.5" (focus)="focusElt='breakable'"
-                      (change)="changeMax()">unité fractionnable (Exemple: 3.4 {{coupon.symbol}} / {{coupon.unity}})
+                      *ngIf="level>0.5" (focus)="focusElt='breakable'">
+          unité fractionnable (Exemple: 3.4 {{coupon.symbol}} / {{coupon.unity}})
         </mat-checkbox>
         <br><br>
 
