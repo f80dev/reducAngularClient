@@ -31,6 +31,7 @@ export class OldCouponsComponent implements OnInit {
   selTags: any=[];
 
   ngOnInit() {
+    this.askFilter=(this.filter.length==0);
     this.refresh(()=>{
       if(this.filter.length>0)this.opereFilter();
     });
