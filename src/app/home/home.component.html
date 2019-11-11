@@ -1,72 +1,92 @@
-<app-flashscreen [message]="user.message"
-                 *ngIf="showMessage && user.message?.length>0"
-                 [duration]="15"
-                 (close)="closeFlashScreen()">
-</app-flashscreen>
 
-<div style="padding:3px;">
-  <mat-accordion [multi]="true" [hidden]="showMessage && user.message?.length>0">
-    <app-tuto title="Bienvenue dans ReducShare !"
-              *ngIf="user.level<0.5"
-              background="./assets/img/network.jpg"
-              button="Commencer"
-              [duration]="5"
-              color="white"
-              [force]="true"
-              image="./assets/icons/icon-144x144.png"
-              subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
-    </app-tuto>
+<table style="width: 100%;"><tr>
+  <td style="width: 700px;vertical-align: top;">
+    <app-flashscreen [message]="user.message"
+                     *ngIf="showMessage && user.message?.length>0"
+                     [duration]="15"
+                     (close)="closeFlashScreen()">
+    </app-flashscreen>
 
-    <app-userform [user]="user"
-                  [excludes]="user.coupons"
-                  (update)="updateUser($event)"
-                  (refresh)="refresh('',$event?.sort)"
-                  (flash)="refresh($event?.message)">
-    </app-userform>
+    <div style="padding:3px;">
+      <mat-accordion [multi]="true" [hidden]="showMessage && user.message?.length>0">
+        <app-tuto title="Bienvenue dans ReducShare !"
+                  *ngIf="user.level<0.5"
+                  background="./assets/img/network.jpg"
+                  button="Commencer"
+                  [duration]="5"
+                  color="white"
+                  [force]="true"
+                  image="./assets/icons/icon-144x144.png"
+                  subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
+        </app-tuto>
 
-    <app-tuto
-      *ngIf="user?.shops?.length>0 && user.level<1"
-      type="title"
-      color="white"
-      [duration]="20"
-      background="./assets/img/openshop2.jpg"
-      title="Bravo votre première enseigne est prête."
-      subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
-    </app-tuto>
+        <app-userform [user]="user"
+                      [excludes]="user.coupons"
+                      (update)="updateUser($event)"
+                      (refresh)="refresh('',$event?.sort)"
+                      (flash)="refresh($event?.message)">
+        </app-userform>
+
+        <app-tuto
+          *ngIf="user?.shops?.length>0 && user.level<1"
+          type="title"
+          color="white"
+          [duration]="20"
+          background="./assets/img/openshop2.jpg"
+          title="Bravo votre première enseigne est prête."
+          subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
+        </app-tuto>
 
 
-    <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
-              label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
-    </app-tuto>
+        <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
+                  label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
+        </app-tuto>
 
-    <app-shops
-      [user]="user"
-      (update)="refresh($event?.message)"
-      (delete)="refresh($event?.message)"
-      (insert)="refresh($event?.message)">
-    </app-shops>
+        <app-shops
+          [user]="user"
+          (update)="refresh($event?.message)"
+          (delete)="refresh($event?.message)"
+          (insert)="refresh($event?.message)">
+        </app-shops>
 
-    <app-tuto *ngIf="coupons.length>0"
-              label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
-    </app-tuto>
+        <app-tuto *ngIf="coupons.length>0"
+                  label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
+        </app-tuto>
 
-    <!--Affiche la liste des coupons en possession de l'utilisateur -->
-    <app-list-coupons (delete)="refresh($event?.message)"
-                      id="zoneMyPromos"
-                      title="Retrouvez ici la liste de tous vos coupons"
-                      (insert)="refresh($event?.message)"
-                      (update)="refresh($event?.message)"
-                      [sort]="sort"
-                      [coupons]="user.coupons" [user]="user">
-    </app-list-coupons>
+        <!--Affiche la liste des coupons en possession de l'utilisateur -->
+        <app-list-coupons (delete)="refresh($event?.message)"
+                          id="zoneMyPromos"
+                          title="Retrouvez ici la liste de tous vos coupons"
+                          (insert)="refresh($event?.message)"
+                          (update)="refresh($event?.message)"
+                          [sort]="sort"
+                          [coupons]="user.coupons" [user]="user">
+        </app-list-coupons>
 
-    <app-about *ngIf="user.level<2.0"
-               style="margin-top: 3px;"
-               [user]="user">
-    </app-about>
-  </mat-accordion>
+        <app-about *ngIf="user.level<2.0"
+                   (open)="openFrame($event)"
+                   [withlogo]="!showHelpScreen"
+                   style="margin-top: 3px;color:black;background-color: darkblue;"
+                   [user]="user">
+        </app-about>
+      </mat-accordion>
 
-</div>
+    </div>
+
+  </td>
+  <td *ngIf="showHelpScreen" style="vertical-align:middle;margin:0px;padding:4px;">
+    <div *ngIf="iframe_src?.length>0" style="height:100vh;width:100%;text-align: center;">
+      <iframe [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"></iframe>
+    </div>
+
+    <div *ngIf="iframe_src?.length==0" style="height:100vh;background-color: #2a002a;width:100%;text-align: center;color:white;vertical-align: middle;font-size:xx-large;">
+     <br><br><br>REDUCSHARE<br><br><br>
+     <img [src]="config.values.brands[0].logo" style="width:30%;max-width: 250px;">
+     <br><br><br>
+     <span style="font-size: small;">Récompensez le bouche à oreille</span>
+   </div>
+  </td>
+</tr></table>
 
 
 

@@ -8,6 +8,7 @@ import {Location} from '@angular/common'
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {PromptComponent} from "../prompt/prompt.component";
+import {BreakpointObserver,BreakpointState} from "@angular/cdk/layout"
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,31 @@ import {PromptComponent} from "../prompt/prompt.component";
 })
 export class HomeComponent implements OnInit {
 
+  showHelpScreen=false;
+  iframe_src="";
+
   constructor(public socket:Socket,
+              public breakpointObserver:BreakpointObserver,
               public api: ApiService,
               public toast:MatSnackBar,
               public router: Router,
               public dialog:MatDialog,
               public config:ConfigService,
               public _location:Location,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute) {
+
+    breakpointObserver
+      .observe('(max-width: 950px)')
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.showHelpScreen = false;
+        } else {
+          this.showHelpScreen = true;
+        }
+      });
+
+  }
+
 
   showMessage: boolean=false;
   user: any = {message:""};
@@ -62,9 +80,7 @@ export class HomeComponent implements OnInit {
       this._location.replaceState(this._location.path().split('/home')[0],"");
 
     }
-
-
-      func(this.config.params);
+    func(this.config.params);
   }
 
   /**
@@ -227,6 +243,13 @@ export class HomeComponent implements OnInit {
       this.refresh();
     else
       this.ngOnInit();
+  }
+
+  openFrame(event,){
+    if(this.showHelpScreen && !event.forceOpen)
+      this.iframe_src=event.url;
+    else
+      window.open(event.url,"blank");
   }
 
   private raz() {

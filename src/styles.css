@@ -8,14 +8,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin:2px !important;
   padding:6px !important;
   background-color: #6e6e6e;
-  max-width:900px;
   vertical-align: text-top;
 }
 
 .visual-coupon {
   color: white;
   position:relative;
-  max-width:895px;
   margin:3px;
   width:100%;
   height:220px;
@@ -114,8 +112,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .big-icon {
   font-size:40px;
-  opacity: 0.5;
   color:black;
+  opacity: 0.5;
   display: inline-block;
 }
 

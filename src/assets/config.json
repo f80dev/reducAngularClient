@@ -5,7 +5,11 @@
     "version": "0.6.3-beta",
     "news": "Possibilité de modifier les points de vente",
     "logo": "./assets/img/logo.png",
-    "website": "https://reducshare.com/web",
+    "editor":{
+      "website": "https://f80.fr",
+      "name":"F80"
+    },
+
     "support": {
       "forum": "http://reducshare.les-forums.com/",
       "email": "contact@reducshare.com",
@@ -21,7 +25,11 @@
     "version": "0.33-beta",
     "news": "bug",
     "logo": "./assets/img/lefooding.png",
-    "website": "https://lefooding.com/fr",
+    "editor":{
+      "website": "https://lefooding.com/fr",
+      "name":"LeFooding",
+      "logo":""
+    },
     "support": {
       "forum": "http://reducshare.les-forums.com/",
       "email": "contact@reducshare.com",
@@ -321,7 +329,7 @@
       "symbol":"🥐",
       "breakable":false,
       "pluriel":true,
-      "label":"Des baguettes gratuites !",
+      "label":"Des croissants gratuits !",
       "share_bonus":0.2,
       "pay_bonus":3,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/croissant_1f950.png",
@@ -425,7 +433,7 @@
       "pay_bonus":2,
       "final_bonus":0,
       "duration_jours":5,
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/clinking-beer-mugs_1f37b.png",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/male-office-worker_1f468-200d-1f4bc.png",
       "direct_bonus":0.5,
       "max":10,
       "level":0.2,
@@ -433,7 +441,7 @@
       "max_coupon":500,
       "score":17,
       "beneficiaire":"client",
-      "visual":"https://reducshare.com/assets/img/happyhour.jpg",
+      "visual":"https://reducshare.com/assets/img/working_room.jp",
       "description":"Un espace de coworking space propose de gagner du temps de location des espaces privatifs",
       "conditions":"pour toute réservation d'un minimum d'une journée",
       "tags":"corporate"

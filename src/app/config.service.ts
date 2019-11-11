@@ -20,7 +20,9 @@ export class ConfigService {
   flips=[];
 
 
-  constructor(private location: Location, private http: HttpClient,public platform:Platform){}
+  constructor(private location: Location, private http: HttpClient,public platform:Platform){
+
+  }
 
   async logo(): Promise<string> {
     let conf = await this.getConfig();
