@@ -2,7 +2,7 @@
   {
     "appname": "ReducShare",
     "title": "ReducShare",
-    "version": "0.6.3-beta",
+    "version": "0.6.5-beta",
     "news": "Possibilité de modifier les points de vente",
     "logo": "./assets/img/logo.png",
     "editor":{
@@ -134,7 +134,7 @@
     {
       "id":"reducvente",
       "title":"Réduction sur le prix de vente",
-      "unity":"% du prix",
+      "unity":"pourcents sur le prix",
       "symbol":"%",
       "breakable":true,
       "pluriel":false,
@@ -158,7 +158,7 @@
     {
       "id":"reducproduit",
       "title":"Réduction du prix sur un produit",
-      "unity":"% du prix",
+      "unity":"pourcents de réduction",
       "symbol":"%",
       "breakable":true,
       "pluriel":false,
@@ -207,7 +207,7 @@
     {
       "id":"reducarticle",
       "title":"Remise sur un article",
-      "unity":"% du prix",
+      "unity":"pourcents de réduction",
       "symbol":"%",
       "breakable":true,
       "pluriel":false,
@@ -449,11 +449,11 @@
     {
       "id":"apero",
       "title":"Un petit apéro",
-      "unity":"apéros",
+      "unity":"apéros gratuits",
       "symbol":"🍺",
       "breakable":false,
       "pluriel":true,
-      "label":"On rince pour l'apéro !",
+      "label":"l'apéro, c'est pour nous",
       "share_bonus":0.02,
       "pay_bonus":2,
       "duration_jours":3,
@@ -637,7 +637,7 @@
     {
       "id":"expositionoeuvregratuite",
       "title":"Des réductions sur les oeuvres",
-      "unity":"% de réduction",
+      "unity":"pourcents de réduction",
       "symbol":"🎟️",
       "pluriel":true,
       "breakable":true,

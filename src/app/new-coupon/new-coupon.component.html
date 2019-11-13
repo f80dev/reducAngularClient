@@ -202,7 +202,6 @@
                   label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
         </app-tuto>
 
-
         <mat-form-field class="form-field-style">
           <input matInput type="number"
                  (focus)="focusElt='share_bonus'"
@@ -236,6 +235,7 @@
                  (focus)="focusElt='pay_bonus'"
                  title="Bonus obtenu lorsqu'un coupon partagé est utilisé chez le commercant"
                  placeholder="Bonus (en {{coupon.symbol}}) par achat obtenu par vos partages" [(ngModel)]="coupon.pay_bonus">
+
         </mat-form-field>
       </mat-step>
 

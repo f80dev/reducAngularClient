@@ -11,10 +11,6 @@ import {NewCouponComponent} from "./new-coupon/new-coupon.component";
 import {AdminComponent} from "./admin/admin.component";
 import {NewCouponSimpleComponent} from "./new-coupon-simple/new-coupon-simple.component";
 
-
-
-
-
 const routes: Routes = [
   { path: 'shop', component: NewshopComponent},
   { path: 'coupons', component: ListCouponsComponent},
