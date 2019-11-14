@@ -50,11 +50,15 @@
              data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
              matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
     </mat-form-field>
-    <button *ngIf="map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
+
+    <!--Géolocalisation-->
+    <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
       <mat-icon>gps_fixed</mat-icon>
     </button>
 
     <br>
+
+    <div *ngIf="new_shop.name?.length>0">
 
     <mat-form-field class="form-field-style">
       <input id="txtShopAddress" type="text"
@@ -119,6 +123,7 @@
              matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
     </mat-form-field>
     <br>
+    </div>
 
   </mat-card-content>
 
