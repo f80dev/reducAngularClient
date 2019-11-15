@@ -43,7 +43,29 @@ export class UserformComponent implements OnInit {
 
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
-              public config:ConfigService) { }
+              public config:ConfigService) {
+
+  }
+
+  checkCommand(command){
+    if(command.indexOf("add_pseudo")>-1){
+      this.config.params.command=this.config.params.command.replace("add_pseudo","");
+      if(this.user.pseudo==null || this.user.pseudo.length==0)
+        this.promptForPseudo(null,"un petit pseudo pour commencer ?",()=>{
+          this.checkCommand(this.config.params.command)
+        })
+    } else {
+      if(command.indexOf("add_shop")>-1){
+        this.config.params.command=this.config.params.command.replace("add_shop","");
+        if(this.user.shops==null || this.user.shops.length==0){
+          setTimeout(()=>{
+            this.addshop();
+          },1500);
+        }
+      }
+    }
+  }
+
 
 
   ngOnInit() {
@@ -57,17 +79,7 @@ export class UserformComponent implements OnInit {
         },500)
       }
     }
-
-    if(this.config.params.command.indexOf("add_shop")>-1){
-      this.config.params.command=this.config.params.command.replace("add_shop","");
-      if(this.user.shops==null || this.user.shops.length==0){
-        setTimeout(()=>{
-          this.addshop();
-        },1500);
-      }
-
-
-    }
+    this.checkCommand(this.config.params.command);
   }
 
 
@@ -167,14 +179,15 @@ export class UserformComponent implements OnInit {
   }
 
 
-  promptForPseudo(event) {
-    event.stopPropagation();
-    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: "Votre pseudo ?",onlyConfirm:false}})
+  promptForPseudo(event,title="Votre pseudo ?",func=null) {
+    if(event)event.stopPropagation();
+    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: title,onlyConfirm:false}})
         .afterClosed().subscribe((result) => {
           if(result!=null && result.length>0){
             this.user.pseudo = result;
             this.saveUser();
           }
+          if(func!=null)func();
         });
   }
 

@@ -40,8 +40,8 @@
 
     </mat-expansion-panel-header>
 
-    <div *ngIf="user.message?.length>0">
-      {{user.message.split("#submessage#")[0]}}
+    <div *ngIf="user.message?.length>0"
+         [innerHTML]="user.message.split('#submessage#')[0] | safe:'html'">
     </div>
 
   <div class="app-card-content">

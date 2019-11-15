@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
+## Paramètres de lancement
+Utilisation du serveur Google : http://reducshare.com/?server=https://pyreduc-3ojm5z4gdq-ew.a.run.app/
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

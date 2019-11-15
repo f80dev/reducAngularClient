@@ -29,6 +29,11 @@ export class ConfigService {
     return Promise.resolve(conf.logo);
   }
 
+
+  /**
+   * Initialisation des principaux paramètres
+   * @param func
+   */
   init(func=null){
 
     this.width_screen=screen.availWidth;

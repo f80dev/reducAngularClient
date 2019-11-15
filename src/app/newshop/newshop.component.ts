@@ -65,17 +65,18 @@ export class NewshopComponent implements OnInit {
   ngOnInit() {
     checkLogin(this.router);
 
-
-
     var params=this.route.snapshot.queryParamMap;
     this.anonymous=(params.get("anonymous")!="false");
     this.new_shop.owner=(params.get("userid"));
     if(params.get("edit")!=null){
       this.new_shop=this.api.shop;
+      this.new_shop.tags=this.api.shop.tags.split(",");
     }
     else {
       var t:any=this.route.snapshot.queryParamMap.get("tags");
-      if(t!=null)this.new_shop.tags=t.split(",");
+      if(t!=null){
+        this.new_shop.tags=t.split(",");
+      }
     }
     if(params.get("pseudo"))this.new_shop.name="Chez "+params.get("pseudo");
     if(!this.anonymous)this.new_shop.public=true;
