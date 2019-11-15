@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";

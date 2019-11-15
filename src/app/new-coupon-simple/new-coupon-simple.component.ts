@@ -6,12 +6,16 @@ import {PromptComponent} from "../prompt/prompt.component";
 import {ApiService} from "../api.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 import {ConfigService} from "../config.service";
+import {BreakpointObserver,BreakpointState} from "@angular/cdk/layout"
+
 
 @Component({
   selector: 'app-new-coupon-simple',
   templateUrl: './new-coupon-simple.component.html',
   styleUrls: ['./new-coupon-simple.component.css']
 })
+
+
 export class NewCouponSimpleComponent implements OnInit {
 
   showOldCoupon=false;
@@ -23,10 +27,24 @@ export class NewCouponSimpleComponent implements OnInit {
   tags="";
   shopname="";
   userid="";
+  iframe_src="https://web.reducshare.com/faqs/init_coupon.html";
+
+  showHelpScreen=false;
 
   constructor(public router:Router, public api: ApiService,
               public config:ConfigService,
-              public dialog: MatDialog,public route: ActivatedRoute) { }
+              public breakpointObserver:BreakpointObserver,
+              public dialog: MatDialog,public route: ActivatedRoute) {
+    breakpointObserver
+      .observe('(max-width: 950px)')
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.showHelpScreen = false;
+        } else {
+          this.showHelpScreen = true;
+        }
+      });
+  }
 
   ngOnInit() {
     checkLogin(this.router);
@@ -77,7 +95,7 @@ export class NewCouponSimpleComponent implements OnInit {
   refresh(){
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
-    var color="#c7006e";
+    var color="#400064";
     this.master_text=exportToHTML("L'intro de votre promotion, la phrase choc qui donne envie de la récupérer:<br> #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e) " +
       "dans ReducShare par le symbole " +
       "#symbol=Symbole_utilisé_pour_représenter_l'unité " +

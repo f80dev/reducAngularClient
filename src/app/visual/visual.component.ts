@@ -13,6 +13,7 @@ export class VisualComponent implements OnInit {
   @Input("height") h:string="";
 
   @Input("crop") crop:string="";
+  @Input("radius") radius:string="";
 
   @Input("max-width") mw:string="";
   @Input("max-height") mh:string="";

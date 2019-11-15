@@ -1,7 +1,11 @@
 <mat-expansion-panel class="app-card" [expanded]="true" style="margin-bottom: 3px;margin-top: 2px;">
     <mat-expansion-panel-header class="app-card-header" collapsedHeight="80px" expandedHeight="80px">
       <div *ngIf="!showPersonalCode" style="display:inline-block;width:90px;vertical-align: middle;position:relative;">
-        <app-visual width="70px" height="70px" [picture]="user.photo" (click)="addImage($event)"></app-visual>
+        <app-visual width="70px" height="70px"
+                    [picture]="user.photo"
+                    radius="50%"
+                    (click)="addImage($event)">
+        </app-visual>
       </div>
 
       <qr-code [size]="70"

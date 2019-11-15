@@ -18,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
-  MAT_DIALOG_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
   MatDialogModule, MatExpansionModule, MatGridListModule,

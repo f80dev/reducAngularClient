@@ -3,7 +3,7 @@
     *ngIf="!picture?.endsWith('png')"
     [src]="picture"
     class="image-photo"
-    [ngStyle]="{'display':'inline-block','width': w,'height':h,'max-width': mw,'max-height':mh}">
+    [ngStyle]="{'display':'inline-block','border-radius':radius,'width': w,'height':h,'max-width': mw,'max-height':mh}">
 
   <img
     *ngIf="picture?.endsWith('png')"
