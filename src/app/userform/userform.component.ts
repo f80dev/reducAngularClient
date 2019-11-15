@@ -40,11 +40,11 @@ export class UserformComponent implements OnInit {
   sort="dtCreate";
   showCouponOnMap:any[]=[];
   showPersonalCode: boolean=false;
+  filter_tag="";
 
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
               public config:ConfigService) {
-
   }
 
   checkCommand(command){
@@ -65,7 +65,6 @@ export class UserformComponent implements OnInit {
       }
     }
   }
-
 
 
   ngOnInit() {
@@ -135,7 +134,8 @@ export class UserformComponent implements OnInit {
         //Vérifie que l'utilisateur n'a pas déjà le coupon
         c.visible=false;
         var bContinue=true;
-        if(c.owner==this.user._id)bContinue=false;
+        if(this.filter_tag.length>0 && (this.filter_tag.indexOf(c.tags)==-1 || c.tags.length==0))bContinue=false; //Rejet sur le critère du filtre
+        if(c.owner==this.user._id)bContinue=false;//Rejet sur le critere de la possession
         this.excludes.forEach((exclude_c)=>{
           if(c._id==exclude_c.origin)bContinue=false;
         });
@@ -295,5 +295,6 @@ export class UserformComponent implements OnInit {
       }
     });
   }
+
 
 }

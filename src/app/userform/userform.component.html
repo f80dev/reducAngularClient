@@ -4,12 +4,14 @@
         <app-visual width="70px" height="70px" [picture]="user.photo" (click)="addImage($event)"></app-visual>
       </div>
 
-      <qr-code [size]="70" style="display: inline-block;vertical-align: middle;margin-right: 20px;"
+      <qr-code [size]="70"
+               style="display: inline-block;vertical-align: middle;margin-right: 20px;"
                *ngIf="showPersonalCode"
                title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
                ngxClipboard
                [cbContent]="user._id"
-               [value]="user._id"></qr-code>
+               [value]="user._id">
+      </qr-code>
 
 
       <div style="display: inline-block;margin-top:15px;font-size: x-large;">
@@ -54,6 +56,19 @@
 
     <!--Montre la carte des promotions-->
     <div *ngIf="showMap">
+      <mat-form-field *ngIf="showCouponOnMap?.length>=5 || filter_tag?.length>0" style="width:60%;">
+        <mat-label>Voir la categorie:</mat-label>
+        <mat-select [(value)]="filter_tag" (selectionChange)="showPromoInSquare()">
+          <mat-option *ngFor="let tag of config.values.tags.split(',')" [value]="tag">
+            #{{tag}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button  mat-icon-button mat-button *ngIf="filter_tag?.length>0" (click)="filter_tag='';showPromoInSquare();">
+        <mat-icon>close</mat-icon>
+      </button>
+
+
       <div id="map" class="map" style="width:95%;display: inline-block;"></div>
       <br>
       <app-list-coupons *ngIf="showCouponOnMap"
@@ -67,7 +82,7 @@
                      <!--*ngIf="showOldPromos">-->
     <!--</app-old-coupons>-->
 
-    <app-tuto button="map" *ngIf="user.coupons?.length==0 && user.level>0.3"
+    <app-tuto button="map" *ngIf="user.coupons?.length==0 && user.level>0.3 && user.shops?.length==0"
               label="Voir les promotions autour de vous sur une carte">
     </app-tuto>
 
