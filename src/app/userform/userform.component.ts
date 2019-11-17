@@ -50,10 +50,11 @@ export class UserformComponent implements OnInit {
   checkCommand(command){
     if(command.indexOf("add_pseudo")>-1){
       this.config.params.command=this.config.params.command.replace("add_pseudo","");
-      if(this.user.pseudo==null || this.user.pseudo.length==0)
+      if(this.user.pseudo==null || this.user.pseudo.length==0){
         this.promptForPseudo(null,"un petit pseudo pour commencer ?",()=>{
           this.checkCommand(this.config.params.command)
         })
+      }
     } else {
       if(command.indexOf("add_shop")>-1){
         this.config.params.command=this.config.params.command.replace("add_shop","");
@@ -78,7 +79,10 @@ export class UserformComponent implements OnInit {
         },500)
       }
     }
-    this.checkCommand(this.config.params.command);
+
+    setTimeout(()=>{
+      this.checkCommand(this.config.params.command);
+    },500);
   }
 
 

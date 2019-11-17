@@ -138,6 +138,7 @@ export class NewCouponSimpleComponent implements OnInit {
   addcoupon(coupon: any) {
     coupon=compute(coupon);
     coupon.owner=this.userid;
+    coupon.title="Jusqu'a "+coupon.max+coupon.symbol+" - "+coupon.conditions;
     this.api.addCoupon(coupon).subscribe((result: any) => {
       localStorage.setItem("showCoupon",result._id);
       this.router.navigate(['home'],{queryParams:{message:result.message}});
