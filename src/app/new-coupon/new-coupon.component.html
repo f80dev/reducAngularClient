@@ -237,15 +237,28 @@
                  placeholder="Bonus (en {{coupon.symbol}}) par achat obtenu par vos partages" [(ngModel)]="coupon.pay_bonus">
 
         </mat-form-field>
+
+        <app-tuto *ngIf="focusElt=='pay_bonus'"
+                  id="tutoPayBonus"
+                  label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé à été utilisé par celui qui l'a reçu (donc à générer un achat)">
+        </app-tuto>
+
+
+        <br>
+        <mat-form-field class="form-field-style">
+          <input matInput type="text"
+                 id="txtPromocodes"
+                 (focus)="focusElt='promocodes'"
+                 title="Code de promotion par palier de bonus"
+                 placeholder="PROMOCODE1=3,PROMOCODE2=5,PROMOCODE3=8"
+                 [(ngModel)]="coupon.promocodes">
+
+        </mat-form-field>
+
       </mat-step>
+      <!-- Fin de la section des récompense-->
 
-      <app-tuto *ngIf="focusElt=='pay_bonus'"
-                id="tutoPayBonus"
-                label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé à été utilisé par celui qui l'a reçu (donc à générer un achat)">
-      </app-tuto>
-
-
-
+      <!-- Section budget -->
       <mat-step name="step5" title="La maitrise du budget de la promotion est important. On l'obtient en limitant la promo dans le temps et en volume">
         <ng-template matStepLabel>Maitriser le budget</ng-template>
 

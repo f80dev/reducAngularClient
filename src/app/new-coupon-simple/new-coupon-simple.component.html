@@ -36,7 +36,7 @@
         </div>
 
 
-        <mat-vertical-stepper style="background: none;margin:0px;padding:0px">
+        <mat-vertical-stepper style="background: none;margin:0px;padding:0px" (selectionChange)="openHelp($event)">
 
           <mat-step title="Description de la promotion">
             <ng-template matStepLabel class="step-title">Description de votre promotion</ng-template>

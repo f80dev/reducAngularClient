@@ -107,13 +107,10 @@ export class ListCouponsComponent implements OnChanges {
         else
           this.formatDate="dd/MM";
       }
-
-
     }
   }
 
   share(url) {
-
   }
 
   showInfos(coupon: any) {

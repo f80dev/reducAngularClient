@@ -138,7 +138,9 @@
                 </table>
                 <br>
                 <span style="font-size: medium" *ngIf="coupon.visible==1">
-                <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>
+                <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer> et
+                  <span *ngIf="coupon.stock<10">{{coupon.stock}}{{coupon.symbol}}</span>
+
               </span>
 
               </div>

@@ -17,6 +17,7 @@ import {LocService} from "../loc.service";
 import {ConfigService} from "../config.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
+import {BreakpointObserver, BreakpointState} from "../../../node_modules/@angular/cdk/layout";
 
 declare var ol: any;
 
@@ -44,6 +45,8 @@ export class NewshopComponent implements OnInit {
   anonymous=true;
   map: any;
   handle:any;
+  iframe_src="https://web.reducshare.com/faqs/init_shop.html";
+  showHelpScreen=false;
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
 
@@ -56,10 +59,19 @@ export class NewshopComponent implements OnInit {
               public dialog:MatDialog,
               public route:ActivatedRoute,
               public _location:Location,
+              public breakpointObserver:BreakpointObserver,
               public router: Router,
               public loc:LocService,
               public config:ConfigService) {
-
+    breakpointObserver
+      .observe('(max-width: 950px)')
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.showHelpScreen = false;
+        } else {
+          this.showHelpScreen = true;
+        }
+      });
   }
 
   ngOnInit() {

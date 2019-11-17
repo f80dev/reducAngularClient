@@ -1,146 +1,158 @@
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 700px;vertical-align: text-top;">
+      <mat-card class="app-card">
 
-<mat-card class="app-card">
+        <mat-toolbar class="app-toolbar" style="padding: 0 !important;">
+          <div style="margin:0px;margin-right: 5px" (click)="addImage()">
+            <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
+            <app-visual *ngIf="new_shop.picture?.length>0"
+                        height="75px" width="75px"
+                        [picture]="new_shop.picture" >
+            </app-visual>
+          </div>
 
-  <mat-toolbar class="app-toolbar" style="padding: 0 !important;">
-    <div style="margin:0px;margin-right: 5px" (click)="addImage()">
-      <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
-      <app-visual *ngIf="new_shop.picture?.length>0"
-                  height="75px" width="75px"
-                  [picture]="new_shop.picture" >
-      </app-visual>
-    </div>
-
-    <div style="display:inline-block;margin:0px;padding: 0px;width:60%;">
-      <h2>
-        <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
-        <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
-      </h2>
-      <div style="line-height:90%;color:lightgrey;font-size: xx-small;">
-        Les promotions sont liées du point
-        de vente.<br> Le nom peut être le vôtre (freelance,artisant)
-      </div>
-    </div>
+          <div style="display:inline-block;margin:0px;padding: 0px;width:60%;">
+            <h2>
+              <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
+              <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
+            </h2>
+            <div style="line-height:90%;color:lightgrey;font-size: xx-small;">
+              Les promotions sont liées du point
+              de vente.<br> Le nom peut être le vôtre (freelance,artisant)
+            </div>
+          </div>
 
 
-    <button mat-button mat-flat-button mat-icon-button
-            id="btnValide" *ngIf="new_shop.name?.length>0"
-            class="app-button" (click)="add()">
-      <mat-icon>checkmark</mat-icon>
+          <button mat-button mat-flat-button mat-icon-button
+                  id="btnValide" *ngIf="new_shop.name?.length>0"
+                  class="app-button" (click)="add()">
+            <mat-icon>checkmark</mat-icon>
 
-    </button>
-  </mat-toolbar>
+          </button>
+        </mat-toolbar>
 
-  <mat-card-content class="app-card-content">
-    <br><br>
-    <app-tuto
-      button="Commencer"
-      [duration]="15"
-      color="white"
-      background="black"
-      image="./assets/img/shop.png"
-      [force]="true"
-      subtitle="Il doit avoir un nom: celui de votre boutique, votre marque ou simplement votre nom.<br>Et une adresse physique ou virtuel (lien internet)"
-      title="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre.">
-    </app-tuto>
+        <mat-card-content class="app-card-content">
+          <br><br>
+          <app-tuto
+            button="Commencer"
+            [duration]="15"
+            color="white"
+            background="black"
+            image="./assets/img/shop.png"
+            [force]="true"
+            subtitle="Il doit avoir un nom: celui de votre boutique, votre marque ou simplement votre nom.<br>Et une adresse physique ou virtuel (lien internet)"
+            title="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre.">
+          </app-tuto>
 
-    <mat-form-field class="form-field-style" style="width:80%;margin-right:10px;">
-      <input id="txtShopName" type="text"
-             (focus)="focusElt=='shopname'"
-             (keyup)="canUpdateName=false"
-             data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
-             matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
-    </mat-form-field>
+          <mat-form-field class="form-field-style" style="width:80%;margin-right:10px;">
+            <input id="txtShopName" type="text"
+                   (focus)="focusElt=='shopname'"
+                   (keyup)="canUpdateName=false"
+                   data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
+                   matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
+          </mat-form-field>
 
-    <!--Géolocalisation-->
-    <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
-      <mat-icon>gps_fixed</mat-icon>
-    </button>
+          <!--Géolocalisation-->
+          <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
+            <mat-icon>gps_fixed</mat-icon>
+          </button>
 
-    <br>
+          <br>
 
-    <div *ngIf="new_shop.name?.length>0">
+          <div *ngIf="new_shop.name?.length>0">
 
-    <mat-form-field class="form-field-style">
-      <input id="txtShopAddress" type="text"
-             (focus)="focusElt=='address'"
-             data-tac="Puis on indique l'adresse du point de vente ou l'on pourra récupérer la promotion et l'utiliser"
-             matInput placeholder="Adresse du point de vente ou l'on peut récupérer la promotion" [(ngModel)]="new_shop.address"
-             (change)="showOnMap()">
-      <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
-    <br>
+            <mat-form-field class="form-field-style">
+              <input id="txtShopAddress" type="text"
+                     (focus)="focusElt=='address'"
+                     data-tac="Puis on indique l'adresse du point de vente ou l'on pourra récupérer la promotion et l'utiliser"
+                     matInput placeholder="Adresse du point de vente ou l'on peut récupérer la promotion" [(ngModel)]="new_shop.address"
+                     (change)="showOnMap()">
+              <button mat-button *ngIf="new_shop.address" matSuffix mat-icon-button aria-label="Clear" (click)="new_shop.address=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <br>
 
-    <!--<mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">Adresse interprétée: {{show_address}}</mat-label>-->
+            <!--<mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">Adresse interprétée: {{show_address}}</mat-label>-->
 
-    <div id="map" class="map form-field-style"
-         *ngIf="!new_shop.address.startsWith('http')"
-         (mouseup)="reverseGeocode=true"
-         (touchend)="reverseGeocode=true">
-    </div>
+            <div id="map" class="map form-field-style"
+                 *ngIf="!new_shop.address.startsWith('http')"
+                 (mouseup)="reverseGeocode=true"
+                 (touchend)="reverseGeocode=true">
+            </div>
 
-    <app-tuto [delay]="5" *ngIf="focusElt=='address' && !new_shop.address.startsWith('http')"
-              label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
+            <app-tuto [delay]="5" *ngIf="focusElt=='address' && !new_shop.address.startsWith('http')"
+                      label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
-    <br>
+            <br>
 
-    <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
-                  *ngIf="!new_shop.address.startsWith('http')"
-                  title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
-                  (change)="checkLogin()">
-      Point de vente visible sur la carte des promotions
-    </mat-checkbox>
-    <br>
+            <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
+                          *ngIf="!new_shop.address.startsWith('http')"
+                          title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
+                          (change)="checkLogin()">
+              Point de vente visible sur la carte des promotions
+            </mat-checkbox>
+            <br>
 
-    <br>
-    <mat-form-field class="form-field-style" style="width:70%;" (focus)="focusElt='tags'">
-      <mat-label>Type de point de vente / prestations</mat-label>
-      <mat-select id="txtShopTags"
-                  title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
-                  [(ngModel)]="new_shop.tags"  multiple>
-        <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+            <br>
+            <mat-form-field class="form-field-style" style="width:70%;" (focus)="focusElt='tags'">
+              <mat-label>Type de point de vente / prestations</mat-label>
+              <mat-select id="txtShopTags"
+                          title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
+                          [(ngModel)]="new_shop.tags"  multiple>
+                <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-    <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
-              label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
+            <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
+                      label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
-    &nbsp;&nbsp;
+            &nbsp;&nbsp;
 
-    <button mat-flat-button mat-button
-            id="cmdFile"
-            (click)="addImage()"
+            <button mat-flat-button mat-button
+                    id="cmdFile"
+                    (click)="addImage()"
             >
-      Visuel
-    </button>
+              Visuel
+            </button>
 
-    <br>
-    <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http')">
-      <input id="txtWebsite" type="text"
-             (focus)="focusElt=='website'"
-             title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
-             matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
-    </mat-form-field>
-    <br>
-    </div>
+            <br>
+            <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http')">
+              <input id="txtWebsite" type="text"
+                     (focus)="focusElt=='website'"
+                     title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
+                     matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
+            </mat-form-field>
+            <br>
+          </div>
 
-  </mat-card-content>
+        </mat-card-content>
 
-  <mat-card-actions class="app-card-action">
+        <mat-card-actions class="app-card-action">
 
-    <button mat-button mat-flat-button
-            title="La validation entraine l'ajout du point de vente dans la liste de vos établissements"
-            id="btnValide2" *ngIf="new_shop.name?.length>0"
-            class="app-button" (click)="add()">Valider</button>
+          <button mat-button mat-flat-button
+                  title="La validation entraine l'ajout du point de vente dans la liste de vos établissements"
+                  id="btnValide2" *ngIf="new_shop.name?.length>0"
+                  class="app-button" (click)="add()">Valider</button>
 
-    <button mat-button mat-flat-button
-            id="btnCancel"
-            class="app-button"
-            (click)="cancel()">
-      Annuler
-    </button>
-    &nbsp;
+          <button mat-button mat-flat-button
+                  id="btnCancel"
+                  class="app-button"
+                  (click)="cancel()">
+            Annuler
+          </button>
+          &nbsp;
 
-  </mat-card-actions>
-</mat-card>
+        </mat-card-actions>
+      </mat-card>
+    </td>
+    <td *ngIf="showHelpScreen" style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
+      <div *ngIf="iframe_src?.length>0" style="height: 100%;width:100%;text-align: center;">
+        <iframe [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"
+                scrolling="no" frameborder="0"
+                style="color:white;background-color: #29004a;"></iframe>
+      </div>
+    </td>
+  </tr>
+</table>

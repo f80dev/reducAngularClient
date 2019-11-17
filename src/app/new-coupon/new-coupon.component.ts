@@ -56,6 +56,7 @@ export class NewCouponComponent implements OnInit {
   saveMax=0;
 
   shopname="";
+  shopaddress="";
   showOldCoupon=false;
   level=0;
 
@@ -95,6 +96,7 @@ export class NewCouponComponent implements OnInit {
     this.tags=params.get("tags") || "";
 
     this.shopname=params.get("shopname") || "";
+    this.shopaddress=params.get("shopaddress") || "";
 
     var modele=params.get("modele") || "";
     if(modele.length>0){

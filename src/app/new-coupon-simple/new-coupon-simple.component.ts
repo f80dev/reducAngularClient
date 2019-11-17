@@ -27,8 +27,8 @@ export class NewCouponSimpleComponent implements OnInit {
   tags="";
   shopname="";
   userid="";
-  iframe_src="https://web.reducshare.com/faqs/init_coupon.html";
 
+  iframe_src="https://web.reducshare.com/faqs/init_coupon.html";
   showHelpScreen=false;
 
   constructor(public router:Router, public api: ApiService,
@@ -151,6 +151,10 @@ export class NewCouponSimpleComponent implements OnInit {
       if(result)
         this.coupon[field]=result;
     });
+  }
+
+  openHelp(event){
+    this.iframe_src="https://web.reducshare.com/faqs/init_coupon.html#"+["description","visuel","avantage","budget"][event.selectedIndex];
   }
 
 }
