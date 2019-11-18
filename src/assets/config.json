@@ -561,6 +561,7 @@
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/wine-glass_1f377.png",
       "visual":"https://reducshare.com/assets/img/vin.jpg",
       "duration_jours":2,
+      "duration_hours":0,
       "stock":20000,
       "max_coupon":5000,
       "description":"Annonce d'une dégustation de vin avec un nombre de points minimum à obtenir pour y accéder",
