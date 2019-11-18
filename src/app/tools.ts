@@ -385,24 +385,32 @@ export function getImageLightness(imageSrc,callback) {
     canvas.width = img.width;
     canvas.height = img.height;
 
+    img.setAttribute("crossOrigin","");
+
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img,0,0);
 
-    var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
-    var data = imageData.data;
-    var r,g,b,avg;
+    try{
+      var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+      var data = imageData.data;
+      var r,g,b,avg;
 
-    for(var x = 0, len = data.length; x < len; x+=4) {
-      r = data[x];
-      g = data[x+1];
-      b = data[x+2];
+      for(var x = 0, len = data.length; x < len; x+=4) {
+        r = data[x];
+        g = data[x+1];
+        b = data[x+2];
 
-      avg = Math.floor((r+g+b)/3);
-      colorSum += avg;
+        avg = Math.floor((r+g+b)/3);
+        colorSum += avg;
+      }
+
+      var brightness = Math.floor(colorSum / (img.width*img.height));
+      callback(brightness);
+    } catch (e) {
+      callback(0);
     }
 
-    var brightness = Math.floor(colorSum / (img.width*img.height));
-    callback(brightness);
+
   }
 }
 
