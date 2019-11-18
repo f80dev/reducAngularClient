@@ -235,4 +235,12 @@ export class ListCouponsComponent implements OnChanges {
     }
 
   }
+
+  showPromoCode(gain:number,promo_codes:string) {
+    for(let item in promo_codes.split(',')){
+      if(gain>Number(item.split("=")[1]))
+        return item.split("=")[0];
+    }
+    return "";
+  }
 }

@@ -115,15 +115,19 @@
             <td style="text-align: center;vertical-align: top;">
 
               <!--Zone réservé au client de base-->
-              <div style="margin-top:10px;line-height:80%;display:inline-block;font-size: larger;"
+              <div style="margin-top:10px;line-height:100%;display:inline-block;font-size: larger;"
                    *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
-                <span style="font-size: 2em">
+                <span style="font-size: 2em;" *ngIf="coupon.promocodes.length==0">
                   {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
                 </span>
+                <span style="font-size: 2em;" *ngIf="coupon.promocodes.length>0">
+                  {{showPromoCode(coupon.gain,coupon.promocodes)}}
+                </span>
                 <br>
-                <span style="font-size: x-small;margin:0;padding: 0;">gagné(es)</span>
+                <span style="font-size: small;padding: 0px;">gagné(es)</span>
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
-                <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer>
+                <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
+                <span *ngIf="coupon.stock<10">Encore {{coupon.stock}}{{coupon.symbol}} à gagner</span>
               </div>
 
 
@@ -365,8 +369,9 @@
          style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
-      {{coupon.label}}<br><br>
-      <div style="font-size:large;" *ngIf="coupon.max>0">
+      <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+      <br><br>
+      <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.max>0">
         Vous avez {{coupon.gain}}{{coupon.symbol}}<br>
         <small>(vous pouvez avoir jusqu'à {{coupon.max}}{{coupon.symbol}})</small>
       </div>

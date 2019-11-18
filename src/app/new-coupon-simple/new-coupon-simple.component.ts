@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {$$, checkLogin, compute, exportToHTML, showError} from "../tools";
+import {$$, checkLogin, compute, exportToHTML, getImageLightness, showError} from "../tools";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {PromptComponent} from "../prompt/prompt.component";
@@ -148,8 +148,16 @@ export class NewCouponSimpleComponent implements OnInit {
 
   addImage(field:string,width=700,height=300) {
     this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.coupon[field],width:width,height:height}}).afterClosed().subscribe((result) => {
-      if(result)
-        this.coupon[field]=result;
+      if(result){
+        getImageLightness(result,(light)=>{
+          if(light>100)
+            this.coupon.ink_color="black";
+          else
+            this.coupon.ink_color="white";
+          this.coupon[field]=result;
+        });
+      }
+
     });
   }
 

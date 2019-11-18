@@ -1,12 +1,15 @@
-<app-old-coupons *ngIf="showOldCoupon"
-                 title="Utilisez un modèle"
-                 subtitle="pour votre nouvelle promotion"
-                 [askFilter]="true"
-                 [shop]="{'_id':coupon.shop,'owner':userid}"
-                 (cancel)="cancel()"
-                 [filter]="tags"
-                 (select)="selectOldAsModel($event)">
-</app-old-coupons>
+<div style="max-width: 700px;">
+  <app-old-coupons *ngIf="showOldCoupon"
+                   title="Utilisez un modèle"
+                   subtitle="pour votre nouvelle promotion"
+                   [askFilter]="true"
+                   [shop]="{'_id':coupon.shop,'owner':userid}"
+                   (cancel)="cancel()"
+                   [filter]="tags"
+                   (select)="selectOldAsModel($event)">
+  </app-old-coupons>
+
+</div>
 
 <app-tuto title="Vous allez réaliser votre première promotion"
           button="C'est partit"
@@ -47,8 +50,12 @@
             <ng-template matStepLabel class="step-title">Votre visuel</ng-template>
             <div style="position:relative;width: 100%;text-align: center;color:white;">
               <span style="color:black" >Couverture de votre coupon (avec Exemple de texte)</span><br>
-              <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">{{coupon.label}}</div>
-              <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">Jusqu'à {{coupon.max}}{{coupon.symbol}}</div>
+              <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">
+                <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+              </div>
+              <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">
+                <span [ngStyle]="{color:coupon.ink_color}">Jusqu'à {{coupon.max}}{{coupon.symbol}}</span>
+              </div>
               <img class="visual-coupon"
                    style="object-fit: cover;"
                    id="id_visual"

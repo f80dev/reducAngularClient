@@ -39,6 +39,8 @@
     <th>deleted</th>
     <th>score</th>
     <th>dtCreate</th>
+    <th>ink</th>
+    <th>promocodes</th>
     <th>Direct</th>
     <th>Share</th>
     <th>Pay</th>
@@ -58,6 +60,8 @@
     <td mat-cell>{{coupon.deleted}}</td>
     <td mat-cell>{{coupon.score}}</td>
     <td mat-cell>{{coupon.dtCreate*1000 | date:'short'}}</td>
+    <td mat-cell>{{coupon.ink_color}}</td>
+    <td mat-cell>{{coupon.promocodes}}</td>
     <td mat-cell>{{coupon.direct_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.share_bonus | number:'1.0-1'}}</td>
     <td mat-cell>{{coupon.pay_bonus | number:'1.0-1'}}</td>

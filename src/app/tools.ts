@@ -371,6 +371,43 @@ export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error)
 }
 
 
+export function getImageLightness(imageSrc,callback) {
+  var img = document.createElement("img");
+  img.src = imageSrc;
+  img.style.display = "none";
+  document.body.appendChild(img);
+
+  var colorSum = 0;
+
+  img.onload = ()=> {
+    // create canvas
+    var canvas:any = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img,0,0);
+
+    var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    var data = imageData.data;
+    var r,g,b,avg;
+
+    for(var x = 0, len = data.length; x < len; x+=4) {
+      r = data[x];
+      g = data[x+1];
+      b = data[x+2];
+
+      avg = Math.floor((r+g+b)/3);
+      colorSum += avg;
+    }
+
+    var brightness = Math.floor(colorSum / (img.width*img.height));
+    callback(brightness);
+  }
+}
+
+
+
 export function cropToSquare(base64,quality=1,func) {
   var img=new Image();
   img.onload=function(){
@@ -404,6 +441,7 @@ export function compute(coupon:any){
   coupon.final_bonus=Number(coupon.final_bonus);
   coupon.max=Number(coupon.max);
   coupon.stock=Number(coupon.stock);
+  if(coupon.ink_color==null)coupon.ink_color="white";
 
   if(coupon.nb_partage>0)
     coupon.share_bonus=1/coupon.nb_partage;
