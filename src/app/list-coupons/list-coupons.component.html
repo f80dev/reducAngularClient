@@ -19,7 +19,7 @@
         <!--Affichage des coupon pour la carte-->
         <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
           {{coupon.shopname}}: {{coupon.label}}<br>
-          Gagnez jusqu'à {{coupon.max}}{{coupon.symbol}}
+          Gagnez jusqu'à {{coupon.max}} {{coupon.unity}}({{coupon.symbol}})
         </span>
 
           <!--Affichage des coupons origines pour leur propriétaire-->
@@ -369,11 +369,12 @@
          style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
-      <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+      <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span><br>
+      <span style="font-size: small">(vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})</span>
       <br><br>
       <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.max>0">
-        Vous avez {{coupon.gain}}{{coupon.symbol}}<br>
-        <small>(vous pouvez avoir jusqu'à {{coupon.max}}{{coupon.symbol}})</small>
+        Pour l'instant vous avez {{coupon.gain}}{{coupon.symbol}}<br>
+
       </div>
     </div>
     <div style="z-index: 110;position: absolute;left:0;top:75%;width:100%;text-align: right;max-width:720px;">
