@@ -28,7 +28,7 @@
 
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Utilisez un modèle pour votre nouvelle promotion"
-                     [shop]="{'_id':coupon.shop,'owner':userid}"
+                     [shopid]="coupon.shop._id"
                      [filter]="tags"
                      [level]="level"
                      (cancel)="showOldCoupon=false"
@@ -245,14 +245,13 @@
 
 
         <br>
-        <mat-form-field class="form-field-style">
+        <mat-form-field class="form-field-style" *ngIf="shopaddress.startsWith('http')">
           <input matInput type="text"
                  id="txtPromocodes"
                  (focus)="focusElt='promocodes'"
                  title="Code de promotion par palier de bonus"
-                 placeholder="PROMOCODE1=3,PROMOCODE2=5,PROMOCODE3=8"
+                 placeholder="Liste des codes promos à restituer par pallier de gain"
                  [(ngModel)]="coupon.promocodes">
-
         </mat-form-field>
 
       </mat-step>

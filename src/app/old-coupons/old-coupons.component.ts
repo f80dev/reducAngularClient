@@ -16,9 +16,10 @@ export class OldCouponsComponent implements OnInit {
   constructor(public router:Router,public dialog: MatDialog,public api:ApiService,public config:ConfigService) { }
 
   coupons:any[]=[];
+  mycoupons:any[]=[];
   withFilter=false;
 
-  @Input("shop") shop:any;
+  @Input("shopid") shopid="";
   @Input("level") level=0;
   @Input("askFilter") askFilter=false;
   @Input("title") title:string="";
@@ -45,6 +46,7 @@ export class OldCouponsComponent implements OnInit {
   refresh(func=null){
     this.withFilter=false;
     this.coupons=[];
+    this.mycoupons=[];
 
     if(this.config.values==null){
       this.router.navigate(['login']);
@@ -59,10 +61,10 @@ export class OldCouponsComponent implements OnInit {
       });
     }
 
-    if(this.shop){
-      this.api.getoldcoupons(this.shop._id).subscribe((r:any)=>{
+    if(this.shopid){
+      this.api.getoldcoupons(this.shopid).subscribe((r:any)=>{
         r.forEach((it)=>{
-          this.coupons.splice(0,0,it);
+          this.mycoupons.push(it);
         });
         if(func!=null)func();
       },(error)=>{showError(this,error);});

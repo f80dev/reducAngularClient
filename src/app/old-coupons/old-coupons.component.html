@@ -47,24 +47,8 @@
   </mat-toolbar>
 
 
-  <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:95%;margin-top:5%;">
-    <div style="width:50%;display:inline-block;">
-      Voici les modèle destinés à {{filter}}
-    </div>
-
-    <button mat-button
-            title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
-            id="btnClearFilter"
-            mat-raised-button
-            (click)="refresh()">
-      Voir tous
-    </button>
-  </div>
-
-
   <!--Sélection d'un filtre-->
   <mat-card-content class="app-card-content" *ngIf="askFilter">
-
     <mat-selection-list #tags (selectionChange)="selTags=tags?.selectedOptions.selected">
       <mat-list-option *ngFor="let tag of config.values.tags?.split(',')">
         {{tag}}
@@ -72,12 +56,37 @@
     </mat-selection-list>
   </mat-card-content>
 
-
-
+  <br>
   <mat-card-content class="app-card-content" *ngIf="!askFilter">
-    <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion"
-              *ngIf="coupons.length>0">
-    </app-tuto>
+
+    Mes anciennes promotions<br>
+    <mat-list style="padding:0px;">
+      <mat-list-item *ngFor="let coupon of mycoupons | orderBy:'dtCreate':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
+        <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
+        <h2 matLine (click)="onselect.emit(coupon)">
+          <span *ngIf="coupon.title">{{coupon.title}}</span>
+        </h2>
+      </mat-list-item>
+    </mat-list>
+
+
+    <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:95%;margin-top:5%;">
+      <div style="width:50%;display:inline-block;">
+        Voici les modèle destinés à #{{filter}}
+      </div>
+
+      <button mat-button
+              title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
+              id="btnClearFilter"
+              mat-raised-button
+              (click)="refresh()">
+        Voir tous
+      </button>
+    </div>
+
+
+    <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion" *ngIf="coupons.length>0"></app-tuto>
+
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons | orderBy:'score':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
@@ -88,16 +97,12 @@
       </span>
         </h2>
         <p matLine style="margin-top: 0px; font-size: small;" title="{{coupon.conditions}}">
-          <!--<span *ngIf="coupon.max>0">Gagner jusqu'à {{coupon.max}}{{coupon.symbol}}</span>-->
-          <!--<span *ngIf="coupon.max==0">Gagner {{coupon.final_bonus}}{{coupon.symbol}}</span>-->
           {{coupon.conditions}}
         </p>
         <p matLine style="margin-top: 10px;"  *ngIf="coupon.share">
           <span> Distribution:{{coupon.share}} </span>
         </p>
-        <!--<p matLine style="font-size: small;margin-top:5px;">-->
-          <!--<span> Partage: {{coupon.share_bonus}}{{coupon.symbol}} / Immédiat: {{coupon.direct_bonus}}{{coupon.symbol}} / Utilisé: {{coupon.pay_bonus}}{{coupon.symbol}}</span>-->
-        <!--</p>-->
+
         <p matLine style="font-size: x-small;margin-top:3px;" *ngIf="coupon.tags.length>0">
           <span>#{{coupon.tags.replace(',',' #').replace(',',' #').replace(',',' #')}}</span>
         </p>

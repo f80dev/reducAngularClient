@@ -26,6 +26,7 @@ export class NewCouponSimpleComponent implements OnInit {
   coupon:any={};
   tags="";
   shopname="";
+  shopid="";
   userid="";
 
   iframe_src="https://web.reducshare.com/faqs/init_coupon.html";
@@ -50,6 +51,7 @@ export class NewCouponSimpleComponent implements OnInit {
     checkLogin(this.router);
     var params: ParamMap = this.route.snapshot.queryParamMap;
     this.tags=params.get("tags") || "";
+    this.shopid=params.get("shopid") || "";
     var modele = params.get("modele") || "";
     if (modele.length > 0) {
       $$("Demande d'ouverture avec le modele "+modele);
@@ -113,6 +115,7 @@ export class NewCouponSimpleComponent implements OnInit {
   }
 
   selectOldAsModel(coupon: any) {
+    coupon._id="";
     if(coupon==null)this.cancel();
     if(coupon.share_bonus>0)coupon.nb_partage=1/coupon.share_bonus;
     this.coupon=compute(coupon);

@@ -50,17 +50,15 @@ export class NewCouponComponent implements OnInit {
     max_coupon:1000,
     duration_jours: 2.0,
     duration_hours: 0.0,
-    picture: 'https://img.bonne-promo.com/image/reduction.png'
+    picture: 'https://img.bonne-promo.com/image/reduction.png',
+    promocodes:'PROMOCODE1=3,PROMOCODE2=5,PROMOCODE3=8'
   };
 
   saveMax=0;
-
   shopname="";
   shopaddress="";
   showOldCoupon=false;
   level=0;
-
-  //mode="add";
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
@@ -74,10 +72,14 @@ export class NewCouponComponent implements OnInit {
               public api: ApiService,
               public route: ActivatedRoute,
               public router:Router,
-              public location: Location) { }
+              public location: Location) {
+  }
 
+
+  /**
+   *
+   */
   ngOnInit() {
-
     checkLogin(this.router);
 
     var params:ParamMap=this.route.snapshot.queryParamMap;
@@ -85,6 +87,7 @@ export class NewCouponComponent implements OnInit {
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
 
+      if(this.coupon.share_bonus>0)this.coupon.nb_partage=1/this.coupon.share_bonus;
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;
@@ -110,8 +113,6 @@ export class NewCouponComponent implements OnInit {
         this.showOldCoupon=true;
       }
     }
-
-
   }
 
 
@@ -121,6 +122,11 @@ export class NewCouponComponent implements OnInit {
     this.refresh();
   }
 
+
+  /**
+   *
+   * @param coupon
+   */
   addcoupon(coupon: any) {
     //Mise en conformité du coupon
 
@@ -133,6 +139,10 @@ export class NewCouponComponent implements OnInit {
     },(error)=>{showError(this,error);});
   }
 
+  /**
+   *
+   * @param coupon
+   */
   selectOldAsModel(coupon: any) {
     if(coupon.share_bonus>0)coupon.nb_partage=1/coupon.share_bonus;
     coupon.shop=this.coupon.shop;

@@ -3,7 +3,7 @@
                    title="Utilisez un modèle"
                    subtitle="pour votre nouvelle promotion"
                    [askFilter]="true"
-                   [shop]="{'_id':coupon.shop,'owner':userid}"
+                   [shopid]="shopid"
                    (cancel)="cancel()"
                    [filter]="tags"
                    (select)="selectOldAsModel($event)">
