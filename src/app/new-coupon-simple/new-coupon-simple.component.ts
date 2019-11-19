@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {$$, checkLogin, compute, exportToHTML, getImageLightness, showError} from "../tools";
+import {$$, checkLogin, compute, evalTitle, exportToHTML, getImageLightness, showError} from "../tools";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {PromptComponent} from "../prompt/prompt.component";
@@ -138,7 +138,9 @@ export class NewCouponSimpleComponent implements OnInit {
   addcoupon(coupon: any) {
     coupon=compute(coupon);
     coupon.owner=this.userid;
-    coupon.title="Jusqu'a "+coupon.max+coupon.symbol+" - "+coupon.conditions;
+
+    coupon.title=evalTitle(coupon);
+
     this.api.addCoupon(coupon).subscribe((result: any) => {
       localStorage.setItem("showCoupon",result._id);
       this.router.navigate(['home'],{queryParams:{message:result.message}});

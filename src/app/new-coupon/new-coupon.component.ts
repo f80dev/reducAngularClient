@@ -3,7 +3,7 @@ import {ApiService} from '../api.service';
 import {
   buildTeaser,
   checkLogin,
-  compute,
+  compute, evalTitle,
   showError,
   unique_id
 } from "../tools";
@@ -161,7 +161,7 @@ export class NewCouponComponent implements OnInit {
 
   refresh(){
     this.hasMax=(this.coupon.max>0);
-    this.coupon.title=this.coupon.label;
+    this.coupon.title=evalTitle(this.coupon);
     if(this.coupon.max>0)this.coupon.title=this.coupon.title+" jusqu'a "+this.coupon.max+this.coupon.symbol;
   }
 
