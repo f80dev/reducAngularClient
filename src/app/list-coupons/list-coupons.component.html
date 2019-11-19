@@ -25,7 +25,7 @@
         </span>
 
           <!--Affichage des coupons origines pour leur propriétaire-->
-          <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
+          <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id" style="font-size: small;line-height: 90%;">
             {{coupon.title}}
 
             <span *ngIf="!isVisible(coupon)">
@@ -146,18 +146,17 @@
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <span style="margin-bottom: 6px;" *ngIf="user.level<0.8">Bonus client, coupon :</span>
+                <span style="margin-bottom: 10px;" *ngIf="user.level<0.8">Augmentation du bonus</span>
                 <br>
                 <table style="text-align: left;display: inline-block;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
-                  <!-- <tr *ngIf="coupon.direct_bonus>0"><td>Immédiat</td><td style="text-align: right;">+{{coupon.direct_bonus}}{{coupon.symbol}}</td></tr> -->
-                  <tr *ngIf="coupon.share_bonus>0"><td>Partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td></tr>
-                  <tr *ngIf="coupon.pay_bonus>0"><td>Transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
-                  <tr *ngIf="coupon.final_bonus>0"><td>Utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.share_bonus>0"><td>Coupon partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.pay_bonus>0"><td>Coupon transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.final_bonus>0"><td>Coupon utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
                 </table>
                 <br>
-                <span style="font-size: medium" *ngIf="coupon.visible==1">
-                <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer> et
-                  <span *ngIf="coupon.stock<10">{{coupon.stock}}{{coupon.symbol}}</span>
+                  <span style="font-size: medium" *ngIf="coupon.visible==1">
+                  <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>
+                  <span *ngIf="coupon.stock<10">et {{coupon.stock}}{{coupon.symbol}}</span>
 
               </span>
 
@@ -171,7 +170,7 @@
 
                 <div style="font-size: medium;max-width:200px;display: inline-block;"
                      *ngIf="!coupon.breakable && coupon.gain<1">
-                  Vous n'avez pas encore assez pour utiliser le coupon
+                  Désolé !<br>Pour utiliser ce coupon, vous devez avoir gagné au moins 1 {{coupon.symbol}}
                 </div>
 
                 <br>
@@ -385,7 +384,13 @@
 
 
 
-  <div class="visual-coupon" *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id" (click)="_flip(coupon)">
+
+
+  <div class="visual-coupon"
+       *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id"
+       (panright)="onPanRight($event,coupon)"
+       (click)="_flip(coupon)">
+
     <img [src]="coupon.visual"
          style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
 

@@ -18,7 +18,6 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     }
   },
-
   {
     "appname": "foodingPromo",
     "title": "Le Fooding promotion",
@@ -38,9 +37,11 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     }
   }
-
-
   ],
+
+  "batch": {
+    "interraction":10
+  },
 
   "editor": {
     "name": "F80",
@@ -138,7 +139,7 @@
       "symbol":"%",
       "breakable":true,
       "pluriel":false,
-      "label":"Réduisez le prix sur certains produits !",
+      "label":"Réduisez le prix des produits marqués d'une pastille rouge",
       "share_bonus":0.05,
       "pay_bonus":2,
       "direct_bonus":1,
@@ -425,13 +426,13 @@
     },
     {
       "id":"coworking",
-      "title":"L'accès aux ressources",
+      "title":"Salles de réunion",
       "unity":"heures de location de salle",
       "symbol":"hrs",
       "breakable":true,
       "pluriel":true,
-      "label":"Coworking Space, l'accès gratuit aux salles",
-      "share_bonus":0.05,
+      "label":"Coworking Space, l'accès gratuit aux salles de réunion",
+      "share_bonus":0.1,
       "pay_bonus":2,
       "final_bonus":0,
       "duration_jours":5,

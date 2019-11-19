@@ -90,7 +90,7 @@ export class NewshopComponent implements OnInit {
         this.new_shop.tags=t.split(",");
       }
     }
-    if(params.get("pseudo"))this.new_shop.name="Chez "+params.get("pseudo");
+    if(params.get("pseudo") && params.get("edit")==null)this.new_shop.name="Chez "+params.get("pseudo");
     if(!this.anonymous)this.new_shop.public=true;
 
     this.showOnMap();

@@ -243,4 +243,10 @@ export class ListCouponsComponent implements OnChanges {
     }
     return "";
   }
+
+  handle=null;
+  onPanRight($event,coupon:any) {
+    clearTimeout(this.handle);
+    this.handle=setTimeout(()=>{this.remove(coupon);},500);
+  }
 }

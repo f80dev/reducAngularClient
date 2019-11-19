@@ -60,7 +60,7 @@
                  id="txtUnity" (change)="refresh()"
                  title="On détermine l'unité de la promotion. Dit autrement : Ce que le client gagne."
                  (focus)="focusElt='unity'"
-                 placeholder="Unitée offerte"
+                 placeholder="Unitées offertes (au pluriel)"
                  [(ngModel)]="coupon.unity">
         </mat-form-field>
 
@@ -73,11 +73,12 @@
                  [(ngModel)]="coupon.symbol">
         </mat-form-field>
 
-        <mat-checkbox [(ngModel)]="coupon.breakable"
+        <mat-checkbox [(ngModel)]="coupon.breakable" style="line-height: 80%;"
                       *ngIf="level>0.5" (focus)="focusElt='breakable'">
-          unité fractionnable (Exemple: 3.4 {{coupon.symbol}} / {{coupon.unity}})
+          unité fractionnable<br>
+          <small>(Exemple: 3.4 {{coupon.unity}})</small>
         </mat-checkbox>
-        <br><br>
+        <br><br><br>
 
         <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
@@ -124,7 +125,7 @@
         </mat-form-field>
 
 
-        <mat-form-field *ngIf="level>0.6" class="form-field-style">
+        <mat-form-field *ngIf="level>1.2" class="form-field-style">
           <input type="text" matInput
                  id="txtWebSite"
                  (focus)="focusElt='website'"
@@ -164,7 +165,7 @@
         <!--</div>-->
 
         <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
-          Visuel du coupon<br><br>
+          Visuel du coupon<br>
           <img
                [src]="coupon.visual"
                class="visual-coupon"
@@ -211,7 +212,7 @@
 
         <app-tuto *ngIf="focusElt=='share_bonus'"
                   id="tutoShareBonus"
-                  label="Attention, le bonus a chaque partagee doit resté faible car il peut augmenter rapidement sans pour autant générer de chiffres d'affaires">
+                  label="Ici vous fixer l'augmentation de l'avantage en fonction du nombre de fois ou le client partage la promotion avec son réseau">
         </app-tuto>
 
         <mat-form-field class="form-field-style" *ngIf="coupon.final_bonus>0 || level>1">
@@ -240,7 +241,7 @@
 
         <app-tuto *ngIf="focusElt=='pay_bonus'"
                   id="tutoPayBonus"
-                  label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé à été utilisé par celui qui l'a reçu (donc à générer un achat)">
+                  label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé a été utilisé par celui qui l'a reçu (donc à générer un achat)">
         </app-tuto>
 
 
