@@ -51,6 +51,6 @@ export class AdminComponent implements OnInit {
   }
 
   openGraph(shopid){
-    openGraphForShop(shopid);
+    window.open(openGraphForShop(shopid),"_blank");
   }
 }

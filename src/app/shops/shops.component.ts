@@ -27,6 +27,7 @@ export class ShopsComponent implements OnInit {
   @Output('delete') ondelete: EventEmitter<any>=new EventEmitter();
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
+  @Output('open') onopen: EventEmitter<any>=new EventEmitter();
 
   //coupons=[];
   showWebCam=false;
@@ -127,7 +128,7 @@ export class ShopsComponent implements OnInit {
   }
 
   openGraph(shoid){
-    openGraphForShop(shoid);
+    this.onopen.emit({shopid:shoid});
   }
 
   showShop(shop,value=null) {

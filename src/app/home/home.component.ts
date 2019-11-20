@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, showError, showMessage, traitement_coupon} from '../tools';
+import {$$, openGraphForShop, showError, showMessage, traitement_coupon} from '../tools';
 import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
@@ -120,6 +120,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  removeHTML(s:string) {
+    for(let i=0;i<10;i++)
+      s=s.replace("<br>","").replace("<h1>","").replace("<h2>","");
+    return s;
+  }
+
   /**
    * Ouverture des sockets et récupération des paramètres
    */
@@ -129,7 +135,12 @@ export class HomeComponent implements OnInit {
       if(data.user==this.user._id){
         if(data.coupon!=null)localStorage.setItem("showCoupon",data.coupon);
         if(data.shop!=null)localStorage.setItem("showShop",data.shop);
-        $$("Refresh depuis la socket avec "+data.message);
+
+        //Affichage du message
+        let mes=this.removeHTML(data.message.split('#submessage#')[0]);
+        $$("Refresh depuis la socket avec "+mes);
+        this.toast.open(mes,"",{duration:4000});
+
         setTimeout(()=>{this.refresh(data.message);},1500);
       }
     });
@@ -245,7 +256,7 @@ export class HomeComponent implements OnInit {
       this.ngOnInit();
   }
 
-  openFrame(event,){
+  openFrame(event){
     if(this.showHelpScreen && !event.forceOpen)
       this.iframe_src=event.url;
     else
@@ -256,5 +267,9 @@ export class HomeComponent implements OnInit {
     var url=localStorage.getItem("firsturl");
     localStorage.clear();
     window.location.href=url;
+  }
+
+  openForm($event: any) {
+    this.openFrame({url:openGraphForShop($event.shopid)});
   }
 }

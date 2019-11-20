@@ -91,10 +91,10 @@
             <td style="text-align: center;width: fit-content;max-width: 40%;">
               <!--Visuel du coupon-->
 
-              <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>350)">
+              <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>370)">
                 <app-visual [picture]="coupon.visual"
                             (click)="coupon.visible>0"
-                            width="33vw" max-width="230px" max-height="180px">
+                            width="25vw" max-width="200px" max-height="180px">
                 </app-visual>
               </div>
 
@@ -107,7 +107,7 @@
                 <qr-code [value]="coupon.url" name="qrcode"
                          style="width:150px;height: 140px;margin:0px;"
                          ngxClipboard [cbContent]="coupon.url"
-                         [size]="120">
+                         [size]="110">
                 </qr-code>
                 <br>
               </a>
@@ -148,8 +148,12 @@
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
                 <span style="margin-bottom: 10px;" *ngIf="user.level<0.8">Augmentation du bonus</span>
                 <br>
-                <table style="text-align: left;display: inline-block;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
-                  <tr *ngIf="coupon.share_bonus>0"><td>Coupon partagé</td><td style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td></tr>
+                <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
+                  <tr *ngIf="coupon.share_bonus>0">
+                    <td>Coupon partagé</td>
+                    <td *ngIf="coupon.share_bonus<1 && !coupon.breakable" style="text-align: right;">+{{coupon.share_bonus*100 | number:'1.0-0'}}%{{coupon.symbol}}</td>
+                    <td *ngIf="coupon.share_bonus>=1 || coupon.breakable" style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td>
+                  </tr>
                   <tr *ngIf="coupon.pay_bonus>0"><td>Coupon transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
                   <tr *ngIf="coupon.final_bonus>0"><td>Coupon utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
                 </table>
@@ -170,7 +174,7 @@
 
                 <div style="font-size: medium;max-width:200px;display: inline-block;"
                      *ngIf="!coupon.breakable && coupon.gain<1">
-                  Désolé !<br>Pour utiliser ce coupon, vous devez avoir gagné au moins 1 {{coupon.symbol}}
+                  Désolé, vous n'y êtes pas encore !<br>Pour utiliser ce coupon, vous devez avoir gagné au moins 1 {{coupon.symbol}}
                 </div>
 
                 <br>

@@ -14,6 +14,7 @@ import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
 import {ConfigService} from "../config.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material";
 
 declare var ol: any;
 declare var EXIF: any;
@@ -44,6 +45,7 @@ export class UserformComponent implements OnInit {
 
   constructor(public dialog: MatDialog,public router:Router,
               public loc:LocService,public api:ApiService,
+              public snackBar:MatSnackBar,
               public config:ConfigService) {
   }
 
@@ -60,7 +62,9 @@ export class UserformComponent implements OnInit {
         this.config.params.command=this.config.params.command.replace("add_shop","");
         if(this.user.shops==null || this.user.shops.length==0){
           setTimeout(()=>{
-            this.addshop();
+            let param="";
+            if(command.indexOf("add_shop(")>-1)param=command.split("add_shop(")[1].split(")")[0];
+            this.addshop(param);
           },1500);
         }
       }
@@ -97,21 +101,22 @@ export class UserformComponent implements OnInit {
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
         localStorage.setItem("showCoupon",result.newcoupon);
-        this.user.message = result.message;
+        //this.snackBar.open(result.message,"",{duration:3000});
         this.onflash.emit({message:result.message});
       },(error)=>{showError(this,error);});
   }
 
 
-  addshop() {
+  addshop(tags="") {
     this.showMap=false;
+    if(this.user.tags.length>0)tags=this.user.tags;
     this.router.navigate(['shop'],
       {queryParams:
           {
             shop:null,
             userid:this.user._id,
             pseudo:this.user.pseudo,
-            tags:this.user.tags,
+            tags:tags,
             anonymous:this.user.email.indexOf("fictif.com")>-1
           }
       });
