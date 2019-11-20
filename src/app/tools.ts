@@ -497,10 +497,12 @@ export function checkLogin(router: Router, params: any = null) {
 
 export function openGraphForShop(idshop:string){
   var domain_server="https://server.f80.fr";
-  domain_server="http://localhost";
+  //domain_server="http://localhost";
 
   var graph_url=domain_server+":5500/api/getgraph/"+idshop+"/hh4271/gpickle";
-  var url=domain_server+":5000/graph/b64="+btoa(graph_url)+"/fr?algo_comm=self&dir=public&axis=False&notext=True&nometrics=False&add_property=True&autorotate=False&limit=5000&pca=1&processors=2"
+  var url=domain_server+":5000/graph/b64="
+    +btoa(graph_url)+"/fr?algo_comm=self&dir=public&axis=False&notext=True&nometrics=False&add_property=True&autorotate=False" +
+    "&limit=5000&pca=1&processors=2&title=Distribution_des_coupons_de_votre_point_de_vente"
   $$("url=",url);
   return url;
 }
