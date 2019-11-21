@@ -138,8 +138,10 @@
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <span style="margin-bottom: 10px;font-weight: bold;" *ngIf="user.level<0.8">Votre bonus peut augmenter</span>
-                <br>
+                <div style="font-weight: bold;" *ngIf="user.level<0.8">
+                  <span *ngIf="coupon.origin!=coupon._id">Votre bonus peut augmenter</span>
+                  <span *ngIf="coupon.origin==coupon._id">L'avantage client évolue</span>
+                </div>
                 <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
                   <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id"><td>Coupon récupéré</td><td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td></tr>
                   <tr *ngIf="coupon.share_bonus>0">
@@ -188,14 +190,15 @@
               <!--La table des gains-->
 
               <!--Zone réserver au créateur-->
-              <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0" style="font-size: small;">
+              <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0"
+                   style="font-size: small;">
                 <br>
                 <table style="display:inline-block;text-align: left;line-height: 90%;" cellpadding="3px">
                   <tr *ngIf="coupon.share>0">
                     <td style="text-align: right;font-size: large;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
                     <td>partages (/{{coupon.max_coupon}})<br></td>
                   </tr>
-                  <tr *ngIf="coupon.share>0"><td><br></td><td></td></tr>
+                  <!--<tr *ngIf="coupon.share>0"><td><br></td><td></td></tr>-->
                   <tr *ngIf="user.level>1">
                     <td style="text-align: right;">{{coupon.gain_total | number:'1.0-1'}} {{coupon.symbol}}</td>
                     <td>proposé(es)</td>
@@ -204,7 +207,7 @@
                     <td style="text-align: right;">{{coupon.stock | number:'1.0-1'}}{{coupon.symbol}}</td>
                     <td>
                       en stock
-                      <mat-icon (click)="updateStock(coupon)" style="cursor:pointer;font-size: small;">edit</mat-icon>
+                      <mat-icon matListIcon (click)="updateStock(coupon)" style="cursor:pointer;font-size: small;display:inline-block;">edit</mat-icon>
                     </td>
                   </tr>
                 </table>

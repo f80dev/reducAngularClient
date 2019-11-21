@@ -47,6 +47,7 @@ export class NewCouponComponent implements OnInit {
     max: 60,
     stock:60,
     website:"https://reducshare.com/faq.html#coupon",
+    visual:"https://reducshare.com/assets/img/gifts.jpg",
     max_coupon:1000,
     duration_jours: 2.0,
     duration_hours: 0.0,
