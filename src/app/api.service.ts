@@ -100,4 +100,8 @@ export class ApiService {
   searchImage(query:string,limit:number){
     return this.http.get("https://server.f80.fr:5600/"+query+"/"+limit+"/true");
   }
+
+  checkCode(userid: string, code: string,field:string) {
+    return this.http.get(api("checkcode/"+userid+"/"+code+"/"+field));
+  }
 }

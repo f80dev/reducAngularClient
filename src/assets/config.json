@@ -2,7 +2,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.7.4-beta",
+    "version": "0.7.5-beta",
     "news": "Possibilité de modifier les points de vente",
     "logo": "./assets/img/logo.png",
     "editor":{
@@ -85,7 +85,7 @@
     {
       "id":"shareReduc",
       "title": "Comment partager ses réductions ?",
-      "content": "Pour partager une réduction, il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer"
+      "content": "Pour partager une réduction, il suffit d'ouvrir celle-ci et d'utiliser le bouton partage. Sur un ordinateur, l'usage du bouton copie dans le presse papier le lien de la promotion qu'il suffit ensuite d'envoyer par n'importe quelle messagerie. <br>Sur un mobile et pour la plupart des navigateurs, la boite de partage propose toutes les applications susceptible d'envoyer le lien<br>Une autre méthode consiste à faire flasher le QRCode de la promotion par les personnes qui souhaite la récupérer. Enfin les sites d'annonces interdisent l'insertion de lien internet mais il est possible d'inserer l'image du QRCode dans les visuels de votre annonce"
     }
   ],
 

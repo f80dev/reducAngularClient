@@ -173,7 +173,6 @@ export class NewCouponComponent implements OnInit {
   refresh(){
     this.hasMax=(this.coupon.max>0);
     this.coupon.title=evalTitle(this.coupon);
-    if(this.coupon.max>0)this.coupon.title=this.coupon.title+" jusqu'a "+this.coupon.max+this.coupon.symbol;
   }
 
   changeMax() {

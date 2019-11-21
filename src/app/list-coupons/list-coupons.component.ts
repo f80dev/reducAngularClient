@@ -97,6 +97,7 @@ export class ListCouponsComponent implements OnChanges {
     }
 
     if(mode==2){//Mode utilisation
+      this._clipboardService.copyFromContent(coupon.url); //En mode local on copie le lien dans le presse papier
       var dtEnd=new Date(Number(coupon.dtEnd)*1000);
       var dtNow=new Date();
       if(dtEnd.getDay()==dtNow.getDay() && dtEnd.getMonth()==dtNow.getMonth())

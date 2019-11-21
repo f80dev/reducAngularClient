@@ -69,14 +69,16 @@ export class LoginComponent implements OnInit {
                this.dialog.open(PromptComponent,{
                  width:'90vw',data: {title:"Renseigner le code reçu"}})
                  .afterClosed().subscribe((code:any) => {
-                 if(code==res.code){
-                   this.data.user.email=email;
-                   this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
-                   this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
-                   this.initUser(email,true);
-                 } else {
-                   this.dialogRef.close({"message":"Le code saisie est incorrect"});
-                 }
+                   this.api.checkCode(this.data.user._id,code,"code").subscribe((res_auth:any)=>{
+                     if(res_auth.status==200){
+                       this.data.user.email=email;
+                       this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
+                       this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
+                       this.initUser(email,true);
+                     } else {
+                       this.dialogRef.close({"message":"Le code saisie est incorrect"});
+                     }
+                   });
                });
              }
            }

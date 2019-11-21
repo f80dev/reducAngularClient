@@ -372,10 +372,15 @@ export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error)
   }
 }
 
+/**
+ * Permet de calculer le titre du coupon par défaut
+ * @param coupon
+ */
 export function evalTitle(coupon:any){
   var s=coupon.label;
   if(s.length>30)s=s.substr(0,30)+"...";
-  return s+" - Jusqu'a "+coupon.max+coupon.symbol;
+  if(this.coupon.max>0)s=s+" - Jusqu'a "+coupon.max+coupon.symbol;
+  return s;
 }
 
 export function getImageLightness(imageSrc,callback) {
