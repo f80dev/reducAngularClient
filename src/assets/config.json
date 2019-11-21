@@ -1,7 +1,7 @@
 {"brands":[
   {
-    "appname": "ReducShare",
-    "title": "ReducShare",
+    "appname": "REDUCSHARE",
+    "title": "REDUCSHARE",
     "version": "0.7.4-beta",
     "news": "Possibilité de modifier les points de vente",
     "logo": "./assets/img/logo.png",
@@ -64,13 +64,13 @@
     },
     {
       "id":"tarif",
-      "title": "Combien coûte ReducShare ?",
-      "content": "Pour un achteur, le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le ReducShare, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), la plupart des fonctions seront gratuites et certaines fonctions 'premium' seront payantes. Pour les associations et établissements publics le service restera intégralement gratuit"
+      "title": "Combien coûte REDUCSHARE ?",
+      "content": "Pour un achteur, le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le REDUCSHARE, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), la plupart des fonctions seront gratuites et certaines fonctions 'premium' seront payantes. Pour les associations et établissements publics le service restera intégralement gratuit"
     },
     {
       "id":"profil",
-      "title": "Doit-on s'authentifier pour utiliser ReducShare ?",
-      "content": "Absolument pas !<br> ReducShare fonctionne parfaitement avec un profil anonyme. <br>L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
+      "title": "Doit-on s'authentifier pour utiliser REDUCSHARE ?",
+      "content": "Absolument pas !<br> REDUCSHARE fonctionne parfaitement avec un profil anonyme. <br>L'inconvénient principal vient du fait que le profil anonyme n'est disponible que sur le terminal (mobile ou ordinateur) sur lequel il a été crée. Clairement, ce type profil n'est pas conseillé si l'on est vendeur. Dans ce cas, il vaut mieux s'authentifier avec son mail (via google, facebook ou directement)"
     },
     {
       "id":"delegate",
@@ -613,7 +613,7 @@
       "duration_hours":480,
       "stock":500,
       "max_coupon":5000,
-      "conditions":"pour 50 points cumulé via ReducShare",
+      "conditions":"pour 50 points cumulé via REDUCSHARE",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/first-place-medal_1f947.png",
       "tags":"fidélisation"
     },

@@ -28,7 +28,7 @@
 
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Utilisez un modèle pour votre nouvelle promotion"
-                     [shopid]="coupon.shop._id"
+                     [shopid]="coupon.shop"
                      [filter]="tags"
                      [level]="level"
                      (cancel)="showOldCoupon=false"
@@ -80,7 +80,7 @@
         </mat-checkbox>
         <br><br><br>
 
-        <app-tuto label="Comme la valeur des promotions de ReducShare est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
+        <app-tuto label="Comme la valeur des promotions de REDUCSHARE est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
                   *ngIf="focusElt=='max'"></app-tuto>
 
         <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax"

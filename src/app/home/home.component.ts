@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-
   showMessage: boolean=false;
   user: any = {message:""};
   coupons=[];
@@ -138,10 +137,10 @@ export class HomeComponent implements OnInit {
 
         //Affichage du message
         let mes=this.removeHTML(data.message.split('#submessage#')[0]);
-        $$("Refresh depuis la socket avec "+mes);
-        this.toast.open(mes,"",{duration:4000});
-
-        setTimeout(()=>{this.refresh(data.message);},1500);
+        if(mes.length>0){
+          $$("Refresh depuis la socket avec "+mes);
+        }
+        setTimeout(()=>{this.refresh(mes);},500);
       }
     });
 
@@ -173,7 +172,7 @@ export class HomeComponent implements OnInit {
               this.refresh("L'email "+new_mail+" à bien été ajouté à votre compte.");
             },(err)=>{showError(this,err);});
           } else {
-            this.refresh("Impossible d'enregistrer le mail. Utiliser la connexion via Google ou Facebook (seul votre email sera récupéré par ReducShare)");
+            this.refresh("Impossible d'enregistrer le mail. Utiliser la connexion via Google ou Facebook (seul votre email sera récupéré par REDUCSHARE)");
           }
         }
       }

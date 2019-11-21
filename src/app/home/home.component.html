@@ -1,14 +1,14 @@
 <table style="width: 100%;"><tr>
   <td style="width: 700px;vertical-align: text-top;">
     <app-flashscreen [message]="user.message"
-                     *ngIf="showMessage && user.message?.length>0"
+                     *ngIf="showMessage"
                      [duration]="15"
                      (close)="closeFlashScreen()">
     </app-flashscreen>
 
     <div style="padding:3px;">
-      <mat-accordion [multi]="true" [hidden]="showMessage && user.message?.length>0">
-        <app-tuto title="Bienvenue dans ReducShare !"
+      <mat-accordion [multi]="true" [hidden]="showMessage">
+        <app-tuto title="Bienvenue dans REDUCSHARE !"
                   *ngIf="user.level<0.5"
                   background="./assets/img/network.jpg"
                   button="Commencer"

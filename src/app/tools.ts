@@ -5,6 +5,7 @@ import {
 } from "ngx-social-button";
 import {WebcamUtil} from "ngx-webcam";
 import {LoginComponent} from "./login/login.component";
+import {MatSnackBar} from "@angular/material";
 
 export const ADMIN_PASSWORD="hh4271";
 
@@ -165,17 +166,20 @@ export function getMarkerLayer(map:any):any {
 }
 
 export function showMessage(vm:any,s:string="",duration=20000){
+
   if(s==null || s.length==0)return false;
   s=s+"";
   $$("Affichage du message :",s)
   if(s.startsWith("#")){
     s=s.substr(1);
-    if(s.length>0)
-      setTimeout(()=>{vm.showMessage=true;},500);
+    vm.user.message=s;
+    if(s.length>0)setTimeout(()=>{vm.showMessage=true;},500);
+  } else {
+    var toaster:MatSnackBar=vm.toast || vm.snackBar;
+    toaster.open(s,"",{duration:duration});
   }
-
-  vm.user.message=s;
-  setTimeout(()=>{vm.user.message=""},duration);
+  //vm.user.message=s;
+  //setTimeout(()=>{vm.user.message=""},duration);
 }
 
 export function isLocal(){

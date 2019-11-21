@@ -14,7 +14,7 @@ import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from '@angular/material/dialog';
 import {ConfigService} from "../config.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
-import {MatSnackBar, MatSnackBarModule} from "@angular/material";
+import {MatSnackBar} from "@angular/material";
 
 declare var ol: any;
 declare var EXIF: any;
@@ -101,7 +101,6 @@ export class UserformComponent implements OnInit {
       this.startScanner();
       this.api.flash(this.user._id, coupon).subscribe((result:any) => {
         localStorage.setItem("showCoupon",result.newcoupon);
-        //this.snackBar.open(result.message,"",{duration:3000});
         this.onflash.emit({message:result.message});
       },(error)=>{showError(this,error);});
   }
@@ -191,9 +190,11 @@ export class UserformComponent implements OnInit {
 
   promptForPseudo(event,title="Votre pseudo ?",func=null) {
     if(event)event.stopPropagation();
-    this.dialog.open(PromptComponent,{width: '250px',data: {title: "Pseudo", question: title,onlyConfirm:false}})
+    this.dialog.open(PromptComponent,
+      {width: '250px',data: {title: "Pseudo", question: title,onlyConfirm:false}})
         .afterClosed().subscribe((result) => {
           if(result!=null && result.length>0){
+            this.user.level+=0.1;
             this.user.pseudo = result;
             this.saveUser();
           }
