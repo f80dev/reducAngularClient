@@ -11,7 +11,7 @@ import {
 } from "ngx-social-button";
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import {DialogData, PromptComponent} from "../prompt/prompt.component";
-import {$$, showError} from "../tools";
+import {$$, showError, showMessage} from "../tools";
 //import {LinkedinLoginProvider} from "../../../node_modules/ngx-social-button/lib/providers/linkedinProvider";
 
 
@@ -56,24 +56,29 @@ export class LoginComponent implements OnInit {
 
   email_login(){
     this.dialog.open(PromptComponent,{
-      width:'90vw',data: {title:"Indiquer votre email"}}).afterClosed().subscribe((email:any) => {
+      width:'90vw',data: {title:"Authentification par email",question:"Renseigner votre adresse mail pour recevoir le code de connexion"}}).afterClosed().subscribe((email:any) => {
        if(email){
          this.api.askforemail(email,this.data.user._id).subscribe((res:any)=>{
            if(res==null){
              this.dialogRef.close({"message":"Cette adresse mail n'est pas valide"});
            } else {
-             this.dialog.open(PromptComponent,{
-               width:'90vw',data: {title:"Renseigner le code reçu"}})
-               .afterClosed().subscribe((code:any) => {
-               if(code==res.code){
-                 this.data.user.email=email;
-                 this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
-                 this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
-                 this.initUser(email,true);
-               } else {
-                 this.dialogRef.close({"message":"Le code saisie est incorrect"});
-               }
-             });
+             if(res.status!=200){
+               this.dialogRef.close({"message":res.message});
+               return;
+             } else {
+               this.dialog.open(PromptComponent,{
+                 width:'90vw',data: {title:"Renseigner le code reçu"}})
+                 .afterClosed().subscribe((code:any) => {
+                 if(code==res.code){
+                   this.data.user.email=email;
+                   this.data.user.pseudo = this.data.user.email.split("@")[0].replace("."," ").split(" ")[0];
+                   this.data.user.pseudo=this.data.user.pseudo.substr(0,1).toUpperCase()+this.data.user.pseudo.substr(1).toLowerCase();
+                   this.initUser(email,true);
+                 } else {
+                   this.dialogRef.close({"message":"Le code saisie est incorrect"});
+                 }
+               });
+             }
            }
 
            // var message="Un lien de connexion à votre nouveau profil vous a été envoyer sur votre boite. Utilisez le pour vous reconnecter";

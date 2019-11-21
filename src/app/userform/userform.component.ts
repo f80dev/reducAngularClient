@@ -274,7 +274,7 @@ export class UserformComponent implements OnInit {
         this.onupdate.emit(this.user);
         showMessage(this,"Authentification validée");
       } else {
-        this.user.message=result["message"];
+        showMessage(this,result["message"]);
       }
     },()=>{
       showMessage(this,"Authentification annulée, vous restez anonyme");
