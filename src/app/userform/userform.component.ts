@@ -114,6 +114,7 @@ export class UserformComponent implements OnInit {
       {queryParams:
           {
             shop:null,
+            level:this.user.level,
             userid:this.user._id,
             pseudo:this.user.pseudo,
             tags:tags,

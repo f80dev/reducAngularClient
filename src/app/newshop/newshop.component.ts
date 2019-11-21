@@ -47,9 +47,10 @@ export class NewshopComponent implements OnInit {
   handle:any;
   iframe_src="https://web.reducshare.com/faqs/init_shop.html";
   showHelpScreen=false;
+  level=0;
+
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
-
 
   reverseGeocode: boolean=false;
   canUpdateName: boolean=true;
@@ -80,6 +81,7 @@ export class NewshopComponent implements OnInit {
     var params=this.route.snapshot.queryParamMap;
     this.anonymous=(params.get("anonymous")!="false");
     this.new_shop.owner=(params.get("userid"));
+    this.level=Number((params.get("level")) || "0");
     if(params.get("edit")!=null){
       this.new_shop=this.api.shop;
       this.new_shop.tags=this.api.shop.tags.split(",");

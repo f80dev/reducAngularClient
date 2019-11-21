@@ -109,9 +109,9 @@ export class NewCouponComponent implements OnInit {
         }
       })
     } else {
-      if(params.get("edit")!="true"){
-        this.showOldCoupon=true;
-      }
+      // if(params.get("edit")!="true"){
+      //   this.showOldCoupon=true;
+      // }
     }
   }
 
