@@ -3,9 +3,11 @@
     BigQuery
   </a>
   -
-  <a href="https://server.f80.fr:5500/api/fictif_flash/5000">5000 interactions sans user</a>
+  <span (click)="openGraph(null,'user')">Graphe Générale</span>
   -
-  <a href="https://server.f80.fr:5500/api/fictif_flash/5000/True">Avec</a>
+  <a href="https://server.f80.fr:5500/api/fictif_flash/500">500 interactions sans user</a>
+  -
+  <a href="https://server.f80.fr:5500/api/fictif_flash/500/True">Avec</a>
   -
   <a href="https://server.f80.fr:5500/api/fictif/48.874929/2.350299/0/rand/5">10 nouveaux comptes</a>
   <a href="https://server.f80.fr:5500/api/fictif/48.874929/2.350299/10/rand/50">50 nouveaux comptes large</a>
@@ -105,7 +107,8 @@
     <td mat-cell>{{shop.public}}</td>
     <td mat-cell>{{shop.website}}</td>
     <td mat-cell>{{shop.score}}</td>
-    <td mat-cell><span (click)="openGraph(shop._id)">Graphe</span></td>
+    <td mat-cell><span (click)="openGraph(shop._id,'coupon')">G_Coupons</span></td>
+    <td mat-cell><span (click)="openGraph(shop._id,'user')">G_Users</span></td>
   </tr>
 </table>
 <br>

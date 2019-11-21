@@ -50,7 +50,7 @@ export class AdminComponent implements OnInit {
 
   }
 
-  openGraph(shopid){
-    window.open(openGraphForShop(shopid),"_blank");
+  openGraph(shopid,type){
+    window.open(openGraphForShop(shopid,type),"_blank");
   }
 }
