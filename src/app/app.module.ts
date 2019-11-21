@@ -55,6 +55,7 @@ import { OrderByPipe } from './order-by.pipe';
 import { FlipModule } from 'ngx-flip';
 import { NewCouponSimpleComponent } from './new-coupon-simple/new-coupon-simple.component';
 import { ImageSelectorComponent } from './image-selector/image-selector.component';
+import { LiteralPipe } from './literal.pipe';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -86,7 +87,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     AboutComponent,
     OrderByPipe,
     NewCouponSimpleComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    LiteralPipe
   ],
   entryComponents: [
     NewCouponComponent,

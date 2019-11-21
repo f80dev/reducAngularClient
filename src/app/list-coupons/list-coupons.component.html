@@ -53,7 +53,7 @@
 
                 <!--Si le coupon ne peut plus être distribué-->
               <span *ngIf="!coupon.canbedeal || coupon.visible==2">
-                Récupérer {{coupon.gain}}{{coupon.symbol}} offert
+                Récupérer {{coupon.gain | literal}}{{coupon.symbol}} offert
               </span>
             </span>
 
@@ -121,16 +121,7 @@
                    *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
 
                 <div style="font-size: 2em;" *ngIf="coupon.promocodes.length==0">
-                  <!--Affiche en mode decimal (breakable et >1)-->
-                  <span *ngIf="coupon.breakable || coupon.gain>=1">
-                    {{coupon.gain | number:'1.0-1'}}{{coupon.symbol}}
-                  </span>
-
-                  <!--Affiche en mode decimal (breakable et >1)-->
-                  <span *ngIf="!coupon.breakable && coupon.gain<1">
-                    {{coupon.gain*100 | number:'1.0-0'}}% {{coupon.symbol}}
-                  </span>
-
+                  {{coupon.gain | literal:1}}{{coupon.symbol}}
                 </div>
 
                 <span style="font-size: 2em;" *ngIf="coupon.promocodes.length>0">
@@ -151,11 +142,10 @@
                 <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
                   <tr *ngIf="coupon.share_bonus>0">
                     <td>Coupon partagé</td>
-                    <td *ngIf="coupon.share_bonus<1 && !coupon.breakable" style="text-align: right;">+{{coupon.share_bonus*100 | number:'1.0-0'}}%{{coupon.symbol}}</td>
-                    <td *ngIf="coupon.share_bonus>=1 || coupon.breakable" style="text-align: right;">+{{coupon.share_bonus | number:'1.0-2'}}{{coupon.symbol}}</td>
+                    <td style="text-align: right;">+{{coupon.share_bonus | literal:2}} {{coupon.symbol}}</td>
                   </tr>
-                  <tr *ngIf="coupon.pay_bonus>0"><td>Coupon transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}}{{coupon.symbol}}</td></tr>
-                  <tr *ngIf="coupon.final_bonus>0"><td>Coupon utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}}{{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.pay_bonus>0"><td>Coupon transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td></tr>
+                  <tr *ngIf="coupon.final_bonus>0"><td>Coupon utilisé</td><td style="text-align: right;">+{{coupon.final_bonus}} {{coupon.symbol}}</td></tr>
                 </table>
                 <br>
                   <span style="font-size: medium" *ngIf="coupon.visible==1">

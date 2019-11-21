@@ -23,7 +23,7 @@ export class TutoComponent implements OnChanges,OnInit {
   @Input('image') image: string="";
   @Input('button') labelButton: string="Continuez";
   @Input('icon') icon:string="";
-  @Input('color') color:string="grey";
+  @Input('color') color:string="white";
   @Input('force') force:boolean=false;
   @Input('button') _button:string="";
   @Input('height') height:string="auto";
