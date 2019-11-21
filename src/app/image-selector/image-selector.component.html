@@ -32,7 +32,7 @@
 
   <mat-grid-list *ngIf="pictures?.length>0" style="width:100%;" cols="3" rowHeight="16:9">
     <mat-grid-tile *ngFor="let tile of pictures">
-      <img [src]="tile" style="width:100px;height:100px" (click)="selPicture(tile)">
+      <img [src]="tile" style="width:20vmin;height:20vmin;" (click)="selPicture(tile)">
     </mat-grid-tile>
   </mat-grid-list>
 

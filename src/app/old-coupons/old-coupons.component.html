@@ -59,15 +59,17 @@
   <br>
   <mat-card-content class="app-card-content" *ngIf="!askFilter">
 
-    Mes anciennes promotions<br>
-    <mat-list style="padding:0px;">
-      <mat-list-item *ngFor="let coupon of mycoupons | orderBy:'dtCreate':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
-        <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
-        <h2 matLine (click)="onselect.emit(coupon)">
-          <span *ngIf="coupon.title">{{coupon.title}}</span>
-        </h2>
-      </mat-list-item>
-    </mat-list>
+    <div *ngIf="mycoupons.length>0">
+      Mes anciennes promotions<br>
+      <mat-list style="padding:0px;">
+        <mat-list-item *ngFor="let coupon of mycoupons | orderBy:'dtCreate':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
+          <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
+          <h2 matLine (click)="onselect.emit(coupon)">
+            <span *ngIf="coupon.title">{{coupon.title}}</span>
+          </h2>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
 
     <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:95%;margin-top:5%;">

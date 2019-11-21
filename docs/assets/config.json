@@ -302,10 +302,10 @@
     },
     {
       "id":"petitdej",
-      "title":"Petit déj offert",
-      "unity":"déjeunés",
+      "title":"des petits déjs offert",
+      "unity":"petits déjeunés",
       "symbol":"🍽️",
-      "breakable":true,
+      "breakable":false,
       "pluriel":true,
       "score":12,
       "label":"On vous offre le petit déjeuné !",

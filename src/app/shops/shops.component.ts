@@ -11,7 +11,7 @@ import {
 import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {openGraphForShop, sendToPrint, showError, traitement_coupon} from "../tools";
+import {openGraphForShop, sendToPrint, showError, showMessage, traitement_coupon} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
 
@@ -93,10 +93,21 @@ export class ShopsComponent implements OnInit {
 
   setDelegate(shop:any) {
     if(this.config.webcamsAvailable==0){
-      this.dialog.open(PromptComponent, {width: '250px',data: {title: "Code utilisateur", question:"", onlyConfirm: false}
+      showMessage(this,);
+      this.dialog.open(PromptComponent, {width: '250px',
+        data: {
+                title: "Code utilisateur",
+                question:"Demander le code à l'utilisateur auquel vous souhaitez déléguer la validation des promotions",
+                onlyConfirm: false
+      }
       }).afterClosed().subscribe((result) => {
         if(result!=null && result.length>0)
-          this.api.delegate(result,shop._id).subscribe(()=>{},(error)=>{showError(this,error);});
+          this.api.delegate(result,shop._id).subscribe((res:any)=>{
+            showMessage(this,res.message);
+          },(error:any)=>{
+            debugger
+            showMessage(this,error.message);
+          });
       });
     } else {
       this.showWebCam=!this.showWebCam;

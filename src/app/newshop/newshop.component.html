@@ -88,7 +88,7 @@
             <br>
 
             <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
-                          *ngIf="!new_shop.address.startsWith('http')"
+                          *ngIf="!new_shop.address.startsWith('http') && level>0.5"
                           title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
                           (change)="checkLogin()">
               Point de vente visible sur la carte des promotions
@@ -111,6 +111,7 @@
             &nbsp;&nbsp;
 
             <button mat-flat-button mat-button
+                    *ngIf="level>0.6"
                     id="cmdFile"
                     (click)="addImage()"
             >

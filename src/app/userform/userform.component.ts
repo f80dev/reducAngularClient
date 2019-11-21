@@ -130,7 +130,13 @@ export class UserformComponent implements OnInit {
     var square=this.map.getView().calculateExtent(this.map.getSize());
     var bottomLeft = ol.proj.toLonLat(ol.extent.getBottomLeft(square));
     var topRight = ol.proj.toLonLat(ol.extent.getTopRight(square));
-    this.api.getcouponinsquare({x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1]}).subscribe((coupons:any)=>{
+    this.api.getcouponinsquare({
+      x0:bottomLeft[0],
+      y0:bottomLeft[1],
+      x1:topRight[0],
+      y1:topRight[1],
+      user:{x:this.user.lng,y:this.user.lat}
+    }).subscribe((coupons:any)=>{
       var l=getMarkerLayer(this.map);
       this.showCouponOnMap=[];
       var scale=0.1;

@@ -8,14 +8,19 @@
         </app-visual>
       </div>
 
-      <qr-code [size]="70"
-               style="display: inline-block;vertical-align: middle;margin-right: 20px;"
-               *ngIf="showPersonalCode"
-               title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
-               ngxClipboard
-               [cbContent]="user._id"
-               [value]="user._id">
-      </qr-code>
+      <div *ngIf="showPersonalCode" style="text-align: center;margin-right: 20px;">
+        <qr-code [size]="70"
+                 style="display: inline-block;vertical-align: middle;"
+                 title="Le QRCode permet d'identifier l'utilisateur notamment pour la délégation de gestion"
+                 ngxClipboard
+                 [cbContent]="user._id"
+                 [value]="user._id">
+        </qr-code><br>
+        <span style="font-size: small;">{{user.code}}</span>
+      </div>
+
+
+
 
 
       <div style="display: inline-block;margin-top:15px;font-size: x-large;">

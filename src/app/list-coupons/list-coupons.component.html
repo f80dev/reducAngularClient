@@ -132,14 +132,16 @@
                 <span style="font-size: small;padding: 0px;">gagné(es)</span>
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
                 <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
+                <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
                 <span *ngIf="coupon.stock<10">Encore {{coupon.stock}}{{coupon.symbol}} à gagner</span>
               </div>
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <span style="margin-bottom: 10px;" *ngIf="user.level<0.8">Augmentation du bonus</span>
+                <span style="margin-bottom: 10px;font-weight: bold;" *ngIf="user.level<0.8">Votre bonus peut augmenter</span>
                 <br>
                 <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;" cellpadding="1" name="zoneInfo">
+                  <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id"><td>Coupon récupéré</td><td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td></tr>
                   <tr *ngIf="coupon.share_bonus>0">
                     <td>Coupon partagé</td>
                     <td style="text-align: right;">+{{coupon.share_bonus | literal:2}} {{coupon.symbol}}</td>
