@@ -138,7 +138,7 @@
 
 
               <div *ngIf="coupon.canbedeal && (coupon.visible==1 || (coupon.origin==coupon._id && coupon.share==0))">
-                <div style="font-weight: bold;" *ngIf="user.level<0.8">
+                <div style="font-weight: bold;" *ngIf="user.level<1.5">
                   <span *ngIf="coupon.origin!=coupon._id">Votre bonus peut augmenter</span>
                   <span *ngIf="coupon.origin==coupon._id">L'avantage client évolue</span>
                 </div>

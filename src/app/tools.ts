@@ -379,7 +379,7 @@ export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error)
 export function evalTitle(coupon:any){
   var s=coupon.label;
   if(s.length>30)s=s.substr(0,30)+"...";
-  if(this.coupon.max>0)s=s+" - Jusqu'a "+coupon.max+coupon.symbol;
+  if(coupon.max>0)s=s+" - Jusqu'a "+coupon.max+coupon.symbol;
   return s;
 }
 
