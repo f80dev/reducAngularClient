@@ -39,6 +39,7 @@ export class NewCouponComponent implements OnInit {
     nb_partage:100,
     final_bonus:0,
     pluriel:true,
+    min_to_use:1,
     min_price:0,  //prix minimum pour la promotion
     conditions:"pour un achat d'un montant supérieur à 15€",
     share_bonus: 3,

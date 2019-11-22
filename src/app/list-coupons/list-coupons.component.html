@@ -100,10 +100,10 @@
 
               <!--QRCode du coupon-->
 
-              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=1)"><small>Montrez le QR-code</small></span><br>
+              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=coupon.min_to_use)"><small>Montrez le QR-code</small></span><br>
 
               <a [href]="coupon.url" target="_blank"
-                 *ngIf="coupon.visible==1 || (coupon.visible==2 && (coupon.breakable || coupon.gain>=1))">
+                 *ngIf="coupon.visible==1 || (coupon.visible==2 && (coupon.breakable || coupon.gain>=coupon.min_to_use))">
                 <qr-code [value]="coupon.url" name="qrcode"
                          style="width:150px;height: 140px;margin:0px;"
                          ngxClipboard [cbContent]="coupon.url"
@@ -111,7 +111,7 @@
                 </qr-code>
                 <br>
               </a>
-              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=1)"><small>au vendeur</small><br></span>
+              <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=coupon.min_to_use)"><small>au vendeur</small><br></span>
 
             </td>
             <td style="text-align: center;vertical-align: top;">
@@ -129,7 +129,7 @@
                 </span>
 
                 <br>
-                <span style="font-size: small;padding: 0px;">gagné(es)</span>
+                <span style="font-size: small;padding: 0px;" *ngIf="coupon.gain>0">gagné(es)</span>
                 <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
                 <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
                 <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
@@ -161,18 +161,18 @@
               </div>
 
               <div style="min-width:200px;" *ngIf="coupon.visible==2">
-                <div style="display: inline-block;" *ngIf="coupon.breakable || coupon.gain>=1">
+                <div style="display: inline-block;" *ngIf="coupon.breakable || coupon.gain>=coupon.min_to_use">
                   <small>et bénéficiez de</small> <br><br>
                   <span style="font-size: xx-large;">{{coupon.gain}}{{coupon.symbol}}</span><br>
                 </div>
 
                 <div style="font-size: medium;max-width:200px;display: inline-block;"
-                     *ngIf="!coupon.breakable && coupon.gain<1">
-                  Désolé, vous n'y êtes pas encore !<br>Pour utiliser ce coupon, vous devez avoir gagné au moins 1 {{coupon.symbol}}
+                     *ngIf="!coupon.breakable && coupon.gain<coupon.min_to_use">
+                  Désolé, vous n'y êtes pas encore !<br>Pour utiliser votre coupon, vous devez avoir {{coupon.min_to_use}} {{coupon.symbol}}
                 </div>
 
                 <br>
-                <div *ngIf="coupon.breakable || coupon.gain>=1">
+                <div *ngIf="coupon.breakable || coupon.gain>=coupon.min_to_use">
                   <div style="width:80%;display:inline-block;line-height: 90%;margin-top:5px;">{{coupon.conditions}}</div>
                   <br><br>
                   Localiser le point de vente :
@@ -397,7 +397,7 @@
       <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span><br>
       <span style="font-size: small">(vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})</span>
       <br><br>
-      <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.max>0 && coupon.breakable || coupon.gain>=1">
+      <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.max>0 && coupon.breakable || coupon.gain>=coupon.min_to_use">
         Pour l'instant vous avez {{coupon.gain | number:'1.0-1'}}
         <!--<span *ngIf="!coupon.breakable && coupon.gain<1">{{coupon.gain*100 | number:'1.0-0' }}% de 1</span>-->
         {{coupon.symbol}}

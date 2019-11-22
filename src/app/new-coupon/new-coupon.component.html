@@ -275,6 +275,8 @@
         <br><br>
         </div>
 
+
+
         <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
           <input matInput id="txtDays" title="On détermine le nombre de jours de validité de la promotion"
                  type="number" min="0" step="any"  placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
@@ -301,7 +303,18 @@
                  id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
         </mat-form-field>
+
+        <mat-form-field *ngIf="level>0.5" class="form-field-style">
+          <input matInput
+                 type="number"
+                 id="txtMin_to_use"
+                 placeholder="Gain minimum pour utiliser le coupon" [(ngModel)]="coupon.min_to_use">
+        </mat-form-field>
+
+
       </mat-step>
+
+
 
       <app-tuto *ngIf="focusElt=='title'"
                 label="Ce titre ne sera pas visible du client. Il est fait pour vous aidez à retrouver votre promotion pour la réutiliser depuis la liste des modèles">
