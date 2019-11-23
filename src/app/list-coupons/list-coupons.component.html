@@ -300,6 +300,16 @@
         <button mat-button mat-flat-button
                 mat-icon-button
                 class="small-icon-button"
+                title="Offrir ses points"
+                name="btnRemove"
+                *ngIf="coupon.origin!=coupon._id"
+                (click)="showCode(coupon,3)">
+          <mat-icon>card_giftcard</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button
+                class="small-icon-button"
                 name="btnEdit"
                 *ngIf="coupon.share==0 && coupon.origin==coupon._id"
                 (click)="onedit.emit(coupon)">

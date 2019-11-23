@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
    */
   analyse_params(func){
     var params=this.route.snapshot.queryParamMap;
+
     localStorage.setItem("firsturl",this._location.path());
     $$("Récupération des paramètres",params);
     if(this.config.params==null){
@@ -60,6 +61,7 @@ export class HomeComponent implements OnInit {
         coupon:params.get("coupon") || "",
         pass:params.get("pass") || "",
         tags:params.get("tags") || "",
+        gift:params.has("gift") || false,
         tuto:true,
         command:params.get("command") || "",
         user:params.get("user") || "",
@@ -68,11 +70,12 @@ export class HomeComponent implements OnInit {
       };
 
       if(params.has("notuto"))this.config.params["tuto"]=false;
-
       if(this.config.params.coupon==""){
         var params2=this._location.path();
         if(params2.indexOf("/home/")>-1)this.config.params.coupon=params2.split("/home/")[1];
       }
+
+      this.config.params.coupon=this.config.params.coupon.split("?")[0];
 
       $$("Netoyage de l'url de lancement:"+this._location.path());
       this._location.replaceState(this._location.path().split('?')[0],"");
@@ -113,7 +116,7 @@ export class HomeComponent implements OnInit {
         //if(isnew)p.message="Vous êtes vendeur ? créer votre première promotion. Vous êtes acheteur ? visualisez les promotions autour de vous !";
         localStorage.setItem("user",u._id);
         this.user = u;
-        this.connect(p.coupon,p.pass);
+        this.connect(p.coupon,p.pass,null,p.gift);
         this.refresh(p.message);
       });
     })
@@ -128,7 +131,7 @@ export class HomeComponent implements OnInit {
   /**
    * Ouverture des sockets et récupération des paramètres
    */
-  connect(coupon:any=null,pass:string=null,user:string=null){
+  connect(coupon:any=null,pass:string=null,user:string=null,gift=false){
     $$("Mise en place de la socket");
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
@@ -148,7 +151,7 @@ export class HomeComponent implements OnInit {
       if(coupon!=null && coupon!=""){
         $$("Traitement du coupon ",coupon);
         $$("Le user est ",this.user);
-        this.api.flash(this.user._id, coupon).subscribe((result:any) => {
+        this.api.flash(this.user._id, coupon,gift).subscribe((result:any) => {
           localStorage.setItem("showCoupon",result.newcoupon);
           this.refresh(result.message);
         },(error)=>{showError(this,error);});

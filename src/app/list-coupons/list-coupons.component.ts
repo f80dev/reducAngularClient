@@ -73,11 +73,18 @@ export class ListCouponsComponent implements OnChanges {
   }
 
   showCode(coupon: any,mode=1) {
+    debugger
     if(coupon.visible==mode)mode=0;
     coupon.visible=mode;
+    if(coupon.visible==3)coupon.visible=1;
+
     coupon.qrcode = environment.domain_appli + '/getqrcode/' + coupon._id;
 
-    if(mode==1){
+    if(mode==3){
+      coupon.url=coupon.url + "?gift";
+      coupon.qrcode=coupon.qrcode+"?gift";
+    } //On offre ses points et l'on pert le coupon
+    if(mode==1 || mode==3){
       this.fixTagPage(coupon);
       this.ngNavigatorShareService.share({
         title: coupon.label,

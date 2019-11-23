@@ -42,8 +42,10 @@ export class ApiService {
     return this.http.get(api('getoldcoupons/' + shopid, ''));
   }
 
-  flash(user: string, couponid: string) {
-    return this.http.get(api('flash/' + couponid + '/' + user, ''));
+  flash(user: string, couponid: string,gift=false) {
+    let s="";
+    if(gift)s="?gift";
+    return this.http.get(api('flash/' + couponid + '/' + user+s, ''));
   }
 
   removeCoupon( idcoupon: string,bDelete=false) {
