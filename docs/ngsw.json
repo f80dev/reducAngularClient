@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1574508461037,
+  "timestamp": 1574509352714,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -87,7 +87,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "7d46d4c56c8594b408222a7bf49dc9e81a47d865",
+    "https://reducshare.com/assets/config.json": "709d6891fe11e09c9608be338f247b7c604a9942",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
