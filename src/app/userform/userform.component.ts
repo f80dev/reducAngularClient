@@ -262,8 +262,22 @@ export class UserformComponent implements OnInit {
   }
 
   logout(){
-    localStorage.clear();
-    this.onupdate.emit(this.user);
+    this.dialog.open(PromptComponent, {
+      width: '250px', data: {
+        onlyConfirm: true,
+        title: "Vous deconnecter de ce compte ?",
+        question: "Vous serez automatiquement placer sur un profil anonyme, vous pouvez vous reconnecter depuis n'importe quel appareil"
+      }
+    })
+      .afterClosed().subscribe((result) => {
+
+        if(result=="yes"){
+        localStorage.clear();
+        this.onupdate.emit(this.user);
+      }
+
+    });
+
   }
 
   securise(){

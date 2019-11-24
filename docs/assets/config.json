@@ -105,6 +105,16 @@
   "domain_appli":"https://reducshare.com",
 
   "tags":"corporate,boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin",
+  "tagsv2":[
+    {
+      "tag":"corporate",
+      "description":"Entreprises, PME, vie au travail"
+    },
+    {
+      "tag":"boutique",
+      "description":"Promo sur les articles"
+    }
+  ],
 
   "modeles":[
     {
@@ -618,8 +628,9 @@
       "visual":"https://reducshare.com/assets/img/piano.jpg",
       "direct_bonus":2,
       "max":0,
+      "min_to_use":200,
       "duration_hours":480,
-      "stock":500,
+      "stock":600,
       "max_coupon":5000,
       "conditions":"pour 50 points cumulé via REDUCSHARE",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/first-place-medal_1f947.png",

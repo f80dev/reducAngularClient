@@ -219,10 +219,10 @@ export function traitement_coupon(coupons:any[],showCoupon:string) : any {
  * Mise en forme du teaser de la promotion
  * @param c
  * @param lieu
- *
+ * @param withCondition indique si l'on doit ou pas ajouter les conditions
  *
  */
-export function buildTeaser(coupon:any,lieu:string){
+export function buildTeaser(coupon:any,lieu:string,withCondition=false){
   var rc=coupon.label;
   var prefixe="à";
 
@@ -241,15 +241,18 @@ export function buildTeaser(coupon:any,lieu:string){
     rc=rc+", jusqu'a "+coupon.max+" "+coupon.unity.replace(firstWord,firstWord+pluriel)+" ("+coupon.symbol+")";
   }
 
-  var prefixe_conditions="pour ";
-  if(coupon.conditions.toLowerCase().startsWith("pour") || coupon.conditions.toLowerCase().startsWith("sur"))prefixe_conditions="";
-  rc=rc+", "+prefixe_conditions+coupon.conditions;
+  if(withCondition){
+    var prefixe_conditions="pour ";
+    if(coupon.conditions.toLowerCase().startsWith("pour") || coupon.conditions.toLowerCase().startsWith("sur"))prefixe_conditions="";
+    rc=rc+", "+prefixe_conditions+coupon.conditions;
+  }
 
   for (var i=0;i<10;i++)
     rc=rc.replace("..",".").replace("!.","!").replace("  "," ");
 
   return rc;
 }
+
 
 
 

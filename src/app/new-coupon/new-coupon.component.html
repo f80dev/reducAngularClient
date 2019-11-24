@@ -27,6 +27,8 @@
 
   <mat-card-content class="app-card-content" style="text-align: left;margin:0;padding:0;">
 
+
+    <!-- Affichage des modèles -->
     <app-old-coupons *ngIf="showOldCoupon"
                      title="Utilisez un modèle pour votre nouvelle promotion"
                      [shopid]="coupon.shop"
@@ -35,6 +37,9 @@
                      (cancel)="showOldCoupon=false"
                      (select)="selectOldAsModel($event)">
     </app-old-coupons>
+
+
+
 
     <mat-vertical-stepper style="background: none;margin:0px;padding:0px" *ngIf="!showOldCoupon">
       <mat-step title="La nature de la promotion permet de décrire les éléments principaux : ce que l'on gagne, une phrase d'accroche, le gain maximum">
@@ -47,13 +52,23 @@
         </div>
         <br>
 
+        <!-- Phrase d'introduction -->
+        <mat-form-field class="form-field-style">
+          <input type="text" matInput
+                 id="txtLabel"
+                 title="{{'On détermine une phrase d\'accroche pour inciter les clients à prendre le coupon' | trans}}"
+                 placeholder="Introduction / Teaser " [(ngModel)]="coupon.label">
+        </mat-form-field><br><br>
+
+
+
         <app-tuto *ngIf="level<1 && focusElt=='symbol'"
                   label="Vous pouvez utiliser des emojis pour représenter l'unité de votre promo (par exemple pour 'croissant')"
                   [delay]="5">
         </app-tuto>
 
 
-        <app-tuto label="Commencer par préciser ce que l'on gagne dans la promotion, au singulier et si possible en 1 seul mot. Par exemple : minute, euro, % de l'addition"
+        <app-tuto label="Préciser,au pluriel, ce que l'on gagne. Par exemple : minutes gratuites de cours, pourcents de réduction, pourcents sur l'addition"
                   *ngIf="focusElt=='unity'"></app-tuto>
 
         <mat-form-field class="form-field-style" style="width: 60%;margin-right: 5%;">
@@ -75,57 +90,32 @@
         </mat-form-field>
 
         <mat-checkbox [(ngModel)]="coupon.breakable" style="line-height: 80%;"
-                      *ngIf="level>0.5" (focus)="focusElt='breakable'">
+                      *ngIf="level>1.5" (focus)="focusElt='breakable'">
           unité fractionnable&nbsp;
           <small>(Exemple: 3.4 {{coupon.unity}})</small>
         </mat-checkbox>
         <br><br><br>
 
-        <app-tuto label="Comme la valeur des promotions de REDUCSHARE est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
-                  *ngIf="focusElt=='max'"></app-tuto>
-
-        <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax"
-                      *ngIf="level>0.5"
-                      (change)="changeMax()">
-          Plafonner le gain
-        </mat-checkbox>
-        <br>
-
-
-        <mat-form-field class="form-field-style" *ngIf="hasMax">
-          <input matInput type="number" (change)="refresh()" (update)="refresh()"
-                 (focus)="focusElt='max'"
-                 id="txtMaxGainByUser"
-                 title="Plafonner les gains permet d'éviter qu'un client ne 'vide' le stock réservé à la promotion"
-                 placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
-        </mat-form-field>
-        <br>
 
         <app-tuto *ngIf="focusElt=='breakable'" id="tutoBreakable"
                   label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">
         </app-tuto>
 
-        <app-tuto label="Pour toute promotion on va préciser dans quel cadre le client peut utiliser la promotion. Par exemple : pour tout achat hors weekend, pour tout achat d'un montant minimum de ..."
-                  *ngIf="focusElt=='conditions'"></app-tuto>
+        <app-tuto *ngIf="focusElt=='symbol'"
+                  label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
 
-        <mat-form-field class="form-field-style">
-          <textarea matInput rows="3"
-                    id="txtConditions"
-                    (focus)="focusElt='conditions'"
-                    title="Condition d'application de l'offre"
-                    placeholder="Offre valable ..."
-                    [(ngModel)]="coupon.conditions"
-                    (change)="normalize_conditions(coupon)"></textarea>
-        </mat-form-field>
-
-        <mat-form-field class="form-field-style">
-          <input type="text" matInput
-                 id="txtLabel"
-                 title="{{'On détermine une phrase d\'accroche pour inciter les clients à prendre le coupon' | trans}}"
-                 placeholder="Introduction / Teaser " [(ngModel)]="coupon.label">
-        </mat-form-field>
+        <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
+          Visuel du coupon<br>
+          <img
+            [src]="coupon.visual"
+            class="visual-coupon"
+            (click)="addImage('visual',800,220,false)"
+          >
+        </div>
 
 
+
+        <br><br>
         <mat-form-field *ngIf="level>1.2" class="form-field-style">
           <input type="text" matInput
                  id="txtWebSite"
@@ -139,40 +129,38 @@
       </mat-step>
 
 
-      <mat-step title="L'ajout d'un visuel est important pour l'impact de la promotion">
-        <ng-template matStepLabel>Ajouter un visuel</ng-template>
+      <mat-step title="Décrire les conditions d'application de la promotion">
+        <ng-template matStepLabel>Conditions d'application</ng-template>
+
+
+        <!--Conditions d'utilisations-->
+        <!-- gain Minimum -->
+        <mat-form-field *ngIf="level>0.5" class="form-field-style">
+          <input matInput
+                 type="number"
+                 id="txtMin_to_use"
+                 placeholder="Gain minimum pour utiliser le coupon" [(ngModel)]="coupon.min_to_use">
+          <label matSuffix>{{coupon.symbol}}</label>
+        </mat-form-field>
+
+        <!--Conditions-->
+        <mat-form-field class="form-field-style">
+          <textarea matInput rows="3"
+                    id="txtConditions"
+                    (focus)="focusElt='conditions'"
+                    title="Condition d'application de l'offre"
+                    placeholder="Offre valable ..."
+                    [(ngModel)]="coupon.conditions"
+                    (change)="normalize_conditions(coupon)"></textarea>
+        </mat-form-field>
+
+        <app-tuto label="Pour toute promotion on va préciser dans quel cadre le client peut utiliser la promotion. Par exemple : pour tout achat hors weekend, pour tout achat d'un montant minimum de ..."
+                  *ngIf="focusElt=='conditions'"></app-tuto>
+
 
         <!--Gestion du visuel-->
 
-        <app-tuto *ngIf="focusElt=='symbol'"
-          label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
-        <!--<div style="width: 100%;text-align: center;">-->
 
-
-          <!-- Présentation du mini visuel -->
-          <!--<table style="display: inline-block;width:100%;"><tr>-->
-            <!--<td style="text-align: center;">-->
-              <!--<span *ngIf="coupon.picture?.length>0">Mini visuel associé à votre promotion</span><br><br>-->
-              <!--<app-visual [picture]="coupon.picture"></app-visual>-->
-            <!--</td>-->
-            <!--<td style="text-align: center;">-->
-              <!--<button mat-button mat-flat-button-->
-                      <!--(click)="addImage('picture',300,300,true)">-->
-                <!--Images-->
-              <!--</button>-->
-            <!--</td>-->
-          <!--</tr></table>-->
-
-        <!--</div>-->
-
-        <div *ngIf="coupon.visual?.length>0" style="width:100%;text-align: center;">
-          Visuel du coupon<br>
-          <img
-               [src]="coupon.visual"
-               class="visual-coupon"
-               (click)="addImage('visual',800,220,false)"
-          >
-        </div>
       </mat-step>
 
 
@@ -197,8 +185,9 @@
                  id="txtDirectBonus"
                  (focus)="focusElt='direct_bonus'"
                  title="Promotion directement récupéré à l'obtention de la promotion"
-                 placeholder="Bonus immédiat (en {{coupon.symbol}})"
+                 placeholder="Bonus immédiat"
                  [(ngModel)]="coupon.direct_bonus">
+          <label matSuffix>{{coupon.symbol}}</label>
         </mat-form-field>
         <app-tuto *ngIf="focusElt=='direct_bonus'" id="tutoDirectBonus"
                   label="Le bonus immédiat est important car c'est celui qui donne envie au client de capturer la promotion. Si le client ne récupére pas la promotion, le vendeur ne peut pas espérer qu'il la partagera">
@@ -209,6 +198,7 @@
                  (focus)="focusElt='share_bonus'"
                  id="txtShareBonus" title="Bonus récupérer à chaque ouverture du coupon partagé"
                  placeholder="Nombre de partages pour 1{{coupon.symbol}} supplémentaire" [(ngModel)]="coupon.nb_partage">
+          <label matSuffix>partages</label>
         </mat-form-field>
 
         <app-tuto *ngIf="focusElt=='share_bonus'"
@@ -222,6 +212,7 @@
                  id="txtFinalBonus" title="Bonus récupérer a l'utilisation du coupon"
                  placeholder="Bonus récupérer à l'utilisation du coupon"
                  [(ngModel)]="coupon.final_bonus">
+          <label matSuffix>{{coupon.symbol}}</label>
         </mat-form-field>
 
         <app-tuto *ngIf="focusElt=='final_bonus'"
@@ -236,14 +227,35 @@
                  id="txtPayBonus"
                  (focus)="focusElt='pay_bonus'"
                  title="Bonus obtenu lorsqu'un coupon partagé est utilisé chez le commercant"
-                 placeholder="Bonus (en {{coupon.symbol}}) par achat obtenu par vos partages" [(ngModel)]="coupon.pay_bonus">
-
+                 placeholder="Bonus par achat obtenu par vos partages" [(ngModel)]="coupon.pay_bonus">
+          <label matSuffix>{{coupon.symbol}}</label>
         </mat-form-field>
 
         <app-tuto *ngIf="focusElt=='pay_bonus'"
                   id="tutoPayBonus"
                   label="On peut attribuer un bonus au client lorsqu'un des coupons qu'il a repartagé a été utilisé par celui qui l'a reçu (donc à générer un achat)">
         </app-tuto>
+
+        <app-tuto label="Comme la valeur des promotions de REDUCSHARE est variable, il sera pertinent de fixer un maximum par client. Par exemple: 25 (pour une remise sur un prix) ou 3 cafés offerts"
+                  *ngIf="focusElt=='max'"></app-tuto>
+
+        <mat-checkbox id="chkPlafond" [(ngModel)]="hasMax"
+                      *ngIf="level>0.5"
+                      (change)="changeMax()">
+          Plafonner le gain
+        </mat-checkbox>
+        <br>
+
+        <mat-form-field class="form-field-style" *ngIf="hasMax">
+          <input matInput type="number" (change)="refresh()" (update)="refresh()"
+                 (focus)="focusElt='max'"
+                 id="txtMaxGainByUser"
+                 title="Plafonner les gains permet d'éviter qu'un client ne 'vide' le stock réservé à la promotion"
+                 placeholder="Le client peut gagner au maximum ..." [(ngModel)]="coupon.max">
+          <label matSuffix>{{coupon.symbol}}</label>
+        </mat-form-field>
+        <br>
+
 
 
         <br>
@@ -279,13 +291,15 @@
 
         <mat-form-field class="form-field-style" style="width: 40%;margin-right:10%;">
           <input matInput id="txtDays" title="On détermine le nombre de jours de validité de la promotion"
-                 type="number" min="0" step="any"  placeholder="Durée (En Jours)" [(ngModel)]="coupon.duration_jours">
+                 type="number" min="0" step="any"  placeholder="Durée de validité" [(ngModel)]="coupon.duration_jours">
+          <label matSuffix>jour(s)</label>
         </mat-form-field>
 
         <mat-form-field class="form-field-style" style="width: 40%;">
           <input matInput id="txtHours"
                  title="On détermine le nombre d'heure de validité de la promotion. 0.5 désignera une demi heure"
-                 type="number" min="0" step="any" placeholder="Durée (En Heure)" [(ngModel)]="coupon.duration_hours">
+                 type="number" min="0" step="any" [(ngModel)]="coupon.duration_hours">
+          <label matSuffix>heures</label>
         </mat-form-field>
         <br>
 
@@ -293,8 +307,9 @@
           <input matInput type="number"
                  id="txtStock"
                  title="Le stock permet d'interrompre automatiquement la promotion lorsque le stock qui lui est réservée tombe a zéro"
-                 placeholder="Stock (en {{coupon.symbol}}) destiné à la promotion"
+                 placeholder="Stock destiné à la promotion"
                  [(ngModel)]="coupon.stock">
+          <label matSuffix>{{coupon.symbol}}</label>
         </mat-form-field>
 
         <mat-form-field *ngIf="level>0.5" class="form-field-style">
@@ -302,13 +317,7 @@
                  type="number"
                  id="txtMaxShare" title="Le nombre maxium de partage permet de limiter le partage du coupon"
                  placeholder="Nombre maximum de partages" [(ngModel)]="coupon.max_coupon">
-        </mat-form-field>
-
-        <mat-form-field *ngIf="level>0.5" class="form-field-style">
-          <input matInput
-                 type="number"
-                 id="txtMin_to_use"
-                 placeholder="Gain minimum pour utiliser le coupon" [(ngModel)]="coupon.min_to_use">
+          <label matSuffix>coupons</label>
         </mat-form-field>
 
 
