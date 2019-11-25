@@ -44,6 +44,7 @@
           <mat-step title="Description de la promotion">
             <ng-template matStepLabel class="step-title">Description de votre promotion</ng-template>
             <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
+            <div class="zone_text" [innerHTML]="condition_text | safe:'html'"></div>
           </mat-step>
 
           <mat-step title="Votre visuel">

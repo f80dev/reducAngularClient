@@ -1,9 +1,11 @@
 <div *ngIf="coupon" style="text-align: center;width:100%;">
   <h2>
-    Ici, {{coupon?.label}}
+    <span *ngIf="coupon.origin==coupon._id">Ici,</span>
+    <span *ngIf="coupon.origin!=coupon._id">{{coupon.shopname}},</span>
+    {{coupon?.label}}
   </h2>
   <br><br>
-  <img [src]="coupon.picture" style="max-width: 40vw"><br>
+  <app-visual [picture]="coupon.visual" height="40vw"></app-visual><br>
   <br>
   <span style="font-size: 2em;">
           Gagner jusqu'a <strong>{{coupon.max}}</strong>&nbsp;{{coupon.unity}}(s) {{coupon.conditions}}
@@ -17,7 +19,9 @@
 
   <qr-code [value]="coupon.url"
            style="max-width:400px;max-height: 400px;display:inline;"
-           [size]="300" [padding]="3">
+           background="black"
+           foreground="white"
+           [size]="370" [padding]="3">
   </qr-code>
 
   <br><br>
@@ -35,16 +39,20 @@
     {{shop.name}}
   </h2>
   <br>
+  <app-visual [picture]="shop.picture" height="25vw"></app-visual><br>
+  <br>
   <br>
   <span style="font-size: 2em;">
           Découvrez nos supers promos en flashant ce code
         </span>
   <br>
   <br>
-
+  <br>
   <qr-code [value]="shop.url"
+           background="black"
+           foreground="white"
            style="max-width:400px;max-height: 400px;display:inline;"
-           [size]="400">
+           [size]="380">
   </qr-code>
   <br><br>
 

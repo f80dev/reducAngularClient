@@ -56,6 +56,7 @@ import { FlipModule } from 'ngx-flip';
 import { NewCouponSimpleComponent } from './new-coupon-simple/new-coupon-simple.component';
 import { ImageSelectorComponent } from './image-selector/image-selector.component';
 import { LiteralPipe } from './literal.pipe';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -97,6 +98,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   ],
 
   imports: [
+    PickerModule,
     SocketIoModule.forRoot(config),
     MatDialogModule,
     FlipModule,

@@ -87,7 +87,20 @@
                  id="txtSymbol" (change)="refresh()"
                  placeholder="Symbole de l'unité"
                  [(ngModel)]="coupon.symbol">
+         <mat-icon matSuffix (click)="showEmoji=!showEmoji" style="cursor: pointer;">emoji_emotions</mat-icon>
         </mat-form-field>
+
+        <div style="width: 100%;text-align: right;">
+        <emoji-mart
+                    *ngIf="showEmoji"
+                    [showPreview]="false"
+                    [emojiSize]="32"
+                    (emojiSelect)="selectEmoji($event)"
+                    [style]="{ display: 'inline-block', bottom: '20px', right: '20px' }"
+                    [emojiTooltip]="true"
+                    emoji="point_up">
+        </emoji-mart>
+        </div>
 
         <mat-checkbox [(ngModel)]="coupon.breakable" style="line-height: 80%;"
                       *ngIf="level>1.5" (focus)="focusElt='breakable'">

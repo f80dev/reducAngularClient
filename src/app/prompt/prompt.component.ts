@@ -7,6 +7,7 @@ export interface DialogData {
   result: string;
   question:string;
   onlyConfirm:boolean;
+  emojis:boolean;
 }
 
 
@@ -18,6 +19,8 @@ export interface DialogData {
 
 export class PromptComponent {
 
+  showEmoji=false;
+
   constructor(
     public dialogRef: MatDialogRef<PromptComponent>,@Inject(MAT_DIALOG_DATA) public data: DialogData) {
   }
@@ -25,6 +28,12 @@ export class PromptComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  selectEmoji(event){
+    this.data.result=this.data.result+event.emoji.native;
+    this.showEmoji=false;
+  }
+
 
   onEnter(evt:any) {
     if(evt.keyCode==13)

@@ -260,7 +260,7 @@
         <!--<mat-icon>attach_money</mat-icon>-->
         <!--</button>-->
 
-        <button *ngIf="user.level>0.8 && coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal"
+        <button *ngIf="coupon.visible==1 && isVisible(coupon) && coupon.canbedeal"
                 class="small-icon-button"
                 mat-button
                 (click)="openPrinter(coupon)"

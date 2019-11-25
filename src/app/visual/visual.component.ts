@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class VisualComponent implements OnInit {
 
+  @Input('fontsize') fontsize="4em";
   @Input("picture") picture="";
   @Input("src") src="";
   @Input("width") w:string="";

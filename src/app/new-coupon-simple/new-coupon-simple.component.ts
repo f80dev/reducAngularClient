@@ -20,8 +20,10 @@ export class NewCouponSimpleComponent implements OnInit {
 
   showOldCoupon=false;
   master_text="";
+  condition_text="";
   augment_text="";
   budget_text="";
+  showEmoji=false;
 
   coupon:any={};
   tags="";
@@ -94,14 +96,16 @@ export class NewCouponSimpleComponent implements OnInit {
       }
   }
 
+
   refresh(){
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="#400064";
-    this.master_text=exportToHTML("L'intro de votre promotion, la phrase choc qui donne envie de la récupérer:<br> #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e) " +
-      "dans REDUCSHARE par le symbole " +
-      "#symbol=Symbole_utilisé_pour_représenter_l'unité " +
-      "<br><br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.master_text=exportToHTML("L'intro de votre promotion, la phrase choc qui donne envie de la récupérer:" +
+      "<br> #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e) " +
+      "dans REDUCSHARE par le symbole #symbol=Symbole_de_l_unité",this.coupon,(fields)=>{this.add_event(fields);},color);
+
+    this.condition_text=exportToHTML("<br><br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     this.augment_text=exportToHTML("Le @beneficiaire gagne :<br><ul><li> #direct_bonus=Bonus_attribué_dés_la_récupération_du_coupon @symbol à la récupération du coupon,</li><li> " +
       "puis 1 @symbol de plus lorsqu'il envoi le coupon à #nb_partage=Gain_à_chaque_partage personnes.</li><li>Enfin #pay_bonus=Bonus_supplémentaire_à_l'usage_d'un_coupon_distribué @symbol suplémentaire " +

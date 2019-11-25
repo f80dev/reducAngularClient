@@ -61,6 +61,7 @@ export class NewCouponComponent implements OnInit {
   shopaddress="";
   showOldCoupon=false;
   level=0;
+  showEmoji=false;
 
   @Output('insert') oninsert: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
@@ -124,6 +125,10 @@ export class NewCouponComponent implements OnInit {
     this.refresh();
   }
 
+  selectEmoji(event){
+    this.coupon.symbol=event.emoji.native;
+    this.showEmoji=false;
+  }
 
   /**
    *

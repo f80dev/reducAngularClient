@@ -28,6 +28,7 @@ export class ImageSelectorComponent implements OnInit {
 
   icons=[];
   showIcons=false;
+  showEmoji=false;
   pictures=[];
 
   constructor(
@@ -56,6 +57,11 @@ export class ImageSelectorComponent implements OnInit {
         this.icons.push({photo:root+"file_emojis"+i+".png"});
     }
     this.showIcons=true;
+  }
+
+  selectEmoji(event){
+    this.data.result=event.emoji.native;
+    this.showEmoji=false;
   }
 
   onSelectFile(event:any) {

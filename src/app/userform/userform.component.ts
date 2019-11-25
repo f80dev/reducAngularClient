@@ -319,7 +319,7 @@ export class UserformComponent implements OnInit {
 
   addImage(event) {
     event.stopPropagation();
-    this.dialog.open(ImageSelectorComponent, {width: '400px', data: {result:this.user.photo,width: 250,height:250}}).afterClosed().subscribe((result) => {
+    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'},width: '400px', data: {result:this.user.photo,width: 250,height:250,emoji:true}}).afterClosed().subscribe((result) => {
       if(result){
         this.user.photo=result;
         this.api.setuser(this.user).subscribe(()=>{});
