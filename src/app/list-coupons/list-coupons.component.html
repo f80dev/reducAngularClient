@@ -411,7 +411,6 @@
 
   <div class="visual-coupon"
        *ngIf="!coupon.flip && coupon.visual?.length>0 && coupon.origin!=coupon._id"
-       (panright)="onPanRight($event,coupon)"
        (click)="_flip(coupon)">
 
     <img [src]="coupon.visual"

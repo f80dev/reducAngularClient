@@ -2,8 +2,8 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.81-beta",
-    "news": "Possibilité de modifier les points de vente",
+    "version": "0.82-beta",
+    "news": "Classement des meilleurs vendeurs",
     "logo": "./assets/img/logo.png",
     "editor":{
       "website": "https://f80.fr",
