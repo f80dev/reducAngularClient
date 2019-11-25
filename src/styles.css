@@ -15,7 +15,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
   position:relative;
   margin:3px;
-  max-width:500px;
+  width:100%;
   height:220px;
   overflow: hidden;
   display: inline-block;
