@@ -70,7 +70,7 @@
 
         <!--Affichage des coupons origines pour leur propriétaire-->
         <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id" style="font-size: small;">
-          <small>{{coupon.share}}/{{coupon.max_coupon}} coupons distribués</small>
+          <span *ngIf="coupon.share>1"><small>{{coupon.share}}/{{coupon.max_coupon}} coupons distribués</small></span>
           <span *ngIf="coupon.max>0 && (coupon.gain/coupon.max)>0.8">
             (max:{{coupon.max}})
           </span>
@@ -87,7 +87,9 @@
           </div>
 
           <app-charts *ngIf="showChart"
+                      (close)="showChart=false"
                       [coupon]="coupon">
+
           </app-charts>
 
           <!--Visuel du coupon-->
@@ -347,9 +349,9 @@
                   title="Partager le coupon pour augmenter votre promotion / réduction"
                   (click)="showCode(coupon,1)">
             <mat-icon>share</mat-icon>&nbsp;
-            <span *ngIf="coupon.origin!=coupon._id">
-              Gagner plus
-            </span>
+            <div style="display:inline-block;line-height: 90%;text-align: center;" *ngIf="coupon.origin!=coupon._id">
+              Gagner<br>plus
+            </div>
 
             <span *ngIf="coupon.origin==coupon._id">
               Distribuer
