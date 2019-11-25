@@ -261,7 +261,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   if(!icon)icon="";
   var iconStyle:any=new ol.style.Style({image: new ol.style.Circle({radius: 15,fill: new ol.style.Fill({color: 'white'})})});
 
-  if(!icon.startsWith("data") && !icon.startsWith("http")) {
+  if(!icon.startsWith("data") && !icon.startsWith("http") && !icon.startsWith("./")) {
     //On a un emoji
     iconStyle = new ol.style.Style({
       text: new ol.style.Text(({
