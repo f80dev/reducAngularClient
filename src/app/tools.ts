@@ -259,10 +259,20 @@ export function buildTeaser(coupon:any,lieu:string,withCondition=false){
 
 export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
   if(!icon)icon="";
+  var iconStyle:any=new ol.style.Style({image: new ol.style.Circle({radius: 15,fill: new ol.style.Fill({color: 'white'})})});
 
-  var iconStyle:any;
-
-  if(icon){
+  if(!icon.startsWith("data") && !icon.startsWith("http")) {
+    //On a un emoji
+    iconStyle = new ol.style.Style({
+      text: new ol.style.Text(({
+        anchor: [0.6, 1.0],
+        text: icon,
+        scale:3,
+        textAlign: "center"
+      }))
+    });
+  } else {
+    //On a une image
     iconStyle = new ol.style.Style({
       image: new ol.style.Icon(({
         anchor: [0.6, 1.0],
@@ -273,15 +283,7 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
         opacity:1.0,
       })),
     });
-  } else {
-    iconStyle = new ol.style.Style({
-      image: new ol.style.Circle({
-        radius: 15,
-        fill: new ol.style.Fill({color: 'white'})
-      })
-    });
   }
-
 
   if(coupon!=null){
     iconStyle.setText(new ol.style.Text({

@@ -29,6 +29,8 @@
 
   <emoji-mart
     *ngIf="showEmoji"
+    set="google"
+    style="margin-top:5px;"
     [showPreview]="false"
     [emojiSize]="48"
     (emojiSelect)="selectEmoji($event)"
@@ -64,7 +66,7 @@
   <mat-dialog-actions style="text-align: center;width:100%;">
     <button id="cmdTurn" mat-button mat-raised-button mat-icon-button
             title="Permet de faire tourner la photo de 90 degrés"
-            *ngIf="data.square && !data.result.startsWith('http')"
+            *ngIf="data.square && data.result.startsWith('data')"
             (click)="rotatePhoto()">
       <mat-icon>refresh</mat-icon>
     </button>
