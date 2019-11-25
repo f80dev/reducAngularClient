@@ -94,7 +94,7 @@
   <td *ngIf="showHelpScreen && !showOldCoupon" style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
     <div *ngIf="iframe_src?.length>0" style="height: 100%;width:100%;text-align: center;">
       <iframe [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"
-              scrolling="no" frameborder="0"
+              scrolling="yes" frameborder="0"
               style="color:white;background-color: #29004a;"></iframe>
     </div>
   </td>
