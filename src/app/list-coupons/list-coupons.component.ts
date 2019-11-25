@@ -40,6 +40,7 @@ export class ListCouponsComponent implements OnChanges {
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
   flipDiv=true;
+  showChart=false;
   formatDate='dd/MM HH:mm';
 
   constructor(public meta: Meta,

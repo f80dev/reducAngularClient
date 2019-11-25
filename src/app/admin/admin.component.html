@@ -42,6 +42,7 @@
     <th mat-sort-header="_id">ID</th>
     <th mat-sort-header="owner">owner</th>
     <th mat-sort-header="old_coupon">père</th>
+    <th mat-sort-header="origin">origin</th>
     <th>lng</th>
     <th>lat</th>
     <th mat-sort-header="public">public</th>
@@ -63,6 +64,7 @@
     <td mat-cell>{{coupon._id}}</td>
     <td mat-cell>{{coupon.owner}}</td>
     <td mat-cell>{{coupon.old_coupon}}</td>
+    <td mat-cell>{{coupon.origin}}</td>
     <td mat-cell>{{coupon.lng | number:'1.0-3'}}</td>
     <td mat-cell>{{coupon.lat | number:'1.0-3'}}</td>
     <td mat-cell>{{coupon.public}}</td>

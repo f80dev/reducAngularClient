@@ -86,6 +86,10 @@
             <app-print-coupon [coupon]="coupon"></app-print-coupon>
           </div>
 
+          <app-charts *ngIf="showChart"
+                      [coupon]="coupon">
+          </app-charts>
+
           <!--Visuel du coupon-->
           <table style="width:100%;vertical-align: top;text-align: center;"><tr>
             <td style="text-align: center;width: fit-content;max-width: 40%;">
@@ -305,6 +309,16 @@
                 *ngIf="coupon.origin!=coupon._id"
                 (click)="showCode(coupon,3)">
           <mat-icon>card_giftcard</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button
+                class="small-icon-button"
+                title="Classement par gain"
+                name="btnCharts"
+                *ngIf="coupon.share>3"
+                (click)="showChart=!showChart">
+          <mat-icon>list</mat-icon>
         </button>
 
         <button mat-button mat-flat-button
