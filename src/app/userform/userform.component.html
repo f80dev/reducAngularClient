@@ -20,43 +20,16 @@
       </div>
 
 
-
-
-
       <div style="display: inline-block;margin-top:15px;font-size: x-large;">
         <span *ngIf="user.pseudo?.length>0" (click)="promptForPseudo($event)">{{user.pseudo}}</span>
         <span *ngIf="user.pseudo?.length==0" (click)="promptForPseudo($event)">Pseudo ?</span>
       </div>
-
-      <!--<button *ngIf="user.pseudo?.length==0" style="display: inline-block;"-->
-              <!--id="cmdPseudo" class="medium-button"-->
-              <!--title="Il est possible de modifier son pseudo tout en restant anonyme"-->
-              <!--mat-button mat-flat-button-->
-              <!--(click)="promptForPseudo()">-->
-        <!--Pseudo-->
-      <!--</button>-->
-
-      <!--<button mat-button *ngIf="user.level==0"-->
-              <!--id="btnAddShop" class="mediyum-button" style="display: inline-block;margin-left:5px;"-->
-              <!--mat-raised-button (click)="addshop()">-->
-      <!--<span *ngIf="user.shops==null || user.shops.length==0">-->
-        <!--Nvlle promotion-->
-      <!--</span>--
-        <!--<span *ngIf="user.shops?.length>0">-->
-        <!--Nvlle enseigne-->
-      <!--</span>-->
-      <!--</button>-->
 
       <mat-progress-spinner *ngIf="config.waiting"></mat-progress-spinner>
 
     </mat-expansion-panel-header>
 
 
-  <!--<div style="height: 50px;">-->
-    <!--<div *ngIf="user.message?.length>0"-->
-         <!--[innerHTML]="user.message.split('#submessage#')[0] | safe:'html'">-->
-    <!--</div>-->
-  <!--</div>-->
 
   <div class="app-card-content">
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
@@ -124,6 +97,7 @@
             *ngIf="user.email?.indexOf('fictif.com')>-1"
             title="S'authentifier permet de se connecter depuis plusieurs appareils"
             id="btnEmailLogin"
+            class="app-button"
             mat-button mat-flat-button (click)="securise()">
       <mat-icon>verified_user</mat-icon>
     </button>
@@ -131,6 +105,7 @@
 
     <button mat-icon-button mat-raised-button
             style="margin-left:10px;"
+            class="app-button"
             *ngIf="user.email?.indexOf('fictif.com')==-1"
             id="btnLogout"
             mat-button (click)="logout()">
@@ -141,12 +116,14 @@
     <button mat-icon-button mat-button mat-raised-button
             *ngIf="(user.shops==null || user.shops.length==0) && user.level>0.5"
             id="btnRAZ"
+            class="app-button"
             (click)="clearAccount(user._id)">
       <mat-icon>delete</mat-icon>
     </button>
 
     <button mat-button
             *ngIf="user.level>0.8"
+            class="app-button"
             id="btnShowCode" title="Afficher son qrcode personnel"
             mat-raised-button mat-icon-button
             (click)="showPersonalCode=!showPersonalCode">
@@ -161,19 +138,22 @@
     </button>
 
     <button mat-button
+            class="app-button"
             *ngIf="user.level<3"
             id="btnExpert" title="Accès aux fonctions avancées de REDUCSHARE"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>
     </button>
 
-    <button mat-button *ngIf="user.level>0.5"
+    <button mat-button *ngIf="user.level>2.5"
+            class="app-button"
             id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">
       <mat-icon>notifications_active</mat-icon>
     </button>
     <button mat-raised-button mat-icon-button mat-button
             *ngIf="user.level>=0.8 || user.shops?.length>0"
+            class="app-button"
             id="btnMap" title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <mat-icon>map</mat-icon>
@@ -182,6 +162,7 @@
     <button mat-raised-button mat-button
             *ngIf="user.level<0.8 && user.shops?.length==0"
             id="btnMapRookie"
+            class="app-button"
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <div class="bloc-bouton">Promos<br>proches</div>
@@ -191,6 +172,7 @@
     <button mat-button
             *ngIf="user.tags?.length==0 || user.shops?.length>0"
             title="Créer un nouveau point de vente"
+            class="app-button"
             id="btnAddShopPlus" mat-icon-button
             mat-raised-button (click)="addshop()">
       <mat-icon>account_balance</mat-icon>
@@ -199,6 +181,7 @@
     <button mat-button
             *ngIf="user.coupons?.length>2"
             title="Trier vos coupons"
+            class="app-button"
             id="btnSort" mat-icon-button
             mat-raised-button (click)="sortCoupons()">
       <mat-icon>sort</mat-icon>
@@ -208,6 +191,7 @@
     <button mat-button
             *ngIf="user.tags?.length>0 && user.shops?.length==0"
             title="Créer une nouvelle enseigne pour des promotions"
+            class="app-button"
             id="btnAddShopPlus2"
             mat-raised-button (click)="addshop()">
       <div class="bloc-bouton">Lancer une<br>promotion</div>

@@ -71,6 +71,7 @@
 
     <button mat-button name="btnDelegate"
             (click)="setDelegate(shop)"
+            class="app-button"
             *ngIf="user.level>0.5"
             title="Déléguer l'encaissement"
             mat-flat-button mat-icon-button>
@@ -80,6 +81,7 @@
 
     <button mat-button name="btnPrint"
             (click)="openPrinter(shop)"
+            class="app-button"
             *ngIf="user.level>0.7"
             ngxClipboard [cbContent]="shop.url"
             title="Imprimer le QRCode du point de vente"
@@ -88,6 +90,7 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
+            class="app-button"
             *ngIf="shop.coupons?.length==0"
             title="Supprimez l'enseigne de votre compte"
             (click)="delShop(shop)">
@@ -95,7 +98,8 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
-            *ngIf="user.level>0.8 && (shop.coupons.length>1 || shop.coupons[0].share>2)"
+            class="app-button"
+            *ngIf="user.level>0.8 && (shop.coupons.length>1 || (shop.coupons[0]!=null && shop.coupons[0].share>2))"
             title="Graph de diffusion d'une promo"
             (click)="openGraph(shop._id)">
       <mat-icon>link</mat-icon>
@@ -103,6 +107,7 @@
 
     <button mat-button mat-flat-button mat-icon-button
             name="btnNewPromoAdvanced"
+            class="app-button"
             *ngIf="user.level>=1"
             title="Nouvelle promotion attachée à cette enseigne"
             (click)="addCoupon(shop,'')">
@@ -111,6 +116,7 @@
 
     <button mat-button mat-flat-button
             name="btnNewPromo"
+            class="app-button"
             *ngIf="user.level<1"
             data-tac="La création d'une enseigne se fait depuis la zone de profil"
             title="Nouvelle promotion attachée à cette enseigne"

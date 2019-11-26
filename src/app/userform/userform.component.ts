@@ -37,6 +37,7 @@ export class UserformComponent implements OnInit {
   showOldPromos: boolean=false;
   private map: any;
   handle:any;
+  message="";
 
   sort="dtCreate";
   showCouponOnMap:any[]=[];

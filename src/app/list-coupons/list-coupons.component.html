@@ -271,6 +271,7 @@
         <button *ngIf="coupon.visible==1 && isVisible(coupon) && coupon.canbedeal"
                 class="small-icon-button"
                 mat-button
+                class="app-button"
                 (click)="openPrinter(coupon)"
                 name="btnPrint"
                 title="Imprimer une affiche de la promotion"
@@ -281,7 +282,7 @@
         <button *ngIf="user && coupon.shop_complete?.owner!=user._id && user.level>0.5"
                 mat-button
                 mat-flat-button mat-icon-button
-                class="small-icon-button"
+                class="app-button"
                 (click)="addfollow(user._id,coupon.shop)"
                 title="Recevoir les prochaines promotion de '{{coupon.shop_complete?.name}}'">
           <mat-icon *ngIf="user && !isfollower(coupon.shop)">favorite</mat-icon>
@@ -291,7 +292,7 @@
         <button *ngIf="user.level>0.5 && coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal"
                 mat-button
                 (click)="stopDeal(coupon)"
-                class="small-icon-button"
+                class="app-button"
                 title="Fermer prématurément la promotion"
                 mat-flat-button mat-icon-button>
           <mat-icon>not_interested</mat-icon>
@@ -299,7 +300,7 @@
 
         <button mat-button mat-flat-button
                 mat-icon-button
-                class="small-icon-button"
+                class="app-button"
                 name="btnRemove"
                 (click)="remove(coupon)">
           <mat-icon>delete</mat-icon>
@@ -307,7 +308,7 @@
 
         <button mat-button mat-flat-button
                 mat-icon-button
-                class="small-icon-button"
+                class="app-button"
                 title="Offrir ce coupon (vous ne l'aurez donc plus)"
                 name="btnGift"
                 *ngIf="coupon.origin!=coupon._id"
@@ -317,7 +318,7 @@
 
         <button mat-button mat-flat-button
                 mat-icon-button
-                class="small-icon-button"
+                class="app-button"
                 title="Classement par gain"
                 name="btnCharts"
                 *ngIf="coupon.share>3"
@@ -327,7 +328,7 @@
 
         <button mat-button mat-flat-button
                 mat-icon-button
-                class="small-icon-button"
+                class="app-button"
                 name="btnEdit"
                 *ngIf="coupon.share==0 && coupon.origin==coupon._id"
                 (click)="onedit.emit(coupon)">
@@ -339,7 +340,7 @@
           <button mat-button mat-flat-button
                   *ngIf="coupon.website!=null && coupon.website?.length>0 && coupon.owner!=user._id"
                   mat-icon-button
-                  class="small-icon-button"
+                  class="app-button"
                   name="btnHelp"
                   (click)="openHelp(coupon.website)">
             <mat-icon>help</mat-icon>
@@ -347,6 +348,7 @@
 
           <button mat-button mat-flat-button
                   name="btnShare"
+                  class="app-button"
                   *ngIf="coupon.canbedeal && user.level<1"
                   title="Partager le coupon pour augmenter votre promotion / réduction"
                   (click)="showCode(coupon,1)">
@@ -363,7 +365,7 @@
 
           <button mat-button mat-flat-button mat-icon-button
                   name="btnShareAdvanced"
-                  class="small-icon-button"
+                  class="app-button"
                   *ngIf="coupon.canbedeal && user.level>=1"
                   title="Partager le coupon pour augmenter votre promotion / réduction"
                   (click)="showCode(coupon,1)">
@@ -372,6 +374,7 @@
 
           <button mat-button mat-flat-button mat-icon-button
                   name="btnUseAdvanced"
+                  class="app-button"
                   *ngIf="coupon.origin!=coupon._id && user.level>0.8"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon,2)">
@@ -380,6 +383,7 @@
 
           <button mat-button mat-flat-button
                   name="btnUse"
+                  class="app-button"
                   *ngIf="coupon.origin!=coupon._id && user.level<=0.8"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon,2)">

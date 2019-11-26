@@ -163,21 +163,26 @@ export function getMarkerLayer(map:any):any {
   return rc;
 }
 
+/**
+ * Affichage du message
+ * @param vm
+ * @param s
+ * @param duration
+ */
 export function showMessage(vm:any,s:string="",duration=20000){
-
   if(s==null || s.length==0)return false;
   s=s+"";
   $$("Affichage du message :",s)
   if(s.startsWith("#")){
+    //Affichage en mode plein écran
     s=s.substr(1);
-    vm.user.message=s;
+    vm.message=s;
     if(s.length>0)setTimeout(()=>{vm.showMessage=true;},500);
   } else {
+    //Affichage en mode toaster
     var toaster:MatSnackBar=vm.toast || vm.snackBar;
     toaster.open(s,"",{duration:duration});
   }
-  //vm.user.message=s;
-  //setTimeout(()=>{vm.user.message=""},duration);
 }
 
 export function isLocal(){
@@ -448,6 +453,8 @@ export function cropToSquare(base64,quality=1,func) {
 export function compute(coupon:any){
   coupon["conditions"]=coupon["conditions"] || "";
   if(coupon.visual==null)coupon.visual=coupon.picture;
+
+  if(coupon.label=="")coupon.label="Super promotion";
 
   if(coupon.conditions=="")coupon.conditions="sur simple présentation du coupon REDUCSHARE";
   if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;

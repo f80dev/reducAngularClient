@@ -29,7 +29,7 @@ export class ShopsComponent implements OnInit {
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
   @Output('open') onopen: EventEmitter<any>=new EventEmitter();
 
-  //coupons=[];
+  message="";
   showWebCam=false;
 
   constructor(public snackBar: MatSnackBar,
