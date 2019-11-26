@@ -26,7 +26,7 @@ export class PromptComponent {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   selectEmoji(event){

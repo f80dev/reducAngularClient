@@ -2,7 +2,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.83-beta",
+    "version": "0.85-beta",
     "news": "Classement des meilleurs vendeurs",
     "logo": "./assets/img/logo.png",
     "editor":{
@@ -60,7 +60,7 @@
     {
       "id":"buildPdV",
       "title": "Qu'est qu'un point de vente ?",
-      "content": "Dans reducShare, un point de vente n'est pas nécéssairement une boutique. Cela peut être le domicile d'un indépendant par exemple.<br>Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
+      "content": "Dans reducShare, un point de vente n'est pas nécéssairement un commerce. Cela peut être le domicile d'un indépendant par exemple.<br>Il s'agit surtout d'une adresse ou le client doit se rendre pour bénéficier de sa promotion. Cette adresse permet également de positionner les promotions sur une carte"
     },
     {
       "id":"tarif",
@@ -104,14 +104,14 @@
   "domain_server":"server.f80.fr",
   "domain_appli":"https://reducshare.com",
 
-  "tags":"corporate,boutique,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin,cinéma",
+  "tags":"corporate,commerce,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin,cinéma",
   "tagsv2":[
     {
       "tag":"corporate",
       "description":"Entreprises, PME, vie au travail"
     },
     {
-      "tag":"boutique",
+      "tag":"commerce",
       "description":"Promo sur les articles"
     }
   ],
@@ -217,7 +217,7 @@
       "conditions":"pour tout achat d'un montant supérieur à 30€",
       "description":"Un commerçant offre une réduction jusqu'a 50% du prix de vente sur un ou plusieurs produits",
       "score":15,
-      "tags":"boutique"
+      "tags":"commerce"
     },
     {
       "id":"fide",
@@ -242,7 +242,7 @@
       "max_coupon":500,
       "conditions":"points utilisablent en réduction ou en lot à chaque achat",
       "score":8,
-      "tags":"boutique"
+      "tags":"commerce"
     },
     {
       "id":"reducarticle",
@@ -266,7 +266,7 @@
       "max_coupon":500,
       "score":6,
       "conditions":"Remise applicable après validation de la réduction par notre vendeur",
-      "tags":"boutique,vin"
+      "tags":"commerce,vin"
     },
     {
       "id":"cafe",
@@ -328,12 +328,12 @@
       "pay_bonus":3,
       "final_bonus":0,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/film-projector_1f4fd.png",
-      "visual":"https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_960_720.jpgg",
+      "visual":"https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_960_720.jpg",
       "direct_bonus":0,
       "max":2,
       "duration_hours":2,
       "stock":30,
-      "score":15,
+      "score":16,
       "beneficiaire":"client",
       "max_coupon":5000,
       "description":"2 heures avant la séance, un cinéma fait gagner 30 places pour un film",
@@ -411,7 +411,7 @@
       "visual":"https://reducshare.com/assets/img/croissants.jpg",
       "description":"Invendus alimentaires. Une boulangerie distribue des croissants ",
       "conditions":"pour tout achat quelque soit le montant à partir de 20h",
-      "tags":"alimentaire,boutique"
+      "tags":"alimentaire,commerce"
     },
     {
       "id":"lastminute",
@@ -583,7 +583,7 @@
       "duration_jours":3,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/225/black-universal-recycling-symbol_267b.png",
       "max":0,
-      "stock":2000,
+      "stock":100,
       "max_coupon":500,
       "score":14,
       "beneficiaire":"client",
@@ -700,7 +700,7 @@
       "beneficiaire":"client",
       "pay_bonus":1,
       "direct_bonus":0.2,
-      "max":2,
+      "max":3,
       "final_bonus":0.3,
       "score":15,
       "duration_hours":480,

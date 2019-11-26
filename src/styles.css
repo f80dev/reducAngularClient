@@ -143,3 +143,10 @@ h2 {
   color:black !important;
   font-weight: lighter;
 }
+
+.bloc-bouton {
+  margin:0px;
+  display:inline-block;
+  font-size:small;
+  line-height: 90%;
+}

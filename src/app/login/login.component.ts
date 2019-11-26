@@ -104,9 +104,9 @@ export class LoginComponent implements OnInit {
   signOut(){
     if(this.socialAuthService.isSocialLoggedIn()){
       this.socialAuthService.signOut().then(()=>{
-        debugger;
+
       }).catch((err)=>{
-        debugger;
+
       });
     }
   }

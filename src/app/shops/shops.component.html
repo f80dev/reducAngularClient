@@ -95,7 +95,7 @@
     </button>
 
     <button mat-button mat-flat-button mat-icon-button
-            *ngIf="user.level>0.8"
+            *ngIf="user.level>0.8 && (shop.coupons.length>1 || shop.coupons[0].share>2)"
             title="Graph de diffusion d'une promo"
             (click)="openGraph(shop._id)">
       <mat-icon>link</mat-icon>

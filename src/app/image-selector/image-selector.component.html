@@ -2,12 +2,11 @@
 
 <mat-dialog-content style="overflow: hidden;">
 
-  <div style="width: 100%;text-align: center">
+  <div style="width: 100%;text-align: center;margin-bottom: 5px;">
     <button mat-flat-button mat-button
             (click)="addUrl()">
       Internet
     </button>
-
 
     <button mat-flat-button mat-button
             id="cmdShowEmoji"
@@ -55,7 +54,7 @@
 
   <div style="width: 95%;text-align: center;overflow: hidden;" *ngIf="pictures?.length==0 && !showEmoji">
     <app-visual [picture]="data.result"
-                [width]="data.width"
+                size="200"
                 max-width="95%"
                 [height]="data.height">
     </app-visual>

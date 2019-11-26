@@ -74,7 +74,6 @@ export class ListCouponsComponent implements OnChanges {
   }
 
   showCode(coupon: any,mode=1) {
-    debugger
     if(coupon.visible==mode)mode=0;
     coupon.visible=mode;
     if(coupon.visible==3)coupon.visible=1;

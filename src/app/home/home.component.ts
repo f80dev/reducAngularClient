@@ -143,7 +143,9 @@ export class HomeComponent implements OnInit {
         if(mes.length>0){
           $$("Refresh depuis la socket avec "+mes);
         }
-        setTimeout(()=>{this.refresh(mes);},500);
+        setTimeout(()=>{
+          this.refresh(mes);
+          }, 500);
       }
     });
 
@@ -188,6 +190,7 @@ export class HomeComponent implements OnInit {
   }
 
 
+  hRefresh=0;
   /**
    *
    * @param message
@@ -200,54 +203,59 @@ export class HomeComponent implements OnInit {
     if(message==null)message="";
     var user_id=localStorage.getItem('user');
 
-    $$("Appel de refresh avec message="+message+". Récupération du compte "+user_id);
-    this.api.getuser(user_id).subscribe((u:any) => {
-      if(u==null || u._id==null){
-        this.raz();
-      }
+    showMessage(this,message,3000);
 
-      for(var k=0;k<u.coupons.length;k++){
-        if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
-          u.coupons[k].flip=true;
-        else
-          u.coupons[k].flip=false;
-      }
-
-      this.user=u;
-      for(var k=0;k<this.user.shops.length;k++)
-        if(this.user.shops[k]._id==localStorage.getItem("showShop"))this.user.shops[k].visible=true;
-
-      showMessage(this,message);
-
-      if(this.user.email.indexOf("fictif.com")==-1){
-        //Validation des CGUs
-        if(this.user.lastCGU<this.config.values.cgu.dtModif && this.config.values.cgu.online){
-          this.dialog.open(PromptComponent,{
-            width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
-              question:this.config.values.cgu.content,
-              onlyConfirm:true}})
-            .afterClosed().subscribe((result:any) => {
-
-            if(result=="yes") {
-              this.user.lastCGU = new Date().getTime();
-              this.api.setuser(this.user).subscribe(() => {
-              });
-            }
-            else{
-              var id_old_user=localStorage.getItem("old_user");
-              if(localStorage.getItem("user")==id_old_user)
-                this.raz();
-              else
-                localStorage.setItem("user",id_old_user);
-
-              this.refresh("Vous ne pouvez pas être authentifier sans valider les CGUs");
-            }
-          });
+    clearTimeout(this.hRefresh);
+    this.hRefresh=setTimeout(()=>{
+      $$("Appel de refresh avec message="+message+". Récupération du compte "+user_id);
+      this.api.getuser(user_id).subscribe((u:any) => {
+        if(u==null || u._id==null){
+          this.raz();
         }
-      }
-      //this.coupons=traitement_coupon(this.user.coupons,localStorage.getItem("showCoupon"));
 
-    },(error)=>{showError(this,error);});
+        for(var k=0;k<u.coupons.length;k++){
+          if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
+            u.coupons[k].flip=true;
+          else
+            u.coupons[k].flip=false;
+        }
+
+        this.user=u;
+        for(var k=0;k<this.user.shops.length;k++)
+          if(this.user.shops[k]._id==localStorage.getItem("showShop"))this.user.shops[k].visible=true;
+
+        if(this.user.email.indexOf("fictif.com")==-1){
+          //Validation des CGUs
+          if(this.user.lastCGU<this.config.values.cgu.dtModif && this.config.values.cgu.online){
+            this.dialog.open(PromptComponent,{
+              width:'90vw',data: {title:"Etes vous d'accord avec les CGU ?",
+                question:this.config.values.cgu.content,
+                onlyConfirm:true}})
+              .afterClosed().subscribe((result:any) => {
+
+              if(result=="yes") {
+                this.user.lastCGU = new Date().getTime();
+                this.api.setuser(this.user).subscribe(() => {
+                });
+              }
+              else{
+                var id_old_user=localStorage.getItem("old_user");
+                if(localStorage.getItem("user")==id_old_user)
+                  this.raz();
+                else
+                  localStorage.setItem("user",id_old_user);
+
+                this.refresh("Vous ne pouvez pas être authentifier sans valider les CGUs");
+              }
+            });
+          }
+        }
+        //this.coupons=traitement_coupon(this.user.coupons,localStorage.getItem("showCoupon"));
+
+      },(error)=>{showError(this,error);});
+
+    },1500);
+
 
   }
 

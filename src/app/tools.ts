@@ -449,6 +449,7 @@ export function compute(coupon:any){
   coupon["conditions"]=coupon["conditions"] || "";
   if(coupon.visual==null)coupon.visual=coupon.picture;
 
+  if(coupon.conditions=="")coupon.conditions="sur simple présentation du coupon REDUCSHARE";
   if(!coupon.conditions.startsWith("pour ") && !coupon.conditions.startsWith("sur "))coupon.conditions="pour "+coupon.conditions;
   coupon.conditions=coupon.conditions.replace("offre valable pour","").replace("valable pour","");
 
@@ -456,6 +457,7 @@ export function compute(coupon:any){
   
   if(coupon.duration_jours==null)coupon.duration_jours=0;
   if(coupon.duration_hours==null)coupon.duration_hours=0;
+
 
   coupon.durationInSec=coupon.duration_jours*24*3600+coupon.duration_hours*3600;
   coupon.delay=0;

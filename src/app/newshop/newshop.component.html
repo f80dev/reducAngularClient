@@ -7,8 +7,7 @@
           <div style="margin:0px;margin-right: 5px" (click)="addImage()">
             <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
             <app-visual *ngIf="new_shop.picture?.length>0"
-                        fontsize="3em"
-                        height="75px" width="75px"
+                        size="50"
                         [picture]="new_shop?.picture" >
             </app-visual>
           </div>
@@ -51,7 +50,7 @@
                    (focus)="focusElt=='shopname'"
                    (keyup)="canUpdateName=false"
                    data-tac="On Commence par indiquer le nom du point de vente qui va faire la promotion"
-                   matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name" autofocus>
+                   matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name">
           </mat-form-field>
 
           <!--Géolocalisation-->

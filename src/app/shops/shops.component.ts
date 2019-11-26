@@ -93,7 +93,6 @@ export class ShopsComponent implements OnInit {
 
   setDelegate(shop:any) {
     if(this.config.webcamsAvailable==0){
-      showMessage(this,);
       this.dialog.open(PromptComponent, {width: '250px',
         data: {
                 title: "Code utilisateur",
@@ -105,7 +104,7 @@ export class ShopsComponent implements OnInit {
           this.api.delegate(result,shop._id).subscribe((res:any)=>{
             showMessage(this,res.message);
           },(error:any)=>{
-            debugger
+
             showMessage(this,error.message);
           });
       });

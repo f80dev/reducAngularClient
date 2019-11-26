@@ -7,11 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class VisualComponent implements OnInit {
 
-  @Input('fontsize') fontsize="4em";
+  fontsize="";
   @Input("picture") picture="";
   @Input("src") src="";
   @Input("width") w:string="";
   @Input("height") h:string="";
+  @Input("size") size=50;
 
   @Input("crop") crop:string="";
   @Input("radius") radius:string="";
@@ -23,7 +24,13 @@ export class VisualComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(this.w=="" || this.h==""){
+      this.w=this.size+"px";
+      this.h=this.size+"px";
+    }
+
     if(this.picture=="")this.picture=this.src;
+    if(this.fontsize=="")this.fontsize=this.size*0.9+"px";
   }
 
 }

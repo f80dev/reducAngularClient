@@ -46,7 +46,7 @@ export class NewCouponComponent implements OnInit {
     direct_bonus: 5,
     pay_bonus: 10,
     max: 60,
-    stock:60,
+    stock:600,
     website:"https://reducshare.com/faq.html#coupon",
     visual:"https://reducshare.com/assets/img/gifts.jpg",
     max_coupon:1000,
@@ -157,6 +157,7 @@ export class NewCouponComponent implements OnInit {
     if(coupon.duration!=null)coupon["duration_hours"]=Math.trunc(coupon.duration/3600);
     if(coupon.duration_jours==null)coupon["duration_jours"]=0;
     if(coupon.duration_hours==null)coupon["duration_hours"]=0;
+    if(coupon.min_to_use==null)coupon["min_to_use"]=1;
     if(coupon.duration==null)coupon.duration=(coupon.duration_jours*24+coupon.duration_hours)*3600;
     if(coupon.duration<=0)coupon.duration=3600;
 
