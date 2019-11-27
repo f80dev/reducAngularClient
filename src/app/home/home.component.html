@@ -36,18 +36,13 @@
           subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
         </app-tuto>
 
-
-        <app-tuto *ngIf="user.coupons?.length>0 && user.shops?.length>0"
-                  label="Retrouvez ci-dessous toutes les enseignes pour lesquelles vous souhaitez faire des promotions">
-        </app-tuto>
-
+<!--  Section contenant la liste des points de ventes -->
         <app-shops
           [user]="user"
           (update)="refresh($event?.message)"
           (delete)="refresh($event?.message)"
           (open)="openForm($event)"
           (insert)="refresh($event?.message)">
-
         </app-shops>
 
         <app-tuto *ngIf="coupons.length>0"

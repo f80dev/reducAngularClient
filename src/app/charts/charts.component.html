@@ -1,0 +1,15 @@
+<span>Classement des meilleurs</span>
+<span class="spacer"></span>
+<span><mat-icon style="font-size:small;display:inline;margin-left: 5px;" (click)="onclose.emit()">cancel</mat-icon></span>
+
+<mat-list style="margin:0px;">
+  <mat-list-item *ngFor="let user of users">
+    <app-visual size="40" [picture]="user.photo"></app-visual>&nbsp;
+    <span *ngIf="user.pseudo?.length>0">{{user.pseudo}} </span>
+    <span *ngIf="user.pseudo?.length==0">anonyme</span>
+    <span class="spacer"></span>
+    <span>
+      {{user.gain}}{{coupon.symbol}}
+    </span>
+  </mat-list-item>
+</mat-list>
