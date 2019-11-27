@@ -77,7 +77,7 @@ export class NewshopComponent implements OnInit {
   ngOnInit() {
     checkLogin(this.router);
 
-    var params=this.route.snapshot.queryParamMap;
+    var params:any=this.route.snapshot.queryParamMap;
     this.anonymous=(params.get("anonymous")!="false");
     this.new_shop.owner=(params.get("userid"));
     this.level=Number((params.get("level")) || "0");
@@ -91,7 +91,11 @@ export class NewshopComponent implements OnInit {
         this.new_shop.tags=t.split(",");
       }
     }
-    if(params.get("pseudo") && params.get("edit")==null)this.new_shop.name="Chez "+params.get("pseudo");
+    if(params.get("pseudo") && params.get("edit")==null){
+      this.new_shop.name="Chez "+params.get("pseudo");
+    }
+    if(params.has("default_name") && params.get("default_name").length>0)this.new_shop.name=params.get("default_name");
+
     if(!this.anonymous)this.new_shop.public=true;
 
     this.showOnMap();

@@ -107,13 +107,26 @@ export class UserformComponent implements OnInit {
   }
 
 
-  addshop(tags="") {
+  /**
+   *
+   * @param params contient la liste tags,nom de la boutique, adresse
+   */
+  addshop(params="") {
+    var tags="";
+    var default_name="";
+
+    if(params.length>0){
+      tags=params.split(",")[0];
+      if(params.indexOf(',')>-1)default_name=tags.split(",")[1];
+    }
+
     this.showMap=false;
     if(this.user.tags.length>0)tags=this.user.tags;
     this.router.navigate(['shop'],
       {queryParams:
           {
             shop:null,
+            default_name:default_name,
             level:this.user.level,
             userid:this.user._id,
             pseudo:this.user.pseudo,

@@ -36,7 +36,8 @@ export class ShopsComponent implements OnInit {
               public router: Router,
               public config:ConfigService,
               public dialog:MatDialog,
-              public api:ApiService) {}
+              public api:ApiService) {
+  }
 
 
 

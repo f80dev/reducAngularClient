@@ -80,11 +80,11 @@
       <iframe id="out" [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"></iframe>
     </div>
 
-    <div *ngIf="iframe_src?.length==0" style="height: 100vh;background-color: #2a002a;width:100%;text-align: center;color:white;vertical-align: middle;font-size:xx-large;">
-     <br><br><br>REDUCSHARE<br><br><br>
+    <div *ngIf="iframe_src?.length==0" [ngStyle]="{'height': '100vh','background-color':config.values?.brands[0].bkcolor ,'width':'100%','text-align':'center','color':'white','vertical-align':'middle','font-size':'xx-large'}">
+     <br><br><br>{{config.values?.brands[0].appname}}<br><br><br>
      <img [src]="config.values?.brands!=null && config.values?.brands[0].logo" style="width:30%;max-width: 250px;">
      <br><br><br>
-     <span style="font-size: small;">Récompensez le bouche à oreille</span>
+     <span style="font-size: small;">{{config.values?.brands[0].claim}}</span>
       <br><br>
    </div>
   </td>

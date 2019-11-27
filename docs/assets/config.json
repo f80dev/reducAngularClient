@@ -3,8 +3,10 @@
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
     "version": "0.85.1-beta",
+    "bkcolor":"#2a002a",
     "news": "Classement des meilleurs vendeurs",
     "logo": "./assets/img/logo.png",
+    "claim":"Récompensez le bouche à oreille",
     "editor":{
       "website": "https://f80.fr",
       "name":"F80"
@@ -19,11 +21,34 @@
     }
   },
   {
+    "appname": "BTpromo",
+    "title": "Bouygues Telecom Promo",
+    "version": "1.0",
+    "news": "bug",
+    "logo": "./assets/img/bt_logo.png",
+    "bkcolor":"gray",
+    "claim":"Les promotions des boutiques Bouygues Telecom",
+    "editor":{
+      "website": "https://lefooding.com/fr",
+      "name":"Bouygues Telecom",
+      "logo":""
+    },
+    "support": {
+      "forum": "http://reducshare.les-forums.com/",
+      "email": "bt-contact@reducshare.com",
+      "facebook": "https://www.facebook.com/bouyguestelecom/",
+      "faq": "https://www.assistance.bouyguestelecom.fr/",
+      "website": "https://www.assistance.bouyguestelecom.fr/"
+    }
+  },
+
+  {
     "appname": "foodingPromo",
     "title": "Le Fooding promotion",
     "version": "0.33-beta",
     "news": "bug",
     "logo": "./assets/img/lefooding.png",
+    "claim":"Récompensez le bouche à oreille",
     "editor":{
       "website": "https://lefooding.com/fr",
       "name":"LeFooding",
@@ -37,6 +62,8 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     }
   }
+
+
   ],
 
   "batch": {
@@ -736,6 +763,32 @@
       "visual":"https://cdn.pixabay.com/photo/2016/03/27/16/23/woman-1283009_960_720.jpg",
       "description":"Une gallerie offre une réduction sur l'achat de certaines oeuvres à l'occasion d'un vernissage",
       "tags":"exposition"
+    },
+    {
+      "id":"boutiquetelephonie",
+      "title":"Des promos sur les casques",
+      "unity":"pourcents réduction",
+      "symbol":"%",
+      "pluriel":true,
+      "breakable":true,
+      "label":"Les casques à moitiés prix",
+      "share_bonus":0.5,
+      "level":0.0,
+      "pay_bonus":1,
+      "beneficiaire":"client bouygues",
+      "direct_bonus":5,
+      "max":50,
+      "final_bonus":0,
+      "score":14,
+      "duration_hours":0,
+      "duration_jours":2,
+      "stock":2000,
+      "max_coupon":5000,
+      "conditions":"sur présentation du coupon",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/headphone_1f3a7.png",
+      "visual":"https://reducshare.com/assets/img/headphones.jpg",
+      "description":"Un point de vente hightech propose ses casques à moitié prix",
+      "tags":"commerce"
     }
   ]
 }
