@@ -117,7 +117,10 @@ export class UserformComponent implements OnInit {
 
     if(params.length>0){
       tags=params.split(",")[0];
-      if(params.indexOf(',')>-1)default_name=tags.split(",")[1];
+      if(params.indexOf(',')>-1){
+        default_name=params.split(",")[1];
+        for(var i=0;i<10;i++)default_name=default_name.replace("_"," ");
+      }
     }
 
     this.showMap=false;

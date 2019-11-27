@@ -426,7 +426,7 @@
       "share_bonus":0.2,
       "pay_bonus":3,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/croissant_1f950.png",
-      "direct_bonus":2,
+      "direct_bonus":1,
       "final_bonus":0,
       "level":0.0,
       "max":10,
