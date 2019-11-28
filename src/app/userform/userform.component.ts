@@ -116,9 +116,10 @@ export class UserformComponent implements OnInit {
     var default_name="";
 
     if(params.length>0){
-      tags=params.split(",")[0];
-      if(params.indexOf(',')>-1){
-        default_name=params.split(",")[1];
+      var sep=";";
+      tags=params.split(sep)[0];
+      if(params.indexOf(sep)>-1){
+        default_name=params.split(sep)[1];
         for(var i=0;i<10;i++)default_name=default_name.replace("_"," ");
       }
     }
@@ -140,6 +141,9 @@ export class UserformComponent implements OnInit {
   }
 
 
+  /**
+   * Montre les promos sur la carte
+   */
   showPromoInSquare(){
     //voir https://openlayers.org/en/latest/examples/moveend.html
     if(!this.map)return false;
@@ -191,6 +195,9 @@ export class UserformComponent implements OnInit {
     })
   }
 
+  /**
+   *
+   */
   openLoc() {
     this.showMap=!this.showMap;
     if(this.showMap){
@@ -339,7 +346,9 @@ export class UserformComponent implements OnInit {
     this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'},width: '400px', data: {result:this.user.photo,width: 250,height:250,emoji:true}}).afterClosed().subscribe((result) => {
       if(result){
         this.user.photo=result;
-        this.api.setuser(this.user).subscribe(()=>{});
+        this.api.setuser(this.user).subscribe(()=>{
+          this.showPromoInSquare();
+        });
       }
     });
   }
