@@ -5,8 +5,8 @@
 
         <mat-toolbar class="app-toolbar" style="padding: 0 !important;">
           <div style="margin:0px;margin-right: 5px" (click)="addImage()">
-            <img *ngIf="new_shop.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
-            <app-visual *ngIf="new_shop.picture?.length>0"
+            <img *ngIf="new_shop?.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
+            <app-visual *ngIf="new_shop?.picture?.length>0"
                         size="50"
                         [picture]="new_shop?.picture" >
             </app-visual>
@@ -101,7 +101,7 @@
               <mat-select id="txtShopTags"
                           title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
                           [(ngModel)]="new_shop.tags"  multiple>
-                <mat-option *ngFor="let tag of config.values.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
+                <mat-option *ngFor="let tag of config.values?.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -117,6 +117,20 @@
             >
               Visuel
             </button>
+
+
+            <br>
+            <div style="width: 100%">
+              <span>Utiliser votre photo pour représenter votre point de vente</span>
+              <span class="spacer"></span>
+              <button mat-flat-button mat-button
+                      id="cmdUseProfil"
+                      (click)="addImageFromUser()">
+                Utiliser
+              </button>
+            </div>
+
+
 
             <br>
             <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http') && level>0.8">

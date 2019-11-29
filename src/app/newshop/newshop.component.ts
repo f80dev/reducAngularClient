@@ -6,9 +6,7 @@ import {
   createMap,
   createMarker,
   getMarkerLayer, isLocal,
-  loginWithEmail,
   normeString,
-  selectFile,
   showError
 } from '../tools';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -162,7 +160,9 @@ export class NewshopComponent implements OnInit {
             (event)=>{
               this.refresh_map();
             },
-            null,
+            (e)=>{
+              debugger;
+            },
             (event)=>{
               this.map.getView().setCenter(event.coordinate);
             });
@@ -205,5 +205,9 @@ export class NewshopComponent implements OnInit {
       if(result)
         this.new_shop.picture=result;
     });
+  }
+
+  addImageFromUser() {
+    this.new_shop.picture=this.api.user.photo;
   }
 }

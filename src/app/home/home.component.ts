@@ -190,7 +190,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  hRefresh=0;
+  hRefresh=null;
   /**
    *
    * @param message

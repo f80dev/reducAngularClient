@@ -141,11 +141,20 @@ export function createMap(center:any,
     });
   }
 
-  if(func_click){
-    rc.on("click", function(e) {
-      func_click(e);
+  if(func_click)
+    rc.on("singleclick",(e)=>{
+      rc.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+        func_click(feature);
+      });
     });
-  }
+
+  // if(func_move)
+  //   rc.on('pointermove',(e)=> {
+  //     rc.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
+  //       func_sel(feature);
+  //     });
+  //   });
+
 
   if(func_move!=null){
     rc.on("moveend",func_move);
@@ -262,7 +271,7 @@ export function buildTeaser(coupon:any,lieu:string,withCondition=false){
 
 
 
-export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
+export function createMarker(lon,lat,icon,coupon=null,scale=0.2){
   if(!icon)icon="";
   var iconStyle:any=new ol.style.Style({image: new ol.style.Circle({radius: 15,fill: new ol.style.Fill({color: 'white'})})});
 
@@ -292,11 +301,9 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
 
   if(coupon!=null){
     iconStyle.setText(new ol.style.Text({
-      text: coupon.max+coupon.symbol,
+      text: coupon.symbol,
       textAlign:"center",
-      font:"18px sans-serif",
-      stroke: new ol.style.Stroke({color: 'white', width: 2}),
-      padding:[2,2,2,2]
+      font:"22px sans-serif"
     }));
   }
 
@@ -304,11 +311,6 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2,func_sel=null){
     geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
   });
   marker.coupon=coupon;
-
-  //TODO a rétablir
-  // if(func_sel!=null){
-  //   marker.on("featureclick",func_sel(this.coupon));
-  // }
 
   marker.setStyle(iconStyle);
   return marker;

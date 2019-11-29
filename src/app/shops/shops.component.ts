@@ -155,6 +155,7 @@ export class ShopsComponent implements OnInit {
   editShop(shop: any,event) {
     event.stopPropagation();
     this.api.shop=shop;
+    this.api.user=this.user;
     this.router.navigate(['shop'],
       {queryParams:
           {

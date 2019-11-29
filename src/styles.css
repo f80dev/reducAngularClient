@@ -45,7 +45,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .spacer {
-  flex: 1 1 auto;
+  flex: 1 1 auto !important;
+}
+
+.filler {
+  flex: 1 1 auto !important;
 }
 
 .app-button {

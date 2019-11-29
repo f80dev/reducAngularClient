@@ -125,6 +125,7 @@ export class UserformComponent implements OnInit {
     }
 
     this.showMap=false;
+    this.api.user=this.user;
     if(this.user.tags.length>0)tags=this.user.tags;
     this.router.navigate(['shop'],
       {queryParams:
@@ -152,19 +153,20 @@ export class UserformComponent implements OnInit {
     var bottomLeft = ol.proj.toLonLat(ol.extent.getBottomLeft(square));
     var topRight = ol.proj.toLonLat(ol.extent.getTopRight(square));
     this.api.getcouponinsquare({
-      x0:bottomLeft[0],
-      y0:bottomLeft[1],
-      x1:topRight[0],
-      y1:topRight[1],
-      user:{x:this.user.lng,y:this.user.lat}
+      x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1],
+      user:{x:this.user.position.lng,y:this.user.position.lat}
     }).subscribe((coupons:any)=>{
-      var l=getMarkerLayer(this.map);
+      var l:any=getMarkerLayer(this.map);
+      //this.snackBar.open(coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol,null,{duration:10000});
+
       this.showCouponOnMap=[];
       var scale=0.1;
       if(this.user.photosize!=null)scale=25/this.user.photosize;
-      var markers=[
-        createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,scale)
-      ];
+      var markers=[];
+
+
+      if(this.user.position!=null)
+        markers.push(createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,scale));
 
       coupons.forEach((c)=>{
         //Vérifie que l'utilisateur n'a pas déjà le coupon
@@ -182,9 +184,8 @@ export class UserformComponent implements OnInit {
           var scale=Math.max(0.20/coupons.length,0.10);
           if(coupons.length<3)icon=c.picture;
 
-          var marker=createMarker(Number(c.lng),Number(c.lat),null,c,scale,(coupon_sel)=>{
-            this.user.message=coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol;
-          });
+          //Ajoute le coupon sur la carte par création d'un marker
+          var marker=createMarker(Number(c.lng),Number(c.lat),null,c,scale);
           markers.push(marker);
           marker.coupon.visible=false;
           this.showCouponOnMap.push(marker.coupon);
@@ -326,8 +327,11 @@ export class UserformComponent implements OnInit {
         this.user.position=pos;
         this.map=createMap(pos,this.user.photo,zoom,0.1,()=>{
           this.showPromoInSquare();
-        },(coupon)=>{
-          this.showCouponOnMap=[coupon];
+        },null,(marker)=>{
+          if(marker.coupon){
+            localStorage.setItem("showCoupon",marker.coupon._id);
+            this.showCouponOnMap=[marker.coupon];
+          }
         });
       },1000);
     } else {
