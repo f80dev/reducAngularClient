@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {$$, hashCode} from '../tools';
+import {$$, brand_text, hashCode} from '../tools';
 import {TransPipe} from "../trans.pipe";
 import {ConfigService} from "../config.service";
 
@@ -34,6 +34,10 @@ export class TutoComponent implements OnChanges,OnInit {
   code:string="";
 
   refresh(){
+
+    this.text=brand_text(this.text,this.config);
+    this.title=brand_text(this.title,this.config);
+
     if(this.config.params==null)return;
     if(!this.config.params.tuto)this.hideTuto(false);
 
@@ -50,6 +54,7 @@ export class TutoComponent implements OnChanges,OnInit {
   }
 
   ngOnChanges() {
+
   }
 
 

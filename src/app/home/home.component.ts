@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit {
         message:params.get("message") || "",
       };
 
+      this.config.activeBrand=Number(params.get("brand") || "0");
+
       if(params.has("notuto"))this.config.params["tuto"]=false;
       if(this.config.params.coupon==""){
         var params2=this._location.path();

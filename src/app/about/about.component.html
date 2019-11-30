@@ -1,14 +1,14 @@
 <mat-expansion-panel class="app-card">
   <mat-expansion-panel-header (click)="switchVisible()" style="cursor: pointer;">
     <div style="text-align: center;width:100%;">
-      {{config.values.brands[0].appname+" - "+config.values.brands[0].version}}<br>
+      {{config.values.brands[config.activeBrand].appname+" - "+config.values.brands[config.activeBrand].version}}<br>
     </div>
   </mat-expansion-panel-header>
 
     <div style="width: 100%;text-align: center;font-size: small;margin-top:5px;">
       <div *ngIf="withlogo">
         <img
-          [src]="config.values.brands[0].logo"
+          [src]="config.values.brands[config.activeBrand].logo"
           [ngStyle]="{'width':logosize,'margin':'15px'}">
         <br>
       </div>
@@ -23,8 +23,8 @@
         <tr>
           <td>Edition</td>
           <td>:
-            <a style="color:lightgray;font-variant: normal;font-style: normal;font-weight: normal;" [href]="config.values.brands[0].editor?.website" target="_blank">
-              <strong>{{config.values.brands[0].editor?.name}}</strong>
+            <a style="color:lightgray;font-variant: normal;font-style: normal;font-weight: normal;" [href]="config.values.brands[config.activeBrand].editor?.website" target="_blank">
+              <strong>{{config.values.brands[config.activeBrand].editor?.name}}</strong>
             </a>
           </td>
         </tr>
@@ -33,25 +33,25 @@
       </table>
       <br><br>
       <div style="width: 100%;text-align: center;font-size: medium;">
-        <a href="mailto:{{config.values.brands[0].support?.email}}" style="display:inline-block;width: 65px;">
+        <a href="mailto:{{config.values.brands[config.activeBrand].support?.email}}" style="display:inline-block;width: 65px;">
           <mat-icon class="big-icon">mail</mat-icon>
         </a>
 
-        <div (click)="openFrame(config.values.brands[0].support?.forum)" style="display:inline-block;width: 65px;pointer:cursor;">
+        <div (click)="openFrame(config.values.brands[config.activeBrand].support?.forum)" style="display:inline-block;width: 65px;pointer:cursor;">
           <mat-icon class="big-icon">persons</mat-icon>
         </div>
 
         <div style="display:inline-block;width: 65px;margin-right: 10px;pointer:cursor;"
-             (click)="openFrame(config.values.brands[0].support?.faq)">
+             (click)="openFrame(config.values.brands[config.activeBrand].support?.faq)">
           <mat-icon class="big-icon">help</mat-icon>
         </div>
 
-        <div (click)="openFrame(config.values.brands[0].support?.facebook,true)"
+        <div (click)="openFrame(config.values.brands[config.activeBrand].support?.facebook,true)"
              style="display:inline-block;width: 60px;pointer:cursor;">
           <img style="width:40px;opacity: 0.5;" src="./assets/icons/facebook.png">
         </div>
 
-        <div (click)="openFrame(config.values.brands[0].support?.website+'&tags='+user.tags)"
+        <div (click)="openFrame(config.values.brands[config.activeBrand].support?.website+'&tags='+user.tags)"
              style="display:inline-block;width: 60px;">
           <mat-icon class="big-icon">home</mat-icon>
         </div>

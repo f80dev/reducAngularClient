@@ -6,14 +6,18 @@
     "start": "ng serve --prod=false --sourceMap=true",
     "start prod": "ng serve --prod=true --sourceMap=true",
     "build": "ng build --prod --base-href=https://reducshare.com --outputPath=./docs",
-    "test": "ng test",
+    "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": ["./src/setupJest.ts"]
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.4",
-    "@angular/cdk": "~8.1.4",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "~8.2.4",
     "@angular/compiler": "~8.2.4",
     "@angular/core": "~8.2.4",
@@ -45,6 +49,7 @@
     "service": "^0.1.4",
     "startbootstrap-grayscale": "^5.0.9",
     "tslib": "^1.10.0",
+    "yarn": "^1.19.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
@@ -63,6 +68,7 @@
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "^24.9.0",
+    "jest-preset-angular": "^8.0.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

@@ -1,5 +1,6 @@
-<app-tuto label="En poursuivant votre navigation, vous acceptez le dépôt de cookies destinés à conserver vos préférences sur cet appareil lorsque vous quittez REDUCSHARE."
+<app-tuto label="En poursuivant votre navigation, vous acceptez le dépôt de cookies destinés à conserver vos préférences sur cet appareil lorsque vous quittez l'application."
           color="white"
+          *ngIf="config.values!=null"
           [delay]="20"
           [duration]="30">
 </app-tuto>

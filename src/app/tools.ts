@@ -14,6 +14,15 @@ export function showError(vm:any,err:any){
   showMessage(vm,"L'application est en cours de maintenance, Merci de réessayer l'opération dans quelques instants");
 }
 
+export function brand_text(text:string,config:any){
+  if(text==null || text.length==0)return "";
+  if (config==null || config.values==null || config.values.brands==null )return text;
+
+  for(var i=0;i<5;i++)
+    text=text.replace("REDUCSHARE",config.values.brands[config.activeBrand].appname);
+  return text;
+}
+
 export function api(service: string , param: string= '', encode: boolean = true): string  {
   service=service.replace("//","/");
   if (encode) { param = encodeURI(param); }

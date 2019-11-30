@@ -12,6 +12,7 @@ export class ConfigService {
 
   visibleTuto=false;
   values:any={};
+  activeBrand=1;
   config:any=null;
   waiting:boolean=false;
   webcamsAvailable:number=0;

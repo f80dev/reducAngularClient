@@ -7,7 +7,7 @@ import {
   showError,
   unique_id
 } from "../tools";
-import {ActivatedRoute, ParamMap, QueryParamsHandling} from "@angular/router";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 import { Location } from '@angular/common';
 import {ConfigService} from "../config.service";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";

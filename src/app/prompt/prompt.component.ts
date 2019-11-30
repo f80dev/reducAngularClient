@@ -20,6 +20,7 @@ export interface DialogData {
 export class PromptComponent {
 
   showEmoji=false;
+  @Input("canEmoji") canEmoji=false;
 
   constructor(
     public dialogRef: MatDialogRef<PromptComponent>,@Inject(MAT_DIALOG_DATA) public data: DialogData) {

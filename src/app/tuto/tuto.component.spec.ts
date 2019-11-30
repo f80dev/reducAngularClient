@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TutoComponent } from './tuto.component';
+import {MatIconModule} from "@angular/material";
+import {SafePipe} from "../safe.pipe";
+import {ConfigService} from "../config.service";
 
 describe('TutoComponent', () => {
   let component: TutoComponent;
@@ -8,7 +11,8 @@ describe('TutoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TutoComponent ]
+      declarations: [ TutoComponent,SafePipe,TutoComponent,ConfigService],
+      imports:[MatIconModule]
     })
     .compileComponents();
   }));
