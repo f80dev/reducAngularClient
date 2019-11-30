@@ -1,3 +1,6 @@
+<div *ngIf="config.values?.brands"
+     [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkmain,'width':'100vw','height':'100vh'}"
+    >
 <div style="max-width: 700px;">
   <app-old-coupons *ngIf="showOldCoupon"
                    title="Utilisez un modèle"
@@ -8,7 +11,6 @@
                    [filter]="tags"
                    (select)="selectOldAsModel($event)">
   </app-old-coupons>
-
 </div>
 
 <app-tuto title="Vous allez réaliser votre première promotion"
@@ -22,84 +24,90 @@
           subtitle="REDUCSHARE propose de partir d'un modèle que vous pouvez totalement personnaliser pour s'adapter à votre promotion.<br><br>Vous pouvez également valider le modèle juste pour voir puisqu'il est toujours possible de modifier ou supprimer une promotion surtout si elle n'a pas été diffusée">
 </app-tuto>
 
-<table style="width: 100%;"><tr>
-  <td style="width: 700px;vertical-align: text-top;">
-    <mat-card class="app-card" *ngIf="!showOldCoupon" style="margin:10px;color:black;background-color: #8f8f8f;">
-      <mat-card-title>
-        Personnaliser le modèle
-      </mat-card-title>
-      <mat-card-subtitle style="color: black;">
-        Tous les contenus violet sont modifiables en les pointant
-      </mat-card-subtitle>
-      <mat-card-content class="app-card-content">
 
-        <div *ngIf="coupon.description?.length>0" style="width: 90%;margin-left:5%;">
-          <span style="color: white">Description du modèle / Exemple pratique :</span><br>
-          {{coupon.description}}
-        </div>
+  <table style="width: 100%;"><tr>
+    <td style="width: 700px;vertical-align: text-top;">
+      <mat-card class="app-card" *ngIf="!showOldCoupon"
+                [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkdialog}"
+                >
+        <mat-card-title>
+          Personnaliser le modèle
+        </mat-card-title>
+        <mat-card-subtitle style="color: black;">
+          Tous les contenus violet sont modifiables en les pointant
+        </mat-card-subtitle>
+        <mat-card-content class="app-card-content">
+
+          <div *ngIf="coupon.description?.length>0" style="width: 90%;margin-left:5%;">
+            <span style="color: white">Description du modèle / Exemple pratique :</span><br>
+            {{coupon.description}}
+          </div>
 
 
-        <mat-vertical-stepper style="background: none;margin:0px;padding:0px" (selectionChange)="openHelp($event)">
+          <mat-vertical-stepper style="background: none;margin:0px;padding:0px" (selectionChange)="openHelp($event)">
 
-          <mat-step title="Description de la promotion">
-            <ng-template matStepLabel class="step-title">Description de votre promotion</ng-template>
-            <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
-            <div class="zone_text" [innerHTML]="condition_text | safe:'html'"></div>
-          </mat-step>
+            <mat-step title="Description de la promotion">
+              <ng-template matStepLabel class="step-title">Description de votre promotion</ng-template>
+              <div class="zone_text" [innerHTML]="master_text | safe:'html'"></div>
+              <div class="zone_text" [innerHTML]="condition_text | safe:'html'"></div>
+            </mat-step>
 
-          <mat-step title="Votre visuel">
-            <ng-template matStepLabel class="step-title">Votre visuel</ng-template>
-            <div style="position:relative;width: 100%;text-align: center;color:white;">
-              <span style="color:black" >Couverture de votre coupon (avec Exemple de texte)</span><br>
-              <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">
-                <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+            <mat-step title="Votre visuel">
+              <ng-template matStepLabel class="step-title">Votre visuel</ng-template>
+              <div style="position:relative;width: 100%;text-align: center;color:white;">
+                <span style="color:black" >Couverture de votre coupon (avec Exemple de texte)</span><br>
+                <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">
+                  <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+                </div>
+                <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">
+                  <span [ngStyle]="{color:coupon.ink_color}">Jusqu'à {{coupon.max}}{{coupon.symbol}}</span>
+                </div>
+                <img class="visual-coupon"
+                     style="object-fit: cover;"
+                     id="id_visual"
+                     [src]="coupon.visual"
+                     (click)="addImage('visual',800,220)"><br>
               </div>
-              <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">
-                <span [ngStyle]="{color:coupon.ink_color}">Jusqu'à {{coupon.max}}{{coupon.symbol}}</span>
-              </div>
-              <img class="visual-coupon"
-                   style="object-fit: cover;"
-                   id="id_visual"
-                   [src]="coupon.visual"
-                   (click)="addImage('visual',800,220)"><br>
-            </div>
-          </mat-step>
+            </mat-step>
 
-          <mat-step title="L'avantage client">
-            <ng-template matStepLabel class="step-title">L'avantage client</ng-template>
-            <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
-          </mat-step>
+            <mat-step title="L'avantage client">
+              <ng-template matStepLabel class="step-title">L'avantage client</ng-template>
+              <div class="zone_text" [innerHTML]="augment_text | safe:'html'"></div>
+            </mat-step>
 
-          <mat-step title="Maitrisez votre budget">
-            <ng-template matStepLabel class="step-title">Maitrisez votre budget</ng-template>
-            <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
-          </mat-step>
+            <mat-step title="Maitrisez votre budget">
+              <ng-template matStepLabel class="step-title">Maitrisez votre budget</ng-template>
+              <div class="zone_text" [innerHTML]="budget_text | safe:'html'"></div>
+            </mat-step>
 
-        </mat-vertical-stepper>
+          </mat-vertical-stepper>
 
-      </mat-card-content>
-      <mat-card-actions class="app-card-action">
-        <button mat-flat-button class="app-button"
-                id="btnValide"
-                *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
-                (click)="addcoupon(coupon)">Valider</button>
+        </mat-card-content>
+        <mat-card-actions class="app-card-action">
+          <button mat-flat-button class="app-button"
+                  id="btnValide"
+                  *ngIf="coupon.label?.length>0 && coupon.title?.length>0" mat-button
+                  (click)="addcoupon(coupon)">Valider</button>
 
-        <button mat-flat-button
-                id="btnCancel"
-                class="app-button"
-                mat-button (click)="cancel()">Annuler</button>
-      </mat-card-actions>
-    </mat-card>
-  </td>
-  <td *ngIf="showHelpScreen && !showOldCoupon" style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
-    <div *ngIf="iframe_src?.length>0" style="height: 100%;width:100%;text-align: center;">
-      <iframe [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"
-              scrolling="yes" frameborder="0"
-              style="color:white;background-color: #29004a;"></iframe>
-    </div>
-  </td>
-</tr>
-</table>
+          <button mat-flat-button
+                  id="btnCancel"
+                  class="app-button"
+                  mat-button (click)="cancel()">Annuler</button>
+        </mat-card-actions>
+      </mat-card>
+    </td>
 
+    <td *ngIf="showHelpScreen && !showOldCoupon"
+        style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
+      <div *ngIf="iframe_src?.length>0"
+           style="height: 100%;width:100%;text-align: center;">
+        <iframe [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"
+                scrolling="yes" frameborder="0"
 
+                style="color:white;background-color: #29004a;"></iframe>
+      </div>
+    </td>
+  </tr>
+  </table>
+</div>
 

@@ -1,130 +1,134 @@
-<mat-expansion-panel *ngFor="let shop of user.shops"
-                     class="app-card" [expanded]="shop.visible"
-                     data-tac="On retrouve ici la liste des enseignes que vous avez crées"
-                     style="margin-bottom: 3px;margin-top:3px;">
-  <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
-                              name="shopCard"
-                              class="app-card-header"
-                              (click)="showShop(shop)">
+<div *ngIf="config.values?.brands!=null">
+  <mat-expansion-panel *ngFor="let shop of user.shops"
+                       class="app-card" [expanded]="shop.visible"
+                       data-tac="On retrouve ici la liste des enseignes que vous avez crées"
+                       [ngStyle]="{'background-color':config.values?.brands[config.activeBrand].colors.bkshop}"
+  >
+    <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
+                                name="shopCard"
+                                class="app-card-header"
+                                (click)="showShop(shop)">
 
-    <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;height:75px;">
-    <app-visual *ngIf="shop.picture?.length>0"
-                [picture]="shop.picture"
-                width="75px" height="75px">
-    </app-visual>
+      <img *ngIf="shop.picture?.length==0" [src]="config.values.icon_card_shop" style="width:75px;height:75px;">
+      <app-visual *ngIf="shop.picture?.length>0"
+                  [picture]="shop.picture"
+                  width="75px" height="75px">
+      </app-visual>
 
-    <div class="app-card-title" style="line-height: 85%;">
-      {{shop.name}}
-      <mat-icon style="cursor:pointer;font-size: medium;height:20px;" (click)="editShop(shop,$event)">create</mat-icon>
-      <div class="app-card-subtitle">
+      <div class="app-card-title" style="line-height: 85%;">
+        {{shop.name}}
+        <mat-icon style="cursor:pointer;font-size: medium;height:20px;" (click)="editShop(shop,$event)">create</mat-icon>
+        <div class="app-card-subtitle">
         <span *ngIf="shop.tags?.length>0 && shop.followers?.length==0">
           <span *ngFor="let tag of shop.tags.split(',')">#{{tag}} </span>
         </span>
-        <span *ngIf="shop.followers?.length>0">
+          <span *ngIf="shop.followers?.length>0">
           Vous avez {{shop.followers?.length}} followers
         </span>
+        </div>
+
+
       </div>
 
 
+    </mat-expansion-panel-header>
+
+
+    <div class="app-card-content" name="shopContent">
+      <div id="print-section-{{shop._id}}" style="display: none;">
+        <app-print-coupon [shop]="shop"></app-print-coupon>
+      </div>
+
+
+      <br>
+      <app-list-coupons [coupons]="shop.coupons"
+                        [user]="user"
+                        (delete)="onupdate.emit($event)"
+                        (update)="onupdate.emit($event)"
+                        (edit)="edit(shop,$event)">
+      </app-list-coupons>
+
+
+      <app-tuto *ngIf="shop.coupons?.length>0 && user.level<1"
+                color="white"
+                type="title"
+                [duration]="30"
+                background="./assets/img/feudartifice2.jpg"
+                title="Bravo, votre première promotion est prête!"
+                subtitle="Faites le savoir, Imprimez une première affiche pour votre enseigne ou partagez la via vos réseaux sociaux. Vous avez le contrôle ! vous pouvez voir comment elle se diffuse en temps réel."
+      >
+      </app-tuto>
+
+
     </div>
 
-
-  </mat-expansion-panel-header>
-
-
-  <div class="app-card-content" name="shopContent">
-    <div id="print-section-{{shop._id}}" style="display: none;">
-      <app-print-coupon [shop]="shop"></app-print-coupon>
-    </div>
+    <app-scanner [size]="300"
+                 *ngIf="showWebCam && shop.visible"
+                 [filter]=""
+                 (flash)="onFlash_event($event,shop)">
+    </app-scanner>
 
 
-    <br>
-    <app-list-coupons [coupons]="shop.coupons"
-                      [user]="user"
-                      (delete)="onupdate.emit($event)"
-                      (update)="onupdate.emit($event)"
-                      (edit)="edit(shop,$event)">
-    </app-list-coupons>
+    <mat-action-row class="app-card-action">
+
+      <button mat-button name="btnDelegate"
+              (click)="setDelegate(shop)"
+              class="app-button"
+              *ngIf="user.level>0.5"
+              title="Déléguer l'encaissement"
+              mat-flat-button mat-icon-button>
+        <mat-icon>person_add</mat-icon>
+      </button>
 
 
-    <app-tuto *ngIf="shop.coupons?.length>0 && user.level<1"
-              color="white"
-              type="title"
-              [duration]="30"
-              background="./assets/img/feudartifice2.jpg"
-              title="Bravo, votre première promotion est prête!"
-              subtitle="Faites le savoir, Imprimez une première affiche pour votre enseigne ou partagez la via vos réseaux sociaux. Vous avez le contrôle ! vous pouvez voir comment elle se diffuse en temps réel."
-    >
-    </app-tuto>
+      <button mat-button name="btnPrint"
+              (click)="openPrinter(shop)"
+              class="app-button"
+              *ngIf="user.level>0.7"
+              ngxClipboard [cbContent]="shop.url"
+              title="Imprimer le QRCode du point de vente"
+              mat-flat-button mat-icon-button>
+        <mat-icon>printer</mat-icon>
+      </button>
 
+      <button mat-button mat-flat-button mat-icon-button
+              class="app-button"
+              *ngIf="shop.coupons?.length==0"
+              title="Supprimez l'enseigne de votre compte"
+              (click)="delShop(shop)">
+        <mat-icon>delete</mat-icon>
+      </button>
 
-  </div>
+      <button mat-button mat-flat-button mat-icon-button
+              class="app-button"
+              *ngIf="user.level>0.8 && (shop.coupons.length>1 || (shop.coupons[0]!=null && shop.coupons[0].share>2))"
+              title="Graph de diffusion d'une promo"
+              (click)="openGraph(shop._id)">
+        <mat-icon>link</mat-icon>
+      </button>
 
-  <app-scanner [size]="300"
-               *ngIf="showWebCam && shop.visible"
-               [filter]=""
-               (flash)="onFlash_event($event,shop)">
-  </app-scanner>
+      <button mat-button mat-flat-button mat-icon-button
+              name="btnNewPromoAdvanced"
+              class="app-button"
+              *ngIf="user.level>=1"
+              title="Nouvelle promotion attachée à cette enseigne"
+              (click)="addCoupon(shop,'')">
+        <mat-icon>note_add</mat-icon>
+      </button>
 
+      <button mat-button mat-flat-button
+              name="btnNewPromo"
+              class="app-button"
+              *ngIf="user.level<1"
+              data-tac="La création d'une enseigne se fait depuis la zone de profil"
+              title="Nouvelle promotion attachée à cette enseigne"
+              (click)="addCoupon(shop,'')">
+        <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
+      </button>
 
-  <mat-action-row class="app-card-action">
+    </mat-action-row>
 
-    <button mat-button name="btnDelegate"
-            (click)="setDelegate(shop)"
-            class="app-button"
-            *ngIf="user.level>0.5"
-            title="Déléguer l'encaissement"
-            mat-flat-button mat-icon-button>
-      <mat-icon>person_add</mat-icon>
-    </button>
+  </mat-expansion-panel>
 
-
-    <button mat-button name="btnPrint"
-            (click)="openPrinter(shop)"
-            class="app-button"
-            *ngIf="user.level>0.7"
-            ngxClipboard [cbContent]="shop.url"
-            title="Imprimer le QRCode du point de vente"
-            mat-flat-button mat-icon-button>
-      <mat-icon>printer</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button mat-icon-button
-            class="app-button"
-            *ngIf="shop.coupons?.length==0"
-            title="Supprimez l'enseigne de votre compte"
-            (click)="delShop(shop)">
-      <mat-icon>delete</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button mat-icon-button
-            class="app-button"
-            *ngIf="user.level>0.8 && (shop.coupons.length>1 || (shop.coupons[0]!=null && shop.coupons[0].share>2))"
-            title="Graph de diffusion d'une promo"
-            (click)="openGraph(shop._id)">
-      <mat-icon>link</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button mat-icon-button
-            name="btnNewPromoAdvanced"
-            class="app-button"
-            *ngIf="user.level>=1"
-            title="Nouvelle promotion attachée à cette enseigne"
-            (click)="addCoupon(shop,'')">
-      <mat-icon>note_add</mat-icon>
-    </button>
-
-    <button mat-button mat-flat-button
-            name="btnNewPromo"
-            class="app-button"
-            *ngIf="user.level<1"
-            data-tac="La création d'une enseigne se fait depuis la zone de profil"
-            title="Nouvelle promotion attachée à cette enseigne"
-            (click)="addCoupon(shop,'')">
-      <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
-    </button>
-
-  </mat-action-row>
-
-</mat-expansion-panel>
+</div>
 

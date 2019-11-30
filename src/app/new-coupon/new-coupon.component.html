@@ -1,7 +1,9 @@
 
 <div style="max-width: 900px;">
 
-<mat-card class="app-card" style="margin:0px;padding:3px;background-color: #8f8f8f;">
+<mat-card class="app-card"
+          [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkdialog}"
+>
   <table style="width: 100%" *ngIf="!showOldCoupon"><tr>
     <td>
       <button mat-button mat-flat-button
@@ -273,8 +275,6 @@
         </mat-form-field>
         <br>
 
-
-
         <br>
         <mat-form-field class="form-field-style" *ngIf="shopaddress.startsWith('http')">
           <input matInput type="text"
@@ -299,8 +299,8 @@
         <div class="detail_promo">
           La promotion dure <span *ngIf="coupon.duration_jours!=null && coupon.duration_jours>0">{{coupon.duration_jours}} jour(s) </span>
           <span *ngIf="coupon.duration_hours!=null && coupon.duration_hours>0">{{coupon.duration_hours}} heures</span>,
-        et s'interrompt si le stocke de {{coupon.stock}} {{coupon.symbol}} à été distribué.
-          La promotion ne peut plus être distribuée si {{coupon.max_coupon}} ont été partagées.
+        et s'interrompt si le stocke de {{coupon.stock}} {{coupon.symbol}} a été distribué.
+          <br>La promotion ne peut plus être distribuée si {{coupon.max_coupon}} coupons ont été partagées.
         <br><br>
         </div>
 

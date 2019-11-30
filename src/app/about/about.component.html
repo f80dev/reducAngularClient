@@ -1,4 +1,6 @@
-<mat-expansion-panel class="app-card">
+<mat-expansion-panel class="app-card"
+                     *ngIf="config.values?.brands!=null"
+                     [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkabout}">
   <mat-expansion-panel-header (click)="switchVisible()" style="cursor: pointer;">
     <div style="text-align: center;width:100%;">
       {{config.values.brands[config.activeBrand].appname+" - "+config.values.brands[config.activeBrand].version}}<br>

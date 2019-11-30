@@ -1,4 +1,6 @@
-<mat-card class="app-card" style="background: none;">
+<mat-card class="app-card"
+          *ngIf="config.values?.brands!=null"
+          [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkcoupon}">
   <mat-toolbar class="app-toolbar">
     <div style="display: inline-block;padding:0px;vertical-align: text-top;" *ngIf="!askFilter">
       {{title}}<br>

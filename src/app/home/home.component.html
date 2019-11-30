@@ -1,90 +1,96 @@
-<table style="width: 100%;"><tr>
-  <td style="width: 700px;vertical-align: text-top;">
-    <app-flashscreen [message]="message"
-                     *ngIf="showMessage"
-                     [duration]="15"
-                     (close)="closeFlashScreen()">
-    </app-flashscreen>
+<div *ngIf="config.values?.brands!=null"
+      [ngStyle]="{'height':'100vh','background-color':config.values.brands[config.activeBrand].colors.bkmain}"
+>
+  <table style="width: 100%;">
+    <tr>
+      <td style="width: 700px;vertical-align: text-top;">
+        <app-flashscreen [message]="message"
+                         *ngIf="showMessage"
+                         [duration]="15"
+                         (close)="closeFlashScreen()">
+        </app-flashscreen>
 
-    <div style="padding:3px;">
-      <mat-accordion [multi]="true" [hidden]="showMessage">
-        <app-tuto title="Bienvenue dans REDUCSHARE !"
-                  *ngIf="config.values!=null && user.level<0.5"
-                  background="./assets/img/network.jpg"
-                  button="Commencer"
-                  [duration]="5"
-                  color="white"
-                  [force]="true"
-                  image="./assets/icons/icon-144x144.png"
-                  subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
-        </app-tuto>
+        <div style="padding:3px;">
+          <mat-accordion [multi]="true" [hidden]="showMessage">
+            <app-tuto title="Bienvenue dans REDUCSHARE !"
+                      *ngIf="config.values!=null && user.level<0.5"
+                      background="./assets/img/network.jpg"
+                      button="Commencer"
+                      [duration]="5"
+                      color="white"
+                      [force]="true"
+                      image="./assets/icons/icon-144x144.png"
+                      subtitle="Une application pour récupérer des promotions dont la valeur augmente quand vous les redistribuez !">
+            </app-tuto>
 
-        <app-userform [user]="user"
-                      [excludes]="user.coupons"
-                      (update)="updateUser($event)"
-                      (refresh)="refresh('',$event?.sort)"
-                      (flash)="refresh($event?.message)">
-        </app-userform>
+            <app-userform [user]="user"
+                          [excludes]="user.coupons"
+                          (update)="updateUser($event)"
+                          (refresh)="refresh('',$event?.sort)"
+                          (flash)="refresh($event?.message)">
+            </app-userform>
 
-        <app-tuto
-          *ngIf="user?.shops?.length>0 && user.level<1"
-          type="title"
-          color="white"
-          [duration]="20"
-          background="./assets/img/openshop2.jpg"
-          title="Bravo votre première enseigne est prête."
-          subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
-        </app-tuto>
+            <app-tuto
+              *ngIf="user?.shops?.length>0 && user.level<1"
+              type="title"
+              color="white"
+              [duration]="20"
+              background="./assets/img/openshop2.jpg"
+              title="Bravo votre première enseigne est prête."
+              subtitle="Vous pouvez maintenant y associer autant de promotions que vous le souhaitez et vos clients pourront s'y inscrire pour recevoir directement vos nouvelles offres">
+            </app-tuto>
 
-<!--  Section contenant la liste des points de ventes -->
-        <app-shops
-          [user]="user"
-          (update)="refresh($event?.message)"
-          (delete)="refresh($event?.message)"
-          (open)="openForm($event)"
-          (insert)="refresh($event?.message)">
-        </app-shops>
+            <!--  Section contenant la liste des points de ventes -->
+            <app-shops
+              [user]="user"
+              (update)="refresh($event?.message)"
+              (delete)="refresh($event?.message)"
+              (open)="openForm($event)"
+              (insert)="refresh($event?.message)">
+            </app-shops>
 
-        <app-tuto *ngIf="coupons.length>0"
-                  label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
-        </app-tuto>
+            <app-tuto *ngIf="coupons.length>0"
+                      label="Ici, retrouvez toutes les réductions récupérées. Vous pouvez les repartager pour augmenter vos bonus ou les utiliser directement dans l'enseigne concernée">
+            </app-tuto>
 
-        <!--Affiche la liste des coupons en possession de l'utilisateur -->
-        <app-list-coupons (delete)="refresh($event?.message)"
-                          id="zoneMyPromos"
-                          title="Retrouvez ici la liste de tous vos coupons"
-                          (insert)="refresh($event?.message)"
-                          (update)="refresh($event?.message)"
-                          [sort]="sort"
-                          [coupons]="user.coupons" [user]="user">
-        </app-list-coupons>
+            <!--Affiche la liste des coupons en possession de l'utilisateur -->
+            <app-list-coupons (delete)="refresh($event?.message)"
+                              id="zoneMyPromos"
+                              title="Retrouvez ici la liste de tous vos coupons"
+                              (insert)="refresh($event?.message)"
+                              (update)="refresh($event?.message)"
+                              [sort]="sort"
+                              [coupons]="user.coupons" [user]="user">
+            </app-list-coupons>
 
-        <app-about *ngIf="user.level<2.0"
-                   (open)="openFrame($event)"
-                   [withlogo]="!showHelpScreen"
-                   style="margin-top: 3px;color:black;background-color: darkblue;"
-                   [user]="user">
-        </app-about>
-      </mat-accordion>
+            <app-about *ngIf="user.level<2.0"
+                       (open)="openFrame($event)"
+                       [withlogo]="!showHelpScreen"
+                       style="margin-top: 3px;color:black;background-color: darkblue;"
+                       [user]="user">
+            </app-about>
+          </mat-accordion>
 
-    </div>
+        </div>
 
-  </td>
-  <td *ngIf="showHelpScreen" style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
-    <div *ngIf="iframe_src?.length>0" style="height: 100vh;width:100%;text-align: center;">
-      <iframe id="out" [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"></iframe>
-    </div>
+      </td>
+      <td *ngIf="showHelpScreen" style="vertical-align:top;height:100vh;margin:0px;padding:4px;">
+        <div *ngIf="iframe_src?.length>0" style="height: 100vh;width:100%;text-align: center;">
+          <iframe id="out" [src]="iframe_src | safe:'resourceUrl'" width="100%" height="100%"></iframe>
+        </div>
 
-    <div *ngIf="config.values?.brands!=null && iframe_src?.length==0"
-         [ngStyle]="{'height': '100vh','background-color':config.values?.brands[config.activeBrand].bkcolor ,'width':'100%','text-align':'center','color':'white','vertical-align':'middle','font-size':'xx-large'}">
-     <br><br><br>{{config.values?.brands[config.activeBrand].appname}}<br><br><br>
-     <img [src]="config.values?.brands!=null && config.values?.brands[config.activeBrand].logo" style="width:30%;max-width: 250px;">
-     <br><br><br>
-     <span style="font-size: small;">{{config.values?.brands[config.activeBrand].claim}}</span>
-      <br><br>
-   </div>
-  </td>
-</tr></table>
+        <div *ngIf="config.values?.brands!=null && iframe_src?.length==0"
+             [ngStyle]="{'height': '100vh','background-color':config.values?.brands[config.activeBrand].bkhelp ,'width':'100%','text-align':'center','color':'white','vertical-align':'middle','font-size':'xx-large'}">
+          <br><br><br>{{config.values?.brands[config.activeBrand].appname}}<br><br><br>
+          <img [src]="config.values?.brands!=null && config.values?.brands[config.activeBrand].logo" style="width:30%;max-width: 250px;">
+          <br><br><br>
+          <span style="font-size: small;">{{config.values?.brands[config.activeBrand].claim}}</span>
+          <br><br>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
 
 
 

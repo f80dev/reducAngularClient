@@ -2,7 +2,16 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.85.2-beta",
+    "version": "0.85.3-beta",
+    "colors":{
+      "bkuser":"#2C4050",
+      "bkshop":"#575757",
+      "bkcoupon":"#686868",
+      "bkmain":"#4F4F4F",
+      "bkabout":"#2C4050",
+      "bkdialog":"#5F5F5F",
+      "bkhelp":"#2C4050"
+    },
     "bkcolor":"#2a002a",
     "news": "Classement des meilleurs vendeurs",
     "logo": "./assets/img/logo.png",
@@ -21,28 +30,6 @@
     }
   },
   {
-    "appname": "BTpromo",
-    "title": "Bouygues Telecom Promo",
-    "version": "1.0",
-    "news": "bug",
-    "logo": "./assets/img/bt_logo.png",
-    "bkcolor":"gray",
-    "claim":"Les promotions des boutiques Bouygues Telecom",
-    "editor":{
-      "website": "https://lefooding.com/fr",
-      "name":"Bouygues Telecom",
-      "logo":""
-    },
-    "support": {
-      "forum": "http://reducshare.les-forums.com/",
-      "email": "bt-contact@reducshare.com",
-      "facebook": "https://www.facebook.com/bouyguestelecom/",
-      "faq": "https://www.assistance.bouyguestelecom.fr/",
-      "website": "https://www.assistance.bouyguestelecom.fr/"
-    }
-  },
-
-  {
     "appname": "foodingPromo",
     "title": "Le Fooding promotion",
     "version": "0.33-beta",
@@ -53,6 +40,14 @@
       "website": "https://lefooding.com/fr",
       "name":"LeFooding",
       "logo":""
+    },
+    "colors":{
+      "bkuser":"#092749",
+      "bkshop":"#092749",
+      "bkcoupon":"#1F2D52",
+      "bkmain":"#4F4F4F",
+      "bkabout":"#4F0D0F",
+      "bkdialog":"#1C3724"
     },
     "support": {
       "forum": "http://reducshare.les-forums.com/",
