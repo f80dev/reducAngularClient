@@ -51,8 +51,8 @@
 
   <!--Sélection d'un filtre-->
   <mat-card-content class="app-card-content" *ngIf="askFilter">
-    <mat-selection-list #tags (selectionChange)="selTags=tags?.selectedOptions.selected">
-      <mat-list-option *ngFor="let tag of config.values.tags?.split(',')">
+    <mat-selection-list #ctl_tags (selectionChange)="selTags=ctl_tags.selectedOptions.selected">
+      <mat-list-option *ngFor="let tag of tags.split(',')">
         {{tag}}
       </mat-list-option>
     </mat-selection-list>

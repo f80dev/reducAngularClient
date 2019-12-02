@@ -58,6 +58,7 @@ import { ImageSelectorComponent } from './image-selector/image-selector.componen
 import { LiteralPipe } from './literal.pipe';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ChartsComponent } from './charts/charts.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -91,7 +92,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     NewCouponSimpleComponent,
     ImageSelectorComponent,
     LiteralPipe,
-    ChartsComponent
+    ChartsComponent,
+    TransactionsComponent
   ],
   entryComponents: [
     NewCouponComponent,

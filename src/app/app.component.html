@@ -1,9 +1,13 @@
-<app-tuto label="En poursuivant votre navigation, vous acceptez le dépôt de cookies destinés à conserver vos préférences sur cet appareil lorsque vous quittez l'application."
-          color="white"
-          [ngStyle]="{'background-color':config.values.brands[config.activeBrand].colors.bkmain}"
-          *ngIf="config.values?.brands!=null"
-          [delay]="20"
-          [duration]="30">
-</app-tuto>
+<div [ngStyle]="{'background-color':config.values?.brands[config.activeBrand].colors.bkmain}"
+     style="width:100vw;height:100vh;"
+     *ngIf="config.values?.brands!=null">
 
-<router-outlet></router-outlet>
+  <app-tuto label="En poursuivant votre navigation, vous acceptez le dépôt de cookies destinés à conserver vos préférences sur cet appareil lorsque vous quittez l'application."
+            color="white"
+            [delay]="20"
+            [duration]="30">
+  </app-tuto>
+
+  <router-outlet></router-outlet>
+
+</div>

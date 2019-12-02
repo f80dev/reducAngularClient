@@ -6,7 +6,8 @@
                        (closed)="showCoupon(coupon,false)"
                        (opened)="showCoupon(coupon,true)"
                        [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkcoupon,'padding':'0px !important'}"
-                       *ngIf="coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id">
+                       *ngIf="coupon.owner?.length>0 && (coupon.flip || coupon.visual==null || coupon.visual?.length==0 || coupon.origin==coupon._id)">
+
     <mat-expansion-panel-header collapsedHeight="50px"
                                 expandedHeight="50px"
                                 class="app-card-header"
@@ -14,10 +15,6 @@
 
       <!-- Titre principal du coupon-->
       <div style="width: 100%;margin-left:5px;margin-top:0px;">
-        <!--<div style="width: 40px;height:40px;display: inline-block;"-->
-        <!--(click)="_flip(coupon)"-->
-        <!--class="header-image">-->
-        <!--</div>-->
 
         <!--Affichage des coupon pour la carte-->
         <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
@@ -26,14 +23,14 @@
         </span>
 
         <!--Affichage des coupons origines pour leur propriétaire-->
-        <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id" style="font-size: small;line-height: 90%;">
+        <div *ngIf="coupon.origin==coupon._id && coupon.owner==user._id"
+             style="font-size: small;line-height: 90%;">
           {{coupon.title}}
 
           <span *ngIf="!isVisible(coupon)">
               &nbsp;&nbsp;- <app-timer [end]="coupon.dtEnd"></app-timer>
             </span>
         </div>
-
 
         <!--Affichage des coupons copiés pour les non propriétaire pour la carte-->
         <div *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
@@ -67,7 +64,6 @@
               Avant le {{(coupon.dtEnd*1000) | date:formatDate}} (il reste <app-timer [end]="coupon.dtEnd"></app-timer>)
             </span>
         </div>
-
 
         <!--Affichage des coupons origines pour leur propriétaire-->
         <div *ngIf="coupon.owner==user._id && coupon.origin==coupon._id" style="font-size: small;">
@@ -324,6 +320,16 @@
                 *ngIf="coupon.origin!=coupon._id"
                 (click)="showCode(coupon,3)">
           <mat-icon>card_giftcard</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button
+                class="app-button"
+                title="Disperser des coupons"
+                name="btnDrop"
+                *ngIf="coupon.origin==coupon._id && coupon.public && user.level>1.5"
+                (click)="drop(coupon)">
+          <mat-icon>arrow_drop_down</mat-icon>
         </button>
 
         <button mat-button mat-flat-button

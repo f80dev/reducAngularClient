@@ -141,6 +141,31 @@ export class UserformComponent implements OnInit {
       });
   }
 
+  createMarkersFromCoupons(coupons,markers){
+    coupons.forEach((c)=>{
+      //Vérifie que l'utilisateur n'a pas déjà le coupon
+      c.visible=false;
+      var bContinue=true;
+      if(this.filter_tag.length>0 && (this.filter_tag.indexOf(c.tags)==-1 || c.tags.length==0))bContinue=false; //Rejet sur le critère du filtre
+      if(c.owner==this.user._id)bContinue=false;//Rejet sur le critere de la possession
+      this.excludes.forEach((exclude_c)=>{
+        if(c._id==exclude_c.origin)bContinue=false;
+      });
+
+      if(bContinue){
+        var icon=this.config.values.icon_coupon;
+
+        var scale=Math.max(0.20/coupons.length,0.10);
+        if(coupons.length<3)icon=c.picture;
+
+        //Ajoute le coupon sur la carte par création d'un marker
+        var marker=createMarker(Number(c.lng),Number(c.lat),null,c,scale);
+        markers.push(marker);
+        marker.coupon.visible=false;
+        this.showCouponOnMap.push(marker.coupon);
+      }
+    });
+  }
 
   /**
    * Montre les promos sur la carte
@@ -164,33 +189,18 @@ export class UserformComponent implements OnInit {
       if(this.user.photosize!=null)scale=25/this.user.photosize;
       var markers=[];
 
-
-      if(this.user.position!=null)
+      if(this.user.position!=null){
         markers.push(createMarker(this.user.position.lng,this.user.position.lat,this.user.photo,null,scale));
+         this.api.getCouponsAround(this.user.position.lng,this.user.position.lat).subscribe((cs:any[])=>{
+           for(let c of cs){
+             coupons.push(c);
+           }
+           this.createMarkersFromCoupons(coupons,markers);
+         })
+      } else
+        this.createMarkersFromCoupons(coupons,markers);
 
-      coupons.forEach((c)=>{
-        //Vérifie que l'utilisateur n'a pas déjà le coupon
-        c.visible=false;
-        var bContinue=true;
-        if(this.filter_tag.length>0 && (this.filter_tag.indexOf(c.tags)==-1 || c.tags.length==0))bContinue=false; //Rejet sur le critère du filtre
-        if(c.owner==this.user._id)bContinue=false;//Rejet sur le critere de la possession
-        this.excludes.forEach((exclude_c)=>{
-          if(c._id==exclude_c.origin)bContinue=false;
-        });
 
-        if(bContinue){
-          var icon=this.config.values.icon_coupon;
-
-          var scale=Math.max(0.20/coupons.length,0.10);
-          if(coupons.length<3)icon=c.picture;
-
-          //Ajoute le coupon sur la carte par création d'un marker
-          var marker=createMarker(Number(c.lng),Number(c.lat),null,c,scale);
-          markers.push(marker);
-          marker.coupon.visible=false;
-          this.showCouponOnMap.push(marker.coupon);
-        }
-      });
       l.getSource().clear();
       l.getSource().addFeatures(markers);
     })

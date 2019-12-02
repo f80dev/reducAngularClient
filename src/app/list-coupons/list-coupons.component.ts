@@ -20,6 +20,7 @@ import {MatDialog} from "../../../node_modules/@angular/material/dialog";
 import {isLocal, sendToPrint, showError, showMessage, traitement_coupon} from "../tools";
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
+import {LocService} from "../loc.service";
 
 @Component({
   selector: 'app-list-coupons',
@@ -49,6 +50,7 @@ export class ListCouponsComponent implements OnChanges {
               public api: ApiService,public dialog: MatDialog,
               public router: Router,private socialAuthService: SocialService,
               public config:ConfigService,
+              public loc:LocService,
               public ngNavigatorShareService: NgNavigatorShareService) {
   }
 
@@ -256,5 +258,24 @@ export class ListCouponsComponent implements OnChanges {
   onPanRight($event,coupon:any) {
     clearTimeout(this.handle);
     this.handle=setTimeout(()=>{this.remove(coupon);},500);
+  }
+
+  drop(coupon:any){
+    this.dialog.open(PromptComponent, {
+      width: '250px', data: {
+        _default:"12 rue martel, paris",
+        onlyConfirm: false,
+        title: "Adresse de la dispersion ?"
+      }
+    }).afterClosed().subscribe((address) => {
+      if(address){
+        this.loc.getAddress(address,(coord)=>{
+          this.api.drop(coupon,Number(coord[0].lat),Number(coord[0].lon),5).subscribe((r:any)=>{
+            this.snackBar.open(r.message,"");
+          });
+        })
+      }
+
+    });
   }
 }

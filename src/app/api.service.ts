@@ -110,4 +110,16 @@ export class ApiService {
   checkCode(userid: string, code: string,field:string) {
     return this.http.get(api("checkcode/"+userid+"/"+code+"/"+field));
   }
+
+  drop(coupon: any, lat: number, lng: number, nbr: number) {
+    return this.http.get(api("dropcoupon/"+coupon['_id']+"/"+lat+"/"+lng+"/"+nbr));
+  }
+
+  getCouponsAround(lng: number, lat: number) {
+    return this.http.get(api("getcouponsaround/"+lng+"/"+lat));
+  }
+
+  getTransactions(user_id: string) {
+    return this.http.get(api("gettransactions/"+user_id));
+  }
 }

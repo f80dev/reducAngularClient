@@ -18,6 +18,7 @@ export class OldCouponsComponent implements OnInit {
   coupons:any[]=[];
   mycoupons:any[]=[];
   withFilter=false;
+  tags:string="";
 
   @Input("shopid") shopid="";
   @Input("level") level=0;
@@ -33,6 +34,9 @@ export class OldCouponsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.tags=this.config.values.brands[this.config.activeBrand].tags;
+    if(this.tags==null)this.tags=this.config.values.tags;
+
     this.askFilter=(this.filter.length==0 && this.level<2);
     this.refresh(()=>{
       if(this.filter.length>0)this.opereFilter();
@@ -94,7 +98,7 @@ export class OldCouponsComponent implements OnInit {
   opereFilter() {
     $$("Application du filtre="+this.filter);
     this.withFilter=true;
-    if(this.filter==this.config.values.tags){
+    if(this.filter==this.tags){
       this.withFilter=false;
       return;
     }

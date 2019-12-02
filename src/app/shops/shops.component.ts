@@ -46,16 +46,27 @@ export class ShopsComponent implements OnInit {
     this.oninsert.emit('coupon ajouté');
   }
 
+
+  /**
+   *
+   * @param shop
+   */
   delShop(shop: any) {
     this.api.removeShop(shop._id).subscribe((result)=>{
       this.ondelete.emit(result);
     },(error)=>{showError(this,error);});
   }
 
+
+
   openPrinter(shop:any){
     sendToPrint("print-section-"+shop._id);
   }
 
+
+  /*
+
+   */
   edit(shop:any,coupon:any){
     this.api.shop=shop;
     this.api.coupon=coupon;
@@ -92,6 +103,10 @@ export class ShopsComponent implements OnInit {
   }
 
 
+  /**
+   *
+   * @param shop
+   */
   setDelegate(shop:any) {
     if(this.config.webcamsAvailable==0){
       this.dialog.open(PromptComponent, {width: '250px',
@@ -127,6 +142,10 @@ export class ShopsComponent implements OnInit {
     }
   }
 
+
+  /**
+   *
+   */
   ngOnInit(): void {
     setTimeout(()=> {
       if(this.user.shops!=null && this.user.shops.length>0 && this.config.params.command.indexOf("add_promo")>-1){
