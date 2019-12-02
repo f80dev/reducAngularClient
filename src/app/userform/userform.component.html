@@ -35,6 +35,7 @@
 
 
   <div class="app-card-content">
+    <app-transactions *ngIf="showTransac" [user]="user"></app-transactions>
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
       <app-scanner [size]="400"
                    filter="/home"
@@ -169,6 +170,16 @@
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <div class="bloc-bouton">Promos<br>proches</div>
+    </button>
+
+
+    <button mat-button
+            *ngIf="user.shops?.length>0"
+            title="Liste des transactions"
+            class="app-button"
+            id="btnTransac" mat-icon-button
+            mat-raised-button (click)="showTransac=!showTransac">
+      <mat-icon>list</mat-icon>
     </button>
 
 

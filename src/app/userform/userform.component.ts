@@ -34,6 +34,7 @@ export class UserformComponent implements OnInit {
 
   showScanner: boolean = false;
   showMap: boolean=false;
+  showTransac:boolean=false;
   showOldPromos: boolean=false;
   private map: any;
   handle:any;

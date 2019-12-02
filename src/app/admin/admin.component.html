@@ -122,6 +122,8 @@
     <th mat-sort-header="_id">ID</th>
     <th>coupon</th>
     <th>user (target)</th>
+    <th>shop</th>
+    <th>Origin</th>
     <th>value</th>
     <th>date</th>
   </tr>
@@ -129,6 +131,8 @@
     <td mat-cell>{{money._id}}</td>
     <td mat-cell>{{money.coupon}}</td>
     <td mat-cell>{{money.user}}</td>
+    <td mat-cell>{{money.shop}}</td>
+    <td mat-cell>{{money.origin}}</td>
     <td mat-cell>{{money.value}}</td>
     <td mat-cell>{{money.dtCreate*1000 | date:'short'}}</td>
   </tr>

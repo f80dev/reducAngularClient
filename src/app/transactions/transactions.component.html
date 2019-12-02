@@ -1,3 +1,7 @@
-<div *ngFor="let t of transactions">
-  {{t.montant}}
+<small><strong>Liste des transactions:</strong></small>
+<br>
+<div *ngFor="let t of transactions | orderBy:'dtCreate':'desc'">
+  {{t.dtCreate*1000 | date:'dd/MM - hh:mm'}} : {{-t.value}}{{t.symbol}} accordés
 </div>
+
+
