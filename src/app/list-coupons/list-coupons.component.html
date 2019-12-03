@@ -134,7 +134,6 @@
               Partager le coupon pour gagner des {{coupon.unity}}
             </div>
 
-
             <span style="font-size: 2em;"
                   *ngIf="coupon.promocodes.length>0">
                   {{showPromoCode(coupon.gain,coupon.promocodes)}}
@@ -143,9 +142,9 @@
 
             <span style="font-size: small;padding: 0px;" *ngIf="coupon.gain>0">gagné(es)</span>
             <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
-            <br><br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
+            <br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
             <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
-            <span *ngIf="coupon.stock<10">Encore {{coupon.stock}}{{coupon.symbol}} à gagner</span>
+            <div *ngIf="coupon.stock<10"><br>Encore {{coupon.stock}}{{coupon.symbol}} à gagner</div>
           </div>
 
 
@@ -318,7 +317,7 @@
                 title="Offrir ce coupon (vous ne l'aurez donc plus)"
                 name="btnGift"
                 *ngIf="coupon.origin!=coupon._id"
-                (click)="showCode(coupon,3)">
+                (click)="confirmGift(coupon)">
           <mat-icon>card_giftcard</mat-icon>
         </button>
 

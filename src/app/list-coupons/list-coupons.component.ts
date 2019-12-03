@@ -278,4 +278,12 @@ export class ListCouponsComponent implements OnChanges {
 
     });
   }
+
+  confirmGift(coupon:any){
+    this.snackBar.open("Offrir ce coupon permet de transfèrer votre avantage mais cela signifie que vous ne l'aurez plus","confirmer",{duration:6000})
+      .onAction().subscribe(()=>{
+        this.showCode(coupon,3);
+    });
+
+  }
 }
