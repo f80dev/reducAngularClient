@@ -44,22 +44,20 @@
       <div style="width:80%;text-align:center;font-size: 6vmin;margin-top:5vh;margin-bottom:5vh;margin-left:10%;"
             [innerHTML]="text | safe:'html'">
       </div>
-      <img *ngIf="image?.length>0" [src]="image" style="max-width: 80%;max-height: 80%;margin-bottom:5vh;display: inline-block;">
-      <div *ngIf="image?.length==0" style="height:40vh"></div>
-      <div style="width:90%;margin-left:5%;margin-top:6vh;text-align:center;font-size: large;margin-bottom: 5vh;" [innerHTML]="subtitle | safe:'html'"></div>
+      <img *ngIf="image?.length>0"
+           [src]="image"
+           style="max-width: 80%;max-height: 80%;margin-bottom:3vh;display: inline-block;">
+
+      <div *ngIf="image?.length==0"
+           style="height:40vh"></div>
+
+      <div style="width:90%;margin-left:5%;margin-top:4vh;text-align:center;font-size: large;margin-bottom: 5vh;"
+           [innerHTML]="subtitle | safe:'html'"></div>
+
       <button mat-button mat-raised-button id="btnStart">{{labelButton}}</button>
 
     </div>
   </div>
-
-
-  <!--<div *ngIf="_type=='tips'" style="display: inline-block;">-->
-    <!--<img *ngIf="image?.length>0 && text?.length>0"-->
-         <!--[src]="image" style="width:15px;height:15px;padding:3px;display: inline-block;"-->
-         <!--(mousedown)="hideTuto()"-->
-    <!--&gt;-->
-    <!--<div *ngIf="_if" style="font-size: x-small;display: inline;">{{text}}</div>-->
-  <!--</div>-->
 
 
 </div>

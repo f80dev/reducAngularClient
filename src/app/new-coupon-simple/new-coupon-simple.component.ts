@@ -107,8 +107,13 @@ export class NewCouponSimpleComponent implements OnInit {
 
     this.condition_text=exportToHTML("<br><br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
+    var nbCouponForShare=1;
+    if(this.coupon.share_bonus<1){
+      nbCouponForShare=1/this.coupon.share_bonus;
+      this.coupon.share_bonus=1;
+    }
     this.augment_text=exportToHTML("Le @beneficiaire gagne :<br><ul><li> #direct_bonus=Bonus_attribué_dés_la_récupération_du_coupon @symbol à la récupération du coupon,</li><li> " +
-      "puis 1 @symbol de plus chaque fois qu'il envoi le coupon à #nb_partage=Gain_à_chaque_partage nouvelles personnes.</li><li>Enfin #pay_bonus=Bonus_supplémentaire(s)_à_l'usage_d'un_coupon_distribué @symbol suplémentaire " +
+      "puis 1 @symbol de plus chaque fois qu'il envoi le coupon à #nb_partage=Gain_à_chaque_partage nouvelle(s) personne(s).</li><li>Enfin #pay_bonus=Bonus_supplémentaire(s)_à_l'usage_d'un_coupon_distribué @symbol suplémentaire " +
       "lorsqu'un coupon qu'il a distribué, est utilisé</li></ul>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @beneficiaire <br>" +
