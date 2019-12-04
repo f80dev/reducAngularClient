@@ -142,7 +142,7 @@ export class UserformComponent implements OnInit {
       });
   }
 
-  createMarkersFromCoupons(coupons,markers){
+  createMarkersFromCoupons(coupons,markers,layer){
     coupons.forEach((c)=>{
       //Vérifie que l'utilisateur n'a pas déjà le coupon
       c.visible=false;
@@ -166,6 +166,9 @@ export class UserformComponent implements OnInit {
         this.showCouponOnMap.push(marker.coupon);
       }
     });
+
+    layer.getSource().clear();
+    layer.getSource().addFeatures(markers);
   }
 
   /**
@@ -196,14 +199,13 @@ export class UserformComponent implements OnInit {
            for(let c of cs){
              coupons.push(c);
            }
-           this.createMarkersFromCoupons(coupons,markers);
+           this.createMarkersFromCoupons(coupons,markers,l);
          })
       } else
-        this.createMarkersFromCoupons(coupons,markers);
+        this.createMarkersFromCoupons(coupons,markers,l);
 
 
-      l.getSource().clear();
-      l.getSource().addFeatures(markers);
+
     })
   }
 

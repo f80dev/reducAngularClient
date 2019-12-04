@@ -122,4 +122,8 @@ export class ApiService {
   getTransactions(user_id: string) {
     return this.http.get(api("gettransactions/"+user_id));
   }
+
+  tirage(couponid:string,gain: string, limit: string) {
+    return this.http.get(api("tirage/"+couponid+"/"+gain+"/"+limit));
+  }
 }

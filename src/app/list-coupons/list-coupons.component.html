@@ -324,6 +324,16 @@
         <button mat-button mat-flat-button
                 mat-icon-button
                 class="app-button"
+                title="Faire gagner de la réduction au meilleur contributeur"
+                name="btnTirage"
+                *ngIf="coupon.origin==coupon._id && user.level>1"
+                (click)="tirage(coupon)">
+          <mat-icon>grade</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                mat-icon-button
+                class="app-button"
                 title="Disperser des coupons"
                 name="btnDrop"
                 *ngIf="coupon.origin==coupon._id && coupon.public && user.level>1.5"

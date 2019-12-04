@@ -261,6 +261,7 @@ export class ListCouponsComponent implements OnChanges {
   }
 
   drop(coupon:any){
+    //TODO: a travailler
     this.dialog.open(PromptComponent, {
       width: '250px', data: {
         _default:"12 rue martel, paris",
@@ -285,5 +286,28 @@ export class ListCouponsComponent implements OnChanges {
         this.showCode(coupon,3);
     });
 
+  }
+
+  tirage(coupon:any) {
+    var title="Tirage au sort pour gagner des "+coupon.unity;
+    this.dialog.open(PromptComponent, {width: '250px', data: {question:"Combien de "+coupon.unity+" fait on gagner ?",onlyConfirm: false,title: title}
+      }).afterClosed().subscribe((gain) => {
+        if(gain){
+
+          if(Number(gain)>coupon.stock){
+            this.snackBar.open("Le stock réservé à la promotion est insuffisant par rapport au gain proposé","",{duration:3000});
+            return;
+          }
+
+          this.dialog.open(PromptComponent, {width: '250px', data: {question:"Combien de partage minimum pour être éligible ?",onlyConfirm: false,title: title}
+          }).afterClosed().subscribe((limit) => {
+            if(limit){
+              this.api.tirage(coupon._id,gain,limit).subscribe((r:any)=>{
+                this.snackBar.open(r.message,"",{});
+              });
+            }
+          });
+        }
+    });
   }
 }
