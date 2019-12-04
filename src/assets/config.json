@@ -2,7 +2,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.85.4-beta",
+    "version": "0.86-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -201,7 +201,7 @@
       "min_to_use":0,
       "pluriel":false,
       "label":"Des articles à moitié prix",
-      "share_bonus":0.5,
+      "share_bonus":1,
       "pay_bonus":20,
       "direct_bonus":10,
       "final_bonus":0,
