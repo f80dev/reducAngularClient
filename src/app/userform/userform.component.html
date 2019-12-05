@@ -98,7 +98,7 @@
     <!--<button mat-button mat-raised-button (click)="showOldPromos=!showOldPromos">Mes promos</button>-->
 
     <button mat-icon-button
-            *ngIf="user.email?.indexOf('fictif.com')>-1"
+            *ngIf="user.level>0.5 && user.email?.indexOf('fictif.com')>-1"
             title="S'authentifier permet de se connecter depuis plusieurs appareils"
             id="btnEmailLogin"
             class="app-button"
@@ -143,7 +143,7 @@
 
     <button mat-button
             class="app-button"
-            *ngIf="user.level<3"
+            *ngIf="user.level<3 && user.level>0.5"
             id="btnExpert" title="Accès aux fonctions avancées de REDUCSHARE"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>
@@ -166,15 +166,14 @@
     <button mat-raised-button mat-button
             *ngIf="user.level<0.8 && user.shops?.length==0"
             id="btnMapRookie"
-            class="app-button"
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
-      <div class="bloc-bouton">Promos<br>proches</div>
+      <div class="bloc-bouton">Trouver une<br>promotion</div>
     </button>
 
 
     <button mat-button
-            *ngIf="user.shops?.length>0"
+            *ngIf="user.shops?.length>0 && user.level>0.5"
             title="Liste des transactions"
             class="app-button"
             id="btnTransac" mat-icon-button
@@ -182,15 +181,6 @@
       <mat-icon>list</mat-icon>
     </button>
 
-
-    <button mat-button
-            *ngIf="user.tags?.length==0 || user.shops?.length>0"
-            title="Créer un nouveau point de vente"
-            class="app-button"
-            id="btnAddShopPlus" mat-icon-button
-            mat-raised-button (click)="addshop()">
-      <mat-icon>account_balance</mat-icon>
-    </button>
 
     <button mat-button
             *ngIf="user.coupons?.length>2"
@@ -202,8 +192,18 @@
     </button>
 
 
+    <!--Affichage du bouton de création de point de vente -->
     <button mat-button
-            *ngIf="user.tags?.length>0 && user.shops?.length==0"
+            *ngIf="user.level>0.8 || user.shops?.length>0"
+            title="Créer un nouveau point de vente"
+            class="app-button"
+            id="btnAddShopPlus" mat-icon-button
+            mat-raised-button (click)="addshop()">
+      <mat-icon>account_balance</mat-icon>
+    </button>
+
+    <button mat-button
+            *ngIf="user.level<0.8 && user.shops?.length==0"
             title="Créer une nouvelle enseigne pour des promotions"
             class="app-button"
             id="btnAddShopPlus2"
