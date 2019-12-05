@@ -134,11 +134,18 @@
       <mat-icon>tap_and_play</mat-icon>
     </button>
 
-    <button *ngIf="config.webcamsAvailable>0" mat-button
-            id="btnScan"
+    <button *ngIf="user.level>0.6 && config.webcamsAvailable>0" mat-button
+            id="btnScan2"
             title="Scanner des coupons directement depuis l'application"
             mat-raised-button mat-icon-button (click)="startScanner()">
       <mat-icon>camera_alt</mat-icon>
+    </button>
+
+    <button *ngIf="user.level<=0.6 && config.webcamsAvailable>0" mat-button
+            id="btnScan" style="font-weight: lighter"
+            title="Scanner des coupons directement depuis l'application"
+            mat-raised-button (click)="startScanner()">
+      Scannez<br>une promo
     </button>
 
     <button mat-button
