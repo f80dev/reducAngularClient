@@ -142,10 +142,10 @@
     </button>
 
     <button *ngIf="user.level<=0.6 && config.webcamsAvailable>0" mat-button
-            id="btnScan" style="font-weight: lighter"
+            id="btnScan" class="medium-button"
             title="Scanner des coupons directement depuis l'application"
             mat-raised-button (click)="startScanner()">
-      Scannez<br>une promo
+      <div class="bloc-bouton">Scannez une<br>promotion</div>
     </button>
 
     <button mat-button
@@ -172,7 +172,7 @@
 
     <button mat-raised-button mat-button
             *ngIf="user.level<0.8 && user.shops?.length==0"
-            id="btnMapRookie"
+            id="btnMapRookie" class="medium-button"
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
       <div class="bloc-bouton">Trouver une<br>promotion</div>
@@ -212,7 +212,7 @@
     <button mat-button
             *ngIf="user.level<0.8 && user.shops?.length==0"
             title="Créer une nouvelle enseigne pour des promotions"
-            class="app-button"
+            class="app-button medium-button"
             id="btnAddShopPlus2"
             mat-raised-button (click)="addshop()">
       <div class="bloc-bouton">Lancer une<br>promotion</div>

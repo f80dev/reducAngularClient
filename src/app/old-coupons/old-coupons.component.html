@@ -19,8 +19,9 @@
             (click)="changeFilter()" >
       <mat-icon>recycle</mat-icon>
     </button>
-    <button mat-button mat-flat-button mat-icon-button *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
-      <mat-icon>filter_list</mat-icon>
+    <button mat-button mat-flat-button
+            *ngIf="filter?.length>0 && !withFilter" (click)="opereFilter()">
+      <div class="bloc-bouton">Remettre<br>le filtre</div>
     </button>
     &nbsp;
     &nbsp;
@@ -81,12 +82,12 @@
         </td>
         <td style="text-align: right;">
           <button mat-button
-                  style="line-height: 95%;font-size: small;font-weight: lighter;height:40px;margin-right:20px;"
+                  style="height:40px;margin-right:20px;"
                   title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
                   id="btnClearFilter"
                   mat-raised-button
                   (click)="refresh()">
-            Voir tous<br>les modèles
+            <div class="bloc-bouton">Voir tous<br>les modèles</div>
           </button>
         </td>
       </tr></table>
