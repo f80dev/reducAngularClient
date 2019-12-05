@@ -60,7 +60,7 @@ export class OldCouponsComponent implements OnInit {
     var modeles=JSON.stringify(this.config.values.modeles);
     if(modeles!=null){
       JSON.parse(modeles).forEach((c)=>{
-        if(c.level<=this.level)
+        if(c.level<=this.level && c.score>2)
           this.coupons.push(c);
       });
     }

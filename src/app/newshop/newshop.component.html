@@ -99,7 +99,7 @@
             <br>
 
             <br>
-            <mat-form-field class="form-field-style" style="width:70%;" (focus)="focusElt='tags'">
+            <mat-form-field class="form-field-style" style="width:75%;" (focus)="focusElt='tags'">
               <mat-label>Type de point de vente / prestations</mat-label>
               <mat-select id="txtShopTags"
                           title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
@@ -121,18 +121,20 @@
               Visuel
             </button>
 
-
             <br>
 
-              <button mat-flat-button mat-button
-                      id="cmdUseProfil"
-                      (click)="addImageFromUser()">
-                Utiliser
-              </button>
-            <span >
-                 &nbsp;&nbsp;votre photo pour représenter votre point de vente
-              </span>
-
+              <table cellspacing="2"><tr>
+                <td>
+                  <button mat-flat-button mat-button
+                          id="cmdUseProfil"
+                          (click)="addImageFromUser()">
+                    Utiliser
+                  </button>
+                </td>
+                <td>
+                  votre photo pour représenter votre point de vente
+                </td>
+              </tr></table>
 
 
 

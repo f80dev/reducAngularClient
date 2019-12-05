@@ -74,19 +74,22 @@
     </div>
 
 
-    <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:95%;margin-top:5%;">
-      <div style="width:50%;display:inline-block;">
-        Voici les modèle destinés à #{{filter}}
-      </div>
-
-      <button mat-button
-              style="line-height: 95%;font-size: small;font-weight: lighter;height:40px;"
-              title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
-              id="btnClearFilter"
-              mat-raised-button
-              (click)="refresh()">
-        Voir tous<br>les modèles
-      </button>
+    <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:100%;margin-top:5%;">
+      <table><tr>
+        <td style="width: 50%">
+          Voici les modèle destinés à #{{filter}}
+        </td>
+        <td style="text-align: right;">
+          <button mat-button
+                  style="line-height: 95%;font-size: small;font-weight: lighter;height:40px;margin-right:20px;"
+                  title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
+                  id="btnClearFilter"
+                  mat-raised-button
+                  (click)="refresh()">
+            Voir tous<br>les modèles
+          </button>
+        </td>
+      </tr></table>
     </div>
 
     <app-tuto label="Les modèles ne sont qu'une base. Ils sont entièrement modifiables pour s'adapter à votre promotion"
