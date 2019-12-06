@@ -296,7 +296,7 @@
           <mat-icon *ngIf="user && isfollower(coupon.shop)">remove_shopping_cart</mat-icon>
         </button>
 
-        <button *ngIf="user.level>0.5 && coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal"
+        <button *ngIf="user.level>0.5 && coupon.share>0 && coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal"
                 mat-button
                 (click)="stopDeal(coupon)"
                 class="app-button"
@@ -357,9 +357,17 @@
                 mat-icon-button
                 class="app-button"
                 name="btnEdit"
-                *ngIf="coupon.share==0 && coupon.origin==coupon._id"
+                *ngIf="user.level>0.8 && coupon.share==0 && coupon.origin==coupon._id"
                 (click)="onedit.emit(coupon)">
           <mat-icon>create</mat-icon>
+        </button>
+
+        <button mat-button mat-flat-button
+                class="app-button"
+                name="btnEdit"
+                *ngIf="user.level<=0.8 && coupon.share==0 && coupon.origin==coupon._id"
+                (click)="onedit.emit(coupon)">
+          <mat-icon>create</mat-icon>&nbsp;Modifier
         </button>
 
 

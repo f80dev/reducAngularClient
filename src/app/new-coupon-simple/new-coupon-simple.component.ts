@@ -101,9 +101,9 @@ export class NewCouponSimpleComponent implements OnInit {
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
     var color="#400064";
-    this.master_text=exportToHTML("L'intro de votre promotion, la phrase choc qui donne envie de la récupérer:" +
-      "<br> #label=teaser_de_votre_promotion <br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e)s " +
-      "dans REDUCSHARE par le symbole #symbol=Symbole_de_l_unité",this.coupon,(fields)=>{this.add_event(fields);},color);
+    this.master_text=exportToHTML("L'intro de votre promotion:" +
+      " #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e)s " +
+      "par le symbole #symbol=Symbole_de_l_unité",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     this.condition_text=exportToHTML("<br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
@@ -113,12 +113,12 @@ export class NewCouponSimpleComponent implements OnInit {
       this.coupon.share_bonus=1;
     }
     this.augment_text=exportToHTML("Le @beneficiaire gagne :<br><ul><li> #direct_bonus=Bonus_attribué_dés_la_récupération_du_coupon @symbol à la récupération du coupon,</li><li> " +
-      "puis 1 @symbol de plus chaque fois qu'il envoi le coupon à #nb_partage=Gain_à_chaque_partage nouvelle(s) personne(s).</li><li>Enfin #pay_bonus=Bonus_supplémentaire(s)_à_l'usage_d'un_coupon_distribué @symbol suplémentaire " +
+      "puis 1 @symbol de plus chaque fois qu'il envoi le coupon à #nb_partage=Gain_à_chaque_partage nouvelle(s) personne(s).</li><li>Enfin #pay_bonus=Bonus_supplémentaire(s)_à_l'usage_d'un_coupon_distribué @symbol supplémentaire(s) " +
       "lorsqu'un coupon qu'il a distribué, est utilisé</li></ul>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
-    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @beneficiaire <br>" +
+    this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @beneficiaire <br><br>" +
       "La promotion se termine au bout de #duration_jours=Durée_de_la_promotion_en_jours jour(s) " +
-      "et #duration_hours=Durée_de_la_promotion_en_heures heure(s) ou si #stock @symbol ont été offerts / distribués.",this.coupon,(fields)=>{this.add_event(fields);},color);
+      "et #duration_hours=Durée_de_la_promotion_en_heures heure(s) ou si,<br>pour l'ensemble des clients, #stock @symbol ont été offerts / distribués.",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     //this.reference_text=exportToHTML("Votre promotion sera classée sous le titre #title=Titre_non_visible_du_client_utilisé_pour_retrouver_sa_promotion",this.coupon,(fields)=>{this.add_event(fields);},color);
   }

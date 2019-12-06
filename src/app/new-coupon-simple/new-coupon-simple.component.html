@@ -38,10 +38,6 @@
         </mat-card-subtitle>
         <mat-card-content class="app-card-content">
 
-          <div *ngIf="coupon.description?.length>0" style="width: 90%;margin-left:5%;">
-            <span style="color: white">Description du modèle / Exemple pratique :</span><br>
-            {{coupon.description}}
-          </div>
 
 
           <mat-vertical-stepper style="background: none;margin:0px;padding:0px" (selectionChange)="openHelp($event)">
@@ -67,7 +63,9 @@
                      id="id_visual"
                      [src]="coupon.visual"
                      (click)="addImage('visual',800,220)"><br>
+                <span style="color:black" >Cliquer sur l'image pour la modifier</span>
               </div>
+
             </mat-step>
 
             <mat-step title="L'avantage client">

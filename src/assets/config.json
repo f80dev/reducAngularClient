@@ -2,7 +2,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.86-beta",
+    "version": "0.87-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -88,7 +88,12 @@
     {
       "id":"tarif",
       "title": "Combien coûte REDUCSHARE ?",
-      "content": "Pour un achteur, le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le REDUCSHARE, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), certaines fonctions 'premium' seront payantes et le nombre de promotion par mois sera limité.<br><br>Pour les associations et établissements publics le service restera intégralement gratuit"
+      "content": "Pour un acheteur, le service sera toujours gratuit.<br><br>Pour les 1000 premiers vendeurs à utiliser le REDUCSHARE, le service sera intégralement gratuit. Pour les suivants (mais on en est pas encore là !), certaines fonctions 'premium' seront payantes et le nombre de promotion par mois sera limité.<br><br>Pour les associations et établissements publics le service restera intégralement gratuit"
+    },
+    {
+      "id":"variable_reduc",
+      "title": "Pourquoi dit-on que l'avantage augmente ?",
+      "content": "La particularité des coupons de REDUCSHARE vient du fait que le montant de l'avantage du client augmente lorsque le client redistribue le coupon ou lorsque lui ou la personne à qui il a envoyé le coupon utilise celui-ci. Cette augmentation est fixée par le vendeur à la fabrication du coupon"
     },
     {
       "id":"profil",
@@ -771,7 +776,7 @@
       "share_bonus":0.5,
       "level":0.0,
       "pay_bonus":20,
-      "beneficiaire":"client bouygues",
+      "beneficiaire":"client",
       "direct_bonus":10,
       "max":50,
       "final_bonus":0,
@@ -783,7 +788,7 @@
       "conditions":"sur présentation du coupon",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/headphone_1f3a7.png",
       "visual":"https://reducshare.com/assets/img/headphones.jpg",
-      "description":"Un point de vente hightech propose ses casques à moitié prix",
+      "description":"Un point de vente hightech propose ses casques audio à moitié prix",
       "tags":"commerce"
     }
   ]

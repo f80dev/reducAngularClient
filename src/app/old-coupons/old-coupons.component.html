@@ -8,7 +8,7 @@
     </div>
 
     <div style="width:80%;display: inline-block;" *ngIf="askFilter">
-      Pour quelle type de points de vente<br> souhaitez-vous voir des modèles ?
+      Pour quel type de points de vente<br> souhaitez-vous voir des modèles ?
     </div>
 
     <span class="spacer">
@@ -63,7 +63,7 @@
   <mat-card-content class="app-card-content" *ngIf="!askFilter">
 
     <div *ngIf="mycoupons.length>0">
-      Mes anciennes promotions<br>
+      <span style="margin-left:5%">Utiliser vos promotions précédentes comme modèle</span><br>
       <mat-list style="padding:0px;">
         <mat-list-item *ngFor="let coupon of mycoupons | orderBy:'dtCreate':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
           <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
@@ -72,17 +72,16 @@
           </h2>
         </mat-list-item>
       </mat-list>
+      <br><br>
     </div>
 
-
-    <div *ngIf="withFilter" style="font-size: small;margin-left:5%;width:100%;margin-top:5%;">
-      <table><tr>
+    <div *ngIf="withFilter" style="margin-left:5%;width:92%;">
+      <table style="width:100%;"><tr>
         <td style="width: 50%">
-          Voici les modèle destinés à #{{filter}}
+          Modèles destinés à #{{filter}}
         </td>
         <td style="text-align: right;">
           <button mat-button
-                  style="height:40px;margin-right:20px;"
                   title="Vous pouvez désactiver le filtre pour voir l'ensemble des modèles disponibles"
                   id="btnClearFilter"
                   mat-raised-button
@@ -113,9 +112,6 @@
           <span> Distribution:{{coupon.share}} </span>
         </p>
 
-        <p matLine style="font-size: x-small;margin-top:3px;" *ngIf="coupon.tags.length>0">
-          <span>#{{coupon.tags.replace(',',' #').replace(',',' #').replace(',',' #')}}</span>
-        </p>
         <button style="display: inline-block;"
                 *ngIf="canDelete"
                 mat-flat-button mat-icon-button (click)="deleteCoupon(coupon)">

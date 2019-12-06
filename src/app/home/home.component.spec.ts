@@ -6,7 +6,7 @@ import {
   MatAccordion,
   MatExpansionPanel,
   MatFormField,
-  MatIcon, MatOption,
+  MatIcon,
   MatOption,
   MatProgressBar,
   MatSelect

@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ImageSelectorComponent } from './image-selector.component';
-import {MatIcon} from "@angular/material";
+import {MatIcon, MatSnackBar,MatDialog} from "@angular/material";
+import {PromptComponent} from "../prompt/prompt.component";
 
 describe('ImageSelectorComponent', () => {
   let component: ImageSelectorComponent;

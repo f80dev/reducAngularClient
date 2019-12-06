@@ -20,12 +20,7 @@
               <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
               <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
             </h2>
-            <div style="line-height:90%;color:lightgrey;font-size: xx-small;">
-              Les promotions sont liées du point
-              de vente.<br> Le nom peut être le vôtre (freelance,artisant)
-            </div>
           </div>
-
 
           <button mat-button mat-flat-button mat-icon-button
                   id="btnValide" *ngIf="new_shop.name?.length>0"
@@ -48,7 +43,7 @@
             title="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre.">
           </app-tuto>
 
-          <mat-form-field class="form-field-style" style="width:80%;margin-right:10px;">
+          <mat-form-field class="form-field-style" style="width:100%;">
             <input id="txtShopName" type="text"
                    (focus)="focusElt=='shopname'"
                    (keyup)="canUpdateName=false"
@@ -56,10 +51,10 @@
                    matInput placeholder="Nom de votre point de vente ou juste votre nom" [(ngModel)]="new_shop.name">
           </mat-form-field>
 
-          <!--Géolocalisation-->
-          <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button mat-icon-button (click)="localize()">
-            <mat-icon>gps_fixed</mat-icon>
-          </button>
+          <app-tuto [if]="new_shop.name?.length==0"
+                    label="Si vous êtes un particulier, un freelance, le nom du point de vente peut être le vôtre.">
+          </app-tuto>
+
 
           <br>
 
@@ -75,6 +70,11 @@
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
+
+            <!--Géolocalisation-->
+            <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button (click)="localize()">
+              Me localiser
+            </button>
             <br>
 
             <!--<mat-label *ngIf="show_address" style="font-size: x-small;color:lightgrey;">Adresse interprétée: {{show_address}}</mat-label>-->
@@ -98,30 +98,30 @@
             </mat-checkbox>
             <br>
 
-            <br>
-            <mat-form-field class="form-field-style" style="width:75%;" (focus)="focusElt='tags'">
-              <mat-label>Type de point de vente / prestations</mat-label>
-              <mat-select id="txtShopTags"
-                          title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
-                          [(ngModel)]="new_shop.tags"  multiple>
-                <mat-option *ngFor="let tag of config.values?.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div *ngIf="level>0.6">
+              <mat-form-field class="form-field-style" style="width:75%;"
+                              (focus)="focusElt='tags'">
+                <mat-label>Type de point de vente / prestations</mat-label>
+                <mat-select id="txtShopTags"
+                            title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
+                            [(ngModel)]="new_shop.tags"  multiple>
+                  <mat-option *ngFor="let tag of config.values?.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-            <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
-                      label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
+              <app-tuto [delay]="10" *ngIf="focusElt=='tags'"
+                        label="Les tags sont très utiles pour filtrer les modèles de coupon en fonction du type d'enseigne"></app-tuto>
 
-            &nbsp;&nbsp;
+              &nbsp;&nbsp;
 
-            <button mat-flat-button mat-button
-                    *ngIf="level>0.6"
-                    id="cmdFile"
-                    (click)="addImage()"
-            >
-              Visuel
-            </button>
+              <button mat-flat-button mat-button
+                      *ngIf="level>0.6"
+                      id="cmdFile"
+                      (click)="addImage()">
+                <div class="bloc-bouton">Visuel du <br>point de vente</div>
+              </button>
 
-            <br>
+              <br>
 
               <table cellspacing="2"><tr>
                 <td>
@@ -135,6 +135,8 @@
                   votre photo pour représenter votre point de vente
                 </td>
               </tr></table>
+
+            </div>
 
 
 
