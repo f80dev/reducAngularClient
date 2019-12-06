@@ -24,6 +24,7 @@ export class NewCouponSimpleComponent implements OnInit {
   augment_text="";
   budget_text="";
   showEmoji=false;
+  level=0;
 
   coupon:any={};
   tags="";
@@ -55,6 +56,11 @@ export class NewCouponSimpleComponent implements OnInit {
     this.tags=params.get("tags") || "";
     this.shopid=params.get("shopid") || "";
     var modele = params.get("modele") || "";
+    this.level=Number(params.get("level") || "0");
+    if(this.level<0.5){
+      modele=this.config.values.modeles[0].id;
+    }
+
     if (modele.length > 0) {
       $$("Demande d'ouverture avec le modele "+modele);
       this.config.values.modeles.forEach((m) => {
