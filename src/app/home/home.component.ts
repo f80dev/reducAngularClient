@@ -79,6 +79,8 @@ export class HomeComponent implements OnInit {
       }
 
       this.config.params.coupon=this.config.params.coupon.split("?")[0];
+      //On supprime le tag s'il ne fait pas partie de la liste des tags autorisé
+      if(this.config.getTags().indexOf(this.config.params.tags)==-1)this.config.params.tags="";
 
       $$("Netoyage de l'url de lancement:"+this._location.path());
       this._location.replaceState(this._location.path().split('?')[0],"");

@@ -31,6 +31,13 @@ export class ConfigService {
   }
 
 
+  getTags(){
+    var tags=this.values.tags;
+    if(this.values.brands[this.activeBrand]!=null && this.values.brands[this.activeBrand].tags!=null)
+      tags=this.values.brands[this.activeBrand].tags;
+    return tags;
+  }
+
   /**
    * Initialisation des principaux paramètres
    * @param func
