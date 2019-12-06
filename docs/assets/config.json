@@ -133,14 +133,26 @@
   "domain_appli":"https://reducshare.com",
 
   "tags":"corporate,commerce,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin,cinéma",
-  "tagsv2":[
+  "tags_details":[
     {
       "tag":"corporate",
-      "description":"Entreprises, PME, vie au travail"
+      "description":"Entreprises, PME, vie au travail",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png"
     },
     {
       "tag":"commerce",
-      "description":"Promo sur les articles"
+      "description":"Promo sur les articles",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png"
+    },
+    {
+      "tag":"restaurant",
+      "description":"Promo sur les articles",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/cup-with-straw_1f964.png"
+    },
+    {
+      "tag":"hotel",
+      "description":"Hotels, lieux d'hébergement",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png"
     }
   ],
 

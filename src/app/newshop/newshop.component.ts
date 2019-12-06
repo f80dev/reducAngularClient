@@ -85,6 +85,7 @@ export class NewshopComponent implements OnInit {
     }
     else {
       var t:any=this.route.snapshot.queryParamMap.get("tags");
+      this.new_shop.picture=this.route.snapshot.queryParamMap.get("picture");
       if(t!=null){
         this.new_shop.tags=t.split(",");
       }

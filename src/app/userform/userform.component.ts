@@ -128,11 +128,18 @@ export class UserformComponent implements OnInit {
     this.showMap=false;
     this.api.user=this.user;
     if(this.user.tags.length>0)tags=this.user.tags;
+
+    let picture="";
+    if(this.config.values!=null && this.config.values.tags_details[tags]!=null){
+      picture=this.config.values.tags_details[tags].picture;
+    }
+
     this.router.navigate(['shop'],
       {queryParams:
           {
             shop:null,
             default_name:default_name,
+            picture:picture,
             level:this.user.level,
             userid:this.user._id,
             pseudo:this.user.pseudo,
