@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
               public _location:Location,
               public route: ActivatedRoute) {
 
-    fixTagPage(meta,{url:"",label:"mon label","picture":"https://reducshare.com/assets/img/discount.png"});
+    fixTagPage(meta,{url:"",label:"mon label",picture:"https://reducshare.com/assets/img/discount.png"});
 
     breakpointObserver
       .observe('(max-width: 950px)')

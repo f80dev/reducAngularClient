@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ConfigService} from "../config.service";
+import {Meta} from "@angular/platform-browser";
+import {fixTagPage} from "../tools";
 
 @Component({
   selector: 'app-flashscreen',
@@ -9,7 +11,9 @@ import {ConfigService} from "../config.service";
 export class FlashscreenComponent implements OnInit {
   private timer: any;
 
-  constructor(public config:ConfigService) { }
+  constructor(public config:ConfigService,public meta:Meta) {
+    fixTagPage(meta,{url:"",label:"mon label",picture:"https://reducshare.com/assets/img/discount.png"});
+  }
 
   @Input("duration") duration:number=5;
   @Input("message") message:string="";
