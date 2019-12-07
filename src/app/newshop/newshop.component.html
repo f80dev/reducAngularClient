@@ -72,7 +72,7 @@
             </mat-form-field>
 
             <!--Géolocalisation-->
-            <button *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button (click)="localize()">
+            <button style="margin-bottom:5px;" *ngIf="new_shop.name?.length>0 && map!=null" mat-button mat-flat-button (click)="localize()">
               Me localiser
             </button>
             <br>
@@ -88,17 +88,20 @@
             <app-tuto [delay]="5" *ngIf="focusElt=='address' && !new_shop.address.startsWith('http')"
                       label="Vérifier la localisation de votre enseigne sur la carte avant validation"></app-tuto>
 
-            <br>
-
-            <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
-                          *ngIf="!new_shop.address.startsWith('http') && level>0.5"
-                          title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
-                          (change)="checkLogin()">
-              Point de vente visible sur la carte des promotions
-            </mat-checkbox>
-            <br>
-
+            <!--Qu'an l'utilisateur atteind un certain niveau de maturite-->
             <div *ngIf="level>0.6">
+
+              <br>
+
+              <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
+                            *ngIf="!new_shop.address.startsWith('http')"
+                            title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
+                            (change)="checkLogin()">
+                Point de vente visible sur la carte des promotions
+              </mat-checkbox>
+              <br>
+
+
               <mat-form-field class="form-field-style" style="width:75%;"
                               (focus)="focusElt='tags'">
                 <mat-label>Type de point de vente / prestations</mat-label>
@@ -136,25 +139,23 @@
                 </td>
               </tr></table>
 
+              <br>
+              <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http') && level>0.8">
+                <input id="txtWebsite" type="text"
+                       (focus)="focusElt=='website'"
+                       title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
+                       matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
+              </mat-form-field>
+              <br>
+
             </div>
 
 
 
-
-            <br>
-            <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http') && level>0.8">
-              <input id="txtWebsite" type="text"
-                     (focus)="focusElt=='website'"
-                     title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
-                     matInput placeholder="Site web / En savoir plus" [(ngModel)]="new_shop.website">
-            </mat-form-field>
-            <br>
           </div>
-
         </mat-card-content>
 
         <mat-card-actions class="app-card-action">
-
           <button mat-button mat-flat-button
                   title="La validation entraine l'ajout du point de vente dans la liste de vos établissements"
                   id="btnValide2" *ngIf="new_shop.name?.length>0"

@@ -57,7 +57,7 @@ export class NewCouponSimpleComponent implements OnInit {
     this.shopid=params.get("shopid") || "";
     var modele = params.get("modele") || "";
     this.level=Number(params.get("level") || "0");
-    if(this.level<0.5){
+    if(modele.length==0 && this.level<0.5){
       modele=this.config.values.modeles[0].id;
     }
 

@@ -137,22 +137,32 @@
     {
       "tag":"corporate",
       "description":"Entreprises, PME, vie au travail",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png"
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png",
+      "level":1
     },
     {
       "tag":"commerce",
-      "description":"Promo sur les articles",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png"
+      "description":"Boutique, enseigne, magasin",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
+      "level":0
     },
     {
       "tag":"restaurant",
-      "description":"Promo sur les articles",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/cup-with-straw_1f964.png"
+      "description":"Restaurant, bars",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/cup-with-straw_1f964.png",
+      "level":0
     },
     {
       "tag":"hotel",
       "description":"Hotels, lieux d'hébergement",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png"
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png",
+      "level":0
+    },
+    {
+      "tag":"cinema",
+      "description":"Hotels, lieux d'hébergement",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png",
+      "level":0
     }
   ],
 
@@ -160,25 +170,25 @@
     {
       "id":"reducvente",
       "title":"Réduction sur le prix de vente",
-      "unity":"pourcents sur le prix",
+      "unity":"pourcents de remise sur le prix",
       "symbol":"%",
       "breakable":true,
       "min_to_use":0,
       "pluriel":false,
-      "label":"Des articles à moitié prix",
+      "label":"Des remises incroyables sur certains articles",
       "share_bonus":1,
       "pay_bonus":20,
       "direct_bonus":10,
       "final_bonus":0,
-      "max":50,
+      "max":80,
       "beneficiaire":"client",
-      "visual":"https://reducshare.com/assets/img/shopping.jpg",
+      "visual":"https://reducshare.com/assets/img/happy.jpg",
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/label_1f3f7.png",
       "duration_hours":48,
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"pour tout achat après validation de la réduction des produits marqués d'une pastille rouge",
+      "conditions":"sur tous les produits marqué d'une pastille rouge après validation de la réduction",
       "score":18,
       "tags":""
     },
@@ -305,9 +315,9 @@
     },
     {
       "id":"cinemagratuit",
-      "title":"Entrée de cinéma gratuite",
+      "title":"Des entrées gratuites",
       "unity":"places de ciné",
-      "symbol":"💺",
+      "symbol":"🎟️",
       "breakable":false,
       "level":0.0,
       "pluriel":true,
@@ -318,11 +328,36 @@
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/film-projector_1f4fd.png",
       "visual":"https://cdn.pixabay.com/photo/2019/11/07/20/48/cinema-4609877_960_720.jpg",
       "direct_bonus":0,
-      "max":2,
+      "max":3,
       "duration_hours":2,
-      "stock":30,
+      "stock":20,
       "score":16,
-      "beneficiaire":"client",
+      "beneficiaire":"spéctacteur",
+      "max_coupon":5000,
+      "description":"2 heures avant la séance, un cinéma fait gagner 30 places pour un film",
+      "conditions":"sur présentation du coupon pour le film 'Z'",
+      "tags":"cinéma"
+    },
+    {
+      "id":"cinemadumatin",
+      "title":"Des entrées gratuites le matin",
+      "unity":"pourcents de remise sur le prix de la place",
+      "symbol":"%",
+      "breakable":true,
+      "level":0.0,
+      "pluriel":true,
+      "label":"Des remises jusqu'a 100% sur vos places de cinéma le matin",
+      "share_bonus":1,
+      "pay_bonus":20,
+      "final_bonus":0,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/film-projector_1f4fd.png",
+      "visual":"https://reducshare.com/assets/img/cinema-theatre.jpg",
+      "direct_bonus":0,
+      "max":3,
+      "duration_hours":2,
+      "stock":20,
+      "score":16,
+      "beneficiaire":"spéctacteur",
       "max_coupon":5000,
       "description":"2 heures avant la séance, un cinéma fait gagner 30 places pour un film",
       "conditions":"sur présentation du coupon pour le film 'Z'",
