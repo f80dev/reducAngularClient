@@ -59,12 +59,15 @@
 
 
       <div id="map" class="map" style="width:95%;display: inline-block;"></div>
-      <br>
-      <app-list-coupons *ngIf="showCouponOnMap"
-                        [user]="user"
-                        (flash)="flash()"
-                        [coupons]="showCouponOnMap">
-      </app-list-coupons>
+      <div *ngIf="showCouponOnMap?.length>0">
+        <br>
+        <app-list-coupons
+          [user]="user"
+          (flash)="flash()"
+          [coupons]="showCouponOnMap">
+        </app-list-coupons>
+      </div>
+
     </div>
 
     <!--<app-old-coupons [user]="user"-->

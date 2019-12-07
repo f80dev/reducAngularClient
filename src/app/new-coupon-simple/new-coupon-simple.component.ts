@@ -124,7 +124,7 @@ export class NewCouponSimpleComponent implements OnInit {
 
     this.budget_text=exportToHTML("La promotion ne peut pas dépasser #max=Gain_maximum_par_client @symbol par @beneficiaire <br><br>" +
       "La promotion se termine au bout de #duration_jours=Durée_de_la_promotion_en_jours jour(s) " +
-      "et #duration_hours=Durée_de_la_promotion_en_heures heure(s) ou si,<br>pour l'ensemble des clients, #stock @symbol ont été offerts / distribués.",this.coupon,(fields)=>{this.add_event(fields);},color);
+      "et #duration_hours=Durée_de_la_promotion_en_heures heure(s) ou si,<br>pour l'ensemble des clients, #stock @symbol ont été offerts / distribués par "+this.shopname,this.coupon,(fields)=>{this.add_event(fields);},color);
 
     //this.reference_text=exportToHTML("Votre promotion sera classée sous le titre #title=Titre_non_visible_du_client_utilisé_pour_retrouver_sa_promotion",this.coupon,(fields)=>{this.add_event(fields);},color);
   }

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ConfigService} from "../config.service";
 
 @Component({
   selector: 'app-print-coupon',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PrintCouponComponent implements OnInit {
 
-  constructor() { }
+  constructor(public config:ConfigService) { }
 
   @Input("coupon") coupon:any=null;
   @Input("shop") shop:any=null;
