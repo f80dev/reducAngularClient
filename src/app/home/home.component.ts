@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
               public _location:Location,
               public route: ActivatedRoute) {
 
+    fixTagPage(meta,{url:"",label:"mon label","picture":"https://reducshare.com/assets/img/discount.png"});
+
     breakpointObserver
       .observe('(max-width: 950px)')
       .subscribe((state: BreakpointState) => {
@@ -81,7 +83,6 @@ export class HomeComponent implements OnInit {
       }
 
       this.config.params.coupon=this.config.params.coupon.split("?")[0];
-      fixTagPage(this.meta,{url:"",label:"mon label","picture":"https://reducshare.com/assets/img/discount.png"});
 
 
       //On supprime le tag s'il ne fait pas partie de la liste des tags autorisé
