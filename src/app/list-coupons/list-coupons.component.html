@@ -457,7 +457,7 @@
       <span *ngIf="coupon.max>0" style="font-size: small">(vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})</span>
       <br><br>
       <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
-        Pour l'instant vous avez {{coupon.gain | number:'1.0-1'}}
+        Pour l'instant vous avez {{coupon.gain | trunc}}
         <!--<span *ngIf="!coupon.breakable && coupon.gain<1">{{coupon.gain*100 | number:'1.0-0' }}% de 1</span>-->
         {{coupon.symbol}}
         <br>
