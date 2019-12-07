@@ -17,7 +17,7 @@ import { Meta } from '@angular/platform-browser';
 import { NgNavigatorShareService } from 'ng-navigator-share';
 import {PromptComponent} from "../prompt/prompt.component";
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {isLocal, sendToPrint, showError, showMessage, traitement_coupon} from "../tools";
+import {fixTagPage, isLocal, sendToPrint, showError, showMessage, traitement_coupon} from "../tools";
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {LocService} from "../loc.service";
@@ -58,22 +58,6 @@ export class ListCouponsComponent implements OnChanges {
     this.coupons=traitement_coupon(this.coupons,localStorage.getItem("showCoupon"));
   }
 
-  fixTagPage(coupon:any){
-    this.meta.removeTag('name = "og:url"');
-    this.meta.removeTag('name = "og:type"');
-    this.meta.removeTag('name = "og:title"');
-    this.meta.removeTag('name = "og:description"');
-    this.meta.removeTag('name = "og:image"');
-
-    this.meta.addTags([
-      {name:"og:url",content:coupon.url},
-      {name:"og:type",content:"website"},
-      {name:"og:locale",content:"fr_FR"},
-      {name:"og:title",content:coupon.label},
-      {name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"},
-      {name:"og:image",content:coupon.picture}
-    ],true);
-  }
 
   showCode(coupon: any,mode=1) {
     if(coupon.visible==mode)mode=0;
@@ -87,7 +71,7 @@ export class ListCouponsComponent implements OnChanges {
       coupon.qrcode=coupon.qrcode+"?gift";
     } //On offre ses points et l'on pert le coupon
     if(mode==1 || mode==3){
-      this.fixTagPage(coupon);
+      fixTagPage(this.meta,coupon);
       this.ngNavigatorShareService.share({
         title: coupon.label,
         text: coupon.message+". Ouvrir le lien pour en bénéficier",

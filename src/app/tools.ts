@@ -539,6 +539,23 @@ export function openGraphForShop(idshop:string,_type="coupon"){
   return url;
 }
 
+export function fixTagPage(meta:any,coupon:any){
+    meta.removeTag('name = "og:url"');
+    meta.removeTag('name = "og:type"');
+    meta.removeTag('name = "og:title"');
+    meta.removeTag('name = "og:description"');
+    meta.removeTag('name = "og:image"');
+
+    meta.addTags([
+      {name:"og:url",content:coupon.url},
+      {name:"og:type",content:"website"},
+      {name:"og:locale",content:"fr_FR"},
+      {name:"og:title",content:coupon.label},
+      {name:"og:description",content:"Ouvrir pour profiter vous aussi de la promotion"},
+      {name:"og:image",content:coupon.picture}
+    ],true);
+}
+
 export function initAvailableCameras(func){
   WebcamUtil.getAvailableVideoInputs()
     .then((mediaDevices: MediaDeviceInfo[]) => {

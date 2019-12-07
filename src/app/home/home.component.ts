@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {$$, openGraphForShop, showError, showMessage, traitement_coupon} from '../tools';
+import {$$, fixTagPage, openGraphForShop, showError, showMessage, traitement_coupon} from '../tools';
 import {MatDialog} from '@angular/material/dialog';
 import {Socket} from "ngx-socket-io";
 import {Location} from '@angular/common'
@@ -9,6 +9,7 @@ import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {PromptComponent} from "../prompt/prompt.component";
 import {BreakpointObserver,BreakpointState} from "@angular/cdk/layout"
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   message="";
 
   constructor(public socket:Socket,
+              public meta:Meta,
               public breakpointObserver:BreakpointObserver,
               public api: ApiService,
               public toast:MatSnackBar,
@@ -79,6 +81,9 @@ export class HomeComponent implements OnInit {
       }
 
       this.config.params.coupon=this.config.params.coupon.split("?")[0];
+      fixTagPage(this.meta,{url:"",label:"mon label","picture":"https://reducshare.com/assets/img/discount.png"});
+
+
       //On supprime le tag s'il ne fait pas partie de la liste des tags autorisé
       if(this.config.getTags().indexOf(this.config.params.tags)==-1)this.config.params.tags="";
 
