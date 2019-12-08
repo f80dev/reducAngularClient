@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import {MatDialog, MatDialogContent, MatDialogRef, MatDialogRef} from "@angular/material";
+import {MatDialog, MatDialogRef} from "@angular/material";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {HttpClient, HttpHandler} from "@angular/common/http";
 import {RouterTestingModule} from "@angular/router/testing";

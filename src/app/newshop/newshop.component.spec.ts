@@ -7,7 +7,7 @@ import {
   MatCardContent,
   MatCheckbox,
   MatFormField,
-  MatIcon, MatOption,
+  MatIcon, MatLabel, MatOption,
   MatSelect,
   MatToolbar,
   MatVerticalStepper
@@ -21,7 +21,7 @@ describe('NewshopComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NewshopComponent,VisualComponent,TutoComponent,MatIcon,MatVerticalStepper,MatCardContent,NewshopComponent,
-      MatToolbar,MatFormField,MatCheckbox,MatSelect,MatOption],
+      MatToolbar,MatFormField,MatCheckbox,MatLabel,MatSelect,MatOption],
       providers:[SafePipe]
     })
     .compileComponents();

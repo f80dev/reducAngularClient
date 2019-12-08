@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ApiService} from "../api.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('NewCouponSimpleComponent', () => {
   let component: NewCouponSimpleComponent;
@@ -14,6 +15,7 @@ describe('NewCouponSimpleComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NewCouponSimpleComponent,TutoComponent,MatIcon,MatVerticalStepper,MatFormField,PromptComponent,ImageSelectorComponent,Router,ActivatedRoute],
+      imports:[RouterTestingModule],
       providers: [
         ApiService,
         { provide: MatDialog },

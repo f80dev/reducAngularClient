@@ -1,4 +1,5 @@
-{"brands":[
+{
+  "brands":[
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
@@ -504,6 +505,7 @@
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/clinking-beer-mugs_1f37b.png",
       "direct_bonus":1,
       "max":5,
+      "min_to_use":0,
       "level":0,
       "duration_hours":24,
       "stock":200,
@@ -514,6 +516,33 @@
       "description":"un bar propose de gagner des verres en fin de journée",
       "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
       "tags":"bar,restaurant,hotel,vin"
+    },
+    {
+      "id":"laplancheapero",
+      "title":"La planche apéro offerte",
+      "unity":"pourcent de remise sur la planche apéro",
+      "symbol":"%",
+      "breakable":false,
+      "pluriel":true,
+      "label":"Et la planche apéro, c'est pour nous !",
+      "share_bonus":1,
+      "pay_bonus":20,
+      "final_bonus":0,
+      "duration_jours":3,
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/pig-face_1f437.png",
+      "direct_bonus":0,
+      "max":100,
+      "level":0,
+      "min_to_use":1,
+      "duration_hours":10,
+      "stock":200,
+      "max_coupon":500,
+      "score":17,
+      "beneficiaire":"client",
+      "visual":"https://reducshare.com/assets/img/charcute.jpeg",
+      "description":"Une remise jusqu'a 100% sur la planche de charcuterie pour accompagner l'apéro",
+      "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
+      "tags":"bar"
     },
     {
       "id":"coworking",

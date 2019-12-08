@@ -193,7 +193,7 @@
 
 
     <button mat-button
-            *ngIf="user.coupons?.length>2"
+            *ngIf="user.coupons?.length>4 && user.level>0.5"
             title="Trier vos coupons"
             class="app-button"
             id="btnSort" mat-icon-button

@@ -2,13 +2,17 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import {TutoComponent} from "./tuto/tuto.component";
 import {RouterTestingModule} from "@angular/router/testing";
+import {MatIcon} from "@angular/material";
+import {SafePipe} from "./safe.pipe";
+import {OrderByPipe} from "./order-by.pipe";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent,TutoComponent
+        AppComponent,TutoComponent,MatIcon
       ],
+      providers:[OrderByPipe],
       imports:[RouterTestingModule]
     }).compileComponents();
   }));
