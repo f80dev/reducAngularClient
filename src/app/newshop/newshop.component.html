@@ -140,7 +140,7 @@
               </tr></table>
 
               <br>
-              <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http') && level>0.8">
+              <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http')">
                 <input id="txtWebsite" type="text"
                        (focus)="focusElt=='website'"
                        title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
