@@ -11,8 +11,9 @@ describe('TutoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TutoComponent,SafePipe,TutoComponent,ConfigService],
-      imports:[MatIconModule]
+      declarations: [ TutoComponent,SafePipe,TutoComponent],
+      imports:[MatIconModule],
+      providers:[ConfigService]
     })
     .compileComponents();
   }));

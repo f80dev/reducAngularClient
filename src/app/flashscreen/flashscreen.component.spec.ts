@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FlashscreenComponent } from './flashscreen.component';
 import {SafePipe} from "../safe.pipe";
-import {LocService} from "../loc.service";
-import {MatAccordion, MatExpansionModule} from "@angular/material";
+import {MatExpansionPanel} from "@angular/material";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('FlashscreenComponent', () => {
   let component: FlashscreenComponent;
@@ -11,9 +11,9 @@ describe('FlashscreenComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlashscreenComponent],
-      imports:[MatExpansionModule],
-      providers:[SafePipe]
+      declarations: [ FlashscreenComponent,MatExpansionPanel],
+      providers:[SafePipe],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

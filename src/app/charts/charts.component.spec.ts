@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartsComponent } from './charts.component';
 import {WebcamModule} from "ngx-webcam";
-import {MatIconModule} from "@angular/material";
+import {MatIconModule, MatList, MatListItem} from "@angular/material";
+import {VisualComponent} from "../visual/visual.component";
 
 describe('ChartsComponent', () => {
   let component: ChartsComponent;
@@ -10,7 +11,7 @@ describe('ChartsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartsComponent ],
+      declarations: [ ChartsComponent,VisualComponent,MatListItem,MatList ],
       imports: [MatIconModule]
     })
     .compileComponents();

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TransactionsComponent } from './transactions.component';
 import {ApiService} from "../api.service";
+import {OrderByPipe} from "../order-by.pipe";
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('TransactionsComponent', () => {
   let component: TransactionsComponent;
@@ -8,7 +10,8 @@ describe('TransactionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TransactionsComponent,ApiService ]
+      declarations: [ TransactionsComponent,OrderByPipe],
+      providers:[ApiService,OrderByPipe,HttpClient,HttpHandler],
     })
     .compileComponents();
   }));

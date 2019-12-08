@@ -1,9 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserformComponent } from './userform.component';
-import {MatExpansionPanel, MatFormField, MatIcon} from "@angular/material";
+import {
+  MatCardActions,
+  MatExpansionPanel,
+  MatFormField,
+  MatIcon,
+  MatOption,
+  MatProgressSpinner,
+  MatSelect
+} from "@angular/material";
 import {QRCodeComponent} from "angular2-qrcode";
 import {TutoComponent} from "../tuto/tuto.component";
+import {VisualComponent} from "../visual/visual.component";
+import {TransactionsComponent} from "../transactions/transactions.component";
+import {ScannerComponent} from "../scanner/scanner.component";
+import {ListCouponsComponent} from "../list-coupons/list-coupons.component";
 
 describe('UserformComponent', () => {
   let component: UserformComponent;
@@ -11,7 +23,9 @@ describe('UserformComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserformComponent,MatExpansionPanel,MatIcon,QRCodeComponent,TutoComponent,MatFormField]
+      declarations: [ UserformComponent,MatExpansionPanel,MatIcon,QRCodeComponent,
+        TutoComponent,MatFormField,VisualComponent,QRCodeComponent,MatProgressSpinner,TransactionsComponent,ScannerComponent,
+      MatSelect,MatOption,ListCouponsComponent,MatCardActions]
     })
     .compileComponents();
   }));
