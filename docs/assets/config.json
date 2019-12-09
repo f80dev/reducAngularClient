@@ -3,7 +3,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.88-beta",
+    "version": "0.89-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -554,12 +554,12 @@
       "share_bonus":1,
       "pay_bonus":20,
       "final_bonus":0,
-      "duration_jours":3,
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/pig-face_1f437.png",
       "direct_bonus":0,
       "max":100,
       "level":0,
       "min_to_use":1,
+      "duration_jours":0,
       "duration_hours":10,
       "stock":200,
       "max_coupon":500,

@@ -39,7 +39,18 @@
         <app-print-coupon [shop]="shop"></app-print-coupon>
       </div>
 
+      <div *ngIf="shop.coupons?.length==0" style="width: 100%;text-align: center;">
+        Créer une première promotion pour '{{shop.name}}' :<br><br>
+        <button mat-button mat-flat-button
+                name="btnNewPromo2"
+                class="app-button"
+                data-tac="La création d'une enseigne se fait depuis la zone de profil"
+                title="Nouvelle promotion attachée à cette enseigne"
+                (click)="addCoupon(shop,'')">
+          <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
+        </button>
 
+      </div>
       <br>
       <app-list-coupons [coupons]="shop.coupons"
                         [user]="user"
@@ -119,7 +130,7 @@
       <button mat-button mat-flat-button
               name="btnNewPromo"
               class="app-button"
-              *ngIf="user.level<1"
+              *ngIf="user.level<1 && shop.coupons?.length>0"
               data-tac="La création d'une enseigne se fait depuis la zone de profil"
               title="Nouvelle promotion attachée à cette enseigne"
               (click)="addCoupon(shop,'')">

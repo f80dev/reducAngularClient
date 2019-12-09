@@ -18,8 +18,8 @@
 
         <!--Affichage des coupon pour la carte-->
         <span *ngIf="coupon.origin==coupon._id && coupon.owner!=user._id">
-          {{coupon.shopname}}: {{coupon.label}}<br>
-          Gagnez jusqu'à {{coupon.max}} {{coupon.unity}}({{coupon.symbol}})
+          {{coupon.label}}<br>
+          Gagnez jusqu'à <strong>{{coupon.max}} {{coupon.unity}}</strong>
         </span>
 
         <!--Affichage des coupons origines pour leur propriétaire-->
@@ -36,7 +36,9 @@
         <div *ngIf="coupon.origin!=coupon._id && coupon.owner==user._id">
 
           <!--sur titre-->
-          <span *ngIf="coupon.visible!=2">{{coupon.label}}</span>
+          <span *ngIf="coupon.visible!=2">
+            {{coupon.label}}
+          </span>
           <br>
 
           <span *ngIf="coupon.visible==2">
@@ -96,6 +98,7 @@
 
           <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>370)">
             <app-visual [picture]="coupon.visual"
+                        [flat]="true"
                         (click)="coupon.visible>0"
                         width="25vw" height="auto" max-width="200px" max-height="180px">
             </app-visual>
@@ -139,8 +142,10 @@
                   {{showPromoCode(coupon.gain,coupon.promocodes)}}
             </span>
 
+            <!-- Affichage du gain-->
+            <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>0">gagné(es)</div>
 
-            <span style="font-size: small;padding: 0px;" *ngIf="coupon.gain>0">gagné(es)</span>
+
             <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
             <br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
             <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
@@ -158,12 +163,12 @@
             <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;"
                    cellpadding="1"
                    name="zoneInfo">
-              <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id"><td>Coupon récupéré</td><td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td></tr>
+              <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id"><td>Remise instantannée</td><td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td></tr>
               <tr *ngIf="coupon.share_bonus>0">
                 <td>{{1/coupon.share_bonus | literal:0}} coupons partagés</td>
                 <td style="text-align: right;">+1 {{coupon.symbol}}</td>
               </tr>
-              <tr *ngIf="coupon.pay_bonus>0"><td>Coupon transformé</td><td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td></tr>
+              <tr *ngIf="coupon.pay_bonus>0"><td>Coupon partagé et utilisé</td><td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td></tr>
               <tr *ngIf="coupon.final_bonus>0"><td>Utiliser le coupon</td><td style="text-align: right;">+{{coupon.final_bonus}} {{coupon.symbol}}</td></tr>
             </table>
             <br>
@@ -234,7 +239,7 @@
 
 
       <app-tuto *ngIf="isVisible(coupon) && coupon.visible==1" [delay]="1" [duration]="30"
-                label="Le lien du coupon est disponible dans le presse-papier, vous pouvez l'envoyer par WhatsApp, SMS, Messenger ... etc ...">
+                label="Le coupon est disponible dans le presse-papier pour partage via WhatsApp, SMS, Messenger ...">
       </app-tuto>
 
       <app-tuto [duration]="15" *ngIf="coupon.canbedeal && coupon.origin==coupon._id && coupon.visible==1 && coupon.share==0"

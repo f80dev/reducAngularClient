@@ -148,7 +148,8 @@
             id="btnScan" class="medium-button"
             title="Scanner des coupons directement depuis l'application"
             mat-raised-button (click)="startScanner()">
-      <div class="bloc-bouton">Scannez une<br>promotion</div>
+      <div class="bloc-bouton" *ngIf="!showScanner">Scannez une<br>promotion</div>
+      <div class="bloc-bouton" *ngIf="showScanner">Fermer le<br>scanner</div>
     </button>
 
     <button mat-button
@@ -178,7 +179,8 @@
             id="btnMapRookie" class="medium-button"
             title="Voir les promos autour de soit (nécéssite de partager sa position)"
             (click)="openLoc()">
-      <div class="bloc-bouton">Trouver une<br>promotion</div>
+      <div class="bloc-bouton" *ngIf="!showMap">Trouver une<br>promotion</div>
+      <div class="bloc-bouton" *ngIf="showMap">Fermer la<br>carte</div>
     </button>
 
 

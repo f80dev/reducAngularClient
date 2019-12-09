@@ -10,6 +10,7 @@ export class VisualComponent implements OnInit {
   fontsize="";
   @Input("picture") picture="";
   @Input("src") src="";
+  @Input("flat") flat=false;
   @Input("width") w:string="";
   @Input("height") h:string="";
   @Input("size") size=50;
