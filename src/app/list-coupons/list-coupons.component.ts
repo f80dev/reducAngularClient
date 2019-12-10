@@ -21,6 +21,7 @@ import {fixTagPage, isLocal, sendToPrint, showError, showMessage, traitement_cou
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {LocService} from "../loc.service";
+import {stringify} from "querystring";
 
 @Component({
   selector: 'app-list-coupons',
@@ -119,8 +120,12 @@ export class ListCouponsComponent implements OnChanges {
 
   remove(coupon: any) {
     var question="Etes vous bien sur ?";
+
+    var gain=""+coupon.gain;
+    if(gain.length>4)gain=gain.substr(4);
+
     if(coupon.origin!=coupon._id)
-      question="Vraiment ? Pourtant vous avez une réduction de "+coupon.gain+coupon.symbol+" à cet endroit";
+      question="Vraiment ? Pourtant vous avez une réduction de "+gain+" "+coupon.symbol;
     else {
       if(coupon.share>0)
         question="Vraiment ? Supprimer une réduction, déjà récupérée va nuire à votre réputation de vendeur."

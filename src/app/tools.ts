@@ -405,6 +405,7 @@ export function evalTitle(coupon:any){
 }
 
 export function getImageLightness(imageSrc,callback) {
+  debugger
   var img = document.createElement("img");
   img.src = imageSrc;
   img.style.display = "none";

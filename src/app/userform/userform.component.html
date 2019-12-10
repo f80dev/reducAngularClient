@@ -43,6 +43,8 @@
       </app-scanner>
     </div>
 
+    <app-tuto [if]="showPersonalCode" label="Votre code personnel permet de vous attribuer un role le validateur de promo pour une enseigne"></app-tuto>
+
     <!--Montre la carte des promotions-->
     <div *ngIf="showMap">
       <mat-form-field *ngIf="showCouponOnMap?.length>=5 || filter_tag?.length>0" style="width:60%;">
@@ -134,14 +136,14 @@
             id="btnShowCode" title="Afficher son qrcode personnel"
             mat-raised-button mat-icon-button
             (click)="showPersonalCode=!showPersonalCode">
-      <mat-icon>tap_and_play</mat-icon>
+      <mat-icon>person</mat-icon>
     </button>
 
     <button *ngIf="user.level>0.6 && config.webcamsAvailable>0" mat-button
             id="btnScan2"
             title="Scanner des coupons directement depuis l'application"
             mat-raised-button mat-icon-button (click)="startScanner()">
-      <mat-icon>camera_alt</mat-icon>
+      <mat-icon>tap_and_play</mat-icon>
     </button>
 
     <button *ngIf="user.level<=0.6 && config.webcamsAvailable>0" mat-button
@@ -160,7 +162,7 @@
       <mat-icon>build</mat-icon>
     </button>
 
-    <button mat-button *ngIf="user.level>2.5"
+    <button mat-button *ngIf="user.level>4.5"
             class="app-button"
             id="btnNotif" title="Recevoir des notifications sur ses appareils connectés (utilisateurs avancés)"
             mat-raised-button mat-icon-button (click)="setWebhook()">

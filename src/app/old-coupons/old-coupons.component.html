@@ -63,7 +63,9 @@
   <mat-card-content class="app-card-content" *ngIf="!askFilter">
 
     <div *ngIf="mycoupons.length>0">
-      <span style="margin-left:5%">Utiliser vos promotions précédentes comme modèle</span><br>
+      <span style="margin-left:5%">
+        <strong>Utilisez vos promotions précédentes comme modèle</strong>
+      </span><br>
       <mat-list style="padding:0px;">
         <mat-list-item *ngFor="let coupon of mycoupons | orderBy:'dtCreate':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
           <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
@@ -78,7 +80,7 @@
     <div *ngIf="withFilter" style="margin-left:5%;width:92%;">
       <table style="width:100%;"><tr>
         <td style="width: 50%">
-          Modèles destinés à #{{filter}}
+          <strong>Utilisez un modèle destiné à #{{filter}}</strong>
         </td>
         <td style="text-align: right;">
           <button mat-button
@@ -96,6 +98,7 @@
               *ngIf="coupons.length>0">
     </app-tuto>
 
+    <span *ngIf="!withFilter" style="margin-left:5%;"><strong>Utilisez un modèle</strong></span>
     <mat-list style="padding:0px;">
       <mat-list-item *ngFor="let coupon of coupons | orderBy:'score':'desc' " name="coupon" (click)="onselect.emit(coupon)" style="cursor: pointer;">
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">

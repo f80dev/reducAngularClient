@@ -229,6 +229,10 @@ export class UserformComponent implements OnInit {
         });
 
       this.loc.getPosition().then((pos:any)=>{
+        this.user.lat=pos.lat;
+        this.user.lng=pos.lng;
+        this.user.dtUpdatePosition=new Date().getTime()/1000;
+        this.api.setuser(this.user).subscribe(()=>{});
         this.initMap(pos,15);
       },()=>{
         this.initMap({lng:2,lat:48},5);

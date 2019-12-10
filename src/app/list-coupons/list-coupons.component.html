@@ -57,9 +57,13 @@
               </span>
             </span>
 
-          <span *ngIf="coupon.visible==0" style="font-size: x-small;">
-              {{coupon.shopname}}
-            </span>
+          <div *ngIf="coupon.visible==0" style="font-size: x-small;">
+            {{coupon.shopname}}
+            <span *ngIf="coupon.distance!=null && coupon.distance<3000">({{coupon.distance | literal:0}} m)</span>
+            <span *ngIf="coupon.distance!=null && coupon.distance>=3000">({{coupon.distance/1000 | literal:0}} km)</span>
+          </div>
+
+
 
           <span *ngIf="coupon.visible==2" style="font-size: x-small;">
               <br>
@@ -132,9 +136,12 @@
               {{coupon.gain | literal:1}}{{coupon.symbol}}
             </div>
 
-            <div style="font-size: medium;"
+            <div style="font-size: medium;display:inline-block;padding:10%;"
                  *ngIf="coupon.promocodes.length==0 && coupon.gain==0">
-              Partager le coupon pour gagner des {{coupon.unity}}
+              <table><tr>
+                <td><mat-icon>share</mat-icon></td>
+                <td>Partager le coupon pour gagner des {{coupon.unity}}</td>
+              </tr></table>
             </div>
 
             <span style="font-size: 2em;"
@@ -163,19 +170,30 @@
             <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;"
                    cellpadding="1"
                    name="zoneInfo">
-              <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id"><td>Remise instantannée</td><td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td></tr>
-              <tr *ngIf="coupon.share_bonus>0">
-                <td>{{1/coupon.share_bonus | literal:0}} coupons partagés</td>
-                <td style="text-align: right;">+1 {{coupon.symbol}}</td>
+              <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id">
+                <td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td>
+                <td>immédiatement disponible</td>
               </tr>
-              <tr *ngIf="coupon.pay_bonus>0"><td>Coupon partagé et utilisé</td><td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td></tr>
-              <tr *ngIf="coupon.final_bonus>0"><td>Utiliser le coupon</td><td style="text-align: right;">+{{coupon.final_bonus}} {{coupon.symbol}}</td></tr>
+
+              <tr *ngIf="coupon.share_bonus>0">
+                <td style="text-align: right;">+1 {{coupon.symbol}}</td>
+                <td>pour {{1/coupon.share_bonus | literal:0}} coupons partagés</td>
+              </tr>
+              <tr *ngIf="coupon.pay_bonus>0">
+                <td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td>
+                <td>pour chaque usage de coupons distribués</td>
+              </tr>
+
+              <tr *ngIf="coupon.final_bonus>0">
+                <td style="text-align: right;">+{{coupon.final_bonus}} {{coupon.symbol}}</td>
+                <td>Utiliser le coupon</td>
+              </tr>
             </table>
             <br>
 
             <div style="font-size: medium" *ngIf="coupon.visible==1 || (coupon.origin==coupon._id && coupon.owner!=user._id)">
                   <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>
-                  <span *ngIf="coupon.stock<10">et {{coupon.stock}}{{coupon.symbol}}</span>
+                  <div *ngIf="coupon.stock<10"> et {{coupon.stock}}{{coupon.symbol}} pour la promotion</div>
             </div>
 
           </div>
@@ -186,9 +204,10 @@
               <span style="font-size: xx-large;">{{coupon.gain}}{{coupon.symbol}}</span><br>
             </div>
 
-            <div style="font-size: medium;max-width:200px;display: inline-block;"
+            <div style="font-size: small;width:80%;padding:10%;display: inline-block;"
                  *ngIf="!coupon.breakable && coupon.gain<coupon.min_to_use">
-              Désolé, vous n'y êtes pas encore !<br>Pour utiliser votre coupon, vous devez avoir récupérer {{coupon.min_to_use}} {{coupon.symbol}}
+              Vous n'y êtes pas encore !<br>Pour utiliser votre coupon, vous devez avoir récupéré au moins {{coupon.min_to_use}} {{coupon.symbol}}
+              <br><br>Partagez cette promotion pour augmenter votre gain
             </div>
 
             <br>

@@ -189,7 +189,7 @@
       "stock":400,
       "level":0,
       "max_coupon":500,
-      "conditions":"sur tous les produits marqué d'une pastille rouge après validation de la réduction",
+      "conditions":"sur tous les produits marqués d'une pastille rouge après validation de la réduction",
       "score":18,
       "tags":""
     },
@@ -201,7 +201,7 @@
       "breakable":true,
       "pluriel":false,
       "label":"Le dentifrice a moitié prix !",
-      "share_bonus":0.1,
+      "share_bonus":1,
       "pay_bonus":2,
       "direct_bonus":1,
       "final_bonus":1,
