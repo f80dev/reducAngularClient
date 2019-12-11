@@ -3,7 +3,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.89-beta",
+    "version": "0.9-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -133,7 +133,7 @@
   "domain_server":"server.f80.fr",
   "domain_appli":"https://reducshare.com",
 
-  "tags":"corporate,commerce,restaurant,alimentaire,bar,concert,événementiel,fidélisation,services,exposition,hotel,vin,cinéma",
+  "tags":"commerce,restaurant,alimentaire,bar,concert,événementiel,services,exposition,hotel,vin,cinéma,corporate,fidélisation",
   "tags_details":[
     {
       "tag":"corporate",
