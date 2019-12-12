@@ -29,7 +29,7 @@ export class OldCouponsComponent implements OnInit {
   @Output("delete") ondelete:EventEmitter<any>=new EventEmitter();
   @Output("cancel") oncancel:EventEmitter<any>=new EventEmitter();
   @Input("canDelete") canDelete: boolean=false;
-  @Input("filter") filter: string="";
+  @Input("filter") filter: any[]=[];
   selTags: any=[];
 
 
@@ -106,7 +106,7 @@ export class OldCouponsComponent implements OnInit {
     var index=0;
     lst_coupons.forEach((it)=>{
       if(it.tags.length>0){
-        var intersect=this.filter.split(",").filter(value => -1 !== it.tags.split(",").indexOf(value));
+        var intersect=this.filter.filter(value => -1 !== it.tags.split(",").indexOf(value));
         if(intersect.length>0)
           this.coupons.push(it);
       } else {
@@ -127,16 +127,16 @@ export class OldCouponsComponent implements OnInit {
   }
 
   selFilter(){
-    var rc="";
-    if(this.selTags.length==0)
+    var rc=[];
+    if(this.selTags.length==0){
       rc=this.config.getTags();
-    else {
+    }else{
       this.selTags.forEach((f:any)=> {
-        rc=rc+","+f.getLabel().trim();
+        rc.push(f.getLabel().trim());
       });
     }
 
-    this.filter=rc.substr(1);
+    this.filter=rc;
     this.askFilter=false;
     this.refresh(()=>{
       if(this.selTags.length>0)this.opereFilter();

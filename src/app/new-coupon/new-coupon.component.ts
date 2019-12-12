@@ -90,7 +90,7 @@ export class NewCouponComponent implements OnInit {
     if(params.has("couponid")){
       this.coupon=this.api.coupon;
 
-      if(this.coupon.share_bonus>0)this.coupon.nb_partage=1/this.coupon.share_bonus;
+      if(this.coupon!=null && this.coupon.share_bonus>0)this.coupon.nb_partage=1/this.coupon.share_bonus;
       var hrs=Math.trunc((this.coupon.dtEnd-this.coupon.dtStart)/3600);
       this.coupon.duration_jours=Math.trunc(hrs/24);
       this.coupon.duration_hours=hrs-this.coupon.duration_jours*24;

@@ -114,7 +114,7 @@ export class NewCouponSimpleComponent implements OnInit {
     this.condition_text=exportToHTML("<br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     var nbCouponForShare=1;
-    if(this.coupon.share_bonus<1){
+    if(this.coupon!=null && this.coupon.share_bonus<1){
       nbCouponForShare=1/this.coupon.share_bonus;
       this.coupon.share_bonus=1;
     }

@@ -35,14 +35,14 @@ export class ConfigService {
    * Retourne les tags
    * @param level
    */
-  getTags(level=2){
+  getTags(level=0){
     var tags=this.values.tags;
     if(this.values.brands[this.activeBrand]!=null && this.values.brands[this.activeBrand].tags!=null)
       tags=this.values.brands[this.activeBrand].tags;
 
-    rc=[];
-    tags.forEach((tag)=>{
-      if(this.config.tags_details[tag].level>this.level)
+    var rc=[];
+    tags.split(",").forEach((tag)=>{
+      if(this.config.tags_details[tag].level>level)
         rc.push(tag);
     });
 
