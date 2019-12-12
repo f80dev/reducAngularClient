@@ -326,7 +326,7 @@
                 mat-button
                 mat-flat-button mat-icon-button
                 class="app-button"
-                (click)="openHelp(coupon.shop_complete.url)"
+                (click)="openHelp(coupon.shop_complete?.website)"
                 title="En savoir plus sur {{coupon.shop_complete.name}}">
           <fa-icon [icon]="faStore" size="lg"></fa-icon>
         </button>
