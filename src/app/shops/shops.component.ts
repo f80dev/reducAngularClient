@@ -11,7 +11,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {sendToPrint, showError, showMessage} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
-import { faChartLine,faTags} from '@fortawesome/free-solid-svg-icons';
+import { faChartLine,faTags,faQuestion} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-shops',
@@ -30,6 +30,7 @@ export class ShopsComponent implements OnInit {
   showWebCam=false;
   faChartLine=faChartLine;
   faTags=faTags;
+  faQuestion=faQuestion;
 
   constructor(public snackBar: MatSnackBar,
               public router: Router,

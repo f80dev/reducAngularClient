@@ -21,7 +21,7 @@ import {fixTagPage, isLocal, sendToPrint, showError, showMessage, traitement_cou
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {LocService} from "../loc.service";
-import {faDice,faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faDice,faTimes,faQuestion,faStore} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-coupons',
@@ -44,6 +44,8 @@ export class ListCouponsComponent implements OnChanges {
   flipDiv=true;
   faDice=faDice;
   faTimes=faTimes;
+  faStore=faStore;
+  faQuestion=faQuestion;
 
   showChart=false;
   formatDate='dd/MM HH:mm';
