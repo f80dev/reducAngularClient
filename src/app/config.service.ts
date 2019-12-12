@@ -31,12 +31,25 @@ export class ConfigService {
   }
 
 
-  getTags(){
+  /**
+   * Retourne les tags
+   * @param level
+   */
+  getTags(level=2){
     var tags=this.values.tags;
     if(this.values.brands[this.activeBrand]!=null && this.values.brands[this.activeBrand].tags!=null)
       tags=this.values.brands[this.activeBrand].tags;
-    return tags;
+
+    rc=[];
+    tags.forEach((tag)=>{
+      if(this.config.tags_details[tag].level>this.level)
+        rc.push(tag);
+    });
+
+    return rc;
   }
+
+
 
   /**
    * Initialisation des principaux paramètres

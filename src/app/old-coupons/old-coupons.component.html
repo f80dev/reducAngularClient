@@ -55,6 +55,7 @@
     <mat-selection-list #ctl_tags (selectionChange)="selTags=ctl_tags.selectedOptions.selected">
       <mat-list-option *ngFor="let tag of tags.split(',')">
         <img mat-list-icon [src]="config.values.tags_details[tag].picture">
+        <h4 mat-line>#{{tag}}</h4>
         <p mat-line>{{config.values.tags_details[tag].description}}</p>
       </mat-list-option>
     </mat-selection-list>

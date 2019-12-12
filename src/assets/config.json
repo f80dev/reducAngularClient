@@ -135,8 +135,7 @@
 
   "tags":"commerce,restaurant,alimentaire,événementiel,services,exposition,hotel,cinéma,corporate,fidélisation",
 
-  "tags_details":
-  {
+  "tags_details": {
     "corporate": {
       "description": "Entreprises, PME, vie au travail",
       "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png",
@@ -162,25 +161,30 @@
       "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
       "level": 0
     },
-    "service": {
+    "services": {
       "description": "cours particulier, services à la personne",
       "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
       "level": 0
     },
     "alimentaire": {
       "description": "cours particulier, services à la personne",
-      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/kiwifruit_1f95d.png",
       "level": 0
     },
     "événementiel": {
       "description": "évenement, conférence, meeting",
-      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
-      "level": 0
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/face-with-party-horn-and-party-hat_1f973.png",
+      "level": 1
     },
     "exposition": {
       "description": "exposition, musée",
       "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
-      "level": 0
+      "level": 1
+    },
+    "fidélisation": {
+      "description": "Fidélisation de vos clients",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/white-medium-star_2b50.png",
+      "level": 2
     }
 
   },
