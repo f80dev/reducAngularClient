@@ -184,13 +184,20 @@ export class UserformComponent implements OnInit {
   showPromoInSquare(){
     //voir https://openlayers.org/en/latest/examples/moveend.html
     if(!this.map)return false;
+    var user_x=0;
+    var user_y=0;
+    if(this.user.position!=null){
+      user_x=this.user.position.lng;
+      user_y=this.user.position.lat;
+    }
+
 
     var square=this.map.getView().calculateExtent(this.map.getSize());
     var bottomLeft = ol.proj.toLonLat(ol.extent.getBottomLeft(square));
     var topRight = ol.proj.toLonLat(ol.extent.getTopRight(square));
     this.api.getcouponinsquare({
       x0:bottomLeft[0],y0:bottomLeft[1],x1:topRight[0],y1:topRight[1],
-      user:{x:this.user.position.lng,y:this.user.position.lat}
+      user:{x:user_x,y:user_y}
     }).subscribe((coupons:any)=>{
       var l:any=getMarkerLayer(this.map);
       //this.snackBar.open(coupon_sel.label+", Gain:"+coupon_sel.direct_bonus+coupon_sel.symbol,null,{duration:10000});

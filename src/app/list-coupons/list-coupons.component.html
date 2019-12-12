@@ -196,7 +196,7 @@
 
             <div style="font-size: medium" *ngIf="coupon.visible==1 || (coupon.origin==coupon._id && coupon.owner!=user._id)">
                   <br>Il reste <app-timer [end]="coupon.dtEnd"></app-timer>
-                  <div *ngIf="coupon.stock<10"> et {{coupon.stock}}{{coupon.symbol}} pour la promotion</div>
+                  <div *ngIf="coupon.stock<10"> et {{coupon.stock}}{{coupon.symbol}} pour cette promotion</div>
             </div>
 
           </div>
