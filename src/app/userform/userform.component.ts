@@ -130,7 +130,7 @@ export class UserformComponent implements OnInit {
     if(this.user.tags.length>0)tags=this.user.tags;
 
     let picture="";
-    if(this.config.values!=null && this.config.values.tags_details[tags]!=null){
+    if(tags!="" && this.config.values!=null && this.config.values.tags_details[tags].picture!=null){
       picture=this.config.values.tags_details[tags].picture;
     }
 

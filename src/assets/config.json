@@ -133,39 +133,57 @@
   "domain_server":"server.f80.fr",
   "domain_appli":"https://reducshare.com",
 
-  "tags":"commerce,restaurant,alimentaire,bar,concert,événementiel,services,exposition,hotel,vin,cinéma,corporate,fidélisation",
-  "tags_details":[
-    {
-      "tag":"corporate",
-      "description":"Entreprises, PME, vie au travail",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png",
-      "level":1
+  "tags":"commerce,restaurant,alimentaire,événementiel,services,exposition,hotel,cinéma,corporate,fidélisation",
+
+  "tags_details":
+  {
+    "corporate": {
+      "description": "Entreprises, PME, vie au travail",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/card-index_1f4c7.png",
+      "level": 2
     },
-    {
-      "tag":"commerce",
-      "description":"Boutique, enseigne, magasin",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
-      "level":0
+    "commerce": {
+      "description": "Boutique, enseigne, magasin",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/shopping-trolley_1f6d2.png",
+      "level": 0
     },
-    {
-      "tag":"restaurant",
-      "description":"Restaurant, bars",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/cup-with-straw_1f964.png",
-      "level":0
+    "restaurant": {
+      "description": "Restaurant, bars",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/cup-with-straw_1f964.png",
+      "level": 0
     },
-    {
-      "tag":"hotel",
-      "description":"Hotels, lieux d'hébergement",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png",
-      "level":0
+    "hotel": {
+      "description": "Hotels, lieux d'hébergement",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png",
+      "level": 0
     },
-    {
-      "tag":"cinema",
-      "description":"Hotels, lieux d'hébergement",
-      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/hotel_1f3e8.png",
-      "level":0
+    "cinema": {
+      "description": "cinéma, spéctacle, rencontre sportive",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "level": 0
+    },
+    "service": {
+      "description": "cours particulier, services à la personne",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "level": 0
+    },
+    "alimentaire": {
+      "description": "cours particulier, services à la personne",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "level": 0
+    },
+    "événementiel": {
+      "description": "évenement, conférence, meeting",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "level": 0
+    },
+    "exposition": {
+      "description": "exposition, musée",
+      "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/whatsapp/224/ticket_1f3ab.png",
+      "level": 0
     }
-  ],
+
+  },
 
   "modeles":[
     {
@@ -265,7 +283,7 @@
       "max_coupon":500,
       "score":6,
       "conditions":"Remise applicable après validation de la réduction par notre vendeur",
-      "tags":"commerce,vin"
+      "tags":"commerce"
     },
     {
       "id":"cafe",
@@ -290,7 +308,7 @@
       "visual":"https://reducshare.com/assets/img/cafe.jpg",
       "description":"Un restaurant offre les cafés en échange de la diffusion de la promotion",
       "conditions":"pour toute addition d'un montant supérieur a 20€",
-      "tags":"restaurant,bar,corporate,hotel"
+      "tags":"restaurant,corporate,hotel"
     },
     {
       "title":"Menu enfant offert",
@@ -514,7 +532,7 @@
       "max_coupon":500,
       "score":13,
       "conditions":"sur simple présentation du coupon au bar pendant le spectacle",
-      "tags":"concert,événementiel"
+      "tags":"événementiel"
     },
     {
       "id":"happyhour",
@@ -541,7 +559,7 @@
       "visual":"https://reducshare.com/assets/img/happyhour.jpg",
       "description":"un bar propose de gagner des verres en fin de journée",
       "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
-      "tags":"bar,restaurant,hotel,vin"
+      "tags":"restaurant,hotel"
     },
     {
       "id":"laplancheapero",
@@ -568,7 +586,7 @@
       "visual":"https://reducshare.com/assets/img/charcute.jpeg",
       "description":"Une remise jusqu'a 100% sur la planche de charcuterie pour accompagner l'apéro",
       "conditions":"pour toute commande entre 17h et 19 du lundi au vendredi",
-      "tags":"bar"
+      "tags":"restaurant"
     },
     {
       "id":"coworking",
@@ -717,7 +735,7 @@
       "max_coupon":5000,
       "description":"Annonce d'une dégustation de vin avec un nombre de points minimum à obtenir pour y accéder",
       "conditions":"pour un achat supérieur à 20€ et si vous avez plus de 200 points",
-      "tags":"vin"
+      "tags":"commerce"
     },
     {
       "id":"coursparticulier",

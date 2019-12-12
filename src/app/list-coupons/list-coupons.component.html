@@ -164,7 +164,7 @@
             <div style="font-weight: bold;" *ngIf="user.level<1.5">
               <span *ngIf="coupon.origin!=coupon._id">Votre avantage peut augmenter</span>
               <div style="display: inline-block;width:200px;" *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
-                L'avantage de votre<br>client augmente:
+                L'avantage client augmente:
               </div>
             </div>
             <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;"
@@ -177,11 +177,14 @@
 
               <tr *ngIf="coupon.share_bonus>0">
                 <td style="text-align: right;">+1 {{coupon.symbol}}</td>
-                <td>pour {{1/coupon.share_bonus | literal:0}} coupons partagés</td>
+                <td>
+                  <span *ngIf="coupon.share_bonus==1">par coupon partagé</span>
+                  <span *ngIf="coupon.share_bonus!=1">pour {{1/coupon.share_bonus | literal:0}} coupons partagés</span>
+                </td>
               </tr>
               <tr *ngIf="coupon.pay_bonus>0">
                 <td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td>
-                <td>pour chaque usage de coupons distribués</td>
+                <td>à chaque usage de vos coupons partagés</td>
               </tr>
 
               <tr *ngIf="coupon.final_bonus>0">

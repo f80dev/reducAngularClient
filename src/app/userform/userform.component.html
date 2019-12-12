@@ -50,7 +50,7 @@
       <mat-form-field *ngIf="showCouponOnMap?.length>=5 || filter_tag?.length>0" style="width:60%;">
         <mat-label>Voir la categorie:</mat-label>
         <mat-select [(value)]="filter_tag" (selectionChange)="showPromoInSquare()">
-          <mat-option *ngFor="let tag of config.values.tags.split(',')" [value]="tag">
+          <mat-option *ngFor="let tag of config.getTags().split(',')" [value]="tag">
             #{{tag}}
           </mat-option>
         </mat-select>

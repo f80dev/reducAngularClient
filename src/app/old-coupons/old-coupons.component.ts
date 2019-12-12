@@ -35,7 +35,7 @@ export class OldCouponsComponent implements OnInit {
 
   ngOnInit() {
     this.tags=this.config.values.brands[this.config.activeBrand].tags;
-    if(this.tags==null)this.tags=this.config.values.tags;
+    if(this.tags==null)this.tags=this.config.getTags();
 
     this.askFilter=(this.filter.length==0 && this.level<2);
     this.refresh(()=>{
@@ -120,7 +120,7 @@ export class OldCouponsComponent implements OnInit {
   changeFilter() {
     this.askFilter=(this.filter.length==0);
 
-    // this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.values.tags,onlyConfirm:false}})
+    // this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.getTags(),onlyConfirm:false}})
     //   .afterClosed().subscribe((result) => {
     //     this.filter=result;
     //     this.refresh();
@@ -130,7 +130,7 @@ export class OldCouponsComponent implements OnInit {
   selFilter(){
     var rc="";
     if(this.selTags.length==0)
-      rc=this.config.values.tags;
+      rc=this.config.getTags();
     else {
       this.selTags.forEach((f:any)=> {
         rc=rc+","+f.getLabel().trim();
