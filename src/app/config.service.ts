@@ -42,7 +42,7 @@ export class ConfigService {
 
     var rc=[];
     tags.split(",").forEach((tag)=>{
-      if(this.config.tags_details[tag].level>level)
+      if(this.config.tags_details[tag].level<=level)
         rc.push(tag);
     });
 
