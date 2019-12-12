@@ -6,29 +6,41 @@
     <td style="width: 700px;vertical-align: text-top;">
       <mat-card class="app-card" [ngStyle]="{'background-color': config.values?.brands[config.activeBrand].colors.bkdialog}">
 
-        <mat-toolbar class="app-toolbar" style="padding: 0 !important;">
-          <div style="margin:0px;margin-right: 5px" (click)="addImage()">
-            <img *ngIf="new_shop?.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
-            <app-visual *ngIf="new_shop?.picture?.length>0"
-                        size="50"
-                        [picture]="new_shop?.picture" >
-            </app-visual>
-          </div>
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 60px;">
+              <div style="margin:0px;margin-right: 5px" (click)="addImage()">
+                <img *ngIf="new_shop?.picture?.length==0" [src]="config.values.icon_card_shop" style="padding:0px;width:75px;">
+                <app-visual *ngIf="new_shop?.picture?.length>0"
+                            size="50"
+                            [picture]="new_shop?.picture" >
+                </app-visual>
+              </div>
+            </td>
+            <td>
+              <div style="display:inline-block;margin:0px;padding: 0px;width:60%;">
+                <h2>
+                  <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
+                  <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
+                </h2>
+              </div>
+            </td>
+            <td style="width: 60px;">
+              <button mat-button mat-flat-button mat-icon-button
+                      id="btnValide" *ngIf="new_shop.name?.length>0"
+                      class="app-button" (click)="add()">
+                <mat-icon>checkmark</mat-icon>
 
-          <div style="display:inline-block;margin:0px;padding: 0px;width:60%;">
-            <h2>
-              <span *ngIf="new_shop.name?.length<=3">Votre établissement</span>
-              <span *ngIf="new_shop.name?.length>3">{{new_shop.name}}</span>
-            </h2>
-          </div>
+              </button>
+            </td>
+          </tr>
+        </table>
 
-          <button mat-button mat-flat-button mat-icon-button
-                  id="btnValide" *ngIf="new_shop.name?.length>0"
-                  class="app-button" (click)="add()">
-            <mat-icon>checkmark</mat-icon>
 
-          </button>
-        </mat-toolbar>
+
+
+
+
 
         <mat-card-content class="app-card-content">
           <br><br>
@@ -43,7 +55,7 @@
             title="Avant de pouvoir créer une promotion, vous devez créer le point de vente qui va faire l'offre.">
           </app-tuto>
 
-          <mat-form-field class="form-field-style" style="width:100%;">
+          <mat-form-field class="form-field-style" style="width:95%;">
             <input id="txtShopName" type="text"
                    (focus)="focusElt=='shopname'"
                    (keyup)="canUpdateName=false"
