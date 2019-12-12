@@ -108,7 +108,7 @@ export class NewCouponSimpleComponent implements OnInit {
     this.coupon=compute(this.coupon);
     var color="#400064";
     this.master_text=exportToHTML("L'intro de votre promotion:" +
-      " #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client représenté(e)s " +
+      " #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client <br> représenté(e)s " +
       "par le symbole #symbol=Symbole_de_l_unité",this.coupon,(fields)=>{this.add_event(fields);},color);
 
     this.condition_text=exportToHTML("<br> Cette offre est valable #conditions=Conditions_pour_bénéficier_de_la_promotion <br>",this.coupon,(fields)=>{this.add_event(fields);},color);

@@ -8,10 +8,10 @@ import {
 import {Router} from '@angular/router';
 import {ApiService} from "../api.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {openGraphForShop, sendToPrint, showError, showMessage, traitement_coupon} from "../tools";
+import {sendToPrint, showError, showMessage} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
-
+import { faChartLine,faTags} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-shops',
@@ -28,6 +28,8 @@ export class ShopsComponent implements OnInit {
 
   message="";
   showWebCam=false;
+  faChartLine=faChartLine;
+  faTags=faTags;
 
   constructor(public snackBar: MatSnackBar,
               public router: Router,

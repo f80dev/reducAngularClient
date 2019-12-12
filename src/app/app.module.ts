@@ -60,6 +60,9 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ChartsComponent } from './charts/charts.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TruncPipe } from './trunc.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
 
@@ -104,6 +107,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   ],
 
   imports: [
+    FontAwesomeModule,
     PickerModule,
     SocketIoModule.forRoot(config),
     MatDialogModule,

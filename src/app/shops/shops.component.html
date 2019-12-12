@@ -2,8 +2,7 @@
   <mat-expansion-panel *ngFor="let shop of user.shops"
                        class="app-card" [expanded]="shop.visible"
                        data-tac="On retrouve ici la liste des enseignes que vous avez crées"
-                       [ngStyle]="{'background-color':config.values?.brands[config.activeBrand].colors.bkshop}"
-  >
+                       [ngStyle]="{'background-color':config.values?.brands[config.activeBrand].colors.bkshop}">
     <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="75px"
                                 name="shopCard"
                                 class="app-card-header"
@@ -40,14 +39,14 @@
       </div>
 
       <div *ngIf="shop.coupons?.length==0" style="width: 100%;text-align: center;">
-        Lancer une promotion pour '{{shop.name}}' :<br><br>
+        Lancer une promotion pour '{{shop.name}}' !<br><br>
         <button mat-button mat-flat-button
                 name="btnNewPromo2"
                 class="app-button"
                 data-tac="La création d'une enseigne se fait depuis la zone de profil"
                 title="Nouvelle promotion attachée à cette enseigne"
                 (click)="addCoupon(shop,'')">
-          <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
+          <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion&nbsp;&nbsp;
         </button>
 
       </div>
@@ -115,7 +114,7 @@
               *ngIf="user.level>0.8 && (shop.coupons.length>1 || (shop.coupons[0]!=null && shop.coupons[0].share>2))"
               title="Graph de diffusion d'une promo"
               (click)="openGraph(shop._id)">
-        <mat-icon>link</mat-icon>
+        <fa-icon [icon]="faChartLine" size="lg"></fa-icon>
       </button>
 
       <button mat-button mat-flat-button mat-icon-button
@@ -124,7 +123,7 @@
               *ngIf="user.level>=1"
               title="Nouvelle promotion attachée à cette enseigne"
               (click)="addCoupon(shop,'')">
-        <mat-icon>note_add</mat-icon>
+        <fa-icon [icon]="faTags" size="lg"></fa-icon>
       </button>
 
       <button mat-button mat-flat-button
@@ -134,7 +133,7 @@
               data-tac="La création d'une enseigne se fait depuis la zone de profil"
               title="Nouvelle promotion attachée à cette enseigne"
               (click)="addCoupon(shop,'')">
-        <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion
+        <mat-icon>add_circle</mat-icon>&nbsp;&nbsp;Promotion&nbsp;&nbsp;
       </button>
 
     </mat-action-row>

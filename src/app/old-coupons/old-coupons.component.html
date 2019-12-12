@@ -54,7 +54,7 @@
   <mat-card-content class="app-card-content" *ngIf="askFilter">
     <mat-selection-list #ctl_tags (selectionChange)="selTags=ctl_tags.selectedOptions.selected">
       <mat-list-option *ngFor="let tag of tags">
-        <img mat-list-icon [src]="config.values.tags_details[tag].picture">
+        <img mat-list-icon style="width:47px;height:47px;" [src]="config.values.tags_details[tag].picture">
         <h4 mat-line>#{{tag}}</h4>
         <p mat-line>{{config.values.tags_details[tag].description}}</p>
       </mat-list-option>

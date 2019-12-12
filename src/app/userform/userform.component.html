@@ -108,7 +108,7 @@
             id="btnEmailLogin"
             class="app-button"
             mat-button mat-flat-button (click)="securise()">
-      <mat-icon>verified_user</mat-icon>
+      <fa-icon [icon]="faSignInAlt" size="lg"></fa-icon>
     </button>
 
 
@@ -118,7 +118,7 @@
             *ngIf="user.email?.indexOf('fictif.com')==-1"
             id="btnLogout"
             mat-button (click)="logout()">
-      <mat-icon>logout</mat-icon>
+      <fa-icon [icon]="faSignOutAlt" size="lg"></fa-icon>
     </button>
 
 
@@ -136,7 +136,7 @@
             id="btnShowCode" title="Afficher son qrcode personnel"
             mat-raised-button mat-icon-button
             (click)="showPersonalCode=!showPersonalCode">
-      <mat-icon>person</mat-icon>
+      <fa-icon [icon]="faQrcode" size="lg"></fa-icon>
     </button>
 
     <button *ngIf="user.level>0.6 && config.webcamsAvailable>0" mat-button
@@ -159,8 +159,13 @@
             *ngIf="user.level<3 && user.level>0.1"
             id="btnExpert" title="Accès aux fonctions avancées de REDUCSHARE"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
-      <mat-icon>build</mat-icon>
+
+      <fa-icon [icon]="faVial" size="lg"></fa-icon>
+        <!--<mat-icon>build</mat-icon>-->
+
+
     </button>
+
 
     <button mat-button *ngIf="user.level>4.5"
             class="app-button"
@@ -192,7 +197,7 @@
             class="app-button"
             id="btnTransac" mat-icon-button
             mat-raised-button (click)="showTransac=!showTransac">
-      <mat-icon>list</mat-icon>
+      <fa-icon [icon]="faFileInvoiceDollar" size="lg"></fa-icon>
     </button>
 
 

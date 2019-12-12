@@ -21,7 +21,7 @@ import {fixTagPage, isLocal, sendToPrint, showError, showMessage, traitement_cou
 import {ConfigService} from "../config.service";
 import {MatSnackBar} from "@angular/material";
 import {LocService} from "../loc.service";
-import {stringify} from "querystring";
+import {faDice,faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-coupons',
@@ -42,6 +42,9 @@ export class ListCouponsComponent implements OnChanges {
   @Output('edit') onedit: EventEmitter<any>=new EventEmitter();
 
   flipDiv=true;
+  faDice=faDice;
+  faTimes=faTimes;
+
   showChart=false;
   formatDate='dd/MM HH:mm';
 
@@ -55,6 +58,10 @@ export class ListCouponsComponent implements OnChanges {
               public ngNavigatorShareService: NgNavigatorShareService) {
   }
 
+
+  /**
+   *
+   */
   ngOnChanges() {
     this.coupons=traitement_coupon(this.coupons,localStorage.getItem("showCoupon"));
   }
@@ -105,6 +112,10 @@ export class ListCouponsComponent implements OnChanges {
     }
   }
 
+  /**
+   *
+   * @param url
+   */
   share(url) {
   }
 
@@ -196,6 +207,10 @@ export class ListCouponsComponent implements OnChanges {
     return false;
   }
 
+  /**
+   *
+   * @param coupon
+   */
   flash(coupon:any){
     this.api.flash(this.user._id, coupon._id).subscribe((result:any) => {
       localStorage.setItem("showCoupon",result.newcoupon);
@@ -204,11 +219,20 @@ export class ListCouponsComponent implements OnChanges {
     },(error)=>{showError(this,error);});
   }
 
+
+  /**
+   *
+   * @param url
+   */
   openHelp(url:string){
     if(url!=null)
       window.open(url,"_blank");
   }
 
+  /**
+   *
+   * @param coupon
+   */
   updateStock(coupon) {
     this.dialog.open(PromptComponent,{width: '250px',data: {title: "Stock ?"}
     }).afterClosed().subscribe((result) => {

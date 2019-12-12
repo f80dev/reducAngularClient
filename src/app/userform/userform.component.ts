@@ -15,6 +15,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfigService} from "../config.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 import {MatSnackBar} from "@angular/material";
+import { faFileInvoiceDollar,faQrcode, faSignInAlt,faSignOutAlt,faVial} from '@fortawesome/free-solid-svg-icons';
 
 declare var ol: any;
 declare var EXIF: any;
@@ -31,6 +32,12 @@ export class UserformComponent implements OnInit {
   @Output('flash') onflash: EventEmitter<any>=new EventEmitter();
   @Output('update') onupdate: EventEmitter<any>=new EventEmitter();
   @Output('refresh') onrefresh: EventEmitter<any>=new EventEmitter();
+
+  faSignInAlt=faSignInAlt;
+  faFileInvoiceDollar=faFileInvoiceDollar;
+  faVial=faVial;
+  faQrcode=faQrcode;
+  faSignOutAlt=faSignOutAlt;
 
   showScanner: boolean = false;
   showMap: boolean=false;
