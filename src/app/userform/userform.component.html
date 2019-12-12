@@ -51,7 +51,7 @@
         <mat-label>Voir la categorie:</mat-label>
         <mat-select [(value)]="filter_tag" (selectionChange)="showPromoInSquare()">
           <mat-option *ngFor="let tag of config.getTags()" [value]="tag">
-            #{{tag}}
+            {{config.values.tags_details[tag].description}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -156,7 +156,7 @@
 
     <button mat-button
             class="app-button"
-            *ngIf="user.level<3 && user.level>0.5"
+            *ngIf="user.level<3 && user.level>0.1"
             id="btnExpert" title="Accès aux fonctions avancées de REDUCSHARE"
             mat-raised-button mat-icon-button (click)="upgradeLevel()">
       <mat-icon>build</mat-icon>

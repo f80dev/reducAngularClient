@@ -1,10 +1,7 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output
 } from '@angular/core';
@@ -179,6 +176,7 @@ export class ShopsComponent implements OnInit {
       {queryParams:
           {
             edit:true,
+            level:this.user.level,
             userid:this.user._id,
             pseudo:this.user.pseudo,
             tags:this.user.tags,

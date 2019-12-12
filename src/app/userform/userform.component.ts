@@ -154,7 +154,7 @@ export class UserformComponent implements OnInit {
       //Vérifie que l'utilisateur n'a pas déjà le coupon
       c.visible=false;
       var bContinue=true;
-      if(this.filter_tag.length>0 && (this.filter_tag.indexOf(c.tags)==-1 || c.tags.length==0))bContinue=false; //Rejet sur le critère du filtre
+      if(this.filter_tag.length>0 && (this.filter_tag.indexOf(c.tags)==-1 && c.tags.length>0))bContinue=false; //Rejet sur le critère du filtre
       if(c.owner==this.user._id)bContinue=false;//Rejet sur le critere de la possession
       this.excludes.forEach((exclude_c)=>{
         if(c._id==exclude_c.origin)bContinue=false;

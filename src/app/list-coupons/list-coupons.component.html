@@ -207,10 +207,19 @@
               <span style="font-size: xx-large;">{{coupon.gain}}{{coupon.symbol}}</span><br>
             </div>
 
-            <div style="font-size: small;width:80%;padding:10%;display: inline-block;"
+            <div style="font-size: small;width:80%;padding:3%;display: inline-block;"
                  *ngIf="!coupon.breakable && coupon.gain<coupon.min_to_use">
               Vous n'y êtes pas encore !<br>Pour utiliser votre coupon, vous devez avoir récupéré au moins {{coupon.min_to_use}} {{coupon.symbol}}
-              <br><br>Partagez cette promotion pour augmenter votre gain
+              <br><br>Partagez cette promotion pour augmenter votre gain<br><br>
+              <button mat-button mat-flat-button mat-icon-button
+                      name="btnShare"
+                      class="app-button"
+                      *ngIf="coupon.canbedeal"
+                      title="Partager le coupon pour augmenter votre promotion / réduction"
+                      (click)="showCode(coupon,1)">
+                <mat-icon>share</mat-icon>
+              </button>
+
             </div>
 
             <br>
@@ -312,6 +321,16 @@
                 mat-flat-button mat-icon-button>
           <mat-icon>printer</mat-icon>
         </button>
+
+        <button *ngIf="user && coupon.shop_complete?.owner!=user._id && user.level>0.2"
+                mat-button
+                mat-flat-button mat-icon-button
+                class="app-button"
+                (click)="openHelp(coupon.shop_complete.url)"
+                title="En savoir plus sur {{coupon.shop_complete.name}}">
+          <mat-icon>question</mat-icon>
+        </button>
+
 
         <button *ngIf="user && coupon.shop_complete?.owner!=user._id && user.level>0.5"
                 mat-button

@@ -104,7 +104,7 @@
             <div *ngIf="level>0.6">
 
               <br>
-
+              <br>
               <mat-checkbox [(ngModel)]="new_shop.public" id="chkPublic"
                             *ngIf="!new_shop.address.startsWith('http')"
                             title="On souhaite que les promotions de cette enseigne soit visible de tous via la carte"
@@ -112,15 +112,17 @@
                 Point de vente visible sur la carte des promotions
               </mat-checkbox>
               <br>
+              <br><br>
 
-
-              <mat-form-field class="form-field-style" style="width:75%;"
+              <mat-form-field class="form-field-style" style="width:95%;"
                               (focus)="focusElt='tags'">
                 <mat-label>Type de point de vente / prestations</mat-label>
                 <mat-select id="txtShopTags"
                             title="Ici on peut qualifier le type de point de vente. Ces étiquettes vont permettre de limiter le nombre de modèle proposés à la sélection"
-                            [(ngModel)]="new_shop.tags"  multiple>
-                  <mat-option *ngFor="let tag of config.values?.tags?.split(',')" [value]="tag">#{{tag}}</mat-option>
+                            [(ngModel)]="new_shop.tags">
+                  <mat-option *ngFor="let tag of config.values?.tags?.split(',')" [value]="tag">
+                    {{config.values.tags_details[tag].description}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
 
@@ -129,16 +131,19 @@
 
               &nbsp;&nbsp;
 
-              <button mat-flat-button mat-button
-                      *ngIf="level>0.6"
-                      id="cmdFile"
-                      (click)="addImage()">
-                <div class="bloc-bouton">Visuel du <br>point de vente</div>
-              </button>
 
               <br>
 
               <table cellspacing="2"><tr>
+                <td>
+                  <button mat-flat-button mat-button
+                          *ngIf="level>0.6"
+                          id="cmdFile"
+                          (click)="addImage()">
+                    <div class="bloc-bouton">Visuel du <br>point de vente</div>
+                  </button>
+                </td>
+                <td>&nbsp;ou&nbsp;</td>
                 <td>
                   <button mat-flat-button mat-button
                           id="cmdUseProfil"
@@ -152,18 +157,18 @@
               </tr></table>
 
               <br>
+              <br>
+              Utilisez vos promotions pour faire connaitre '{{new_shop.name}}':
               <mat-form-field class="form-field-style" *ngIf="!new_shop.address.startsWith('http')">
                 <input id="txtWebsite" type="text"
                        (focus)="focusElt=='website'"
                        title="Indiquer le site web ou un lien pour en savoir plus, celui-ci sera visible sur les coupons."
-                       matInput placeholder="Site web / En savoir plus"
+                       matInput placeholder="Site web de votre point de vente"
                        [(ngModel)]="new_shop.website">
               </mat-form-field>
               <br>
 
             </div>
-
-
 
           </div>
         </mat-card-content>

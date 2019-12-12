@@ -202,7 +202,7 @@ export class NewshopComponent implements OnInit {
   }
 
   addImage() {
-    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'}, width: '90vw', height:'80vh',maxWidth:"400px",maxHeight:"500px",data: {emoji:true,result:this.new_shop.picture,width: '300px',height:'300px'}}).afterClosed().subscribe((result) => {
+    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'}, width: '90vw', height:'550px',maxWidth:"400px",maxHeight:"90vh",data: {emoji:true,result:this.new_shop.picture,width: '300px',height:'300px'}}).afterClosed().subscribe((result) => {
       if(result)
         this.new_shop.picture=result;
     });

@@ -410,7 +410,7 @@
       "score":16,
       "beneficiaire":"spéctacteur",
       "max_coupon":5000,
-      "description":"Le cinéma offre jusqu'a 4 popcorn en échange de promotion",
+      "description":"Le cinéma offre jusqu'a 4 pots de popcorn",
       "conditions":"sur simple présentation du coupon",
       "tags":"cinéma"
     },
