@@ -61,7 +61,7 @@ import { ChartsComponent } from './charts/charts.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TruncPipe } from './trunc.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import {ImageCropperModule} from "ngx-image-cropper";
 
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
@@ -109,6 +109,7 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
   imports: [
     FontAwesomeModule,
     PickerModule,
+    ImageCropperModule,
     SocketIoModule.forRoot(config),
     MatDialogModule,
     FlipModule,

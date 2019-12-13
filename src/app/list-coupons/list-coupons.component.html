@@ -99,7 +99,7 @@
 
 
             <table ><tr style="vertical-align: top;text-align: center;">
-              <td>
+              <td style="max-width: 300px;">
                 <!--Affichage lorsque le gain de départ est nul-->
                 <div style="font-size: medium;display:inline-block;"
                      *ngIf="coupon.gain==0 && coupon.max>0">
@@ -408,7 +408,7 @@
                 class="app-button"
                 title="Disperser des coupons"
                 name="btnDrop"
-                *ngIf="coupon.origin==coupon._id && coupon.public && user.level>1.5"
+                *ngIf="coupon.origin==coupon._id && coupon.public && user.level>5"
                 (click)="drop(coupon)">
           <mat-icon>arrow_drop_down</mat-icon>
         </button>

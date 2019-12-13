@@ -2,10 +2,11 @@ import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "../../../node_modules/@angular/material/dialog";
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {MatDialog} from "../../../node_modules/@angular/material/dialog";
-import {rotate, selectFile} from "../tools";
+import {resizeBase64Img, rotate, selectFile} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ApiService} from "../api.service";
 import {MatSnackBar} from "@angular/material";
+import {ImageCroppedEvent} from "ngx-image-cropper";
 
 export interface ImageSelectorData {
   quality:number;
@@ -30,6 +31,10 @@ export class ImageSelectorComponent implements OnInit {
   showIcons=false;
   showEmoji=false;
   pictures=[];
+  imagesearchengine_token="";
+
+  imageChangedEvent: any = null;
+  croppedImage: any = null;
 
   constructor(
     public dialog:MatDialog,
@@ -61,13 +66,15 @@ export class ImageSelectorComponent implements OnInit {
 
   selectEmoji(event){
     this.data.result=event.emoji.native;
+    this.imageChangedEvent=null;
     this.showEmoji=false;
   }
 
   onSelectFile(event:any) {
+    this.imageChangedEvent=event;
     selectFile(event,this.data.maxsize,this.data.quality,this.data.square,(res)=>{
       this.data.result=res;
-    })
+    });
   }
 
 
@@ -91,6 +98,7 @@ export class ImageSelectorComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       if(result){
         this.data.result=result;
+        this.imageChangedEvent=null;
       }
     });
   }
@@ -106,20 +114,39 @@ export class ImageSelectorComponent implements OnInit {
         if(result.startsWith("http")){
           this.data.result=result;
         } else {
-          this.api.searchImage(result,15).subscribe((r:any)=>{
-            if(r==null || r.length==0)
-              this.snackBar.open("Désolé nous n'avons pas trouvé d'images pour le mot "+result,"",{duration:2000});
-            else
-              this.pictures=r;
-          })
+          this.api.gettokenforimagesearchengine().subscribe((token:any)=>{
+            this.api.searchImage(result,15,token.access_token).subscribe((r:any)=>{
+              if(r==null || r.length==0)
+                this.snackBar.open("Désolé nous n'avons pas trouvé d'images pour le mot "+result,"",{duration:2000});
+              else
+                this.pictures=r;
+            });
+          });
         }
 
       }
     });
   }
 
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.data.result=event.base64;
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+
   selPicture(tile: any) {
     this.data.result=tile;
+    resizeBase64Img(tile,600,0.5,(result)=>{
+      this.croppedImage=result;
+    });
     this.pictures=[];
   }
 }

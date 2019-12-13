@@ -56,6 +56,11 @@ export class ApiService {
     return this.http.get(api('removeshop/'  + id, ''));
   }
 
+  gettokenforimagesearchengine() {
+    return this.http.get("https://server.f80.fr:5800/auth?username=reducshare&password=hh");
+  }
+
+
   getcouponinsquare(param: { x0: any; y0: any; x1: any; y1: any ,user:any}) {
     return this.http.get(api('getcouponinsquare/'  + param.x0+'/'+param.y0+'/'+param.x1+'/'+param.y1, ''));
   }
@@ -99,8 +104,9 @@ export class ApiService {
     return this.http.get(api("updatecoupon/"+coupon_id+"/"+field+"/"+value));
   }
 
-  searchImage(query:string,limit:number){
-    return this.http.get("https://server.f80.fr:5600/"+query+"/"+limit+"/true");
+  searchImage(query:string,limit:number,token:string){
+    var url="https://server.f80.fr:5800/api/"+query+"?limit="+limit+"&quality=true";
+    return this.http.get(url,{'headers':{"access_token":token}});
   }
 
   getUsersFromCoupon(coupon:any,limit=10){
