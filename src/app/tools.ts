@@ -326,9 +326,14 @@ export function createMarker(lon,lat,icon,coupon=null,scale=0.2){
 }
 
 
-
+/**
+ *
+ * @param base64
+ * @param maxsize
+ * @param quality
+ * @param func
+ */
 export function resizeBase64Img(base64, maxsize,quality,func) {
-
   if(base64==null || base64==""){
     $$("Probleme d'image vide");
     func();
@@ -356,6 +361,10 @@ export function resizeBase64Img(base64, maxsize,quality,func) {
   img.src=base64;
 }
 
+
+/**
+ *
+ */
 export function getAuthServiceConfigs() {
   let config = new SocialServiceConfig()
     .addFacebook("696168110875713")
@@ -365,6 +374,12 @@ export function getAuthServiceConfigs() {
   return config;
 }
 
+
+/**
+ *
+ * @param base64
+ * @param func
+ */
 export function getSize(base64,func){
   var img=new Image();
   img.src=base64;
@@ -373,6 +388,18 @@ export function getSize(base64,func){
   }
 }
 
+
+/**
+ *
+ * @param base64
+ * @param x
+ * @param y
+ * @param width
+ * @param height
+ * @param quality
+ * @param func
+ * @param func_error
+ */
 export function cropBase64Img(base64,x,y,width,height,quality=1,func,func_error) {
   try{
     var canvas:any = document.createElement("canvas");
@@ -404,8 +431,13 @@ export function evalTitle(coupon:any){
   return s;
 }
 
+
+/**
+ * Retourne la blancheur de l'image permettant de choisir la couleur du texte
+ * @param imageSrc
+ * @param callback
+ */
 export function getImageLightness(imageSrc,callback) {
-  debugger
   var img = document.createElement("img");
   img.src = imageSrc;
   img.style.display = "none";
@@ -443,8 +475,6 @@ export function getImageLightness(imageSrc,callback) {
     } catch (e) {
       callback(0);
     }
-
-
   }
 }
 

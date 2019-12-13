@@ -3,7 +3,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.91-beta",
+    "version": "0.92-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -167,7 +167,7 @@
       "level": 0
     },
     "alimentaire": {
-      "description": "commerces de bouche",
+      "description": "commerces de bouche, superette",
       "picture": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/kiwifruit_1f95d.png",
       "level": 0
     },
@@ -201,7 +201,7 @@
       "label":"Des remises incroyables sur certains articles",
       "share_bonus":1,
       "pay_bonus":20,
-      "direct_bonus":0,
+      "direct_bonus":10,
       "final_bonus":0,
       "max":80,
       "beneficiaire":"client",
@@ -407,6 +407,7 @@
       "min_to_use":1,
       "duration_hours":8,
       "stock":30,
+      "ink_color":"black",
       "score":16,
       "beneficiaire":"spéctacteur",
       "max_coupon":5000,

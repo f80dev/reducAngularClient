@@ -35,6 +35,7 @@ export class NewCouponSimpleComponent implements OnInit {
   iframe_src="https://web.reducshare.com/faqs/init_coupon.html";
   showHelpScreen=false;
 
+
   constructor(public router:Router, public api: ApiService,
               public config:ConfigService,
               public breakpointObserver:BreakpointObserver,
@@ -50,6 +51,10 @@ export class NewCouponSimpleComponent implements OnInit {
       });
   }
 
+
+  /**
+   *
+   */
   ngOnInit() {
     checkLogin(this.router);
     var params: ParamMap = this.route.snapshot.queryParamMap;
@@ -57,7 +62,8 @@ export class NewCouponSimpleComponent implements OnInit {
     this.shopid=params.get("shopid") || "";
     var modele = params.get("modele") || "";
     this.level=Number(params.get("level") || "0");
-    if(modele.length==0 && this.level<0.5){
+    // Le non affichage du modèle se fait si le client est à un niveau inférieur à 0 (cela correspond à un mode démonstration)
+    if(modele.length==0 && this.level<0.0){
       modele=this.config.values.modeles[0].id;
     }
 
@@ -75,6 +81,11 @@ export class NewCouponSimpleComponent implements OnInit {
     }
   }
 
+
+  /**
+   *
+   * @param fields
+   */
   add_event(fields:any){
       for(let elt of fields){
         var field=elt.split("=")[0];
@@ -103,6 +114,9 @@ export class NewCouponSimpleComponent implements OnInit {
   }
 
 
+  /**
+   *
+   */
   refresh(){
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
@@ -129,6 +143,11 @@ export class NewCouponSimpleComponent implements OnInit {
     //this.reference_text=exportToHTML("Votre promotion sera classée sous le titre #title=Titre_non_visible_du_client_utilisé_pour_retrouver_sa_promotion",this.coupon,(fields)=>{this.add_event(fields);},color);
   }
 
+
+  /**
+   * Choisir un modèle
+   * @param coupon
+   */
   selectOldAsModel(coupon: any) {
     coupon._id="";
     if(coupon==null)this.cancel();
@@ -148,11 +167,19 @@ export class NewCouponSimpleComponent implements OnInit {
     this.refresh();
   }
 
+
+  /**
+   *
+   */
   cancel(){
     this.showOldCoupon=false;
     this.router.navigate(['home'],{queryParams:{message:"création de coupon annulée"}});
   }
 
+  /**
+   *
+   * @param coupon
+   */
   addcoupon(coupon: any) {
     coupon=compute(coupon);
     coupon.owner=this.userid;
@@ -166,6 +193,12 @@ export class NewCouponSimpleComponent implements OnInit {
   }
 
 
+  /**
+   *
+   * @param field
+   * @param width
+   * @param height
+   */
   addImage(field:string,width=700,height=300) {
     this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.coupon[field],width:width,height:height}}).afterClosed().subscribe((result) => {
       if(result){
@@ -181,6 +214,11 @@ export class NewCouponSimpleComponent implements OnInit {
     });
   }
 
+
+  /**
+   *
+   * @param event
+   */
   openHelp(event){
     this.iframe_src="https://web.reducshare.com/faqs/init_coupon.html#"+["description","visuel","avantage","budget"][event.selectedIndex];
   }

@@ -29,7 +29,7 @@ export class OldCouponsComponent implements OnInit {
   @Output("delete") ondelete:EventEmitter<any>=new EventEmitter();
   @Output("cancel") oncancel:EventEmitter<any>=new EventEmitter();
   @Input("canDelete") canDelete: boolean=false;
-  @Input("filter") filter: any[]=[];
+  @Input("filter") filter="";
   selTags: any=[];
 
 
@@ -97,7 +97,7 @@ export class OldCouponsComponent implements OnInit {
   opereFilter() {
     $$("Application du filtre="+this.filter);
     this.withFilter=true;
-    if(this.filter==this.tags){
+    if(this.filter.length==0){
       this.withFilter=false;
       return;
     }
@@ -106,8 +106,7 @@ export class OldCouponsComponent implements OnInit {
     var index=0;
     lst_coupons.forEach((it)=>{
       if(it.tags.length>0){
-        var intersect=this.filter.filter(value => -1 !== it.tags.split(",").indexOf(value));
-        if(intersect.length>0)
+        if(this.filter.indexOf(it.tags)>=0)
           this.coupons.push(it);
       } else {
         this.coupons.push(it);
@@ -118,28 +117,13 @@ export class OldCouponsComponent implements OnInit {
 
   changeFilter() {
     this.askFilter=(this.filter.length==0);
-
-    // this.dialog.open(PromptComponent,{width: '250px',data: {title: "Filtre", question: "Choisir un tag parmi "+this.config.getTags(),onlyConfirm:false}})
-    //   .afterClosed().subscribe((result) => {
-    //     this.filter=result;
-    //     this.refresh();
-    // });
   }
 
-  selFilter(){
-    var rc=[];
-    if(this.selTags.length==0){
-      rc=this.config.getTags();
-    }else{
-      this.selTags.forEach((f:any)=> {
-        rc.push(f.getLabel().trim());
-      });
-    }
-
-    this.filter=rc;
+  selFilter(selTag:string=""){
+    this.filter=selTag;
     this.askFilter=false;
     this.refresh(()=>{
-      if(this.selTags.length>0)this.opereFilter();
+      this.opereFilter();
     });
   }
 }

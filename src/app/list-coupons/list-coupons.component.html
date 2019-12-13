@@ -500,11 +500,13 @@
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
       <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span><br>
-      <span *ngIf="coupon.max>0" style="font-size: small">(vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})</span>
+      <div *ngIf="coupon.max>0" style="font-size: small;line-height: 90%;">
+        (vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})
+      </div>
       <br><br>
-      <div [ngStyle]="{'font-size':'large',color:coupon.ink_color}" *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
+      <div [ngStyle]="{'font-size':'large','font-weight':'bolder',color:coupon.ink_color,'line-height':'90%'}"
+           *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
         Pour l'instant vous avez {{coupon.gain | trunc}}
-        <!--<span *ngIf="!coupon.breakable && coupon.gain<1">{{coupon.gain*100 | number:'1.0-0' }}% de 1</span>-->
         {{coupon.symbol}}
         <br>
       </div>

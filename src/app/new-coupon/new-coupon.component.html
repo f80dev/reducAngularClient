@@ -149,6 +149,12 @@
       <mat-step title="Décrire les conditions d'application de la promotion">
         <ng-template matStepLabel>Conditions d'application</ng-template>
 
+        <div class="detail_promo">
+          <div *ngIf="level<1" style="font-size: x-small">Résumé de votre saisie:<br></div>
+          L'offre est valable {{coupon.conditions}}
+          <span *ngIf="coupon.min_to_use>0"> pour les clients ayant au minimum accumulé {{coupon.min_to_use}}{{coupon.symbol}}</span>
+          <br>
+        </div>
 
         <!--Conditions d'utilisations-->
         <!-- gain Minimum -->
@@ -162,7 +168,7 @@
 
         <!--Conditions-->
         <mat-form-field class="form-field-style">
-          <textarea matInput rows="3"
+          <textarea matInput rows="2"
                     id="txtConditions"
                     (focus)="focusElt='conditions'"
                     title="Condition d'application de l'offre"
