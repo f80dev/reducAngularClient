@@ -42,33 +42,28 @@
           <br>
 
           <span *ngIf="coupon.visible==2">
-              Rendez vous "{{coupon.shopname}}"
+              Rendez vous à "{{coupon.shopname}}"
             </span>
 
           <!-- Sous-titre-->
-          <span *ngIf="coupon.visible==1">
-              <span style="font-size: x-small;" *ngIf="coupon.canbedeal && coupon.max>0">
-                Partagez la promo pour gagner jusqu'à {{coupon.max}}{{coupon.symbol}}
+          <div *ngIf="coupon.visible==0">
+              <span style="font-size: small;" *ngIf="coupon.canbedeal && coupon.max>0">
+                Partagez pour gagner jusqu'à <strong>{{coupon.max}}</strong> {{coupon.unity}}
               </span>
 
             <!--Si le coupon ne peut plus être distribué-->
               <span *ngIf="!coupon.canbedeal || coupon.visible==2">
                 Récupérer {{coupon.gain | literal}}{{coupon.symbol}} offert
               </span>
-            </span>
+          </div>
 
-          <div *ngIf="coupon.visible==0" style="font-size: x-small;">
+          <div *ngIf="coupon.visible==2" style="font-size: x-small;">
             {{coupon.shopname}}
             <span *ngIf="coupon.distance!=null && coupon.distance<3000">({{coupon.distance | literal:0}} m)</span>
             <span *ngIf="coupon.distance!=null && coupon.distance>=3000">({{coupon.distance/1000 | literal:0}} km)</span>
+            Avant {{(coupon.dtEnd*1000) | date:formatDate}} (il reste <app-timer [end]="coupon.dtEnd"></app-timer>)
           </div>
 
-
-
-          <span *ngIf="coupon.visible==2" style="font-size: x-small;">
-              <br>
-              Avant le {{(coupon.dtEnd*1000) | date:formatDate}} (il reste <app-timer [end]="coupon.dtEnd"></app-timer>)
-            </span>
         </div>
 
         <!--Affichage des coupons origines pour leur propriétaire-->
@@ -97,10 +92,62 @@
 
       <!--Visuel du coupon-->
       <table style="width:100%;vertical-align: top;text-align: center;"><tr>
-        <td style="text-align: center;width: fit-content;max-width: 40%;">
-          <!--Visuel du coupon-->
+        <td style="text-align: center;width: fit-content;">
 
-          <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin!=coupon._id || config.width_screen>370)">
+          <div style="line-height:100%;display:inline-block;margin:0px;"
+               *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
+
+
+            <table ><tr style="vertical-align: top;text-align: center;">
+              <td>
+                <!--Affichage lorsque le gain de départ est nul-->
+                <div style="font-size: medium;display:inline-block;"
+                     *ngIf="coupon.gain==0 && coupon.max>0">
+                  <mat-icon>share</mat-icon><br>
+                  Partager pour gagner jusqu'a {{coupon.max}} {{coupon.unity}}
+                </div>
+
+                <!--Affichage lorsque le gain de départ est positif -->
+                <div style="font-size: 3em;font-weight: bold;"
+                     *ngIf="coupon.gain>0 || coupon.max==0">
+                  {{coupon.gain | literal:1}}{{coupon.symbol}}
+                </div>
+
+
+                <span style="font-size: 2em;"
+                      *ngIf="coupon.promocodes.length>0">
+                    {{showPromoCode(coupon.gain,coupon.promocodes)}}
+            </span>
+
+                <!-- Affichage du gain-->
+                <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>0 && coupon.gain<=1">gagné(e)</div>
+                <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>1">gagné(e)s</div>
+              </td>
+
+
+              <button mat-button mat-flat-button
+                      name="btnShare"
+                      class="app-button"
+                      *ngIf="coupon.canbedeal && user.level<2 && coupon.gain>0"
+                      title="Partager le coupon pour augmenter votre promotion / réduction"
+                      (click)="showCode(coupon,1)">
+                <mat-icon>share</mat-icon>
+                <div class="bloc-bouton" *ngIf="coupon.origin!=coupon._id">
+                  Gagner<br>plus
+                </div>
+              </button>
+
+              <td>
+
+              </td>
+            </tr></table>
+
+
+
+          </div>
+
+          <!--Visuel du coupon-->
+          <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin==coupon._id)">
             <app-visual [picture]="coupon.visual"
                         [flat]="true"
                         (click)="coupon.visible>0"
@@ -130,31 +177,8 @@
           <div style="margin-top:10px;line-height:100%;display:inline-block;font-size: larger;"
                *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
 
-            <!-- TODO: a ajouter-->
-            <div style="font-size: 2em;"
-                 *ngIf="coupon.gain>0">
-              {{coupon.gain | literal:1}}{{coupon.symbol}}
-            </div>
-
-            <div style="font-size: medium;display:inline-block;padding:10%;"
-                 *ngIf="coupon.promocodes.length==0 && coupon.gain==0">
-              <table><tr>
-                <td><mat-icon>share</mat-icon></td>
-                <td>Partager le coupon pour gagner des {{coupon.unity}}</td>
-              </tr></table>
-            </div>
-
-            <span style="font-size: 2em;"
-                  *ngIf="coupon.promocodes.length>0">
-                  {{showPromoCode(coupon.gain,coupon.promocodes)}}
-            </span>
-
-            <!-- Affichage du gain-->
-            <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>0">gagné(es)</div>
-
-
             <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
-            <br><br>il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
+            il reste <app-timer [end]="coupon.dtEnd"></app-timer><br>
             <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
             <div *ngIf="coupon.stock<10"><br>Encore {{coupon.stock}}{{coupon.symbol}} à gagner</div>
           </div>
@@ -226,7 +250,7 @@
             <div *ngIf="coupon.breakable || coupon.gain>=coupon.min_to_use">
               <div style="width:80%;display:inline-block;line-height: 90%;margin-top:5px;">{{coupon.conditions}}</div>
               <br><br>
-              Localiser le point de vente :
+              Localiser "{{coupon.shopname}}":
               <button mat-button mat-flat-button
                       name="btnMap"
                       class="small-icon-button"
@@ -277,13 +301,13 @@
                 label="Commencez la distribution de votre coupon en l'imprimant ou en l'envoyant a votre réseau par SMS, facebook, whatsapp">
       </app-tuto>
 
-      <div style="width: 100%;text-align: center;font-size: medium;color:lightgrey;"
-           name="zoneConditions"
-           *ngIf="coupon.origin!=coupon._id && coupon.visible!=0 && !coupon.canbedeal">
-        <br>
-        <strong>Rappel des conditions d'application:</strong><br>
-        Offre valable pour {{coupon.conditions}}
-      </div>
+      <!--<div style="width: 100%;text-align: center;font-size: medium;color:lightgrey;"-->
+           <!--name="zoneConditions"-->
+           <!--*ngIf="coupon.origin!=coupon._id && coupon.visible!=0 && !coupon.canbedeal">-->
+        <!--<br>-->
+        <!--<strong>Rappel des conditions d'application:</strong><br>-->
+        <!--Offre valable pour {{coupon.conditions}}-->
+      <!--</div>-->
 
       <app-tuto *ngIf="!coupon.canbedeal && coupon.origin!=coupon._id"
                 label="Le coupon ne peut plus être distribué, mais vous pouvez l'utiliser au près du vendeur">
@@ -374,7 +398,7 @@
                 class="app-button"
                 title="Faire gagner de la réduction au meilleur contributeur"
                 name="btnTirage"
-                *ngIf="coupon.origin==coupon._id && user.level>1"
+                *ngIf="coupon.origin==coupon._id && user.level>1 && coupon.share>5"
                 (click)="tirage(coupon)">
           <fa-icon [icon]="faDice" size="lg"></fa-icon>
         </button>
@@ -499,15 +523,14 @@
          style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
-      <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span><br>
+      <span [ngStyle]="{color:coupon.ink_color,'font-weight':'bolder'}">{{coupon.label}}</span><br>
       <div *ngIf="coupon.max>0" style="font-size: small;line-height: 90%;">
         (vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})
       </div>
       <br><br>
       <div [ngStyle]="{'font-size':'large','font-weight':'bolder',color:coupon.ink_color,'line-height':'90%'}"
            *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
-        Pour l'instant vous avez {{coupon.gain | trunc}}
-        {{coupon.symbol}}
+        Pour l'instant vous avez {{coupon.gain | trunc}}{{coupon.symbol}}
         <br>
       </div>
     </div>

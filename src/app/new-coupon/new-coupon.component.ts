@@ -36,7 +36,7 @@ export class NewCouponComponent implements OnInit {
     breakable:false,
     unity: 'pourcents de réduction',
     delay:0,
-    nb_partage:100,
+    nb_partage:1,
     final_bonus:0,
     pluriel:true,
     min_to_use:1,
