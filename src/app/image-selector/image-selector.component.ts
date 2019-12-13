@@ -13,6 +13,7 @@ export interface ImageSelectorData {
   title:string;
   square:boolean;
   maxsize: number;
+  ratio:string;
   filter:string;
   result:string;
   emoji:boolean;
@@ -32,8 +33,9 @@ export class ImageSelectorComponent implements OnInit {
   showEmoji=false;
   pictures=[];
   imagesearchengine_token="";
+  ratio="1";
 
-  imageChangedEvent: any = null;
+  imageBase64:string=null;
   croppedImage: any = null;
 
   constructor(
@@ -49,6 +51,7 @@ export class ImageSelectorComponent implements OnInit {
     data.title=data.title || "Sélectionner une image";
     if(data.square==null)data.square=true;
     data.maxsize=data.maxsize || 500;
+    this.ratio=data.ratio || "1";
     data.width=data.width || data.maxsize;
     if(data.square)data.height=data.width;
     if(data.width>data.maxsize)data.width=data.maxsize;
@@ -66,14 +69,13 @@ export class ImageSelectorComponent implements OnInit {
 
   selectEmoji(event){
     this.data.result=event.emoji.native;
-    this.imageChangedEvent=null;
+    this.imageBase64=null;
     this.showEmoji=false;
   }
 
   onSelectFile(event:any) {
-    this.imageChangedEvent=event;
-    selectFile(event,this.data.maxsize,this.data.quality,this.data.square,(res)=>{
-      this.data.result=res;
+    selectFile(event,this.data.maxsize,this.data.quality,false,(res)=>{
+      this.imageBase64=res;
     });
   }
 
@@ -98,7 +100,7 @@ export class ImageSelectorComponent implements OnInit {
     }).afterClosed().subscribe((result) => {
       if(result){
         this.data.result=result;
-        this.imageChangedEvent=null;
+        this.imageBase64=null;
       }
     });
   }
@@ -132,6 +134,8 @@ export class ImageSelectorComponent implements OnInit {
     this.croppedImage = event.base64;
     this.data.result=event.base64;
   }
+
+
   imageLoaded() {
     // show cropper
   }
@@ -143,10 +147,8 @@ export class ImageSelectorComponent implements OnInit {
   }
 
   selPicture(tile: any) {
-    this.data.result=tile;
-    resizeBase64Img(tile,600,0.5,(result)=>{
-      this.croppedImage=result;
+    this.api.convert(tile).subscribe((res:any)=>{
+      this.imageBase64="data:image/jpg;base64,"+res.result;
     });
-    this.pictures=[];
   }
 }

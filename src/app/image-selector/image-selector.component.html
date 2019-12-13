@@ -52,12 +52,13 @@
          (click)="selIcon(icon)">
   </div>
 
-  <div *ngIf="imageChangedEvent && !showEmoji">
+  <div *ngIf="imageBase64 && !showEmoji"
+       style="margin-left:5%;width:90%">
     <image-cropper
-      [imageChangedEvent]="imageChangedEvent"
+      [imageBase64]="imageBase64"
       [maintainAspectRatio]="true"
-      [aspectRatio]="16 / 9"
-      [resizeToWidth]="128"
+      [aspectRatio]="ratio"
+      [resizeToWidth]="200"
       format="png"
       (imageCropped)="imageCropped($event)"
       (imageLoaded)="imageLoaded()"
@@ -70,12 +71,12 @@
 
   <div style="width: 95%;text-align: center;overflow: hidden;">
 
-    <img *ngIf="imageChangedEvent!=null"
+    <img *ngIf="imageBase64!=null"
          class="image-photo"
          [src]="croppedImage">
 
     <app-visual [picture]="data.result"
-                *ngIf="pictures?.length==0 && !showEmoji && imageChangedEvent==null"
+                *ngIf="pictures?.length==0 && !showEmoji && imageBase64==null"
                 size="200"
                 max-width="95%"
                 [height]="data.height">

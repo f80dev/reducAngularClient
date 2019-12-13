@@ -132,4 +132,8 @@ export class ApiService {
   tirage(couponid:string,gain: string, limit: string) {
     return this.http.get(api("tirage/"+couponid+"/"+gain+"/"+limit));
   }
+
+  convert(url:string) {
+    return this.http.post(api("convert"),url);
+  }
 }
