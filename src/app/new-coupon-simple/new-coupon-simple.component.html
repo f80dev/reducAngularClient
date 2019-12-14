@@ -48,21 +48,21 @@
               <div class="zone_text" [innerHTML]="condition_text | safe:'html'"></div>
             </mat-step>
 
-            <mat-step title="Votre visuel">
+            <mat-step title="Votre visuel" style="text-align: center;">
               <ng-template matStepLabel class="step-title">Votre visuel</ng-template>
-              <div style="position:relative;width: 100%;text-align: center;color:white;">
+              <div style="display:inline-block;position:relative;text-align: center;color:white;">
                 <span style="color:black" >Couverture de votre coupon (avec Exemple de texte)</span><br>
-                <div style="position:absolute;z-index:100;left:5%;width:90%;top:20%;font-size: large;">
-                  <span [ngStyle]="{color:coupon.ink_color}">{{coupon.label}}</span>
+                <div style="position:absolute;z-index:100;left:5%;width:90%;top:40%;">
+                  <span [ngStyle]="{color:coupon.ink_color,'font-size':'150%'}">{{coupon.label}}</span>
                 </div>
-                <div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">
-                  <span [ngStyle]="{color:coupon.ink_color}">Jusqu'à {{coupon.max}}{{coupon.unity}}</span>
-                </div>
+                <!--<div *ngIf="coupon.max>0" style="position:absolute;z-index:100;width:100%;top:60%;font-size: x-large;">-->
+                  <!--<span [ngStyle]="{color:coupon.ink_color,'font-size':'5vw'}">Jusqu'à {{coupon.max}}{{coupon.unity}}</span>-->
+                <!--</div>-->
                 <img class="visual-coupon"
-                     style="object-fit: cover;"
+                     style="height: 100%;object-fit: contain;"
                      id="id_visual"
                      [src]="coupon.visual"
-                     (click)="addImage('visual',800,220)"><br>
+                     (click)="addImage('visual')"><br>
                 <span style="color:black" >Cliquer sur l'image pour la modifier</span>
               </div>
 

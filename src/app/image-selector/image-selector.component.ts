@@ -33,7 +33,7 @@ export class ImageSelectorComponent implements OnInit {
   showEmoji=false;
   pictures=[];
   imagesearchengine_token="";
-  ratio="1";
+  ratio=1;
 
   imageBase64:string=null;
   croppedImage: any = null;
@@ -51,11 +51,19 @@ export class ImageSelectorComponent implements OnInit {
     data.title=data.title || "Sélectionner une image";
     if(data.square==null)data.square=true;
     data.maxsize=data.maxsize || 500;
-    this.ratio=data.ratio || "1";
+    this.ratio=data.ratio || 1;
     data.width=data.width || data.maxsize;
     if(data.square)data.height=data.width;
     if(data.width>data.maxsize)data.width=data.maxsize;
     if(data.height>data.maxsize)data.height=data.maxsize;
+
+    if(data.result.startsWith("http")){
+      this.api.convert(data.result).subscribe((r:any)=>{
+        this.imageBase64="data:image/jpg;base64,"+r.result;
+      });
+    }
+    if(data.result.startsWith("data:"))this.imageBase64=data.result;
+
   }
 
   addIcons(){
@@ -85,8 +93,8 @@ export class ImageSelectorComponent implements OnInit {
   }
 
   rotatePhoto() {
-    rotate(this.data.result,90,this.data.quality,(res)=>{
-      this.data.result=res;
+    rotate(this.imageBase64,90,this.data.quality,(res)=>{
+      this.imageBase64=res;
     });
   }
 
@@ -123,6 +131,7 @@ export class ImageSelectorComponent implements OnInit {
               else{
                 if(r.length>10)r=r.slice(0,9);
                 this.pictures=r;
+                this.imageBase64=null;
               }
 
             });

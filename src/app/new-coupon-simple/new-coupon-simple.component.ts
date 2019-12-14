@@ -199,8 +199,8 @@ export class NewCouponSimpleComponent implements OnInit {
    * @param width
    * @param height
    */
-  addImage(field:string,width=700,height=300) {
-    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {result:this.coupon[field],width:width,height:height}}).afterClosed().subscribe((result) => {
+  addImage(field:string) {
+    this.dialog.open(ImageSelectorComponent, {width: '90%', data: {ratio:16/9,result:this.coupon[field]}}).afterClosed().subscribe((result) => {
       if(result){
         getImageLightness(result,(light)=>{
           if(light>100)

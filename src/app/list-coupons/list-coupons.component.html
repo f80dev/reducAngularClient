@@ -523,16 +523,21 @@
          style="position:absolute;z-index:0;top:0;left:0;width:100%;height:100%;object-fit: cover;object-position: 50% 50%;">
 
     <div style="z-index: 100;position: absolute;left:10%;top:10%;width:80%;max-width: 500px;font-size:x-large;">
-      <span [ngStyle]="{color:coupon.ink_color,'font-weight':'bolder'}">{{coupon.label}}</span><br>
-      <div *ngIf="coupon.max>0" style="font-size: small;line-height: 90%;">
-        (vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})
+      <div [ngStyle]="{color:coupon.ink_color,'font-weight':'bolder'}">
+        {{coupon.label}}<br>
+        <div *ngIf="coupon.max>0" style="font-size: small;line-height: 90%;">
+          (vous pouvez avoir jusqu'à {{coupon.max}}&nbsp;{{coupon.unity}})
+        </div>
+        <br><br>
+        <div [ngStyle]="{'font-size':'large','font-weight':'bolder','line-height':'90%'}"
+             *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
+          Pour l'instant vous avez {{coupon.gain | trunc}}{{coupon.symbol}}
+          <br>
+        </div>
       </div>
-      <br><br>
-      <div [ngStyle]="{'font-size':'large','font-weight':'bolder',color:coupon.ink_color,'line-height':'90%'}"
-           *ngIf="coupon.gain>0 && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
-        Pour l'instant vous avez {{coupon.gain | trunc}}{{coupon.symbol}}
-        <br>
-      </div>
+
+
+
     </div>
     <div style="z-index: 110;position: absolute;left:0;top:75%;width:100%;text-align: right;max-width:720px;">
       <button *ngIf="user.level<1 && coupon._id!=coupon.origin"

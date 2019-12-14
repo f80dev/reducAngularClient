@@ -385,13 +385,13 @@ export class UserformComponent implements OnInit {
 
   addImage(event) {
     event.stopPropagation();
-    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'},width: '400px', data:
+    this.dialog.open(ImageSelectorComponent, {position:{left:'5vw',top:'10vh'},width: '90vw',height:'90vh', data:
         {
           result:this.user.photo,
           width: 250,
           height:250,
           emoji:true,
-          ratio:"1"
+          ratio:1
         }
     }).afterClosed().subscribe((result) => {
       if(result){

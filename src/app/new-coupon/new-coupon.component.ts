@@ -196,7 +196,10 @@ export class NewCouponComponent implements OnInit {
   }
 
   addImage(field,width,height,emoji=false) {
-    this.dialog.open(ImageSelectorComponent, {width: '90%',height:"70%", data: {ratio:'16 / 9',emoji:emoji,result:this.coupon[field],width: width,height:height}}).afterClosed().subscribe((result) => {
+    this.dialog.open(ImageSelectorComponent, {
+      width: '90vw',height:"90vh",
+      data: {ratio:16/9,emoji:emoji,result:this.coupon[field],width: width,height:height}
+    }).afterClosed().subscribe((result) => {
       if(result){
         this.coupon[field]=result;
       }
