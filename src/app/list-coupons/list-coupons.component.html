@@ -97,7 +97,7 @@
           <div style="line-height:100%;display:inline-block;margin:0px;"
                *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
 
-
+            <br>
             <table ><tr style="vertical-align: top;text-align: center;">
               <td style="max-width: 300px;">
                 <!--Affichage lorsque le gain de départ est nul-->
@@ -117,7 +117,7 @@
                 <span style="font-size: 2em;"
                       *ngIf="coupon.promocodes.length>0">
                     {{showPromoCode(coupon.gain,coupon.promocodes)}}
-            </span>
+                </span>
 
                 <!-- Affichage du gain-->
                 <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>0 && coupon.gain<=1">gagné(e)</div>
@@ -150,6 +150,8 @@
           <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin==coupon._id)">
             <app-visual [picture]="coupon.visual"
                         [flat]="true"
+                        [ink]="coupon.ink_color"
+                        [text]="coupon.label"
                         (click)="coupon.visible>0"
                         width="25vw" height="auto" max-width="200px" max-height="180px">
             </app-visual>

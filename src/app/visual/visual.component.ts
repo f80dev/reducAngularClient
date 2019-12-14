@@ -14,12 +14,15 @@ export class VisualComponent implements OnInit {
   @Input("width") w:string="";
   @Input("height") h:string="";
   @Input("size") size=50;
+  @Input("text") text="";
+
 
   @Input("crop") crop:string="";
   @Input("radius") radius:string="";
 
   @Input("max-width") mw:string="";
   @Input("max-height") mh:string="";
+  @Input("ink") ink="white";
 
 
   constructor() { }
