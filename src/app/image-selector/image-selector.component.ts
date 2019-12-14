@@ -117,11 +117,14 @@ export class ImageSelectorComponent implements OnInit {
           this.data.result=result;
         } else {
           this.api.gettokenforimagesearchengine().subscribe((token:any)=>{
-            this.api.searchImage(result,15,token.access_token).subscribe((r:any)=>{
+            this.api.searchImage(result,10,token.access_token).subscribe((r:any)=>{
               if(r==null || r.length==0)
                 this.snackBar.open("Désolé nous n'avons pas trouvé d'images pour le mot "+result,"",{duration:2000});
-              else
+              else{
+                if(r.length>10)r=r.slice(0,9);
                 this.pictures=r;
+              }
+
             });
           });
         }

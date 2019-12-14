@@ -39,37 +39,40 @@
   </emoji-mart>
 
 
-  <mat-grid-list *ngIf="pictures?.length>0" style="width:100%;" cols="3" rowHeight="16:9">
+  <mat-grid-list *ngIf="pictures?.length>0 && imageBase64==null" style="width:100%;" cols="3" rowHeight="16:9">
     <mat-grid-tile *ngFor="let tile of pictures">
-      <img [src]="tile" style="width:20vmin;height:20vmin;" (click)="selPicture(tile)">
+      <img [src]="tile" style="width:25vmin;height:25vmin;" (click)="selPicture(tile)">
     </mat-grid-tile>
   </mat-grid-list>
 
 
   <div *ngIf="showIcons" style="width:100%;">
-    <img *ngFor="let icon of icons" [src]="icon.photo"
+    <img *ngFor="let icon of icons"
+         [src]="icon.photo"
          style="width:30px;display: inline-block;"
          (click)="selIcon(icon)">
   </div>
 
-  <div *ngIf="imageBase64 && !showEmoji"
-       style="margin-left:5%;width:90%">
-    <image-cropper
-      [imageBase64]="imageBase64"
-      [maintainAspectRatio]="true"
-      [aspectRatio]="ratio"
-      [resizeToWidth]="200"
-      format="png"
-      (imageCropped)="imageCropped($event)"
-      (imageLoaded)="imageLoaded()"
-      (cropperReady)="cropperReady()"
-      (loadImageFailed)="loadImageFailed()"
-    >
-    </image-cropper>
-    <br>
+  <div style="width: 100%;text-align: center;">
+    <div *ngIf="imageBase64 && !showEmoji"
+         style="display: inline-block;width:90%;max-width: 300px;">
+      <image-cropper
+        [imageBase64]="imageBase64"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="ratio"
+        [resizeToWidth]="200"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      >
+      </image-cropper>
+      <br>
+    </div>
   </div>
 
-  <div style="width: 95%;text-align: center;overflow: hidden;">
+  <div style="width: 100%;text-align: center;overflow: hidden;">
 
     <img *ngIf="imageBase64!=null"
          class="image-photo"
