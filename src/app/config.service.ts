@@ -57,7 +57,7 @@ export class ConfigService {
    */
   init(func=null){
 
-    this.width_screen=screen.availWidth;
+    this.width_screen=window.innerWidth;
 
     initAvailableCameras((res)=>{
       this.webcamsAvailable=res;

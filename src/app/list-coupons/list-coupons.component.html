@@ -98,7 +98,8 @@
                *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
 
             <br>
-            <table ><tr style="vertical-align: top;text-align: center;">
+            <table >
+              <tr style="vertical-align: top;text-align: center;">
               <td style="max-width: 300px;">
                 <!--Affichage lorsque le gain de départ est nul-->
                 <div style="font-size: medium;display:inline-block;"
@@ -140,14 +141,13 @@
               <td>
 
               </td>
-            </tr></table>
-
-
+            </tr>
+            </table>
 
           </div>
 
           <!--Visuel du coupon-->
-          <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin==coupon._id)">
+          <div *ngIf="coupon.visible==0 && coupon.picture?.length>0 && (coupon.origin==coupon._id && config.width_screen>500)">
             <app-visual [picture]="coupon.visual"
                         [flat]="true"
                         [ink]="coupon.ink_color"
