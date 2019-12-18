@@ -22,7 +22,8 @@ export class ConfigService {
 
 
   constructor(private location: Location, private http: HttpClient,public platform:Platform){
-
+    if(localStorage.getItem("activeBrand")!=null)
+      this.activeBrand=Number(localStorage.getItem("activeBrand"));
   }
 
   async logo(): Promise<string> {

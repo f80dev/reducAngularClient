@@ -74,7 +74,8 @@ export class HomeComponent implements OnInit {
         message:params.get("message") || "",
       };
 
-      this.config.activeBrand=Number(params.get("brand") || "0");
+      this.config.activeBrand=Number(params.get("brand") || localStorage.getItem("activeBrand") || "0");
+      if(params.get("brand"))localStorage.setItem("activeBrand",params.get("brand"));
 
       if(params.has("notuto"))this.config.params["tuto"]=false;
       if(this.config.params.coupon==""){

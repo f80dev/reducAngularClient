@@ -3,7 +3,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.93-beta",
+    "version": "0.94-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -12,7 +12,7 @@
       "bkabout":"#5F5F5F",
       "bkdialog":"#5F5F5F",
       "bkhelp":"#2C4050",
-      "inkmodel":"white"
+      "inkmodel":"#893B92"
     },
     "bkcolor":"#2a002a",
     "news": "Classement des meilleurs vendeurs",
@@ -77,10 +77,10 @@
         "bkuser":"#286210",
         "bkshop":"#286210",
         "bkcoupon":"#15621D",
-        "bkmain":"#4C7B20",
+        "bkmain":"#96BD0F",
         "bkabout":"#15621D",
         "bkdialog":"#1C3724",
-        "inkmodel":"white"
+        "inkmodel":"FFF200"
       },
       "support": {
         "forum": "https://jeunes-ecologistes.org/la-resistance-continue-contre-amazon/",
