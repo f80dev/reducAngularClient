@@ -120,7 +120,7 @@ export class NewCouponSimpleComponent implements OnInit {
   refresh(){
     this.dialog.closeAll();
     this.coupon=compute(this.coupon);
-    var color="#400064";
+    var color=this.config.values.brands[this.config.activeBrand].colors["inkmodel"];
     this.master_text=exportToHTML("L'intro de votre promotion:" +
       " #label=teaser_de_votre_promotion <br><br>Le @beneficiaire gagne des #unity=unité_désignant_ce_que_gagne_le_client <br> représenté(e)s " +
       "par le symbole #symbol=Symbole_de_l_unité",this.coupon,(fields)=>{this.add_event(fields);},color);

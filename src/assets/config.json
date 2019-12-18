@@ -11,7 +11,8 @@
       "bkmain":"#4F4F4F",
       "bkabout":"#5F5F5F",
       "bkdialog":"#5F5F5F",
-      "bkhelp":"#2C4050"
+      "bkhelp":"#2C4050",
+      "inkmodel":"white"
     },
     "bkcolor":"#2a002a",
     "news": "Classement des meilleurs vendeurs",
@@ -48,7 +49,8 @@
       "bkcoupon":"#1F2D52",
       "bkmain":"#4F4F4F",
       "bkabout":"#4F0D0F",
-      "bkdialog":"#1C3724"
+      "bkdialog":"#1C3724",
+      "inkmodel":"white"
     },
     "support": {
       "forum": "http://reducshare.les-forums.com/",
@@ -64,7 +66,7 @@
       "title": "EcoloShop",
       "version": "0.33-beta",
       "news": "bug",
-      "logo": "./assets/img/jeunesecolo.png",
+      "logo": "./assets/img/jeunesecolos.png",
       "claim":"Les jeunes écologistes s'engagent pour le commerce de proximité",
       "editor":{
         "website": "https://jeunes-ecologistes.org/",
@@ -75,9 +77,10 @@
         "bkuser":"#286210",
         "bkshop":"#286210",
         "bkcoupon":"#15621D",
-        "bkmain":"#4F4F4F",
+        "bkmain":"#4C7B20",
         "bkabout":"#15621D",
-        "bkdialog":"#1C3724"
+        "bkdialog":"#1C3724",
+        "inkmodel":"white"
       },
       "support": {
         "forum": "https://jeunes-ecologistes.org/la-resistance-continue-contre-amazon/",
@@ -86,7 +89,7 @@
         "faq": "https://web.reducshare.com/faq.html?from=appli&marque=Les%20Jeunes%20Ecolos",
         "website": "https://www.jeunes-ecologistes.org/"
       },
-      "tags":"restaurant,hotel,commerce,cinema"
+      "tags":"restaurant,hotel,commerce,cinéma"
     }
 
 
