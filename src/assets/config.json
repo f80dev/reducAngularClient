@@ -58,7 +58,36 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     },
     "tags":"restaurant,hotel,commerce"
-  }
+  },
+    {
+      "appname": "EcoloShop",
+      "title": "EcoloShop",
+      "version": "0.33-beta",
+      "news": "bug",
+      "logo": "./assets/img/jeunesecolo.png",
+      "claim":"Les jeunes écologistes s'engagent pour le commerce de proximité",
+      "editor":{
+        "website": "https://jeunes-ecologistes.org/",
+        "name":"Les jeunes ecolos",
+        "logo":"https://www.jeunes-ecologistes.org/wp-content/uploads/2017/04/LogoClassique.png"
+      },
+      "colors":{
+        "bkuser":"#286210",
+        "bkshop":"#286210",
+        "bkcoupon":"#15621D",
+        "bkmain":"#4F4F4F",
+        "bkabout":"#15621D",
+        "bkdialog":"#1C3724"
+      },
+      "support": {
+        "forum": "https://jeunes-ecologistes.org/la-resistance-continue-contre-amazon/",
+        "email": "https://jeunes-ecologistes.org/contact/",
+        "facebook": "https://www.facebook.com/jeunes.ecologistes/",
+        "faq": "https://web.reducshare.com/faq.html?from=appli&marque=Les%20Jeunes%20Ecolos",
+        "website": "https://www.jeunes-ecologistes.org/"
+      },
+      "tags":"restaurant,hotel,commerce,cinema"
+    }
 
 
   ],

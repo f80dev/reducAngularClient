@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1576573972575,
+  "timestamp": 1576657396292,
   "index": "https://reducshare.com/index.html",
   "assetGroups": [
     {
@@ -62,6 +62,7 @@
         "https://reducshare.com/assets/img/happy.jpg",
         "https://reducshare.com/assets/img/happyhour.jpg",
         "https://reducshare.com/assets/img/headphones.jpg",
+        "https://reducshare.com/assets/img/jeunesecolos.png",
         "https://reducshare.com/assets/img/lefooding.png",
         "https://reducshare.com/assets/img/legumes.jpg",
         "https://reducshare.com/assets/img/logo.png",
@@ -94,7 +95,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://reducshare.com/assets/config.json": "92ba44475688ced3a8e1c320a1314aa1492745ee",
+    "https://reducshare.com/assets/config.json": "a5699d759b28b02c804e9170423eacd769a449e3",
     "https://reducshare.com/assets/exif.js": "b5962aef35409d93f1ff55461045a6796e80343f",
     "https://reducshare.com/assets/icons/facebook.png": "675cf6ab6fa72cb3a3363b3afaed84db20733baf",
     "https://reducshare.com/assets/icons/icon-128x128.png": "03727efdcc9d66b15a4da260e2be9e4eb94e0b2a",
@@ -129,6 +130,7 @@
     "https://reducshare.com/assets/img/happy.jpg": "5997966f9bebfba481a99277aec6abe19b7a0b47",
     "https://reducshare.com/assets/img/happyhour.jpg": "91c068476cd223c3436c9e38df44e0124887b72f",
     "https://reducshare.com/assets/img/headphones.jpg": "5da3e68bc88e628dd93a4b866567908786e8bbe2",
+    "https://reducshare.com/assets/img/jeunesecolos.png": "b021539bb57e7dc06e1d1c23899eb6f5759dcabd",
     "https://reducshare.com/assets/img/lefooding.png": "615848bb9aee65ce5ada68899d277e1a38ef7f96",
     "https://reducshare.com/assets/img/legumes.jpg": "c48b9863696f10a993d0128bd3ff7fe0659d17aa",
     "https://reducshare.com/assets/img/logo.png": "0b3665f36e42e77a1451b1a9f683e9ac5b2847f4",
