@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
 
     localStorage.setItem("firsturl",this._location.path());
     $$("Récupération des paramètres",params);
+
     if(this.config.params==null){
       this.config.params={
         coupon:params.get("coupon") || "",
