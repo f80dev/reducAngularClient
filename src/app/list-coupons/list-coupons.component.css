@@ -9,6 +9,11 @@ mat-card img{
   background-size: cover;
 }
 
+.firstcolumn {
+  text-align: right;
+  min-width:100px;
+}
+
 
 
 

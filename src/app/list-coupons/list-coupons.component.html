@@ -165,7 +165,7 @@
           <a [href]="coupon.url" target="_blank"
              *ngIf="coupon.visible==1 || (coupon.visible==2 && (coupon.breakable || coupon.gain>=coupon.min_to_use))">
             <qr-code [value]="coupon.url" name="qrcode"
-                     style="width:150px;height: 140px;margin:0px;"
+                     style="max-width:150px;width:30vmin;height:30vmin;margin:0px;"
                      ngxClipboard [cbContent]="coupon.url"
                      [size]="110">
             </qr-code>
@@ -174,7 +174,9 @@
           <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=coupon.min_to_use)"><small>au vendeur</small><br></span>
 
         </td>
-        <td style="text-align: center;vertical-align: top;">
+
+        <!--Deuxième colonne du tableau principal du coupon-->
+        <td style="min-width:65vw;text-align: center;vertical-align: top;">
 
           <!--Zone réservé au client de base-->
           <div style="margin-top:10px;line-height:100%;display:inline-block;font-size: larger;"
@@ -198,24 +200,24 @@
                    cellpadding="1"
                    name="zoneInfo">
               <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id">
-                <td style="text-align: right;">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td>
+                <td class="firstcolumn">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td>
                 <td>immédiatement disponible</td>
               </tr>
 
               <tr *ngIf="coupon.share_bonus>0">
-                <td style="text-align: right;">+1 {{coupon.symbol}}</td>
+                <td class="firstcolumn">+1 {{coupon.symbol}}</td>
                 <td>
                   <span *ngIf="coupon.share_bonus==1">par coupon partagé</span>
                   <span *ngIf="coupon.share_bonus!=1">pour {{1/coupon.share_bonus | literal:0}} coupons partagés</span>
                 </td>
               </tr>
               <tr *ngIf="coupon.pay_bonus>0">
-                <td style="text-align: right;">+{{coupon.pay_bonus}} {{coupon.symbol}}</td>
+                <td class="firstcolumn">+{{coupon.pay_bonus}} {{coupon.symbol}}</td>
                 <td>à chaque usage d'un coupon partagé</td>
               </tr>
 
               <tr *ngIf="coupon.final_bonus>0">
-                <td style="text-align: right;">+{{coupon.final_bonus}} {{coupon.symbol}}</td>
+                <td class="firstcolumn">+{{coupon.final_bonus}} {{coupon.symbol}}</td>
                 <td>Utiliser le coupon</td>
               </tr>
             </table>
