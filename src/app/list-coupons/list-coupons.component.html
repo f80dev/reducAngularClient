@@ -77,7 +77,7 @@
       </div>
 
     </mat-expansion-panel-header>
-    <div style="margin:0px !important;" class="app-card-content">
+    <div style="padding:0px !important; margin:0px !important;" class="app-card-content">
 
       <!-- Section destinée à l'imprression -->
       <div id="print-section-{{coupon._id}}" style="display: none;">
@@ -109,13 +109,13 @@
                 </div>
 
                 <!--Affichage lorsque le gain de départ est positif -->
-                <div style="font-size: 3em;font-weight: bold;"
+                <div style="font-size: large;font-weight: bold;"
                      *ngIf="coupon.gain>0 || coupon.max==0">
                   {{coupon.gain | literal:1}}{{coupon.symbol}}
                 </div>
 
 
-                <span style="font-size: 2em;"
+                <span style="font-size:large;"
                       *ngIf="coupon.promocodes.length>0">
                     {{showPromoCode(coupon.gain,coupon.promocodes)}}
                 </span>
@@ -124,22 +124,17 @@
                 <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>0 && coupon.gain<=1">gagné(e)</div>
                 <div style="font-size: small;margin-top: 10px;" *ngIf="coupon.gain>1">gagné(e)s</div>
               </td>
-
-
-              <button mat-button mat-flat-button
-                      name="btnShare"
-                      class="app-button"
-                      *ngIf="coupon.canbedeal && user.level<2 && coupon.gain>0"
-                      title="Partager le coupon pour augmenter votre promotion / réduction"
-                      (click)="showCode(coupon,1)">
-                <mat-icon>share</mat-icon>
-                <div class="bloc-bouton" *ngIf="coupon.origin!=coupon._id">
-                  Gagner<br>plus
-                </div>
-              </button>
-
               <td>
-
+                <button mat-button mat-flat-button
+                        name="btnShare" style="margin: 0px;"
+                        class="app-button"
+                        *ngIf="coupon.canbedeal && user.level<2 && coupon.gain>0"
+                        title="Partager le coupon pour augmenter votre promotion / réduction"
+                        (click)="showCode(coupon,1)">
+                  <div class="bloc-bouton" *ngIf="coupon.origin!=coupon._id">
+                    Gagner<br>plus
+                  </div>
+                </button>
               </td>
             </tr>
             </table>
@@ -165,18 +160,20 @@
           <a [href]="coupon.url" target="_blank"
              *ngIf="coupon.visible==1 || (coupon.visible==2 && (coupon.breakable || coupon.gain>=coupon.min_to_use))">
             <qr-code [value]="coupon.url" name="qrcode"
-                     style="max-width:150px;width:30vmin;height:30vmin;margin:0px;"
+                     style="max-width:150px;width:20vmin;height:20vmin;margin:0px;"
                      ngxClipboard [cbContent]="coupon.url"
                      [size]="110">
             </qr-code>
             <br>
           </a>
-          <span *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=coupon.min_to_use)"><small>au vendeur</small><br></span>
+          <div *ngIf="coupon.visible==2  && (coupon.breakable || coupon.gain>=coupon.min_to_use)">
+            <small>au vendeur</small><br>
+          </div>
 
         </td>
 
         <!--Deuxième colonne du tableau principal du coupon-->
-        <td style="min-width:65vw;text-align: center;vertical-align: top;">
+        <td style="min-width:50vw;text-align: center;vertical-align: top;">
 
           <!--Zone réservé au client de base-->
           <div style="margin-top:10px;line-height:100%;display:inline-block;font-size: larger;"
@@ -188,16 +185,16 @@
             <div *ngIf="coupon.stock<10"><br>Encore {{coupon.stock}}{{coupon.symbol}} à gagner</div>
           </div>
 
-
+          <!--Zone réservé au vendeur-->
           <div *ngIf="coupon.canbedeal && (coupon.visible==1 && coupon.origin!=coupon._id) || (coupon.origin==coupon._id && coupon.share==0) || (coupon.origin==coupon._id && coupon.owner!=user._id)">
             <div style="font-weight: bold;" *ngIf="user.level<1.5">
               <span *ngIf="coupon.origin!=coupon._id">Votre avantage peut augmenter</span>
               <div style="display: inline-block;width:200px;" *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
-                L'avantage client augmente
+                L'avantage client
               </div>
             </div>
             <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;"
-                   cellpadding="1"
+                   cellpadding="3"
                    name="zoneInfo">
               <tr *ngIf="coupon.direct_bonus>0 && coupon.origin==coupon._id">
                 <td class="firstcolumn">+{{coupon.direct_bonus | literal}} {{coupon.symbol}}</td>

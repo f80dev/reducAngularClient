@@ -50,6 +50,13 @@ export class AdminComponent implements OnInit {
 
   }
 
+  create_user(nCompte){
+    var xy=prompt("Point de chute","48,2");
+    var n=prompt("Nombre de user","10");
+    xy=xy.replace(",","/");
+    window.open("https://server.f80.fr:5500/api/fictif/"+xy+"/0/rand/"+n);
+  }
+
   openGraph(shopid,type){
     window.open(openGraphForShop(shopid,type),"_blank");
   }

@@ -3,7 +3,7 @@
   {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.94-beta",
+    "version": "0.95-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -512,7 +512,7 @@
       "max":10,
       "duration_hours":6,
       "stock":10,
-      "score":15,
+      "score":16,
       "beneficiaire":"client",
       "max_coupon":5000,
       "visual":"https://reducshare.com/assets/img/croissants.jpg",
