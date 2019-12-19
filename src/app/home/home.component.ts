@@ -226,6 +226,7 @@ export class HomeComponent implements OnInit {
         }
 
         for(var k=0;k<u.coupons.length;k++){
+          //u.coupons[k].duration=(u.coupons[k].dtEnd-u.coupons[k].dtStart)/60000;
           if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
             u.coupons[k].flip=true;
           else

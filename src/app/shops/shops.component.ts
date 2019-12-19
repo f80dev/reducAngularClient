@@ -113,7 +113,8 @@ export class ShopsComponent implements OnInit {
         data: {
                 title: "Code utilisateur",
                 question:"Demander le code à l'utilisateur auquel vous souhaitez déléguer la validation des promotions",
-                onlyConfirm: false
+                onlyConfirm: false,
+                canEmoji:false
       }
       }).afterClosed().subscribe((result) => {
         if(result!=null && result.length>0)

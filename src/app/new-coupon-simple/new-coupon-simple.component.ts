@@ -101,7 +101,7 @@ export class NewCouponSimpleComponent implements OnInit {
 
           if(event.target.id!=null){
             var field=event.target.id.replace("id_","");
-            this.dialog.open(PromptComponent,{width: '80%',data: {title:"Personnaliser",question: desc, result: this.coupon[field],onlyConfirm:false}})
+            this.dialog.open(PromptComponent,{width: '80%',data: {title:"Personnaliser",question: desc, result: this.coupon[field],onlyConfirm:false,emojis:true}})
               .afterClosed().subscribe((result) => {
                 if(result!=null){
                   this.coupon[field]=result;
