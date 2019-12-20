@@ -105,17 +105,17 @@
         </emoji-mart>
         </div>
 
-        <mat-checkbox [(ngModel)]="coupon.breakable" style="line-height: 80%;"
-                      *ngIf="level>1.5" (focus)="focusElt='breakable'">
-          unité fractionnable&nbsp;
-          <small>(Exemple: 3.4 {{coupon.unity}})</small>
-        </mat-checkbox>
-        <br><br><br>
+        <!--<mat-checkbox [(ngModel)]="coupon.breakable" style="line-height: 80%;"-->
+                      <!--*ngIf="level>1.5" (focus)="focusElt='breakable'">-->
+          <!--unité fractionnable&nbsp;-->
+          <!--<small>(Exemple: 3.4 {{coupon.unity}})</small>-->
+        <!--</mat-checkbox>-->
+        <br><br>
 
 
-        <app-tuto *ngIf="focusElt=='breakable'" id="tutoBreakable"
-                  label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">
-        </app-tuto>
+        <!--<app-tuto *ngIf="focusElt=='breakable'" id="tutoBreakable"-->
+                  <!--label="Préciser si l'objet de la promotion est fractionnable (en morceau) ou entier. Exemple : un café n'est pas fractionnable, un % sur un prix l'est">-->
+        <!--</app-tuto>-->
 
         <app-tuto *ngIf="focusElt=='symbol'"
                   label="Il est bon d'ajouter un visuel pour renforcer l'attractivité de votre promotion. Cela peut être une photo ou un emoji"></app-tuto>
