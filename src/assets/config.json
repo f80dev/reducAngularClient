@@ -1,9 +1,9 @@
 {
   "brands":[
-  {
+    {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
-    "version": "0.96-beta",
+    "version": "0.97-beta",
     "colors":{
       "bkuser":"#2C4050",
       "bkshop":"#142637",
@@ -31,7 +31,7 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     }
   },
-  {
+    {
     "appname": "foodingPromo",
     "title": "Le Fooding promotion",
     "version": "0.33-beta",

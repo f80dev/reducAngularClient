@@ -1,6 +1,6 @@
 {
   "name": "reducShare",
-  "version": "0.0.3",
+  "version": "0.9.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --prod=false --sourceMap=true",
