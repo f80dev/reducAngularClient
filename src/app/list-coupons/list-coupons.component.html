@@ -275,36 +275,42 @@
             <div *ngIf="coupon._id==coupon.origin && coupon.owner==user._id && coupon.share>0"
                  style="font-size: small;">
               <div *ngIf="coupon.visible!=1">
-                <table style="display:inline-block;text-align: left;line-height: 90%;" cellpadding="3px">
+                <table style="display:inline-block;text-align: left;line-height: 90%;" cellpadding="3px" cellspacing="3px">
                   <tr *ngIf="coupon.share>0">
-                    <td></td>
+
                     <td style="text-align: right;font-size: large;"><strong>{{coupon.share | number:'1.0-0'}}</strong>&nbsp;</td>
-                    <td>partages (/{{coupon.max_coupon}})<br></td>
+                    <td>partages
+                      <div *ngIf="coupon.share/coupon.max_coupon>0.9">
+                        (/{{coupon.max_coupon}})
+                        <br>
+                      </div>
+
+                    </td>
 
                   </tr>
                   <!--<tr *ngIf="coupon.share>0"><td><br></td><td></td></tr>-->
-                  <tr *ngIf="user.level>1">
-                    <td></td>
+                  <tr *ngIf="user.level>3">
+
                     <td style="text-align: right;">{{coupon.gain_total | number:'1.0-1'}} {{coupon.symbol}}</td>
                     <td>proposé(es)</td>
-
                   </tr>
-                  <tr style="vertical-align: middle;">
-                    <td style="text-align: left;width: fit-content;">
-                      <mat-icon matListIcon (click)="updateStock(coupon)" style="cursor:pointer;font-size: medium;display:inline-block;">edit</mat-icon>
-                    </td>
+
+                  <tr style="vertical-align: top;">
+
                     <td style="text-align: right;width: fit-content;">
+                      <fa-icon [icon]="faPen" (click)="updateStock(coupon)" style="cursor:pointer"></fa-icon>&nbsp;
                       <strong>{{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}</strong>
                     </td>
                     <td>
-                      en stock
+                      réservés à l'offre (stock)
                     </td>
 
                   </tr>
                 </table>
               </div>
 
-              <div *ngIf="coupon.visible==1 && user.level<2" style="line-height: 105%;font-size: x-small;padding:3px;">
+              <div *ngIf="coupon.visible==1 && user.level<2"
+                   style="line-height: 105%;font-size: x-small;padding:3px;">
                 <fa-icon [icon]="faPaste" size="2x"></fa-icon><br>
                 Le presse-papier contient le coupon pour partage via WhatsApp, SMS, Messenger<br><br>
                 <mat-icon>printer</mat-icon><br>
@@ -360,7 +366,7 @@
         <!--<mat-icon>attach_money</mat-icon>-->
         <!--</button>-->
 
-        <button *ngIf="coupon.visible==1 && isVisible(coupon) && coupon.canbedeal"
+        <button *ngIf="(coupon.visible==1 || config.width_screen>350) && isVisible(coupon) && coupon.canbedeal"
                 class="small-icon-button"
                 mat-button
                 class="app-button"
@@ -505,7 +511,7 @@
           <button mat-button mat-flat-button mat-icon-button
                   name="btnUseAdvanced"
                   class="app-button"
-                  *ngIf="(coupon.origin!=coupon._id && user.level>0.8) && (config.width_screen<=500)"
+                  *ngIf="coupon.origin!=coupon._id && user.level>0.8 && config.width_screen<=500"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon,2)">
             <mat-icon>done</mat-icon>
@@ -514,7 +520,7 @@
           <button mat-button mat-flat-button
                   name="btnUse"
                   class="app-button"
-                  *ngIf="(coupon.origin!=coupon._id && user.level<=0.8) || (config.width_screen>500)"
+                  *ngIf="coupon.origin!=coupon._id && (user.level<=0.8 || config.width_screen>500)"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon,2)">
             Utiliser
@@ -523,6 +529,8 @@
         </div>
       </div>
 
+
+      <!-- Affichage du coupon depuis la carte -->
       <div *ngIf="coupon.owner!=user?._id">
         <button *ngIf="coupon._id==coupon.origin && isVisible(coupon) && coupon.canbedeal" mat-button
                 (click)="flash(coupon)"

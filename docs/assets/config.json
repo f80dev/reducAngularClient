@@ -1,6 +1,6 @@
 {
   "brands":[
-  {
+    {
     "appname": "REDUCSHARE",
     "title": "REDUCSHARE",
     "version": "0.97-beta",
@@ -31,7 +31,7 @@
       "website": "https://web.reducshare.com/index.html?from=appli"
     }
   },
-  {
+    {
     "appname": "foodingPromo",
     "title": "Le Fooding promotion",
     "version": "0.33-beta",
@@ -769,7 +769,7 @@
     {
       "id":"coursparticulier",
       "title":"Cours particulier de piano",
-      "unity":"minutes",
+      "unity":"minutes gratuites",
       "symbol":"min",
       "beneficiaire":"client",
       "pluriel":true,
@@ -940,6 +940,58 @@
       "visual":"https://cdn.pixabay.com/photo/2016/03/09/11/53/wine-glasses-1246240_960_720.jpg",
       "description":"La RH d'une entreprise offre des bouteilles de champagne en échange de la cooptation de candidats.",
       "tags":"corporate"
+    },
+    {
+      "id":"plomberie",
+      "title":"Travaux de rénovation",
+      "unity":"euros sur la main d'oeuvre",
+      "symbol":"€",
+      "pluriel":true,
+      "breakable":false,
+      "min_to_use":1,
+      "label":"Travaux de rénovation à domicile. Réduction sur la main d'oeuvre",
+      "level":0.0,
+      "pay_bonus":20,
+      "share_bonus":1,
+      "direct_bonus":10,
+      "final_bonus":10,
+      "max":50,
+      "score":16,
+      "duration_jours":31,
+      "stock":500,
+      "max_coupon":500,
+      "beneficiaire":"client",
+      "conditions":"pour toute commande d'un montant supérieure à 300€",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/male-construction-worker_1f477-200d-2642-fe0f.png",
+      "visual":"https://reducshare.com/assets/img/travaux.jpg",
+      "description":"Un entrepreneur propose des réductions en euro sur la main d'oeuvre",
+      "tags":"services"
+    },
+    {
+      "id":"menage",
+      "title":"Menage à domicile",
+      "unity":"minutes gratuites",
+      "symbol":"min",
+      "pluriel":true,
+      "breakable":false,
+      "min_to_use":10,
+      "label":"Ménage à domicile",
+      "level":0.0,
+      "pay_bonus":10,
+      "share_bonus":1,
+      "direct_bonus":5,
+      "final_bonus":15,
+      "max":60,
+      "score":16,
+      "duration_jours":31,
+      "stock":500,
+      "max_coupon":500,
+      "beneficiaire":"client",
+      "conditions":"sur simple présentation du coupon",
+      "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/facebook/230/sponge_1f9fd.png",
+      "visual":"https://reducshare.com/assets/img/menage.jpg",
+      "description":"Un homme / une femme de ménage propose du temps de ménage supplémentaire",
+      "tags":"services"
     }
   ]
 }

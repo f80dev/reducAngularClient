@@ -225,15 +225,16 @@ export class HomeComponent implements OnInit {
           this.raz();
         }
 
-        debugger
+        //Traitement local des coupons
         for(var k=0;k<u.coupons.length;k++){
-          //u.coupons[k].duration=(u.coupons[k].dtEnd-u.coupons[k].dtStart)/60000;
+          u.coupons[k].facteur=u.coupons[k].duration/(u.coupons[k].dtEnd-u.coupons[k].dtStart);
           if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
             u.coupons[k].flip=true;
           else
             u.coupons[k].flip=false;
         }
 
+        debugger;
         this.user=u;
         for(var k=0;k<this.user.shops.length;k++)
           if(this.user.shops[k]._id==localStorage.getItem("showShop"))this.user.shops[k].visible=true;
