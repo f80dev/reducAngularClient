@@ -234,7 +234,6 @@ export class HomeComponent implements OnInit {
             u.coupons[k].flip=false;
         }
 
-        debugger;
         this.user=u;
         for(var k=0;k<this.user.shops.length;k++)
           if(this.user.shops[k]._id==localStorage.getItem("showShop"))this.user.shops[k].visible=true;

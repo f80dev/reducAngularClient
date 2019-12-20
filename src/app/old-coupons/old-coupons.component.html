@@ -105,12 +105,9 @@
         <img *ngIf="coupon.picture" matListAvatar [src]="coupon.picture">
         <h2 matLine (click)="onselect.emit(coupon)">
           <span *ngIf="coupon.title">{{coupon.title}}</span>
-          <span *ngIf="!coupon.title">
-        {{coupon.label}} sur {{coupon.unity}}
-      </span>
         </h2>
         <p matLine style="margin-top: 0px; font-size: small;" title="{{coupon.conditions}}">
-          {{coupon.conditions}}
+          des {{coupon.unity}} {{coupon.conditions}}
         </p>
         <p matLine style="margin-top: 10px;"  *ngIf="coupon.share">
           <span> Distribution:{{coupon.share}} </span>

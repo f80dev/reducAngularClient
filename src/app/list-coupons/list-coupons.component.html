@@ -109,10 +109,10 @@
                       Partager pour gagner<br>jusqu'a {{coupon.max}} {{coupon.unity}}
                     </div>
 
-                    <div style="font-size: small;" *ngIf="coupon.gain>0">Vous avez déjà</div>
+                    <div style="font-size: x-small;" *ngIf="coupon.gain>0">Vous avez déjà</div>
 
                     <!--Affichage lorsque le gain de départ est positif -->
-                    <div style="font-size: large;"
+                    <div style="font-size: x-large;margin-top: 5px;"
                          *ngIf="coupon.gain>0 || coupon.max==0">
                       {{coupon.gain | literal:1}}{{coupon.symbol}}
                     </div>
@@ -185,19 +185,22 @@
                  *ngIf="coupon._id!=coupon.origin && coupon.visible==0">
 
               <span *ngIf="coupon.max>0 && coupon.gain/coupon.max>0.8">(/{{coupon.max}})</span>
-              il reste<br><app-timer [end]="coupon.dtEnd"></app-timer><br>
-              <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
+              <div *ngIf="coupon.delayToEnd/coupon.duration<0.2">
+                il reste<br><app-timer [end]="coupon.dtEnd"></app-timer><br>
+                <span style="font-size: x-small" *ngIf="user.level<0.3">avant la fin de la promotion</span>
+              </div>
               <div *ngIf="coupon.stock<10"><br>Encore {{coupon.stock}}{{coupon.symbol}} à gagner</div>
             </div>
 
             <!--Zone réservé au vendeur-->
             <div *ngIf="coupon.canbedeal && (coupon.visible==1 && coupon.origin!=coupon._id) || (coupon.origin==coupon._id && coupon.share==0) || (coupon.origin==coupon._id && coupon.owner!=user._id)">
               <div style="font-weight: bold;" *ngIf="user.level<1.5">
-                <span *ngIf="coupon.origin!=coupon._id">Votre avantage peut augmenter</span>
+                <span *ngIf="coupon.origin!=coupon._id && coupon.gain<coupon.max">Votre avantage peut augmenter</span>
                 <div style="display: inline-block;width:200px;" *ngIf="coupon.origin==coupon._id && coupon.owner==user._id">
                   L'avantage client
                 </div>
               </div>
+
               <table style="text-align: left;display: inline-block;font-weight:lighter;font-size:small;line-height: 95%;"
                      cellpadding="3"
                      name="zoneInfo">
@@ -296,7 +299,6 @@
                   </tr>
 
                   <tr style="vertical-align: top;">
-
                     <td style="text-align: right;width: fit-content;">
                       <fa-icon [icon]="faPen" (click)="updateStock(coupon)" style="cursor:pointer"></fa-icon>&nbsp;
                       <strong>{{coupon.stock | number:'1.0-1'}} {{coupon.symbol}}</strong>
