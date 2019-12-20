@@ -94,6 +94,10 @@ export class OldCouponsComponent implements OnInit {
     return c;
   }
 
+
+  /**
+   * Applique le filtre
+   */
   opereFilter() {
     $$("Application du filtre="+this.filter);
     this.withFilter=true;
@@ -101,12 +105,14 @@ export class OldCouponsComponent implements OnInit {
       this.withFilter=false;
       return;
     }
-    var lst_coupons=JSON.parse(JSON.stringify(this.coupons));
+
+
+    var lst_coupons=JSON.parse(JSON.stringify(this.coupons));//On clone la liste
     this.coupons=[];
     var index=0;
     lst_coupons.forEach((it)=>{
       if(it.tags.length>0){
-        if(this.filter.indexOf(it.tags)>=0)
+        if(it.tags.indexOf(this.filter)>=0)
           this.coupons.push(it);
       } else {
         this.coupons.push(it);
@@ -115,6 +121,10 @@ export class OldCouponsComponent implements OnInit {
     if(this.coupons.length==0)this.coupons=lst_coupons;
   }
 
+
+  /**
+   *
+   */
   changeFilter() {
     this.askFilter=(this.filter.length==0);
   }

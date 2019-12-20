@@ -225,6 +225,7 @@ export class HomeComponent implements OnInit {
           this.raz();
         }
 
+        debugger
         for(var k=0;k<u.coupons.length;k++){
           //u.coupons[k].duration=(u.coupons[k].dtEnd-u.coupons[k].dtStart)/60000;
           if(this.config.flips.indexOf(u.coupons[k]._id)>-1)
@@ -264,12 +265,8 @@ export class HomeComponent implements OnInit {
           }
         }
         //this.coupons=traitement_coupon(this.user.coupons,localStorage.getItem("showCoupon"));
-
       },(error)=>{showError(this,error);});
-
     },1500);
-
-
   }
 
   closeFlashScreen() {

@@ -7,6 +7,7 @@ import {ApiService} from "../api.service";
 import {ImageSelectorComponent} from "../image-selector/image-selector.component";
 import {ConfigService} from "../config.service";
 import {BreakpointObserver,BreakpointState} from "@angular/cdk/layout"
+import {MatSnackBar} from "@angular/material";
 
 
 @Component({
@@ -37,7 +38,7 @@ export class NewCouponSimpleComponent implements OnInit {
 
 
   constructor(public router:Router, public api: ApiService,
-              public config:ConfigService,
+              public config:ConfigService,public toast:MatSnackBar,
               public breakpointObserver:BreakpointObserver,
               public dialog: MatDialog,public route: ActivatedRoute) {
     breakpointObserver

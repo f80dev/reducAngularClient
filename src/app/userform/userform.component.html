@@ -37,7 +37,7 @@
   <div class="app-card-content">
     <app-transactions *ngIf="showTransac" [user]="user"></app-transactions>
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
-      <app-scanner [size]="400"
+      <app-scanner [size]="320"
                    filter="/home"
                    (flash)="onflash_event($event)">
       </app-scanner>
