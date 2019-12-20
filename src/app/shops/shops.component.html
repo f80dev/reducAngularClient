@@ -118,7 +118,7 @@
       <button mat-button mat-flat-button mat-icon-button
               name="btnNewPromoAdvanced"
               class="app-button"
-              *ngIf="user.level>=1"
+              *ngIf="user.level>=1 && config.width_screen<330"
               title="Nouvelle promotion attachée à cette enseigne"
               (click)="addCoupon(shop,'')">
         <fa-icon [icon]="faTags" size="lg"></fa-icon>
@@ -127,7 +127,7 @@
       <button mat-button mat-flat-button
               name="btnNewPromo"
               class="app-button"
-              *ngIf="user.level<1 && shop.coupons?.length>0"
+              *ngIf="(user.level<1 || config.width_screen>=330) && shop.coupons?.length>0"
               data-tac="La création d'une enseigne se fait depuis la zone de profil"
               title="Nouvelle promotion attachée à cette enseigne"
               (click)="addCoupon(shop,'')">
