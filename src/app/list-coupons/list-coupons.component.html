@@ -209,6 +209,11 @@
                   <td>immédiatement disponible</td>
                 </tr>
 
+                <tr *ngIf="coupon.final_bonus>0">
+                  <td class="firstcolumn">+{{coupon.final_bonus}} {{coupon.symbol}}</td>
+                  <td>à l'usage du coupon</td>
+                </tr>
+
                 <tr *ngIf="coupon.share_bonus>0">
                   <td class="firstcolumn">+1 {{coupon.symbol}}</td>
                   <td>
@@ -221,10 +226,7 @@
                   <td>à chaque usage d'un coupon partagé</td>
                 </tr>
 
-                <tr *ngIf="coupon.final_bonus>0">
-                  <td class="firstcolumn">+{{coupon.final_bonus}} {{coupon.symbol}}</td>
-                  <td>Utiliser le coupon</td>
-                </tr>
+
               </table>
               <br>
 
