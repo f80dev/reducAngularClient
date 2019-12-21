@@ -1,6 +1,5 @@
 <div *ngFor="let coupon of coupons | orderBy:sort" style="width:100%;padding: 0px;margin-top:3px;">
 
-
   <mat-expansion-panel [expanded]="isVisible(coupon)"
                        class="app-card"
                        (closed)="showCoupon(coupon,false)"
@@ -160,20 +159,29 @@
 
             <!--QRCode du coupon-->
 
-            <div *ngIf="coupon.visible==2  && (coupon.gain>=coupon.min_to_use)"><small>Montrez le QR-code</small><br></div>
-
-            <a [href]="coupon.url" target="_blank"
-               *ngIf="coupon.visible==1 || (coupon.visible==2 && coupon.gain>=coupon.min_to_use)">
-              <qr-code [value]="coupon.url" name="qrcode"
-                       style="max-width:150px;width:20vmin;height:20vmin;margin:0px;"
-                       ngxClipboard [cbContent]="coupon.url"
-                       [size]="110">
-              </qr-code>
-              <br>
-            </a>
-            <div *ngIf="coupon.visible==2  && coupon.gain>=coupon.min_to_use">
-              <small>au vendeur</small><br>
+            <div *ngIf="coupon.visible==2  && (coupon.gain>=coupon.min_to_use)">
+              <!--<small>Montrez le QR-code</small><br>-->
+              <button mat-button mat-flat-button
+                      name="btnUse"
+                      class="app-button"
+                      title="Partager le coupon pour augmenter votre promotion / réduction"
+                      (click)="use(coupon)">
+                <div class="bloc-bouton">Utiliser<br>Votre coupon</div>
+              </button>
             </div>
+
+            <!--<a [href]="coupon.url" target="_blank"-->
+               <!--*ngIf="coupon.visible==1 || (coupon.visible==2 && coupon.gain>=coupon.min_to_use)">-->
+              <!--<qr-code [value]="coupon.url" name="qrcode"-->
+                       <!--style="max-width:150px;width:20vmin;height:20vmin;margin:0px;"-->
+                       <!--ngxClipboard [cbContent]="coupon.url"-->
+                       <!--[size]="110">-->
+              <!--</qr-code>-->
+              <!--<br>-->
+            <!--</a>-->
+            <!--<div *ngIf="coupon.visible==2  && coupon.gain>=coupon.min_to_use">-->
+              <!--<small>au vendeur</small><br>-->
+            <!--</div>-->
 
           </td>
 
@@ -239,7 +247,7 @@
 
             <div style="min-width:200px;" *ngIf="coupon.visible==2">
               <div style="display: inline-block;" *ngIf="coupon.gain>=coupon.min_to_use">
-                <small>et bénéficiez de</small> <br><br>
+                <small>Vous bénéficiez de</small> <br><br>
                 <span style="font-size: xx-large;">{{coupon.gain}}{{coupon.symbol}}</span><br>
               </div>
 
@@ -527,7 +535,7 @@
                   *ngIf="coupon.origin!=coupon._id && (user.level<=0.8 || config.width_screen>500)"
                   title="Utiliser votre coupon pour avoir votre réduction"
                   (click)="showCode(coupon,2)">
-            Utiliser
+            En profiter
           </button>
 
         </div>

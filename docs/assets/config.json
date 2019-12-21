@@ -405,7 +405,7 @@
       "picture":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/232/film-projector_1f4fd.png",
       "visual":"https://reducshare.com/assets/img/cinema-theatre.jpg",
       "direct_bonus":10,
-      "max":3,
+      "max":100,
       "min_to_use":1,
       "duration_hours":8,
       "stock":20,

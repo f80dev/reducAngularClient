@@ -327,4 +327,21 @@ export class ListCouponsComponent implements OnChanges {
         }
     });
   }
+
+  use(coupon:any){
+    if(this.user.level>1){
+      this.api.use(coupon).subscribe((result:any)=>{
+        this.onflash.emit({message:result.message});
+      });
+    } else {
+      this.dialog.open(PromptComponent,{width: '250px',data: {onlyConfirm:true,title: "Utiliser votre coupon ?", question: "Après usage de votre coupon, votre avantage sera remis à 0"}
+      }).afterClosed().subscribe((result) => {
+        if(result=="yes")
+          this.api.use(coupon).subscribe((result:any)=>{
+            this.onflash.emit({message:result.message});
+            coupon.visible=0;
+          });
+      });
+    }
+  }
 }

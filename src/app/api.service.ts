@@ -136,4 +136,8 @@ export class ApiService {
   convert(url:string) {
     return this.http.post(api("convert"),url);
   }
+
+  use(coupon: any) {
+    return this.http.get(api("use/"+coupon._id));
+  }
 }
