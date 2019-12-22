@@ -32,10 +32,21 @@
 
     </mat-expansion-panel-header>
 
-
-
   <div class="app-card-content">
     <app-transactions *ngIf="showTransac" [user]="user"></app-transactions>
+
+    <!--Affichage des coupons à valider-->
+    <div *ngIf="user.coupon_to_validate">
+      <div *ngFor="let c of user.coupon_to_validate">
+        Demande de validation
+        <span *ngIf="c.ownername"> de {{c["ownername"]}}</span> pour {{c["gain"]}}{{c["symbol"]}}
+        <button mat-icon-button mat-button (click)="use(c)"><mat-icon>checkmark</mat-icon></button>
+        <button mat-icon-button mat-button (click)="cancel(c)"><mat-icon>close</mat-icon></button>
+      </div>
+    </div>
+
+
+    <!--Scanner de validation du qrcode-->
     <div style="width:100%;text-align: center;" *ngIf="showScanner">
       <app-scanner [size]="320"
                    filter="/home"

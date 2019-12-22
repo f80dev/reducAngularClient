@@ -404,4 +404,13 @@ export class UserformComponent implements OnInit {
   }
 
 
+  use(coupon:any){
+    this.api.use(coupon).subscribe((result:any)=>{});
+  }
+
+  cancel(coupon:any){
+    this.onrefresh.emit();
+    this.api.ask(coupon,false).subscribe((result:any)=>{});
+  }
+
 }

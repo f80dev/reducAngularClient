@@ -137,7 +137,22 @@ export class ApiService {
     return this.http.post(api("convert"),url);
   }
 
+  /**
+   * Déclenche l'usage de la promotion
+   * @param coupon
+   */
   use(coupon: any) {
     return this.http.get(api("use/"+coupon._id));
   }
+
+  /**
+   * Demande la validation du coupon par le vendeur
+   * @param coupon
+   */
+  ask(coupon: any,update_value=true) {
+    return this.http.get(api("ask/"+coupon._id+"/"+update_value));
+  }
+
+
+
 }

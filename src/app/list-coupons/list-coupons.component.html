@@ -161,11 +161,13 @@
 
             <div *ngIf="coupon.visible==2  && (coupon.gain>=coupon.min_to_use)">
               <!--<small>Montrez le QR-code</small><br>-->
+              <span *ngIf="coupon.wait_validation">En attente de validation</span>
               <button mat-button mat-flat-button
+                      *ngIf="!coupon.wait_validation"
                       name="btnUse"
                       class="app-button"
                       title="Partager le coupon pour augmenter votre promotion / réduction"
-                      (click)="use(coupon)">
+                      (click)="ask(coupon)">
                 <div class="bloc-bouton">Utiliser<br>Votre coupon</div>
               </button>
             </div>
@@ -316,8 +318,9 @@
                     <td>
                       réservés à l'offre (stock)
                     </td>
-
                   </tr>
+
+
                 </table>
               </div>
 
