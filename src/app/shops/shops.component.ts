@@ -11,7 +11,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {sendToPrint, showError, showMessage} from "../tools";
 import {PromptComponent} from "../prompt/prompt.component";
 import {ConfigService} from "../config.service";
-import { faChartLine,faTags,faQuestion} from '@fortawesome/free-solid-svg-icons';
+import { faChartLine,faUserCog,faTags,faQuestion} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-shops',
@@ -30,6 +30,7 @@ export class ShopsComponent implements OnInit {
   showWebCam=false;
   faChartLine=faChartLine;
   faTags=faTags;
+  faUserCog=faUserCog;
   faQuestion=faQuestion;
 
   constructor(public snackBar: MatSnackBar,
@@ -187,5 +188,9 @@ export class ShopsComponent implements OnInit {
             anonymous:this.user.email.indexOf("fictif.com")>-1
           }
       });
+  }
+
+  openTransactForm(userid: string, shop: any) {
+    this.router.navigate(["transacForm"],{queryParams:{userid:userid,shopid:shop._id,shopname:shop.name}});
   }
 }

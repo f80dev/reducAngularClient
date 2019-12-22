@@ -33,7 +33,7 @@
     </mat-expansion-panel-header>
 
   <div class="app-card-content">
-    <app-transactions *ngIf="showTransac" [user]="user"></app-transactions>
+    <app-transactions *ngIf="showTransac" [userid]="user._id"></app-transactions>
 
     <!--Affichage des coupons à valider-->
     <div *ngIf="user.coupon_to_validate">

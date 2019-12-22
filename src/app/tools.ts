@@ -775,3 +775,5 @@ function drawRotated(canvas, image, degrees) {
   ctx.drawImage(image, -image.width / 2, -image.height / 2);
   ctx.restore();
 }
+
+

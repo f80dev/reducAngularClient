@@ -10,6 +10,7 @@ import {NgxSocialButtonModule} from "ngx-social-button";
 import {NewCouponComponent} from "./new-coupon/new-coupon.component";
 import {AdminComponent} from "./admin/admin.component";
 import {NewCouponSimpleComponent} from "./new-coupon-simple/new-coupon-simple.component";
+import {TransacshopComponent} from "./transacshop/transacshop.component";
 
 const routes: Routes = [
   { path: 'shop', component: NewshopComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'admin', component: AdminComponent},
+  { path: 'transacForm', component: TransacshopComponent},
   { path: '', component: HomeComponent},
 ];
 

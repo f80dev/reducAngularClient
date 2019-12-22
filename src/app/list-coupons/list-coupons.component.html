@@ -161,7 +161,11 @@
 
             <div *ngIf="coupon.visible==2  && (coupon.gain>=coupon.min_to_use)">
               <!--<small>Montrez le QR-code</small><br>-->
-              <span *ngIf="coupon.wait_validation">En attente de validation</span>
+              <div *ngIf="coupon.wait_validation">
+                En attente de validation<br>
+                Transaction: <strong>#{{coupon.transacCode}}</strong>
+              </div>
+
               <button mat-button mat-flat-button
                       *ngIf="!coupon.wait_validation"
                       name="btnUse"

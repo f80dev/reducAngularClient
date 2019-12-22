@@ -145,6 +145,7 @@ export class HomeComponent implements OnInit {
    */
   connect(coupon:any=null,pass:string=null,user:string=null,gift=false){
     $$("Mise en place de la socket");
+
     this.socket.on("refresh",(data:any)=>{
       if(data.user==this.user._id){
         if(data.coupon!=null)localStorage.setItem("showCoupon",data.coupon);

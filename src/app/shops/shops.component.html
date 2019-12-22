@@ -116,6 +116,13 @@
       </button>
 
       <button mat-button mat-flat-button mat-icon-button
+              class="app-button"
+              title="Ecran de contrôle des transactions"
+              (click)="openTransactForm(user._id,shop)">
+        <fa-icon [icon]="faUserCog" size="lg"></fa-icon>
+      </button>
+
+      <button mat-button mat-flat-button mat-icon-button
               name="btnNewPromoAdvanced"
               class="app-button"
               *ngIf="user.level>=1 && config.width_screen<330"

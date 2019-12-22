@@ -4,6 +4,7 @@ import {$$, openGraphForShop, showError} from "../tools";
 import { Location } from '@angular/common';
 import { Router} from '@angular/router';
 import {ADMIN_PASSWORD} from "../tools";
+import {LocService} from "../loc.service";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AdminComponent implements OnInit {
   shops=[];
   moneys=[];
 
-  constructor(public api:ApiService,public _location:Location,public router:Router) {
+  constructor(public api:ApiService,public _location:Location,public router:Router,public loc:LocService) {
     if(_location.path().indexOf(ADMIN_PASSWORD)==-1)
       router.navigate(["home"]);
   }
@@ -51,10 +52,14 @@ export class AdminComponent implements OnInit {
   }
 
   create_user(nCompte){
-    var xy=prompt("Point de chute","48,2");
-    var n=prompt("Nombre de user","10");
-    xy=xy.replace(",","/");
-    window.open("https://server.f80.fr:5500/api/fictif/"+xy+"/0/rand/"+n);
+    this.loc.getPosition().then((pos:any)=>{
+      var xy=prompt("Point de chute",pos.lat+","+pos.lng);
+      var n=prompt("Nombre de user","10");
+      xy=xy.replace(",","/");
+      window.open("https://server.f80.fr:5500/api/fictif/"+xy+"/0/rand/"+n);
+    });
+
+
   }
 
   openGraph(shopid,type){

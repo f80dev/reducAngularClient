@@ -7,15 +7,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-  @Input("end") dtEnd:number=0;
+  @Input("end") dtEnd:number=new Date().getTime()/1000;
   @Input("short") short:boolean=false;
+  @Input("showAfter") showAfter:boolean=false;
   dateToShow:string="";
   delayInHour:number=0;
 
   constructor() { }
 
   refresh(){
-    var delay=(this.dtEnd*1000-new Date().getTime())/1000;
+    var delay=Math.abs(this.dtEnd*1000-new Date().getTime())/1000;
     this.delayInHour=Math.trunc(delay/3600);
     var delayInDay=Math.trunc(delay/(24*3600));
     var delayInMinutes=Math.trunc(delay/60);
@@ -29,8 +30,7 @@ export class TimerComponent implements OnInit {
       this.dateToShow=this.dateToShow.replace("jours","jrs").replace("heures","hrs");
     }
 
-    if(delay<0)this.dateToShow="";
-
+    if(delay<0 && !this.showAfter)this.dateToShow="";
   }
 
   ngOnInit() {

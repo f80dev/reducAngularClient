@@ -125,8 +125,8 @@ export class ApiService {
     return this.http.get(api("getcouponsaround/"+lng+"/"+lat));
   }
 
-  getTransactions(user_id: string) {
-    return this.http.get(api("gettransactions/"+user_id));
+  getTransactions(user_id: string,shopid:string="") {
+    return this.http.get(api("gettransactions/"+user_id+"/"+shopid));
   }
 
   tirage(couponid:string,gain: string, limit: string) {

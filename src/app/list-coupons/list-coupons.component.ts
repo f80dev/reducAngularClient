@@ -8,6 +8,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import {hashCode} from "../tools";
 import {ClipboardService} from 'ngx-clipboard';
 import {ApiService} from '../api.service';
 import {environment} from '../../environments/environment';
@@ -335,18 +336,18 @@ export class ListCouponsComponent implements OnChanges {
   ask(coupon:any){
     if(this.user.level>1){
       this.api.ask(coupon).subscribe((result:any)=>{
-        coupon.visible=0;
-        coupon.flip=0;
-        coupon.wait_validation=true;
+        coupon=result;
+        coupon.visible==2;
+        setTimeout(()=>{this.onupdate.emit();},500);
       });
     } else {
       this.dialog.open(PromptComponent,{width: '250px',data: {onlyConfirm:true,title: "Utiliser votre coupon ?", question: "Après usage de votre coupon, votre avantage sera remis à 0"}
       }).afterClosed().subscribe((result) => {
         if(result=="yes")
           this.api.ask(coupon).subscribe((result:any)=>{
-            coupon.visible=0;
-            coupon.flip=0;
-            coupon.wait_validation=true;
+            coupon=result;
+            coupon.visible==2;
+            setTimeout(()=>{this.onupdate.emit();},500);
           });
       });
     }

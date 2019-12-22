@@ -1,0 +1,28 @@
+<div [ngStyle]="{'background-color': config.values.brands[config.activeBrand].colors.bkcoupon,
+                  'color':'white','width':'100vw','height':'100vh','font-size':size,'text-align':'center'}">
+  <strong>{{shopname}}</strong>
+  <br><br>
+  Demande de validation
+  <table style="width: 100%;" cellspacing="10" cellpadding="10">
+    <tr *ngFor="let c of coupons | orderBy:'dtUpdate':'desc'" style="vertical-align: center;">
+      <td style="width:110px;text-align: center;">
+        <button mat-icon-button mat-raised-button mat-button (click)="use(c)"><mat-icon>checkmark</mat-icon></button>&nbsp;
+        <button mat-icon-button mat-raised-button mat-button (click)="cancel(c)"><mat-icon>close</mat-icon></button>
+      </td>
+      <td style="width: fit-content">
+        #{{c.transacCode}}
+      </td>
+      <td style="text-align: left;">
+        <div style="line-height: 90%;">
+          <span *ngIf="c.ownername"> de {{c["ownername"]}} pour </span>{{c["gain"]}}{{c["symbol"]}}<br>
+          <span style="font-size: small">{{c.conditions}}</span>
+        </div>
+      </td>
+      <td style="text-align: right;">
+        <app-timer *ngIf="c.dtUpdate" [showAfter]="true" [end]="c.dtUpdate"></app-timer>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+
+</div>

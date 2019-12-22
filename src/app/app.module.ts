@@ -62,6 +62,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { TruncPipe } from './trunc.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {ImageCropperModule} from "ngx-image-cropper";
+import { TransacshopComponent } from './transacshop/transacshop.component';
 
 
 const config: SocketIoConfig = { url: environment.socket_server, options: {} };
@@ -98,7 +99,8 @@ const config: SocketIoConfig = { url: environment.socket_server, options: {} };
     LiteralPipe,
     ChartsComponent,
     TransactionsComponent,
-    TruncPipe
+    TruncPipe,
+    TransacshopComponent
   ],
   entryComponents: [
     NewCouponComponent,
