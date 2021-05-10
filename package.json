@@ -54,7 +54,7 @@
     "exif-js": "^2.3.0",
     "hammerjs": "^2.0.8",
     "jsqr": "^1.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "ng-navigator-share": "^1.0.0",
     "ngx-clipboard": "^12.2.1",
     "ngx-device-detector": "^1.3.11",
